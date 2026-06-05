@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DayTripFlow Europe v41 Mobile</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="language-bar" aria-label="Language selector">
+      <label>Language
+        <select id="languageSelect">
+          <option value="en">English</option>
+          <option value="he">עברית</option>
+        </select>
+      </label>
+    </section>
+
+    <header class="hero">
+      <p class="eyebrow">Offline-first travel assistant</p>
+      <h1>DayTripFlow Europe</h1>
+      <p>Choose your starting point and travel mode. The app shows only relevant places for that city and mode.</p>
+    </header>
+
+
+
+    <section class="panel offline-pack-panel">
+      <h2>Prepare Offline Pack</h2>
+      <p class="notice">Save the selected city guide on this phone before the trip. Text, guide cards, My Trip, likes and saved places stay local on the device. No cloud or external DB is required.</p>
+      <div class="grid two">
+        <label>Offline city pack
+          <select id="offlineCitySelect">
+            <option value="prague">Prague</option>
+            <option value="vienna">Vienna</option>
+            <option value="strasbourg">Strasbourg</option>
+          </select>
+        </label>
+        <label>Pack content
+          <select id="offlinePackLevel">
+            <option value="text" selected>Text guide + coordinates</option>
+            <option value="text-images">Text guide + local visuals</option>
+          </select>
+        </label>
+      </div>
+      <div class="compact-actions">
+        <button id="saveOfflinePack" class="mini-main" type="button">📦 Save city offline</button>
+        <button id="checkOfflinePack" class="icon-btn" type="button" title="Check offline status">✅</button>
+        <button id="clearOfflinePack" class="icon-btn remove" type="button" title="Remove selected offline pack">🗑️</button>
+      </div>
+      <div id="offlinePackStatus" class="offline-status">Offline status will appear here.</div>
+      <p class="source-note">Important: this saves the guide data, coordinates and local card visuals. Live transit times, Uber/Bolt prices and Google/Waze map tiles still require the external apps or a separately downloaded offline map.</p>
+    </section>
+
+    <section class="panel route-panel">
+      <h2>Route Builder</h2>
+      <div class="grid two">
+        <label>Origin
+          <select id="originSelect"></select>
+        </label>
+        <label>Travel mode
+          <select id="modeSelect">
+            <option value="transit">Public transport / Moovit</option>
+            <option value="uber">Uber</option>
+            <option value="bolt">Bolt</option>
+            <option value="car">Car / Waze</option>
+          </select>
+        </label>
+      </div>
+      <div id="hotelWrap" class="hotel-wrap hidden">
+        <label>Hotel / base address
+          <input id="hotelAddress" placeholder="Paste hotel name or address" />
+        </label>
+        <button id="saveHotel" class="mini-main">Save hotel</button>
+      </div>
+      <div class="grid two">
+        <label>Destination
+          <select id="destinationSelect"></select>
+        </label>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="grid two stay-days-row">
+        <label>Stay days
+          <select id="stayDays">
+            <option value="1">1 day</option>
+            <option value="2">2 days</option>
+            <option value="3" selected>3 days</option>
+            <option value="4">4 days</option>
+            <option value="5">5 days</option>
+            <option value="6">6 days</option>
+            <option value="7">7 days</option>
+          </select>
+        </label>
+      </div>
+      <p class="notice small-notice">Build My Trip from the cards below. Browse the packs, then add only the places or car routes you actually want.</p>
+    </section>
+
+
+
+    <section class="panel travel-type-panel">
+      <h2>Choose trip package type</h2>
+      <div class="main-choice-row">
+        <button id="publicTravelBtn" class="choice-btn active" type="button">Public Travels</button>
+        <button id="carTravelBtn" class="choice-btn" type="button">Travel By Car</button>
+      </div>
+      <p id="packageModeText" class="notice small-notice"></p>
+      <div id="carPackageControls" class="grid two hidden">
+        <label>Driving time each way
+          <select id="driveHours">
+            <option value="1">Up to 1 hour each way</option>
+            <option value="2">Up to 2 hours each way</option>
+            <option value="3">Up to 3 hours each way</option>
+            <option value="4">Up to 4 hours each way</option>
+            <option value="5" selected>Up to 5 hours each way</option>
+          </select>
+        </label>
+        <label>Sort places
+          <select id="sortOrder">
+            <option value="near">Nearest first</option>
+            <option value="far">Farthest first</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <nav class="tabs" aria-label="Categories">
+      <button class="tab active" data-tab="trips">Day trips</button>
+      <button class="tab" data-tab="food">Food</button>
+      <button class="tab" data-tab="nightlife">Nightlife</button>
+      <button class="tab" data-tab="experiences">Experiences</button>
+      <button class="tab" data-tab="mustdo">MustDo</button>
+      <button class="tab" data-tab="recommendations">My recommendations</button>
+      <button class="tab" data-tab="mytrip">My Trip</button>
+      <button class="tab" data-tab="saved">Saved offline</button>
+    </nav>
+
+    <section class="panel">
+      <div id="modeNotice" class="notice"></div>
+      <div id="list" class="cards"></div>
+    </section>
+  </main>
+  <script src="app.js"></script>
+  <script src="i18n.js"></script>
+</body>
+</html>
