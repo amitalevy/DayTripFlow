@@ -10912,11 +10912,2258 @@ function v47SpecificGuide(item){
   return pack[getLang()] || pack.en || pack.he;
 }
 
+
+
+// v49: specific real guide content for Experiences + MustDo. This gets priority over all generic fallback templates.
+const V49_EXPERIENCE_MUSTDO_GUIDES = {
+  "Vltava River Cruise": {
+    "he": {
+      "why": "שייט בוולטאבה נותן את פראג מזווית שאי אפשר לקבל מהרחוב: הגשרים, האיים, הטירה והעיר העתיקה נפרשים לאט לאורך הנהר. זו חוויה טובה במיוחד ביום ראשון בעיר או כשכבר עייפים מהליכה.",
+      "see": [
+        "גשר קארל מהמים",
+        "קו הרקיע של טירת פראג",
+        "קמפה והאיים הקטנים",
+        "חזיתות העיר העתיקה לאורך הנהר"
+      ],
+      "fit": "מתאים לזוגות, משפחות ומי שרוצה לראות הרבה בלי ללכת הרבה.",
+      "tip": "הזמן הכי טוב הוא לפני שקיעה. לבדוק מסלול — לא כל שייט עובר באותם קטעים."
+    },
+    "en": {
+      "why": "A Vltava cruise shows Prague from the angle the streets cannot give: bridges, islands, castle skyline and Old Town façades unfolding from the river.",
+      "see": [
+        "Charles Bridge from the water",
+        "Prague Castle skyline",
+        "Kampa and river islands",
+        "Old Town riverfront façades"
+      ],
+      "fit": "Good for couples, families and tired legs.",
+      "tip": "Best before sunset. Check the exact route; not all cruises cover the same stretch."
+    }
+  },
+  "Petřín Hill Viewpoint": {
+    "he": {
+      "why": "פטרין היא גבעה ירוקה מעל מאלה סטרנה, עם תחושת בריחה מההמולה של המרכז. מגיעים בשביל נוף, שבילים, גנים ורגע שקיעה שמרגיש רומנטי יותר מרוב נקודות התצפית בעיר.",
+      "see": [
+        "שבילי גן ירוקים",
+        "מגדל התצפית של פטרין",
+        "נוף לטירה, גשרים וגגות",
+        "אזור שקט יחסית להליכה"
+      ],
+      "fit": "מתאים לשקיעה, זוגות, צילום ויום עם קצב איטי.",
+      "tip": "הפוניקולר עלול להיות מושבת בתקופות שיפוץ; לבדוק לפני שמתכננים עלייה קלה."
+    },
+    "en": {
+      "why": "Petřín is a green hill above Malá Strana, a real pause from the dense center. Go for views, gardens and one of Prague’s softer sunset moments.",
+      "see": [
+        "Green garden paths",
+        "Petřín Lookout Tower",
+        "Views of castle, bridges and rooftops",
+        "A quieter walking area"
+      ],
+      "fit": "Best for sunset, couples, photos and a slow day.",
+      "tip": "Check funicular status before relying on it; walking up is possible but tiring."
+    }
+  },
+  "Black Light Theatre": {
+    "he": {
+      "why": "תיאטרון אור שחור הוא סגנון מופע שמזוהה מאוד עם פראג: חושך, תאורה אולטרה־סגולה, תנועה ואשליות ויזואליות. זה לא מוזיאון ולא טיול רחוב, אלא ערב קליל ומקורה עם אופי מקומי.",
+      "see": [
+        "מופע ויזואלי ללא צורך בשפה גבוהה",
+        "אפקטים של אור וחושך",
+        "תנועה, פנטומימה ואשליות",
+        "אופציה טובה ליום גשם"
+      ],
+      "fit": "מתאים למשפחות, ערב גשום ומי שרוצה מופע קל להבנה.",
+      "tip": "לבדוק ביקורות למופע הספציפי; האיכות משתנה בין תיאטראות שונים."
+    },
+    "en": {
+      "why": "Black light theatre is a Prague-associated performance style using darkness, UV light, movement and visual illusion. It is an indoor evening with a local twist.",
+      "see": [
+        "Visual performance with little language barrier",
+        "Light-and-dark effects",
+        "Movement, mime and illusion",
+        "Good rainy-day option"
+      ],
+      "fit": "Good for families, rainy evenings and easy entertainment.",
+      "tip": "Check reviews for the specific show; quality varies by venue."
+    }
+  },
+  "Beer Spa": {
+    "he": {
+      "why": "ספא בירה הוא חוויה תיירותית אבל זכירה: יושבים באמבט עץ עם מרכיבי בירה, שותים בירה תוך כדי, ומקבלים סיפור מצחיק לספר אחרי הטיול. לא מגיעים בשביל היסטוריה — מגיעים בשביל חוויה קלילה ומשעשעת.",
+      "see": [
+        "אמבט ספא עם מרכיבי בירה",
+        "בירה לשתייה במהלך החוויה",
+        "חדר זוגי/פרטי לפי ספק",
+        "אווירה מצחיקה ולא רשמית"
+      ],
+      "fit": "מתאים לזוגות, חברים ומתנה קטנה לעצמך בטיול.",
+      "tip": "להשוות מחירים וביקורות; יש הבדל גדול בין ספקים."
+    },
+    "en": {
+      "why": "Beer spa is touristy but memorable: wooden tubs, beer ingredients, beer to drink and a funny travel story. It is not history; it is a playful wellness break.",
+      "see": [
+        "Beer-ingredient spa tub",
+        "Beer during the session",
+        "Private/couple room options",
+        "Light and funny mood"
+      ],
+      "fit": "Good for couples, friends and a playful break.",
+      "tip": "Compare providers and reviews; the experience varies a lot."
+    }
+  },
+  "Prague Vintage Car Tour": {
+    "he": {
+      "why": "סיור רכב וינטג׳ מתאים כשאתה רוצה לראות את פראג בסגנון קולנועי, בלי ללכת הרבה. הרכב עצמו הוא חלק מהחוויה: צילום, נסיעה איטית ברחובות היסטוריים ותחושה של “פראג של פעם”.",
+      "see": [
+        "רכב פתוח/וינטג׳ לפי הספק",
+        "רחובות העיר העתיקה ומאלה סטרנה",
+        "עצירות צילום קצרות",
+        "חוויה טובה למעט הליכה"
+      ],
+      "fit": "מתאים לצילום, זוגות, הורים או יום עייף.",
+      "tip": "לוודא מסלול ושפה מראש; חלק מהסיורים הם יותר צילום ופחות הדרכה עמוקה."
+    },
+    "en": {
+      "why": "A vintage car tour is for seeing Prague in a cinematic style with minimal walking. The car is part of the experience: photos, slow streets and old-Prague mood.",
+      "see": [
+        "Vintage/open car depending on provider",
+        "Old Town and Malá Strana streets",
+        "Short photo stops",
+        "Low-walking sightseeing"
+      ],
+      "fit": "Good for photos, couples, parents or tired days.",
+      "tip": "Confirm route and language; some tours are more photo ride than deep guiding."
+    }
+  },
+  "E-bike Old Town Tour": {
+    "he": {
+      "why": "סיור אי־בייק מאפשר לכסות יותר אזורים בפחות זמן: נהר, גשרים, שכונות ותצפיות. זה מתאים כשאתה רוצה להבין את מבנה העיר בלי ללכת עשרות אלפי צעדים.",
+      "see": [
+        "מסלול רכוב בין אזורים מרכזיים",
+        "הסברים קצרים בתחנות",
+        "אפשרות להגיע לתצפיות בלי מאמץ גדול",
+        "חוויה פעילה יותר מסיור רגלי"
+      ],
+      "fit": "מתאים למי שנוח לו ברכיבה עירונית ולקבוצות שרוצות קצב.",
+      "tip": "לבדוק ביטוח, קסדה ותנאי תנועה; לא מתאים לכל אחד במרכז צפוף."
+    },
+    "en": {
+      "why": "An e-bike tour covers more ground with less walking: river, bridges, districts and viewpoints. Good for understanding the city layout quickly.",
+      "see": [
+        "Ride between central areas",
+        "Short explanations at stops",
+        "Easier access to viewpoints",
+        "More active than a walking tour"
+      ],
+      "fit": "Good if you are comfortable riding in a city.",
+      "tip": "Check helmet, insurance and traffic conditions; central Prague can be busy."
+    }
+  },
+  "Prague Castle Viewpoints": {
+    "he": {
+      "why": "התצפיות סביב טירת פראג מסבירות למה העיר כל כך מצולמת: גגות אדומים, נהר, גשרים ומגדלים בשכבות. זו לא רק “עוד תצפית” אלא דרך להבין את המבנה של פראג.",
+      "see": [
+        "מבט על מאלה סטרנה",
+        "גגות העיר העתיקה",
+        "גשרי הוולטאבה",
+        "שילוב עם רחוב Nerudova או אזור הטירה"
+      ],
+      "fit": "מתאים לצילום, ביקור ראשון והתמצאות בעיר.",
+      "tip": "להגיע מוקדם או לקראת ערב; באמצע היום האזור יכול להיות עמוס מאוד."
+    },
+    "en": {
+      "why": "Castle-side viewpoints explain why Prague is so photographed: red roofs, river, bridges and towers layered together.",
+      "see": [
+        "Views over Malá Strana",
+        "Old Town rooftops",
+        "Vltava bridges",
+        "Pairs well with Nerudova Street or Castle area"
+      ],
+      "fit": "Good for photos, first visit and orientation.",
+      "tip": "Go early or toward evening; midday can be crowded."
+    }
+  },
+  "Vyšehrad Sunset Walk": {
+    "he": {
+      "why": "וישהראד נותן שקיעה רגועה יותר מהטירה: חומות, פארק, בית קברות היסטורי ונוף לנהר. זה מקום שמרגיש פחות תיירותי ויותר מקומי.",
+      "see": [
+        "חומות המבצר",
+        "נוף לוולטאבה",
+        "בזיליקת פטר ופול מבחוץ",
+        "בית הקברות ההיסטורי של דמויות צ׳כיות"
+      ],
+      "fit": "מתאים לשקיעה, הליכה שקטה ומי שרוצה לברוח מהעיר העתיקה.",
+      "tip": "לשלב עם ארוחה ב־U Kroka או הליכה חזרה לאורך הנהר."
+    },
+    "en": {
+      "why": "Vyšehrad gives a calmer sunset than the Castle: fortress walls, parkland, cemetery and river views with a more local feel.",
+      "see": [
+        "Fortress walls",
+        "Vltava views",
+        "St Peter and Paul Basilica exterior",
+        "Historic cemetery of Czech figures"
+      ],
+      "fit": "Good for sunset, quiet walking and avoiding Old Town crowds.",
+      "tip": "Pair it with dinner nearby or a river walk back."
+    }
+  },
+  "Letná Metronome View": {
+    "he": {
+      "why": "המטרונום של לטנה הוא נקודת תצפית רחבה מעל שורת הגשרים של פראג. המקום מרגיש צעיר וחופשי יותר, עם סקייטרים, בירה בפארק ונוף פתוח.",
+      "see": [
+        "שורת הגשרים על הוולטאבה",
+        "תצפית לגגות העיר",
+        "אזור פארק לטנה",
+        "אווירה צעירה ופחות רשמית"
+      ],
+      "fit": "מתאים לשקיעה, בירה בפארק וצילום רחב של העיר.",
+      "tip": "לא לבוא במיוחד בגשם; הערך כאן הוא נוף ואווירה פתוחה."
+    },
+    "en": {
+      "why": "The Letná Metronome gives a wide view over Prague’s bridge line. The area feels young and informal, with skaters, park beer and open city views.",
+      "see": [
+        "Vltava bridge line",
+        "Rooftop views",
+        "Letná park area",
+        "Young informal atmosphere"
+      ],
+      "fit": "Good for sunset, park beer and wide city photos.",
+      "tip": "Not worth a special trip in rain; the value is open-air view and mood."
+    }
+  },
+  "Paddle Boats on Vltava": {
+    "he": {
+      "why": "סירות פדלים בוולטאבה הן חוויה קלילה שמוסיפה משחקיות ליום: לא היסטוריה עמוקה, אלא שעה על המים עם מבט קרוב לגשרים ולאיים.",
+      "see": [
+        "חתירה/פדלים באזור הנהר",
+        "מבט לגשר קארל והאיים לפי מיקום",
+        "חוויה רגועה לזוגות או משפחות",
+        "צילום מהמים"
+      ],
+      "fit": "מתאים למזג אוויר טוב, זוגות ומשפחות.",
+      "tip": "לעשות רק כשהשמש טובה והרוח לא חזקה; אחרת זה פחות כיף."
+    },
+    "en": {
+      "why": "Pedal boats on the Vltava add a playful hour on the water: not deep history, but close views of bridges and islands.",
+      "see": [
+        "Pedal boat on the river",
+        "Bridge and island views depending on dock",
+        "Easy couple/family activity",
+        "Photos from water level"
+      ],
+      "fit": "Good in nice weather for couples and families.",
+      "tip": "Do it when weather is pleasant; wind or rain weakens the experience."
+    }
+  },
+  "Mirror Maze Petřín": {
+    "he": {
+      "why": "מבוך המראות בפטרין הוא אטרקציה קטנה ונוסטלגית, יותר מצחיקה מאשר מרשימה. היא טובה כשכבר נמצאים בגבעה ורוצים עצירה קצרה לילדים או רגע קליל.",
+      "see": [
+        "חדר מראות מעוותות",
+        "מבנה בסגנון טירה קטנה",
+        "שילוב עם גבעת פטרין",
+        "עצירה קצרה ולא פעילות מרכזית"
+      ],
+      "fit": "מתאים למשפחות וילדים. פחות מתאים כמטרה בלעדית למבוגרים.",
+      "tip": "לא לנסוע במיוחד רק לזה; לשלב עם פטרין והתצפית."
+    },
+    "en": {
+      "why": "The Petřín Mirror Maze is small and nostalgic — more funny than impressive. It works best as a short stop while already on the hill.",
+      "see": [
+        "Distorting mirror room",
+        "Small castle-like building",
+        "Pairs with Petřín Hill",
+        "Short stop, not main activity"
+      ],
+      "fit": "Best for families and children. Not a standalone adult highlight.",
+      "tip": "Do not cross town only for it; combine with Petřín views."
+    }
+  },
+  "Museum of Senses": {
+    "he": {
+      "why": "מוזיאון החושים הוא אטרקציה מקורה וצילומית עם אשליות, חדרים אינטראקטיביים ומשחקים ויזואליים. הוא שימושי במיוחד כפתרון לגשם או לילדים.",
+      "see": [
+        "אשליות אופטיות",
+        "חדרים אינטראקטיביים",
+        "נקודות צילום לרשתות",
+        "פעילות קצרה במרכז"
+      ],
+      "fit": "מתאים למשפחות, יום גשם ומי שרוצה משהו קליל.",
+      "tip": "לא לצפות למוזיאון היסטורי; זה יותר משחק וצילום."
+    },
+    "en": {
+      "why": "Museum of Senses is an indoor, photo-friendly attraction with illusions and interactive rooms. It is especially useful as a rain plan or with kids.",
+      "see": [
+        "Optical illusions",
+        "Interactive rooms",
+        "Photo spots",
+        "Short central activity"
+      ],
+      "fit": "Good for families, rain and light entertainment.",
+      "tip": "Do not expect a historical museum; it is more playful and visual."
+    }
+  },
+  "Jewish Quarter Walk": {
+    "he": {
+      "why": "הרובע היהודי של פראג הוא אחד האזורים ההיסטוריים החשובים בעיר: בתי כנסת, בית קברות עתיק וסיפור יהודי שנמשך מאות שנים. זו הליכה שנותנת עומק ולא רק צילום.",
+      "see": [
+        "בתי כנסת היסטוריים",
+        "בית הקברות היהודי העתיק",
+        "רחובות Josefov",
+        "הקשר להיסטוריה יהודית אירופית"
+      ],
+      "fit": "מתאים להיסטוריה, תרבות ומי שרוצה להבין שכבות עמוקות בעיר.",
+      "tip": "לבדוק כרטיסים וסגירות בשבתות/חגים יהודיים."
+    },
+    "en": {
+      "why": "Prague’s Jewish Quarter is one of the city’s most meaningful historical areas: synagogues, Old Jewish Cemetery and centuries of Jewish history.",
+      "see": [
+        "Historic synagogues",
+        "Old Jewish Cemetery",
+        "Josefov streets",
+        "European Jewish history context"
+      ],
+      "fit": "Best for history, culture and a deeper layer of Prague.",
+      "tip": "Check tickets and closures on Saturdays/Jewish holidays."
+    }
+  },
+  "Tram 22 Scenic Ride": {
+    "he": {
+      "why": "קו 22 הוא “סיור זול” דרך פראג: חשמלית רגילה שעוברת באזורים יפים ומובילה לכיוון הטירה. זו דרך טובה לראות את העיר כשעייפים מהליכה.",
+      "see": [
+        "נסיעה דרך שכונות היסטוריות",
+        "גישה לאזור הטירה",
+        "מבט מהחלון על פראג יומיומית",
+        "עלות נמוכה יחסית"
+      ],
+      "fit": "מתאים ליום עייף, תחבורה ציבורית וחוויית עיר מקומית.",
+      "tip": "לעלות מחוץ לשעות עומס אם רוצים ליהנות מהנסיעה ולא רק להידחס."
+    },
+    "en": {
+      "why": "Tram 22 is a cheap scenic ride through Prague, passing attractive areas and climbing toward the Castle. It is useful when your legs are tired.",
+      "see": [
+        "Ride through historic districts",
+        "Access to Castle area",
+        "Daily city views from the window",
+        "Low-cost experience"
+      ],
+      "fit": "Good for tired days and public-transport exploration.",
+      "tip": "Ride outside peak hours if you want to enjoy it."
+    }
+  },
+  "Dancing House Rooftop": {
+    "he": {
+      "why": "הבית הרוקד הוא עצירת אדריכלות מודרנית מול הנהר, בניגוד חד לפראג הגותית והבארוקית. הגג נותן זווית נחמדה על הנהר והעיר.",
+      "see": [
+        "חזית הבניין של Gehry/Milunić",
+        "נוף לנהר",
+        "צילום אדריכלי",
+        "שילוב עם הליכת נהר"
+      ],
+      "fit": "מתאים לאדריכלות, צילום ועצירה קצרה.",
+      "tip": "לשלב עם Náplavka או הליכה לאורך הנהר; לא לבנות עליו פעילות ארוכה."
+    },
+    "en": {
+      "why": "Dancing House is a modern architectural stop by the river, contrasting with Prague’s gothic and baroque core. The rooftop adds a pleasant river view.",
+      "see": [
+        "Gehry/Milunić façade",
+        "River view",
+        "Architecture photos",
+        "Pairs with a riverside walk"
+      ],
+      "fit": "Good for architecture, photos and a short stop.",
+      "tip": "Pair it with Náplavka or the river walk; it is not a long activity."
+    }
+  },
+  "Franz Kafka Head": {
+    "he": {
+      "why": "ראש קפקא המסתובב של דייוויד צ׳רני הוא פסל מודרני שמחבר בין פראג הספרותית, אמנות ציבורית והומור צ׳כי עוקצני. זו עצירת צילום קצרה אבל זכירה.",
+      "see": [
+        "פסל מתכתי מסתובב",
+        "חיבור לסופר פרנץ קפקא",
+        "אזור קניות/מרכזי",
+        "מופע תנועה קצר"
+      ],
+      "fit": "מתאים לצילום, אמנות ציבורית ועצירה בין תחנות.",
+      "tip": "לבדוק מתי הפסל בתנועה; לא שווה להמתין זמן רב."
+    },
+    "en": {
+      "why": "David Černý’s rotating Kafka Head links literary Prague with public art and Czech irony. It is short, visual and memorable.",
+      "see": [
+        "Rotating metal sculpture",
+        "Reference to Franz Kafka",
+        "Central shopping area",
+        "Short kinetic display"
+      ],
+      "fit": "Good for photos and a quick public-art stop.",
+      "tip": "Check movement timing; do not wait too long."
+    }
+  },
+  "Strahov Monastery Library": {
+    "he": {
+      "why": "ספריית מנזר סטרחוב היא מהחללים ההיסטוריים היפים בפראג: תקרות מצוירות, ארונות ספרים עתיקים ותחושת ידע אירופית ישנה. זו חוויה שקטה יותר מתצפית רגילה.",
+      "see": [
+        "אולם תאולוגי ופילוסופי",
+        "תקרות מצוירות",
+        "אוסף ספרים עתיקים",
+        "שילוב עם תצפית סטרחוב"
+      ],
+      "fit": "מתאים לאדריכלות, ספרים, היסטוריה ויום גשם.",
+      "tip": "לבדוק גישה וצילום; לא תמיד אפשר להיכנס לכל חלל."
+    },
+    "en": {
+      "why": "Strahov Monastery Library is one of Prague’s most beautiful historic interiors: painted ceilings, old bookcases and old-European scholarship.",
+      "see": [
+        "Theological and Philosophical Halls",
+        "Painted ceilings",
+        "Historic book collections",
+        "Pairs with Strahov viewpoint"
+      ],
+      "fit": "Good for architecture, books, history and rainy days.",
+      "tip": "Check access and photo rules; not all spaces may be open."
+    }
+  },
+  "Kampa Island Walk": {
+    "he": {
+      "why": "קמפה היא הליכה רכה ליד הנהר, עם תעלות, אמנות, גשרים קטנים ומעבר נעים בין גשר קארל למאלה סטרנה. היא נותנת פראג רגועה יותר.",
+      "see": [
+        "תעלות קטנות",
+        "פסלים ואמנות ציבורית",
+        "מבט לגשר קארל מהצד",
+        "שבילים ליד הנהר"
+      ],
+      "fit": "מתאים לזוגות, צילום והפסקה שקטה מהעומס.",
+      "tip": "לשלב עם Lennon Wall או קפה באזור; לא לרוץ דרכה מהר."
+    },
+    "en": {
+      "why": "Kampa is a soft riverside walk with canals, public art and small bridges between Charles Bridge and Malá Strana.",
+      "see": [
+        "Small canals",
+        "Public art and sculpture",
+        "Side views of Charles Bridge",
+        "Riverside paths"
+      ],
+      "fit": "Good for couples, photos and a calmer pause.",
+      "tip": "Pair with Lennon Wall or a nearby café; do not rush it."
+    }
+  },
+  "Náplavka Saturday Market": {
+    "he": {
+      "why": "שוק שבת בנאפלבקה הוא מקום לראות את פראג היומיומית: דוכני אוכל, קפה, מאפים, ירקות ואנשים מקומיים לאורך הנהר. זו חוויה שמרגישה פחות כמו אתר תיירות.",
+      "see": [
+        "דוכני אוכל ומאפים",
+        "קפה ליד הנהר",
+        "קהל מקומי",
+        "הליכה לאורך הוולטאבה"
+      ],
+      "fit": "מתאים לשבת בבוקר, אוכל קל ואווירה מקומית.",
+      "tip": "לבדוק אם השוק פעיל בעונה/יום הביקור; להגיע בבוקר ולא מאוחר מדי."
+    },
+    "en": {
+      "why": "Náplavka Saturday Market shows everyday Prague: food stalls, coffee, pastries, produce and locals along the river.",
+      "see": [
+        "Food and pastry stalls",
+        "Coffee by the river",
+        "Local crowd",
+        "Vltava riverside walk"
+      ],
+      "fit": "Good for Saturday morning and local atmosphere.",
+      "tip": "Check if the market is active that date; go in the morning."
+    }
+  },
+  "Old Town Underground": {
+    "he": {
+      "why": "העיר התחתית של פראג חושפת שכבות נסתרות מתחת לרחובות: מרתפים, חדרים נמוכים וסיפורים מימי הביניים. זו דרך להבין שפראג בנויה על היסטוריה מתחת לרגליים.",
+      "see": [
+        "חללים תת־קרקעיים",
+        "סיפורי ימי הביניים",
+        "סיור מודרך מקורה",
+        "הקשר לעיר העתיקה"
+      ],
+      "fit": "מתאים ליום גשם, היסטוריה ומי שרוצה מעבר למה שרואים ברחוב.",
+      "tip": "לבחור סיור עם מדריך טוב; בלי הסבר המקום מאבד ערך."
+    },
+    "en": {
+      "why": "Old Town Underground reveals layers beneath Prague’s streets: cellars, low rooms and medieval stories under your feet.",
+      "see": [
+        "Underground spaces",
+        "Medieval stories",
+        "Indoor guided tour",
+        "Old Town context"
+      ],
+      "fit": "Good for rain, history and deeper city layers.",
+      "tip": "Choose a good guided tour; without explanation the spaces lose meaning."
+    }
+  },
+  "Prater Giant Ferris Wheel": {
+    "he": {
+      "why": "הגלגל הענק בפראטר הוא אחד הסמלים הוותיקים של וינה מאז סוף המאה ה־19. לא מדובר במתקן אקסטרים, אלא בחוויה נוסטלגית: קרון איטי, נוף רחב, וינה שנראית כמו דגם מלמעלה.",
+      "see": [
+        "הגלגל הענק ההיסטורי",
+        "נוף על וינה והפראטר",
+        "אווירת פארק שעשועים ישן",
+        "צילום טוב לקראת ערב"
+      ],
+      "fit": "מתאים למשפחות, זוגות ומי שרוצה חוויה קלה עם נוף.",
+      "tip": "לעלות בשעת אור רכה; בלילה האווירה יפה אבל רואים פחות פרטים."
+    },
+    "en": {
+      "why": "The Prater Giant Ferris Wheel is a late-19th-century Vienna icon. It is not a thrill ride; it is slow, nostalgic and gives a broad city view.",
+      "see": [
+        "Historic Ferris wheel",
+        "Views over Vienna and Prater",
+        "Old amusement-park atmosphere",
+        "Good evening photos"
+      ],
+      "fit": "Good for families, couples and an easy view experience.",
+      "tip": "Go in soft light; at night the mood is nice but details are harder to see."
+    }
+  },
+  "Schönbrunn Palace gardens": {
+    "he": {
+      "why": "גני שנברון הם הצד הפתוח של הארמון הקיסרי: צירים סימטריים, מזרקות, גבעה ותצפית גלורייט. גם בלי להיכנס לחדרי הארמון, הגנים מסבירים את קנה המידה של הכוח ההבסבורגי.",
+      "see": [
+        "שבילי הגנים הקיסריים",
+        "מזרקות ופסלים",
+        "תצפית ה־Gloriette",
+        "חזית הארמון מבחוץ"
+      ],
+      "fit": "מתאים ליום יפה, זוגות, משפחות וצילום.",
+      "tip": "לעלות ל־Gloriette אם יש כוח; משם מבינים את כל המתחם."
+    },
+    "en": {
+      "why": "Schönbrunn gardens are the open-air face of imperial power: symmetry, fountains, hill views and the Gloriette. Even without palace rooms, the scale is clear.",
+      "see": [
+        "Imperial garden axes",
+        "Fountains and sculptures",
+        "Gloriette viewpoint",
+        "Palace exterior"
+      ],
+      "fit": "Good for nice weather, couples, families and photos.",
+      "tip": "Walk up to the Gloriette if you can; it explains the whole site."
+    }
+  },
+  "Belvedere Palace": {
+    "he": {
+      "why": "בלוודר הוא שילוב של ארמון בארוק, גנים ואמנות. הוא חשוב במיוחד בגלל אוסף קלימט, כולל “הנשיקה”, אבל גם החצר והחזיתות נותנות חוויה וינאית מפוארת.",
+      "see": [
+        "Upper Belvedere",
+        "גני הארמון",
+        "ציורי Klimt לפי תצוגה",
+        "חזיתות בארוקיות"
+      ],
+      "fit": "מתאים לאמנות, אדריכלות ויום גשם חלקי.",
+      "tip": "אם הזמן קצר — לבחור מראש אם באים בשביל האמנות בפנים או בשביל הגנים והצילום."
+    },
+    "en": {
+      "why": "Belvedere combines baroque palace, gardens and art. It is especially important for Klimt, including The Kiss, but the palace setting matters too.",
+      "see": [
+        "Upper Belvedere",
+        "Palace gardens",
+        "Klimt paintings depending on display",
+        "Baroque façades"
+      ],
+      "fit": "Good for art, architecture and partly rainy days.",
+      "tip": "If time is short, decide whether your focus is art inside or gardens/photos outside."
+    }
+  },
+  "Danube Canal street art": {
+    "he": {
+      "why": "תעלת הדנובה מציגה את וינה הפחות קיסרית: גרפיטי, ברים עונתיים, הליכה ליד מים וקהל צעיר. זה ניגוד טוב לארמונות ולמוזיאונים.",
+      "see": [
+        "קירות גרפיטי",
+        "ברים עונתיים על התעלה",
+        "הליכה ליד מים",
+        "אווירה צעירה יותר"
+      ],
+      "fit": "מתאים לערב קל, צילום רחוב וקצת וינה מודרנית.",
+      "tip": "הכי טוב במזג אוויר טוב; בחורף או גשם האזור פחות חי."
+    },
+    "en": {
+      "why": "The Danube Canal shows less-imperial Vienna: graffiti, seasonal bars, waterfront walking and a younger crowd — a useful contrast to palaces.",
+      "see": [
+        "Graffiti walls",
+        "Seasonal canal bars",
+        "Waterfront walk",
+        "Younger atmosphere"
+      ],
+      "fit": "Good for a relaxed evening and street photography.",
+      "tip": "Best in good weather; winter or rain makes it quieter."
+    }
+  },
+  "Vienna State Opera standing tickets": {
+    "he": {
+      "why": "כרטיסי עמידה לאופרה הם דרך נגישה יחסית לטעום מוסד תרבות מהחשובים בעולם בלי לשלם מחיר מלא. החוויה היא גם המבנה, גם הקהל וגם המוזיקה.",
+      "see": [
+        "בית האופרה מבפנים",
+        "הופעת אופרה/בלט לפי ערב",
+        "טקסיות וינאית",
+        "אפשרות מחיר נמוך יחסית"
+      ],
+      "fit": "מתאים לחובבי תרבות ולמי שמוכן לעמוד.",
+      "tip": "להבין מראש את הכללים: מתי קונים, איפה עומדים וכמה זמן ההופעה."
+    },
+    "en": {
+      "why": "Standing tickets are a more accessible way to experience one of the world’s great opera houses without paying full seat prices.",
+      "see": [
+        "Opera house interior",
+        "Opera/ballet depending on night",
+        "Viennese cultural ritual",
+        "Lower-cost access"
+      ],
+      "fit": "Good for culture lovers willing to stand.",
+      "tip": "Understand the rules: buying time, standing area and performance length."
+    }
+  },
+  "Spanish Riding School": {
+    "he": {
+      "why": "בית הספר הספרדי לרכיבה הוא חובה למי שרוצה לראות מסורת חצר קיסרית חיה: סוסי ליפיצן, אולם בארוק ואימון/מופע שממשיך מאות שנים של תרבות רכיבה.",
+      "see": [
+        "סוסי Lipizzaner",
+        "אולם רכיבה בארוקי",
+        "אימון או הופעה לפי כרטיס",
+        "קשר להיסטוריה ההבסבורגית"
+      ],
+      "fit": "חובה לחובבי תרבות, סוסים ומסורת.",
+      "tip": "להבדיל בין אימון בוקר, סיור ומופע מלא — אלו חוויות שונות."
+    },
+    "en": {
+      "why": "The Spanish Riding School is a living imperial tradition: Lipizzaner horses, baroque hall and classical riding culture.",
+      "see": [
+        "Lipizzaner horses",
+        "Baroque riding hall",
+        "Training or performance depending on ticket",
+        "Habsburg cultural context"
+      ],
+      "fit": "Must for culture, horses and tradition.",
+      "tip": "Morning exercise, guided tour and full performance are different experiences."
+    }
+  },
+  "Kunsthistorisches Museum": {
+    "he": {
+      "why": "המוזיאון לתולדות האמנות הוא חובה כי הוא מציג את הטעם והאוספים של האימפריה ההבסבורגית ברמה עצומה. המבנה עצמו כמעט מתחרה ביצירות.",
+      "see": [
+        "אולמות מונומנטליים",
+        "ציורי מאסטרים",
+        "אוסף עתיקות",
+        "בית קפה מרשים"
+      ],
+      "fit": "חובה לחובבי אמנות והיסטוריה.",
+      "tip": "לבחור מראש אגפים; אחרת תצא מותש ולא תזכור כלום."
+    },
+    "en": {
+      "why": "The Kunsthistorisches Museum is a must because it shows the Habsburg imperial collections at monumental scale. The building nearly competes with the art.",
+      "see": [
+        "Monumental halls",
+        "Master paintings",
+        "Antiquities",
+        "Impressive museum café"
+      ],
+      "fit": "Must for art and history lovers.",
+      "tip": "Choose sections first; otherwise it becomes overwhelming."
+    }
+  },
+  "Hundertwasserhaus": {
+    "he": {
+      "why": "Hundertwasserhaus הוא חובה כי הוא שובר את וינה המסודרת: קווים לא ישרים, צבע, צמחייה ואדריכלות שמסרבת להיות סימטרית. זו תמונת נגד לארמונות.",
+      "see": [
+        "חזית צבעונית",
+        "צמחייה על הבניין",
+        "קווים עקומים",
+        "אזור צילום קצר"
+      ],
+      "fit": "חובה לחובבי אדריכלות מיוחדת וצילום.",
+      "tip": "זה אתר חיצוני בעיקר; לבוא כעצירה קצרה ולא פעילות ארוכה."
+    },
+    "en": {
+      "why": "Hundertwasserhaus is a must because it breaks Vienna’s order: irregular lines, color, greenery and anti-symmetrical architecture.",
+      "see": [
+        "Colorful façade",
+        "Greenery on the building",
+        "Curved lines",
+        "Short photo stop"
+      ],
+      "fit": "Must for unusual architecture and photos.",
+      "tip": "It is mainly an exterior stop; keep it short."
+    }
+  },
+  "Naschmarkt food walk": {
+    "he": {
+      "why": "Naschmarkt הוא שוק האוכל הידוע של וינה, שילוב של דוכנים, מסעדות, תבלינים וקהל מקומי/תיירותי. זו דרך טובה להבין את וינה דרך אוכל ולא רק דרך ארמונות.",
+      "see": [
+        "דוכני תבלינים ומעדנים",
+        "מסעדות קטנות",
+        "קפה/מאפה",
+        "אווירת שוק עירוני"
+      ],
+      "fit": "מתאים לצהריים, טעימות וקבוצות עם טעמים שונים.",
+      "tip": "לאכול במקומות עם תחלופה גבוהה; להיזהר ממקומות שנראים תיירותיים מדי."
+    },
+    "en": {
+      "why": "Naschmarkt is Vienna’s best-known food market: stalls, spices, small restaurants and a mixed local/visitor crowd. It explains the city through food.",
+      "see": [
+        "Spice and deli stalls",
+        "Small restaurants",
+        "Coffee/pastry stops",
+        "Urban market atmosphere"
+      ],
+      "fit": "Good for lunch, tasting and groups with different tastes.",
+      "tip": "Choose busy places with turnover; avoid overly touristy-looking traps."
+    }
+  },
+  "Ring Tram scenic loop": {
+    "he": {
+      "why": "מסלול הרינג סביב המרכז מאפשר לראות את וינה הקיסרית בקו אחד: אופרה, פרלמנט, בית העירייה, מוזיאונים ושדרות רחבות. זה שימושי כהיכרות מהירה עם העיר.",
+      "see": [
+        "מבני Ringstrasse",
+        "אופרה ופרלמנט מבחוץ",
+        "מוזיאונים וכיכרות",
+        "נסיעה קלה בלי הרבה הליכה"
+      ],
+      "fit": "מתאים ליום ראשון בעיר, גשם קל או התמצאות.",
+      "tip": "להשתמש בזה כהקדמה ואז לבחור איפה לרדת ולחזור בהמשך."
+    },
+    "en": {
+      "why": "A Ringstrasse tram ride gives a quick line through imperial Vienna: opera, parliament, city hall, museums and grand boulevards.",
+      "see": [
+        "Ringstrasse buildings",
+        "Opera and Parliament exteriors",
+        "Museums and squares",
+        "Easy low-walking orientation"
+      ],
+      "fit": "Good for first day, light rain or orientation.",
+      "tip": "Use it as an overview, then return to the stops that interest you."
+    }
+  },
+  "Danube Tower view": {
+    "he": {
+      "why": "מגדל הדנובה נותן תצפית גבוהה על וינה, הדנובה והאזורים החדשים יותר של העיר. זו חוויה שונה מתצפיות הארמונות כי היא מציגה עיר מודרנית ורחבה.",
+      "see": [
+        "מבט פנורמי מגובה רב",
+        "נהר הדנובה",
+        "הפארק סביב המגדל",
+        "אופציה למסעדה/קפה לפי זמינות"
+      ],
+      "fit": "מתאים לנוף, צילום ומי שכבר ראה את המרכז.",
+      "tip": "לבדוק ראות לפני שמגיעים; ביום ערפילי הערך יורד מאוד."
+    },
+    "en": {
+      "why": "Danube Tower gives a high view over Vienna, the Danube and newer parts of the city — a different perspective from palace viewpoints.",
+      "see": [
+        "High panoramic view",
+        "Danube River",
+        "Park around the tower",
+        "Restaurant/café option if available"
+      ],
+      "fit": "Good for views, photos and repeat visitors.",
+      "tip": "Check visibility first; haze can ruin the value."
+    }
+  },
+  "Grinzing wine taverns": {
+    "he": {
+      "why": "גרינצינג היא שכונת יין בקצה וינה, עם Heuriger – טברנות יין מקומיות. מגיעים בשביל ערב אוסטרי רגוע של יין, אוכל פשוט ואווירה מחוץ למרכז.",
+      "see": [
+        "טברנות יין Heuriger",
+        "יין מקומי צעיר",
+        "אוכל אוסטרי פשוט",
+        "אווירת כפר בתוך העיר"
+      ],
+      "fit": "מתאים לערב רגוע, זוגות וחובבי יין.",
+      "tip": "לבדוק מי פתוח באותו יום; לא כל Heuriger פתוח כל ערב."
+    },
+    "en": {
+      "why": "Grinzing is Vienna’s wine-tavern district, known for Heuriger. Go for a relaxed Austrian evening of local wine, simple food and village mood within the city.",
+      "see": [
+        "Heuriger wine taverns",
+        "Young local wine",
+        "Simple Austrian food",
+        "Village-like mood"
+      ],
+      "fit": "Good for relaxed evenings, couples and wine lovers.",
+      "tip": "Check which taverns are open that day; not all open every evening."
+    }
+  },
+  "Stadtpark walk": {
+    "he": {
+      "why": "Stadtpark הוא פארק מרכזי קליל עם פסל יוהאן שטראוס המוזהב, שבילי הליכה ותחושה וינאית רגועה. זו עצירה טובה בין אתרים, לא יעד ליום שלם.",
+      "see": [
+        "פסל Strauss המפורסם",
+        "שבילים וירק",
+        "עצירת מנוחה במרכז",
+        "צילום אייקוני קצר"
+      ],
+      "fit": "מתאים להפסקה, משפחות וצילום קצר.",
+      "tip": "להוסיף אותו כשעוברים באזור; לא לנסוע במיוחד מרחוק."
+    },
+    "en": {
+      "why": "Stadtpark is an easy central park with the golden Johann Strauss monument, paths and a calm Viennese pause.",
+      "see": [
+        "Famous Strauss statue",
+        "Green walking paths",
+        "Central rest stop",
+        "Short iconic photo"
+      ],
+      "fit": "Good for a break, families and quick photos.",
+      "tip": "Add it when nearby; do not cross town just for it."
+    }
+  },
+  "Central Cemetery music graves": {
+    "he": {
+      "why": "בית הקברות המרכזי של וינה הוא לא רק בית קברות — הוא אתר תרבות, במיוחד בזכות קברי מלחינים כמו בטהובן, שוברט וברהמס. זה מקום שקט שמחבר את וינה למוזיקה שלה.",
+      "see": [
+        "חלקת המלחינים",
+        "שבילים רחבים ושקטים",
+        "אדריכלות קבורה מרשימה",
+        "הקשר למוזיקה קלאסית"
+      ],
+      "fit": "מתאים לחובבי מוזיקה, היסטוריה ומקומות שקטים.",
+      "tip": "הוא רחוק יחסית מהמרכז; לשלב רק אם הנושא באמת מעניין אותך."
+    },
+    "en": {
+      "why": "Vienna Central Cemetery is a cultural site, especially because of composer graves like Beethoven, Schubert and Brahms. It links Vienna to its music history.",
+      "see": [
+        "Composer graves",
+        "Quiet broad paths",
+        "Funerary architecture",
+        "Classical music context"
+      ],
+      "fit": "Good for music lovers, history and quiet places.",
+      "tip": "It is outside the center; go only if the theme interests you."
+    }
+  },
+  "Albertina Museum": {
+    "he": {
+      "why": "האלברטינה משלבת מיקום מרכזי ליד האופרה עם אוסף אמנות גדול ותערוכות מתחלפות. זו בחירה טובה כשאתה רוצה מוזיאון איכותי בלי להתרחק מהמסלול.",
+      "see": [
+        "אוסף גרפי/אמנות מודרנית לפי תצוגה",
+        "תערוכות מתחלפות",
+        "מרפסת/אזור צילום בחוץ",
+        "קרבה לאופרה"
+      ],
+      "fit": "מתאים ליום גשם, אמנות ומיקום נוח.",
+      "tip": "לבדוק תערוכה נוכחית; הערך משתנה לפי מה שמוצג."
+    },
+    "en": {
+      "why": "Albertina combines a central location by the Opera with major art collections and changing exhibitions. It is a quality museum without detour.",
+      "see": [
+        "Graphic/modern collections depending on display",
+        "Temporary exhibitions",
+        "Exterior terrace/photo area",
+        "Close to Opera"
+      ],
+      "fit": "Good for rain, art and central planning.",
+      "tip": "Check the current exhibition; it changes the value."
+    }
+  },
+  "House of Music": {
+    "he": {
+      "why": "בית המוזיקה הוא מוזיאון אינטראקטיבי שמנסה להפוך את וינה המוזיקלית לחוויה משחקית: צלילים, מלחינים, ניסויים ואודיו. זה טוב יותר ממוזיאון יבש לילדים או למי שאוהב אינטראקציה.",
+      "see": [
+        "תחנות אינטראקטיביות",
+        "סיפורי מלחינים",
+        "משחקים סביב צליל",
+        "אפשרות טובה ליום גשם"
+      ],
+      "fit": "מתאים למשפחות, ילדים וחובבי מוזיקה.",
+      "tip": "לא להגיע אם אתה מחפש מוזיאון קלאסי שקט; זה יותר חווייתי."
+    },
+    "en": {
+      "why": "House of Music turns musical Vienna into an interactive experience: sound experiments, composers and audio play.",
+      "see": [
+        "Interactive stations",
+        "Composer stories",
+        "Sound experiments",
+        "Good rainy-day option"
+      ],
+      "fit": "Good for families, kids and music lovers.",
+      "tip": "Do not expect a quiet classical museum; it is experiential."
+    }
+  },
+  "Rathausplatz evening": {
+    "he": {
+      "why": "רחבת בית העירייה משתנה לפי עונה: שווקים, הקרנות, פסטיבלים ואווירת ערב. הערך הוא לא רק המבנה אלא מה שקורה סביבו.",
+      "see": [
+        "חזית בית העירייה",
+        "אירועים עונתיים",
+        "אווירת ערב פתוחה",
+        "שילוב עם Ringstrasse"
+      ],
+      "fit": "מתאים לערב קל ולבדיקת אירועים בזמן אמת.",
+      "tip": "לפני שיוצאים לבדוק אם יש אירוע — בלי אירוע זה בעיקר צילום ומעבר."
+    },
+    "en": {
+      "why": "Rathausplatz changes by season: markets, screenings, festivals and evening atmosphere. The value is often the event, not only the building.",
+      "see": [
+        "City Hall façade",
+        "Seasonal events",
+        "Open evening mood",
+        "Pairs with Ringstrasse"
+      ],
+      "fit": "Good for a light evening and live-event checking.",
+      "tip": "Check if something is on; without an event it is mostly a photo/pass-through."
+    }
+  },
+  "Vienna coffeehouse crawl": {
+    "he": {
+      "why": "סיור בתי קפה הוא דרך להבין את וינה דרך טקס: מלנג׳, עוגה, עיתון, מלצרים וחללים היסטוריים. כל בית קפה נותן אופי אחר.",
+      "see": [
+        "Café Central / Landtmann / Demel לפי בחירה",
+        "קפה וינאי וקינוחים",
+        "אדריכלות פנים",
+        "קצב איטי של ישיבה"
+      ],
+      "fit": "מתאים ליום גשם, זוגות וחובבי קינוחים.",
+      "tip": "לא לנסות יותר מדי בתי קפה ביום אחד; שניים טובים מספיק."
+    },
+    "en": {
+      "why": "A coffeehouse crawl explains Vienna through ritual: Melange, cake, newspapers, waiters and historic rooms. Each café has a different character.",
+      "see": [
+        "Café Central / Landtmann / Demel depending on route",
+        "Viennese coffee and desserts",
+        "Historic interiors",
+        "Slow sitting culture"
+      ],
+      "fit": "Good for rain, couples and dessert lovers.",
+      "tip": "Do not overdo it; two good cafés are enough."
+    }
+  },
+  "Prater amusement park": {
+    "he": {
+      "why": "פראטר הוא פארק שעשועים עירוני חופשי בכניסה, עם מתקנים בתשלום, אוכל מהיר ואווירה נוסטלגית. הוא מראה צד קליל של וינה.",
+      "see": [
+        "מתקני לונה פארק",
+        "דוכני אוכל",
+        "הגלגל הענק",
+        "אווירה עממית יותר מהמרכז הקיסרי"
+      ],
+      "fit": "מתאים למשפחות, ערב קליל וצעירים.",
+      "tip": "לבדוק אילו מתקנים פתוחים בעונה; לא כל הפארק פעיל באותה מידה כל השנה."
+    },
+    "en": {
+      "why": "Prater is an urban amusement park with free entry and paid rides, snacks and nostalgic energy. It shows Vienna’s playful side.",
+      "see": [
+        "Amusement rides",
+        "Snack stalls",
+        "Giant Ferris Wheel",
+        "More casual mood than imperial center"
+      ],
+      "fit": "Good for families, light evenings and younger travelers.",
+      "tip": "Check seasonal opening; not all rides operate equally year-round."
+    }
+  },
+  "MAK design museum": {
+    "he": {
+      "why": "MAK מתמקד בעיצוב, אמנות שימושית, ריהוט וחפצים — פחות “ציורים מפורסמים” ויותר איך אסתטיקה נכנסת לחיים. זו אלטרנטיבה חכמה למוזיאוני הענק.",
+      "see": [
+        "עיצוב ואמנות שימושית",
+        "ריהוט וחפצים היסטוריים",
+        "תערוכות עכשוויות",
+        "חלל שקט יחסית"
+      ],
+      "fit": "מתאים לעיצוב, אדריכלות ויום גשם.",
+      "tip": "לבחור אם זה באמת תחום שמעניין אותך; אחרת מוזיאונים קלאסיים יהיו מתגמלים יותר."
+    },
+    "en": {
+      "why": "MAK focuses on design, applied arts, furniture and objects — less famous painting, more how aesthetics enters daily life.",
+      "see": [
+        "Design and applied arts",
+        "Furniture and historic objects",
+        "Contemporary exhibitions",
+        "Quieter museum atmosphere"
+      ],
+      "fit": "Good for design, architecture and rain.",
+      "tip": "Go if design interests you; otherwise the classic museums may be stronger."
+    }
+  },
+  "St. Stephen’s Cathedral": {
+    "he": {
+      "why": "קתדרלת סטפן היא הלב האנכי של וינה: גג רעפים צבעוני, מגדלים גותיים וכיכר שמרגישה כמו מרכז העיר האמיתי. זה אתר חובה כי הוא נותן מיד את קנה המידה והזהות של וינה.",
+      "see": [
+        "חזית גותית מפורטת",
+        "גג רעפים צבעוני",
+        "פנים הקתדרלה",
+        "כיכר Stephansplatz"
+      ],
+      "fit": "מתאים לכל ביקור ראשון בוינה.",
+      "tip": "להגיע גם בערב; התאורה והאווירה בכיכר משתנות לגמרי."
+    },
+    "en": {
+      "why": "St. Stephen’s Cathedral is Vienna’s vertical heart: tiled roof, gothic towers and the square that feels like the city’s true center.",
+      "see": [
+        "Detailed Gothic façade",
+        "Colorful tiled roof",
+        "Cathedral interior",
+        "Stephansplatz"
+      ],
+      "fit": "Essential for any first visit.",
+      "tip": "Return in the evening; the lighting changes the mood."
+    }
+  },
+  "Schönbrunn Palace": {
+    "he": {
+      "why": "שנברון הוא הארמון שמסביר את וינה הקיסרית: מגורי קיץ של ההבסבורגים, גנים עצומים ותכנון שמציג כוח, סדר וטקס. זה לא רק ארמון יפה — זו הצהרת כוח פוליטית.",
+      "see": [
+        "חזית הארמון",
+        "חדרים קיסריים לפי כרטיס",
+        "גנים ומזרקות",
+        "תצפית Gloriette"
+      ],
+      "fit": "חובה לביקור ראשון, במיוחד למי שרוצה להבין את ההבסבורגים.",
+      "tip": "להגיע מוקדם. התורים והמרחקים בתוך המתחם גוזלים זמן."
+    },
+    "en": {
+      "why": "Schönbrunn explains imperial Vienna: Habsburg summer residence, vast gardens and a layout designed to project power and ceremony.",
+      "see": [
+        "Palace façade",
+        "Imperial rooms with ticket",
+        "Gardens and fountains",
+        "Gloriette viewpoint"
+      ],
+      "fit": "Must-do for first-time visitors interested in Habsburg Vienna.",
+      "tip": "Go early; queues and walking distances consume time."
+    }
+  },
+  "Belvedere Klimt": {
+    "he": {
+      "why": "בלוודר הוא חובה בעיקר בזכות קלימט ו“הנשיקה”, אבל גם כי הוא משלב ארמון בארוק עם אמנות שמגדירה את וינה המודרנית. זה חיבור בין אימפריה לאסתטיקה.",
+      "see": [
+        "The Kiss של Klimt לפי תצוגה",
+        "אולמות הארמון",
+        "גני בלוודר",
+        "אוסף אמנות אוסטרית"
+      ],
+      "fit": "מתאים לאמנות, זוגות ויום גשם.",
+      "tip": "להזמין כרטיס מראש אם “הנשיקה” חשובה לך."
+    },
+    "en": {
+      "why": "Belvedere is a must mainly for Klimt and The Kiss, but also because it links baroque palace space with modern Viennese art.",
+      "see": [
+        "Klimt’s The Kiss depending on display",
+        "Palace halls",
+        "Belvedere gardens",
+        "Austrian art collection"
+      ],
+      "fit": "Good for art, couples and rain.",
+      "tip": "Book ahead if The Kiss is a priority."
+    }
+  },
+  "Ringstrasse walk": {
+    "he": {
+      "why": "הרינגשטראסה הוא שיעור פתוח בהיסטוריה של וינה: שדרה שנבנתה במקום חומות העיר, עם אופרה, פרלמנט, מוזיאונים ובית עירייה. הליכה כאן מסבירה איך וינה הפכה לעיר אימפריאלית מודרנית.",
+      "see": [
+        "האופרה",
+        "הפרלמנט",
+        "Rathaus",
+        "מוזיאוני התאומים ושדרות רחבות"
+      ],
+      "fit": "מתאים להתמצאות, אדריכלות ויום ראשון בעיר.",
+      "tip": "אפשר לעשות חלק בהליכה וחלק בחשמלית כדי לא להתעייף."
+    },
+    "en": {
+      "why": "Ringstrasse is an open lesson in Vienna’s history: a boulevard built where city walls once stood, lined with opera, parliament, museums and city hall.",
+      "see": [
+        "State Opera",
+        "Parliament",
+        "Rathaus",
+        "Twin museums and broad boulevards"
+      ],
+      "fit": "Good for orientation, architecture and first-day planning.",
+      "tip": "Mix walking with tram sections to avoid fatigue."
+    }
+  },
+  "Hofburg Palace": {
+    "he": {
+      "why": "הופבורג הוא מתחם השלטון ההבסבורגי בלב וינה — לא בניין אחד אלא עיר של ארמונות, חצרות, מוזיאונים וטקסים. חובה כי הוא מסביר את מרכז הכוח של האימפריה.",
+      "see": [
+        "חצרות הארמון",
+        "מוזיאונים לפי בחירה",
+        "אזור הספרייה הלאומית",
+        "מעבר אל Heldenplatz"
+      ],
+      "fit": "מתאים להיסטוריה, אדריכלות וביקור ראשון.",
+      "tip": "לא לנסות את כל המוזיאונים ביום אחד; לבחור נושא."
+    },
+    "en": {
+      "why": "Hofburg is the Habsburg power complex at Vienna’s center — not one building, but a city of palaces, courtyards and museums.",
+      "see": [
+        "Palace courtyards",
+        "Museums depending on choice",
+        "National Library area",
+        "Heldenplatz"
+      ],
+      "fit": "Good for history, architecture and first visit.",
+      "tip": "Do not try every museum in one day; choose a theme."
+    }
+  },
+  "Vienna State Opera": {
+    "he": {
+      "why": "האופרה של וינה היא סמל תרבותי חי, לא רק בניין יפה. גם אם לא נכנסים להופעה, החזית והמיקום שלה על הרינג מראים את המקום של מוזיקה בחיי העיר.",
+      "see": [
+        "חזית בית האופרה",
+        "אפשרות סיור/הופעה",
+        "אווירת ערב סביב המבנה",
+        "קירבה לאלברטינה והרינג"
+      ],
+      "fit": "חובה לחובבי תרבות ומוזיקה.",
+      "tip": "אם אין תקציב לכרטיס מלא, לבדוק כרטיסי עמידה או סיור."
+    },
+    "en": {
+      "why": "Vienna State Opera is a living cultural symbol, not just a façade. Even outside, it shows how central music is to the city.",
+      "see": [
+        "Opera façade",
+        "Tour/performance option",
+        "Evening atmosphere around building",
+        "Close to Albertina and Ring"
+      ],
+      "fit": "Must for culture and music lovers.",
+      "tip": "If full tickets are costly, check standing tickets or guided tours."
+    }
+  },
+  "Naschmarkt": {
+    "he": {
+      "why": "נאשמרקט הוא שוק האוכל המרכזי של וינה, מקום שבו העיר נהיית פחות פורמלית: דוכנים, תבלינים, מאפים, מסעדות וערבוב מטבחים.",
+      "see": [
+        "דוכני אוכל ותבלינים",
+        "מסעדות קלילות",
+        "טעימות וקפה",
+        "אווירת שוק עירוני"
+      ],
+      "fit": "חובה למי שאוהב אוכל או רוצה הפסקה פחות מוזיאלית.",
+      "tip": "להגיע רעבים אבל לבחור בזהירות; לא כל מקום בשוק שווה באותה מידה."
+    },
+    "en": {
+      "why": "Naschmarkt is Vienna’s main food market, where the city becomes less formal: stalls, spices, pastries, restaurants and mixed cuisines.",
+      "see": [
+        "Food and spice stalls",
+        "Casual restaurants",
+        "Tasting and coffee",
+        "Urban market mood"
+      ],
+      "fit": "Must for food lovers and a less museum-like break.",
+      "tip": "Come hungry but choose carefully; not every stall is equal."
+    }
+  },
+  "Prater Ferris Wheel": {
+    "he": {
+      "why": "הגלגל הענק בפראטר הוא אחד הדימויים המזוהים עם וינה. גם אם הנסיעה קצרה, היא נותנת שילוב של נוסטלגיה, נוף ותחושת עיר שעוד יודעת לשחק.",
+      "see": [
+        "הגלגל הענק",
+        "נוף לפראטר ולעיר",
+        "אווירת פארק שעשועים",
+        "צילום אייקוני"
+      ],
+      "fit": "מתאים למשפחות וזוגות.",
+      "tip": "אם כבר בפראטר, לשלב עם הליכה קצרה בפארק ולא רק לעלות וללכת."
+    },
+    "en": {
+      "why": "The Prater Ferris Wheel is one of Vienna’s most recognizable images, combining nostalgia, view and playful city energy.",
+      "see": [
+        "Giant wheel",
+        "Views over Prater and city",
+        "Amusement-park mood",
+        "Iconic photo"
+      ],
+      "fit": "Good for families and couples.",
+      "tip": "If you go, walk a little in Prater too; do not only ride and leave."
+    }
+  },
+  "Café Central": {
+    "he": {
+      "why": "קפה סנטרל הוא יותר מבית קפה: זה סמל לתרבות בתי הקפה של וינה, מקום שמזוהה עם אינטלקטואלים, עיתונים, עוגות וישיבה איטית. מגיעים בשביל הטקס.",
+      "see": [
+        "חלל היסטורי גבוה",
+        "קפה וינאי",
+        "Apfelstrudel / עוגות",
+        "אווירת בית קפה קלאסי"
+      ],
+      "fit": "חובה למי שרוצה להבין את תרבות הקפה של וינה.",
+      "tip": "התור יכול להיות ארוך; אם אין זמן, יש בתי קפה היסטוריים אחרים."
+    },
+    "en": {
+      "why": "Café Central is more than a café: it represents Vienna’s coffeehouse culture of writers, newspapers, cakes and slow sitting.",
+      "see": [
+        "Grand historic interior",
+        "Viennese coffee",
+        "Apfelstrudel / cakes",
+        "Classic café atmosphere"
+      ],
+      "fit": "Must for understanding Viennese café culture.",
+      "tip": "Lines can be long; if short on time, consider other historic cafés."
+    }
+  },
+  "Graben and Kohlmarkt": {
+    "he": {
+      "why": "Graben ו־Kohlmarkt הם הצירים האלגנטיים של המרכז: חנויות יוקרה, חזיתות קלאסיות, עמוד הדבר והליכה שמחברת את סטפנסדום להופבורג.",
+      "see": [
+        "עמוד הדבר Graben",
+        "חנויות וקונדיטוריות",
+        "חזיתות היסטוריות",
+        "הליכה לכיוון Hofburg"
+      ],
+      "fit": "חובה להתמצאות במרכז ההיסטורי.",
+      "tip": "לעבור כאן בדרך בין אתרים; לא חייבים לקנות כלום."
+    },
+    "en": {
+      "why": "Graben and Kohlmarkt are elegant central axes: luxury shops, historic façades, Plague Column and the walk from Stephansdom toward Hofburg.",
+      "see": [
+        "Graben Plague Column",
+        "Shops and pastry stops",
+        "Historic façades",
+        "Walk toward Hofburg"
+      ],
+      "fit": "Essential for central orientation.",
+      "tip": "Use it as a connector between sites; shopping is optional."
+    }
+  },
+  "MuseumsQuartier": {
+    "he": {
+      "why": "רובע המוזיאונים הוא הצד התרבותי־עכשווי של וינה: חצרות פתוחות, מוזיאונים, ישיבה בחוץ וקהל צעיר. הוא מראה שהעיר היא לא רק אימפריה ישנה.",
+      "see": [
+        "חצרות MQ",
+        "Leopold/MUMOK לפי עניין",
+        "ישיבה בחוץ",
+        "אווירה צעירה ותרבותית"
+      ],
+      "fit": "חובה למי שאוהב אמנות עכשווית או מרחב עירוני חי.",
+      "tip": "גם בלי מוזיאון, שווה לעצור בחצר אם נמצאים באזור."
+    },
+    "en": {
+      "why": "MuseumsQuartier is Vienna’s contemporary cultural side: courtyards, museums, outdoor seating and a younger crowd.",
+      "see": [
+        "MQ courtyards",
+        "Leopold/MUMOK depending on interest",
+        "Outdoor seating",
+        "Young cultural atmosphere"
+      ],
+      "fit": "Must for contemporary art or lively urban space.",
+      "tip": "Even without a museum ticket, the courtyards are worth a stop."
+    }
+  },
+  "Karlskirche": {
+    "he": {
+      "why": "Karlskirche היא אחת הכנסיות הבארוקיות היפות בווינה, עם כיפה גדולה, עמודים בהשראה רומית ובריכה שמייצרת השתקפות נהדרת. היא חזקה במיוחד לצילום.",
+      "see": [
+        "חזית בארוקית",
+        "כיפה ועמודים",
+        "בריכת השתקפות",
+        "כיכר שקטה יחסית"
+      ],
+      "fit": "חובה לחובבי אדריכלות וצילום.",
+      "tip": "להגיע לקראת ערב כשהחזית והמים נותנים צילום טוב יותר."
+    },
+    "en": {
+      "why": "Karlskirche is one of Vienna’s most beautiful baroque churches, with a dome, Roman-inspired columns and a reflecting pool.",
+      "see": [
+        "Baroque façade",
+        "Dome and columns",
+        "Reflecting pool",
+        "Relatively calm square"
+      ],
+      "fit": "Must for architecture and photography.",
+      "tip": "Go toward evening for better reflections and light."
+    }
+  },
+  "Danube Canal": {
+    "he": {
+      "why": "תעלת הדנובה היא וינה הפחות רשמית: גרפיטי, ברים, אופניים והליכה לאורך מים. חובה אם רוצים לראות צד צעיר יותר מהעיר.",
+      "see": [
+        "גרפיטי וקירות צבעוניים",
+        "ברים עונתיים",
+        "הליכת מים",
+        "חיבור לאזורי בילוי"
+      ],
+      "fit": "מתאים לערב, צעירים וצילום רחוב.",
+      "tip": "לבוא במזג אוויר טוב ובשעות שהברים פתוחים."
+    },
+    "en": {
+      "why": "The Danube Canal is less formal Vienna: graffiti, bars, bikes and waterfront walking. Essential if you want a younger city layer.",
+      "see": [
+        "Graffiti walls",
+        "Seasonal bars",
+        "Waterfront walking",
+        "Links to nightlife areas"
+      ],
+      "fit": "Good for evening, younger travelers and street photos.",
+      "tip": "Go in good weather when bars are active."
+    }
+  },
+  "Rathausplatz": {
+    "he": {
+      "why": "Rathausplatz הוא כיכר אירועים ענקית מול בית העירייה. בחורף שוק חג, בקיץ הקרנות ואירועים — זה מקום שמראה את וינה כעיר חיה, לא רק מוזיאון.",
+      "see": [
+        "בית העירייה הנאו־גותי",
+        "אירועים עונתיים",
+        "רחבה פתוחה",
+        "קרבה לרינג"
+      ],
+      "fit": "חובה אם יש אירוע עונתי בזמן הביקור.",
+      "tip": "לבדוק לוח אירועים; בלי אירוע הערך קצר יותר."
+    },
+    "en": {
+      "why": "Rathausplatz is a major event square in front of City Hall: winter markets, summer screenings and seasonal festivals.",
+      "see": [
+        "Neo-Gothic City Hall",
+        "Seasonal events",
+        "Open square",
+        "Close to Ringstrasse"
+      ],
+      "fit": "Must if an event is on during your visit.",
+      "tip": "Check the event calendar; without events it is a shorter stop."
+    }
+  },
+  "Albertina": {
+    "he": {
+      "why": "האלברטינה היא מוזיאון מרכזי ונוח שמחבר בין אמנות, ארמון ומיקום מושלם ליד האופרה. חובה אם רוצים אמנות טובה בלי לצאת מהמרכז.",
+      "see": [
+        "אוספי אמנות ותערוכות",
+        "חדרים היסטוריים לפי כרטיס",
+        "מרפסת צילום",
+        "קרבה לאופרה"
+      ],
+      "fit": "חובה לחובבי אמנות עם זמן מוגבל.",
+      "tip": "לבדוק את התערוכה הנוכחית — היא קובעת אם זה MustDo עבורך."
+    },
+    "en": {
+      "why": "Albertina is a central museum linking art, palace rooms and a perfect location by the Opera. A strong art stop without leaving the center.",
+      "see": [
+        "Art collections and exhibitions",
+        "Historic rooms depending on ticket",
+        "Photo terrace",
+        "Close to Opera"
+      ],
+      "fit": "Must for art lovers with limited time.",
+      "tip": "Check current exhibitions; they decide how essential it is for you."
+    }
+  },
+  "Stadtpark Strauss statue": {
+    "he": {
+      "why": "פסל שטראוס המוזהב ב־Stadtpark הוא אחת התמונות הקלאסיות של וינה המוזיקלית. זו עצירה קצרה שמחברת את העיר לוולסים ולדימוי הרומנטי שלה.",
+      "see": [
+        "פסל יוהאן שטראוס",
+        "פארק עירוני נעים",
+        "צילום אייקוני",
+        "הליכה קצרה במרכז"
+      ],
+      "fit": "חובה קטנה לחובבי מוזיקה וצילום.",
+      "tip": "לשלב כעצירת מעבר; לא צריך להקדיש לזה הרבה זמן."
+    },
+    "en": {
+      "why": "The golden Strauss statue in Stadtpark is one of the classic images of musical Vienna, linking the city to waltz culture.",
+      "see": [
+        "Johann Strauss statue",
+        "Pleasant city park",
+        "Iconic photo",
+        "Short central walk"
+      ],
+      "fit": "Small must-do for music and photos.",
+      "tip": "Use it as a passing stop; no need for a long visit."
+    }
+  },
+  "Grinzing evening": {
+    "he": {
+      "why": "ערב בגרינצינג מציג את וינה של יין וטברנות Heuriger. זו חוויה שונה מהמרכז: פחות ארמון, יותר שולחן, יין, אוכל פשוט ומוזיקה/אווירה מקומית.",
+      "see": [
+        "טברנות יין",
+        "אוכל אוסטרי פשוט",
+        "רחובות שכונה שקטים",
+        "אפשרות מוזיקה לפי מקום"
+      ],
+      "fit": "חובה למי שרוצה ערב מקומי יותר ולא רק בר בעיר.",
+      "tip": "לבדוק איזה Heuriger פתוח; לא כולם פעילים כל ערב."
+    },
+    "en": {
+      "why": "A Grinzing evening shows Vienna’s wine-tavern side: less palace, more table, wine, simple food and local mood.",
+      "see": [
+        "Wine taverns",
+        "Simple Austrian food",
+        "Quiet district streets",
+        "Possible music depending on tavern"
+      ],
+      "fit": "Must if you want a more local evening than central bars.",
+      "tip": "Check which Heuriger is open; not all operate every evening."
+    }
+  },
+  "Strasbourg Boat Tour": {
+    "he": {
+      "why": "שייט בשטרסבורג הוא אחת הדרכים הכי טובות להבין את העיר מהר: Grande Île, פטיט פראנס, Neustadt והרובע האירופי מתחברים למסלול אחד על נהר Ill. זה נותן מסגרת לפני שמטיילים ברגל.",
+      "see": [
+        "Petite France מהמים",
+        "Neustadt – הרובע הגרמני־קיסרי",
+        "מוסדות אירופיים",
+        "הסברים באוזניות לפי שפה"
+      ],
+      "fit": "מתאים ליום ראשון בעיר, משפחות ומי שרוצה להבין את המבנה שלה.",
+      "tip": "לעשות בתחילת הביקור; אחר כך ההליכה בעיר ברורה יותר."
+    },
+    "en": {
+      "why": "A Strasbourg boat tour is one of the fastest ways to understand the city: Grande Île, Petite France, Neustadt and European Quarter linked by the Ill River.",
+      "see": [
+        "Petite France from the water",
+        "Neustadt imperial district",
+        "European institutions",
+        "Audio commentary in several languages"
+      ],
+      "fit": "Good for first day, families and orientation.",
+      "tip": "Do it early in the visit; the city makes more sense afterward."
+    }
+  },
+  "Cathedral Platform View": {
+    "he": {
+      "why": "תצפית הקתדרלה נותנת מבט על גגות שטרסבורג, התעלות והמרקם הצפוף של העיר העתיקה. העלייה במדרגות הופכת את הנוף למשהו שהרווחת במאמץ.",
+      "see": [
+        "גגות Grande Île",
+        "מבט על הקתדרלה מקרוב",
+        "תעלות ורחובות מלמעלה",
+        "צילום פנורמי"
+      ],
+      "fit": "מתאים לצילום, היסטוריה ומי שלא מפחד ממדרגות.",
+      "tip": "לבדוק שעות ומזג אוויר; ביום ערפילי לא שווה להתאמץ."
+    },
+    "en": {
+      "why": "The cathedral platform gives rooftop views over Strasbourg, canals and the dense old-town fabric. The stair climb makes the view feel earned.",
+      "see": [
+        "Grande Île rooftops",
+        "Close cathedral details",
+        "Canals and streets from above",
+        "Panoramic photos"
+      ],
+      "fit": "Good for photos and those comfortable with stairs.",
+      "tip": "Check hours and weather; haze reduces the value."
+    }
+  },
+  "Petite France canals": {
+    "he": {
+      "why": "תעלות פטיט פראנס הן התמונה הרומנטית של שטרסבורג: מים, גשרים, בתי חצי־עץ ומרפסות פרחים. זה המקום שבו אלזס מרגישה הכי גלויה בעיר.",
+      "see": [
+        "תעלות וגשרים קטנים",
+        "בתי חצי־עץ",
+        "נקודות צילום ליד המים",
+        "הליכה איטית ללא יעד קשיח"
+      ],
+      "fit": "מתאים לזוגות, צילום וערב רגוע.",
+      "tip": "הכי יפה מוקדם בבוקר או אחרי שקיעה כשהעומס יורד."
+    },
+    "en": {
+      "why": "Petite France canals are Strasbourg’s romantic postcard: water, small bridges, half-timbered houses and flowered balconies.",
+      "see": [
+        "Canals and small bridges",
+        "Half-timbered houses",
+        "Waterfront photo spots",
+        "Slow aimless walking"
+      ],
+      "fit": "Best for couples, photos and relaxed evenings.",
+      "tip": "Most beautiful early morning or after sunset when crowds thin."
+    }
+  },
+  "European Quarter walk": {
+    "he": {
+      "why": "הרובע האירופי מציג שטרסבורג אחרת: לא רק אלזס ציורית, אלא עיר עם תפקיד פוליטי באירופה. כאן נמצאים מוסדות כמו הפרלמנט האירופי ומועצת אירופה.",
+      "see": [
+        "מבני מוסדות אירופיים",
+        "אדריכלות מודרנית יותר",
+        "הליכה רחבה ופתוחה",
+        "הקשר לעיר כבירה אירופית"
+      ],
+      "fit": "מתאים למי שמתעניין בפוליטיקה, אירופה ואדריכלות מודרנית.",
+      "tip": "לשלב עם פארק Orangerie או שייט; האזור פחות “קסום” לבד."
+    },
+    "en": {
+      "why": "The European Quarter shows another Strasbourg: not just picturesque Alsace, but a city with a political role in Europe.",
+      "see": [
+        "European institutional buildings",
+        "More modern architecture",
+        "Wide open walking areas",
+        "European-capital context"
+      ],
+      "fit": "Good for politics, Europe and modern architecture.",
+      "tip": "Pair with Orangerie Park or boat tour; alone it is less charming."
+    }
+  },
+  "Covered Bridges sunset": {
+    "he": {
+      "why": "הגשרים המקורים וסכר Vauban נותנים את אחת מנקודות השקיעה הטובות בעיר: מגדלים, מים, גגות וכניסה דרמטית לפטיט פראנס.",
+      "see": [
+        "Ponts Couverts",
+        "מגדלי ההגנה",
+        "Vauban Dam nearby",
+        "שקיעה על התעלות"
+      ],
+      "fit": "מתאים לצילום, זוגות והליכת ערב.",
+      "tip": "לעלות ל־Vauban Dam viewpoint אם פתוח — הזווית משם חזקה יותר."
+    },
+    "en": {
+      "why": "Covered Bridges and Vauban Dam create one of the best sunset corners in Strasbourg: towers, water, rooftops and a dramatic entry to Petite France.",
+      "see": [
+        "Ponts Couverts",
+        "Defensive towers",
+        "Nearby Vauban Dam",
+        "Sunset over canals"
+      ],
+      "fit": "Good for photos, couples and evening walk.",
+      "tip": "Go up to Vauban Dam viewpoint if open; the angle is stronger."
+    }
+  },
+  "Batorama cruise": {
+    "he": {
+      "why": "Batorama היא מפעילת השייט המזוהה עם שטרסבורג, עם סיור של כ־70 דקות לאורך נקודות מרכזיות בעיר. היתרון הוא הסבר מובנה בכמה שפות ותנועה נוחה גם ביום גשם.",
+      "see": [
+        "Grande Île",
+        "Petite France",
+        "Neustadt",
+        "European institutions לפי מסלול"
+      ],
+      "fit": "מתאים למשפחות, יום ראשון בעיר וגשם קל.",
+      "tip": "להזמין שעה שמתאימה לתוכנית; חלק מהסירות מקורות ומחוממות/ממוזגות."
+    },
+    "en": {
+      "why": "Batorama is Strasbourg’s well-known boat operator, with about 70-minute tours linking major city areas and multilingual audio commentary.",
+      "see": [
+        "Grande Île",
+        "Petite France",
+        "Neustadt",
+        "European institutions depending on route"
+      ],
+      "fit": "Good for families, first day and light rain.",
+      "tip": "Choose a time that fits your day; many boats are covered and climate-controlled."
+    }
+  },
+  "Alsace wine tasting": {
+    "he": {
+      "why": "טעימת יין באלזס מכניסה לטיול את אחד הסיפורים החשובים של האזור: ריזלינג, גוורצטרמינר, כרמים וכפרי יין. גם בתוך העיר אפשר לקבל טעימה בלי לנסוע לכל דרך היין.",
+      "see": [
+        "יינות לבנים אלזסיים",
+        "הסבר על זנים מקומיים",
+        "אפשרות גבינות/נשנושים",
+        "חיבור לכפרי היין באזור"
+      ],
+      "fit": "מתאים לזוגות, חובבי יין וערב רגוע.",
+      "tip": "אם מתכננים גם טיול רכב בכפרי יין, לשמור טעימה גדולה לשם."
+    },
+    "en": {
+      "why": "Alsace wine tasting brings in one of the region’s core stories: Riesling, Gewürztraminer, vineyards and wine villages.",
+      "see": [
+        "Alsatian white wines",
+        "Local grape explanations",
+        "Possible cheese/snack pairing",
+        "Context for wine villages"
+      ],
+      "fit": "Good for couples, wine lovers and relaxed evenings.",
+      "tip": "If you plan a wine-route car day, save the bigger tasting for there."
+    }
+  },
+  "Bike tour along Ill river": {
+    "he": {
+      "why": "סיור אופניים לאורך נהר Ill מתאים כי שטרסבורג שטוחה יחסית, ירוקה ומלאה שבילי מים. זו דרך לראות יותר שכונות בלי תחושה של מרתון הליכה.",
+      "see": [
+        "שבילים ליד הנהר",
+        "מעבר בין Grande Île לאזורים ירוקים",
+        "אפשרות להגיע לרובע האירופי",
+        "קצב קליל יותר מהליכה"
+      ],
+      "fit": "מתאים למי שנוח לו ברכיבה עירונית וליום מזג אוויר טוב.",
+      "tip": "לוודא אופניים תקינים, קסדה/ביטוח ומסלול שמתרחק מכבישים עמוסים."
+    },
+    "en": {
+      "why": "A bike tour along the Ill works because Strasbourg is flat, green and water-based. It covers more city without a walking marathon.",
+      "see": [
+        "Riverside paths",
+        "Links between Grande Île and greener areas",
+        "Possible European Quarter access",
+        "Lighter pace than walking"
+      ],
+      "fit": "Good for confident city cyclists and nice weather.",
+      "tip": "Check bike condition, insurance/helmet and route away from heavy traffic."
+    }
+  },
+  "Christmas market route": {
+    "he": {
+      "why": "מסלול שוק חג המולד הוא חובה עונתית כי הוא משנה את כל העיר: אורות, דוכנים, ריחות תבלינים ועץ חג ענק. זו חוויה שלא קיימת באותו אופן בקיץ.",
+      "see": [
+        "Place Kléber",
+        "דוכני יין חם ומאפים",
+        "קישוטי רחוב",
+        "כיכרות שוק שונות"
+      ],
+      "fit": "חובה בדצמבר/עונת חג המולד.",
+      "tip": "ללכת בשעות מוקדמות יותר כדי להימנע מעומס סוף יום."
+    },
+    "en": {
+      "why": "The Christmas market route is a seasonal must because it transforms the city: lights, stalls, spice smells and the huge Christmas tree.",
+      "see": [
+        "Place Kléber",
+        "Mulled wine and pastry stalls",
+        "Street decorations",
+        "Different market squares"
+      ],
+      "fit": "Must in Christmas season.",
+      "tip": "Go earlier to avoid peak evening crowds."
+    }
+  },
+  "Orangerie Park": {
+    "he": {
+      "why": "פארק אורנז׳רי הוא נשימה ירוקה בעיר, עם אגם, שבילים וחסידות שמזוהות עם אלזס. חובה אם צריך הפסקה מהעיר העתיקה או אם מטיילים עם ילדים.",
+      "see": [
+        "אגם ושבילים",
+        "מדשאות",
+        "חסידות אם נמצאות",
+        "קרבה לרובע האירופי"
+      ],
+      "fit": "מתאים למשפחות, פיקניק ומנוחה.",
+      "tip": "לשלב עם הרובע האירופי; שניהם באותו כיוון."
+    },
+    "en": {
+      "why": "Orangerie Park is Strasbourg’s green breath: lake, paths and storks associated with Alsace. Essential if you need a pause or travel with kids.",
+      "see": [
+        "Lake and paths",
+        "Lawns",
+        "Storks if present",
+        "Close to European Quarter"
+      ],
+      "fit": "Good for families, picnic and rest.",
+      "tip": "Pair with European Quarter; they are in the same direction."
+    }
+  },
+  "Museum of Modern Art": {
+    "he": {
+      "why": "המוזיאון לאמנות מודרנית הוא חובה למי שרוצה לאזן את העיר העתיקה עם תרבות מודרנית. המבנה ליד הנהר והתערוכות נותנים הפסקה חכמה מהסמטאות.",
+      "see": [
+        "אמנות מודרנית ועכשווית",
+        "תערוכות מתחלפות",
+        "מבנה ליד הנהר",
+        "קירבה לפטיט פראנס"
+      ],
+      "fit": "מתאים לחובבי אמנות ויום גשם.",
+      "tip": "לבדוק תערוכה לפני שמחליטים אם זה חובה עבורך."
+    },
+    "en": {
+      "why": "The Museum of Modern Art is essential if you want to balance old-town charm with modern culture.",
+      "see": [
+        "Modern and contemporary art",
+        "Changing exhibitions",
+        "Riverside building",
+        "Near Petite France"
+      ],
+      "fit": "Good for art lovers and rainy days.",
+      "tip": "Check the current exhibition before deciding how essential it is."
+    }
+  },
+  "Astronomical Clock visit": {
+    "he": {
+      "why": "השעון האסטרונומי בתוך קתדרלת שטרסבורג הוא שילוב של מכניקה, אמונה, זמן ואמנות. הוא לא רק “שעון יפה” אלא אובייקט שמראה איך מדע ודת נפגשו בעיר.",
+      "see": [
+        "מנגנון השעון",
+        "דמויות נעות לפי שעה",
+        "פנים הקתדרלה",
+        "הקשר אסטרונומי־דתי"
+      ],
+      "fit": "מתאים להיסטוריה, משפחות וסקרנות טכנית.",
+      "tip": "לבדוק שעות הדגמה; להגיע סתם עלול לפספס את הרגע המרכזי."
+    },
+    "en": {
+      "why": "The astronomical clock inside Strasbourg Cathedral combines mechanics, faith, time and art — not just a pretty clock.",
+      "see": [
+        "Clock mechanism",
+        "Moving figures at set times",
+        "Cathedral interior",
+        "Astronomy-religion context"
+      ],
+      "fit": "Good for history, families and technical curiosity.",
+      "tip": "Check demonstration times; otherwise you may miss the main moment."
+    }
+  },
+  "Canal photography walk": {
+    "he": {
+      "why": "הליכת צילום לאורך התעלות נותנת דרך איטית ומדויקת לראות את שטרסבורג: השתקפויות, גשרים, חזיתות ובתי חצי־עץ. זה טוב במיוחד בשעות אור רך.",
+      "see": [
+        "השתקפויות במים",
+        "גשרים קטנים",
+        "חזיתות חצי־עץ",
+        "פינות פחות עמוסות סביב Petite France"
+      ],
+      "fit": "מתאים לצילום, זוגות והליכה רגועה.",
+      "tip": "להתחיל מוקדם בבוקר כדי לקבל מים שקטים ופחות אנשים."
+    },
+    "en": {
+      "why": "A canal photography walk is a slow way to see Strasbourg: reflections, bridges, façades and half-timbered houses.",
+      "see": [
+        "Water reflections",
+        "Small bridges",
+        "Half-timbered façades",
+        "Quieter corners around Petite France"
+      ],
+      "fit": "Good for photography, couples and slow walking.",
+      "tip": "Start early for calmer water and fewer people."
+    }
+  },
+  "German border day hop": {
+    "he": {
+      "why": "שטרסבורג יושבת ממש על גבול גרמניה, ולכן קפיצה קצרה לצד השני נותנת תחושה של מעבר תרבותי מהיר: שפה, שילוט, אוכל ואווירה משתנים בלי יום נסיעה גדול.",
+      "see": [
+        "מעבר נהר/גבול לאזור Kehl",
+        "תחושת גרמניה קרובה",
+        "חנויות/קפה בצד השני",
+        "הליכה או חשמלית לפי מסלול"
+      ],
+      "fit": "מתאים לסקרנות, משפחות ויום קליל.",
+      "tip": "לא לצפות ליעד תיירותי גדול; הערך הוא החוויה של מעבר הגבול."
+    },
+    "en": {
+      "why": "Strasbourg sits directly on the German border, so a short hop gives a quick cultural shift: language, signs, food and mood change fast.",
+      "see": [
+        "Cross toward Kehl area",
+        "Nearby Germany feeling",
+        "Shops/cafés across the border",
+        "Walk or tram depending on route"
+      ],
+      "fit": "Good for curiosity, families and an easy detour.",
+      "tip": "Do not expect a major attraction; the value is the border experience."
+    }
+  },
+  "Thermal spa Baden-Baden": {
+    "he": {
+      "why": "מרחצאות באדן־באדן הם חוויית ספא גרמנית קלאסית: מים תרמיים, שקט וטקס רחצה מסודר. זו חוויה שמתאימה יותר ליום רכב או תכנון מראש.",
+      "see": [
+        "מרחצאות תרמיים",
+        "אווירת ספא אלגנטית",
+        "אפשרות יום רגוע מחוץ לעיר",
+        "שילוב עם פארקים/קזינו"
+      ],
+      "fit": "מתאים לזוגות, מנוחה ויום רכב.",
+      "tip": "לבדוק כללים, לבוש, שעות וכרטיסים; תרבות מרחצאות משתנה לפי מקום."
+    },
+    "en": {
+      "why": "Baden-Baden thermal baths are a classic German spa experience: thermal water, quiet and a structured bathing ritual.",
+      "see": [
+        "Thermal baths",
+        "Elegant spa mood",
+        "Relaxed out-of-town day",
+        "Pairs with parks/casino"
+      ],
+      "fit": "Good for couples, rest and car day.",
+      "tip": "Check rules, clothing policy, hours and tickets."
+    }
+  },
+  "Casino Baden-Baden": {
+    "he": {
+      "why": "הקזינו של באדן־באדן הוא לא רק הימורים אלא אולם היסטורי אלגנטי שמזוהה עם עיירת הספא. גם למי שלא מהמר, יש עניין באדריכלות ובאווירה.",
+      "see": [
+        "אולמות קזינו היסטוריים",
+        "Kurhaus מבחוץ",
+        "אווירת ערב אלגנטית",
+        "שילוב עם ספא/פארקים"
+      ],
+      "fit": "מתאים לערב אלגנטי או ביקור אדריכלי.",
+      "tip": "לבדוק קוד לבוש וגיל כניסה; לא להגיע ספונטנית בלי לדעת כללים."
+    },
+    "en": {
+      "why": "Baden-Baden Casino is not only gambling; it is a historic elegant hall tied to the spa-town identity.",
+      "see": [
+        "Historic casino rooms",
+        "Kurhaus exterior",
+        "Elegant evening mood",
+        "Pairs with spa/parks"
+      ],
+      "fit": "Good for elegant evening or architecture interest.",
+      "tip": "Check dress code and entry age rules first."
+    }
+  },
+  "Vauban Dam viewpoint": {
+    "he": {
+      "why": "סכר Vauban הוא המקום שממנו רואים את פטיט פראנס והגשרים המקורים בפריים אחד. חובה לצילום כי הוא מסדר את כל הסיפור הוויזואלי של האזור.",
+      "see": [
+        "גג תצפית מעל הסכר",
+        "נוף לגשרים המקורים",
+        "פטיט פראנס מלמעלה",
+        "צילום פנורמי"
+      ],
+      "fit": "חובה לצילום והתמצאות.",
+      "tip": "לעלות לגג אם פתוח; זו הזווית שלא מקבלים מהרחוב."
+    },
+    "en": {
+      "why": "Vauban Dam viewpoint frames Petite France and the Covered Bridges together, making it one of the best photo/orientation points.",
+      "see": [
+        "Rooftop over the dam",
+        "Covered Bridges view",
+        "Petite France from above",
+        "Panoramic photo"
+      ],
+      "fit": "Must for photos and orientation.",
+      "tip": "Go up to the roof if open; street level is not the same."
+    }
+  },
+  "Riverside picnic": {
+    "he": {
+      "why": "פיקניק ליד הנהר מתאים כשמזג האוויר טוב ורוצים לעצור את הקצב: לקנות מאפה/גבינה/שתייה ולשבת ליד המים במקום עוד מסעדה.",
+      "see": [
+        "ישיבה ליד Ill",
+        "מאפים וגבינות מקומיות",
+        "הפסקה בלי הזמנה",
+        "אווירה רגועה"
+      ],
+      "fit": "מתאים לזוגות, משפחות ותקציב נמוך.",
+      "tip": "לקנות מראש בשוק/מאפייה ולבחור מקום מוצל ונקי."
+    },
+    "en": {
+      "why": "A riverside picnic works when weather is good and you want to slow down: buy pastry/cheese/drinks and sit by the water instead of another restaurant.",
+      "see": [
+        "Sitting by the Ill",
+        "Local pastries and cheese",
+        "Break without reservation",
+        "Calm mood"
+      ],
+      "fit": "Good for couples, families and low budget.",
+      "tip": "Buy ahead from a bakery/market and choose a shaded clean spot."
+    }
+  },
+  "Cathedral light show seasonally": {
+    "he": {
+      "why": "מופעי תאורה על הקתדרלה מתקיימים בעונות/אירועים מסוימים והופכים את החזית למסך ענק. זו חוויה חזקה אם היא פעילה בזמן הביקור.",
+      "see": [
+        "חזית הקתדרלה מוארת",
+        "מוזיקה/אנימציה לפי אירוע",
+        "קהל בכיכר",
+        "אווירת ערב עונתית"
+      ],
+      "fit": "מתאים לערב, צילום ומשפחות.",
+      "tip": "לבדוק תאריכים רשמיים; זה לא קורה כל השנה."
+    },
+    "en": {
+      "why": "Seasonal cathedral light shows turn the façade into a huge screen. If active during your visit, it can be a strong evening experience.",
+      "see": [
+        "Illuminated cathedral façade",
+        "Music/animation depending on event",
+        "Crowd in square",
+        "Seasonal evening mood"
+      ],
+      "fit": "Good for evening, photos and families.",
+      "tip": "Check official dates; it is not year-round."
+    }
+  },
+  "Local bakery crawl": {
+    "he": {
+      "why": "סיור מאפיות קטן בשטרסבורג הוא דרך טעימה להבין את אלזס: kougelhopf, טארטים, מאפים חמאתיים ולחמים. זה נותן תרבות מקומית בלי מוזיאון.",
+      "see": [
+        "מאפים אלזסיים",
+        "קפה קצר",
+        "חלונות ראווה של מאפיות",
+        "עצירות קטנות בין אתרים"
+      ],
+      "fit": "מתאים לבוקר, משפחות וחובבי מתוק.",
+      "tip": "לקנות מעט בכל מקום; אחרת נהיים כבדים מהר מדי."
+    },
+    "en": {
+      "why": "A small bakery crawl in Strasbourg is a tasty way to understand Alsace: kougelhopf, tarts, buttery pastries and breads.",
+      "see": [
+        "Alsatian pastries",
+        "Short coffee stops",
+        "Bakery windows",
+        "Small stops between sites"
+      ],
+      "fit": "Good for mornings, families and sweet lovers.",
+      "tip": "Buy small portions at each place; it adds up quickly."
+    }
+  },
+  "Strasbourg Cathedral": {
+    "he": {
+      "why": "קתדרלת שטרסבורג היא הסמל החד־משמעי של העיר: גותית, גבוהה, מפורטת ובעלת נוכחות שמכתיבה את כל המרכז. חובה כי היא נותנת את “רגע הוואו” הראשון.",
+      "see": [
+        "חזית אבן מפורטת",
+        "פנים הקתדרלה",
+        "השעון האסטרונומי",
+        "כיכר הקתדרלה"
+      ],
+      "fit": "חובה לכל ביקור ראשון בשטרסבורג.",
+      "tip": "לחזור גם בלילה; התאורה משנה לגמרי את החזית."
+    },
+    "en": {
+      "why": "Strasbourg Cathedral is the city’s defining symbol: high, gothic, detailed and dominant. It delivers the first major wow moment.",
+      "see": [
+        "Detailed stone façade",
+        "Cathedral interior",
+        "Astronomical clock",
+        "Cathedral square"
+      ],
+      "fit": "Essential for any first visit.",
+      "tip": "Return at night; lighting transforms the façade."
+    }
+  },
+  "Petite France": {
+    "he": {
+      "why": "פטיט פראנס היא החלק הכי ציורי של העיר: תעלות, גשרים, בתי חצי־עץ והיסטוריה של רובע בעלי מלאכה. חובה כי זה הדימוי שאנשים זוכרים משטרסבורג.",
+      "see": [
+        "תעלות וגשרים",
+        "בתי חצי־עץ",
+        "רחובות צרים",
+        "נקודות צילום ליד המים"
+      ],
+      "fit": "חובה לזוגות, צילום וביקור ראשון.",
+      "tip": "לבוא מוקדם או אחרי שקיעה כדי להרגיש את המקום בלי עומס."
+    },
+    "en": {
+      "why": "Petite France is the city’s most picturesque quarter: canals, bridges, half-timbered houses and old artisan history.",
+      "see": [
+        "Canals and bridges",
+        "Half-timbered houses",
+        "Narrow streets",
+        "Waterfront photo points"
+      ],
+      "fit": "Must for couples, photos and first visit.",
+      "tip": "Go early or after sunset to avoid the heaviest crowds."
+    }
+  },
+  "Covered Bridges": {
+    "he": {
+      "why": "הגשרים המקורים והמגדלים הם שרידי מערכת ההגנה של העיר, והם יוצרים כניסה דרמטית לפטיט פראנס. חובה כי הם נותנים לשטרסבורג עומק היסטורי ולא רק יופי.",
+      "see": [
+        "מגדלי הגנה",
+        "גשרים מעל המים",
+        "מבט לפטיט פראנס",
+        "שילוב עם Vauban Dam"
+      ],
+      "fit": "מתאים להיסטוריה, צילום והליכת ערב.",
+      "tip": "לשלב עם Vauban Dam viewpoint לאותה חוויה חזקה יותר."
+    },
+    "en": {
+      "why": "The Covered Bridges and towers are remnants of the city’s defensive system, giving Petite France a dramatic historic entrance.",
+      "see": [
+        "Defensive towers",
+        "Bridges over water",
+        "Views toward Petite France",
+        "Pairs with Vauban Dam"
+      ],
+      "fit": "Good for history, photos and evening walk.",
+      "tip": "Combine with Vauban Dam viewpoint for the strongest angle."
+    }
+  },
+  "Batorama boat tour": {
+    "he": {
+      "why": "שייט Batorama הוא חובה למי שרוצה להבין את שטרסבורג בלי להתפזר: הוא מחבר בין העיר העתיקה, פטיט פראנס, Neustadt והמוסדות האירופיים במסלול אחד עם הסבר.",
+      "see": [
+        "Grande Île",
+        "Petite France",
+        "Neustadt",
+        "הרובע האירופי לפי מסלול"
+      ],
+      "fit": "חובה ליום ראשון או משפחות.",
+      "tip": "לעשות בתחילת הביקור, לפני שמחליטים איפה להעמיק ברגל."
+    },
+    "en": {
+      "why": "Batorama is a must if you want to understand Strasbourg efficiently: Old Town, Petite France, Neustadt and European institutions in one narrated route.",
+      "see": [
+        "Grande Île",
+        "Petite France",
+        "Neustadt",
+        "European Quarter depending on route"
+      ],
+      "fit": "Must for first day or families.",
+      "tip": "Do it early, before deciding where to explore on foot."
+    }
+  },
+  "European Parliament area": {
+    "he": {
+      "why": "אזור הפרלמנט האירופי מציג את שטרסבורג כבירה אירופית, לא רק עיר אלזסית יפה. חובה למי שרוצה להבין למה לעיר יש חשיבות פוליטית.",
+      "see": [
+        "מבנה הפרלמנט האירופי מבחוץ",
+        "מוסדות אירופיים סמוכים",
+        "אדריכלות מודרנית",
+        "הליכה רחבה ליד נהר/פארק"
+      ],
+      "fit": "מתאים למתעניינים באירופה, פוליטיקה ואדריכלות מודרנית.",
+      "tip": "לשלב עם Orangerie Park; האזור פחות תיירותי לבד."
+    },
+    "en": {
+      "why": "The European Parliament area shows Strasbourg as a European political capital, not only a pretty Alsatian city.",
+      "see": [
+        "European Parliament exterior",
+        "Nearby European institutions",
+        "Modern architecture",
+        "Wide walks near river/park"
+      ],
+      "fit": "Good for Europe, politics and modern architecture.",
+      "tip": "Pair with Orangerie Park; alone it is less charming."
+    }
+  },
+  "Place Kléber": {
+    "he": {
+      "why": "Place Kléber היא הכיכר המרכזית הגדולה של שטרסבורג, נקודת מפגש עירונית ושער לקניות, אירועים ושוק חג המולד. חובה להתמצאות בעיר.",
+      "see": [
+        "הכיכר המרכזית",
+        "חנויות ורחובות סביב",
+        "אירועים עונתיים",
+        "עץ חג מולד בעונה"
+      ],
+      "fit": "מתאים להתמצאות, קניות ואירועים.",
+      "tip": "לאכול לאו דווקא בכיכר עצמה; להשתמש בה כנקודת עוגן."
+    },
+    "en": {
+      "why": "Place Kléber is Strasbourg’s main central square, a meeting point and gateway to shopping, events and Christmas season.",
+      "see": [
+        "Main square",
+        "Surrounding shopping streets",
+        "Seasonal events",
+        "Christmas tree in season"
+      ],
+      "fit": "Good for orientation, shopping and events.",
+      "tip": "Use it as an anchor; do not assume the best food is right on the square."
+    }
+  },
+  "Astronomical Clock": {
+    "he": {
+      "why": "השעון האסטרונומי בקתדרלה הוא מפגש של מכניקה, אמונה וזמן. חובה כי הוא מוסיף לקתדרלה רובד טכני וסיפורי, לא רק אדריכלי.",
+      "see": [
+        "מנגנון השעון",
+        "דמויות נעות לפי שעה",
+        "פנים הקתדרלה",
+        "הקשר היסטורי־מדעי"
+      ],
+      "fit": "מתאים למשפחות, היסטוריה וסקרנות.",
+      "tip": "לבדוק שעות הדגמה; אחרת תראה רק את האובייקט בלי הרגע החי."
+    },
+    "en": {
+      "why": "The astronomical clock combines mechanics, faith and time, adding a technical/story layer to the cathedral beyond architecture.",
+      "see": [
+        "Clock mechanism",
+        "Moving figures at set times",
+        "Cathedral interior",
+        "Historical-scientific context"
+      ],
+      "fit": "Good for families, history and curiosity.",
+      "tip": "Check demonstration times; otherwise you miss the living moment."
+    }
+  },
+  "Alsatian winstub dinner": {
+    "he": {
+      "why": "ארוחת Winstub אלזסית היא חובה קולינרית: מסעדה מסורתית עם עץ, יין מקומי ומנות כמו choucroute או flammekueche. כאן מבינים את האזור דרך הצלחת.",
+      "see": [
+        "אווירת פונדק אלזסי",
+        "מנות מקומיות כבדות יחסית",
+        "יין לבן אלזסי",
+        "חום ועץ במקום עיצוב מודרני"
+      ],
+      "fit": "חובה לחובבי אוכל מקומי.",
+      "tip": "לבחור מקום עם ביקורות טובות ולא רק הכי קרוב לקתדרלה."
+    },
+    "en": {
+      "why": "An Alsatian winstub dinner is a culinary must: wood, local wine and dishes like choucroute or flammekueche — the region on a plate.",
+      "see": [
+        "Traditional Alsatian inn mood",
+        "Hearty local dishes",
+        "Alsatian white wine",
+        "Warm wood interior"
+      ],
+      "fit": "Must for local-food lovers.",
+      "tip": "Choose by solid reviews, not just proximity to the cathedral."
+    }
+  },
+  "Krutenau evening": {
+    "he": {
+      "why": "Krutenau הוא אזור סטודנטיאלי/צעיר יחסית עם ברים, מסעדות ואווירת ערב פחות תיירותית. חובה אם רוצים לראות איפה העיר חיה אחרי שעות היום.",
+      "see": [
+        "ברים ומסעדות קטנות",
+        "קהל צעיר יותר",
+        "הליכה לא רשמית בערב",
+        "קרבה למרכז אך פחות גלויה"
+      ],
+      "fit": "מתאים לערב קל, סטודנטים ואווירה מקומית.",
+      "tip": "לבחור בר לפי מצב רוח; האזור משתנה מאוד ממקום למקום."
+    },
+    "en": {
+      "why": "Krutenau is a younger/student-feeling district with bars, restaurants and a less touristy evening mood.",
+      "see": [
+        "Small bars and restaurants",
+        "Younger crowd",
+        "Informal evening walk",
+        "Close to center but less obvious"
+      ],
+      "fit": "Good for casual evening and local mood.",
+      "tip": "Pick by mood; venues differ a lot."
+    }
+  },
+  "Maison Kammerzell photo stop": {
+    "he": {
+      "why": "Maison Kammerzell הוא אחד הבתים המפורסמים בשטרסבורג, ממש ליד הקתדרלה, עם חזית חצי־עץ עשירה בפרטים. גם אם לא אוכלים שם, זו עצירת צילום חובה.",
+      "see": [
+        "חזית היסטורית מפורטת",
+        "מיקום ליד הקתדרלה",
+        "פרטי עץ וקישוטים",
+        "צילום קלאסי של העיר"
+      ],
+      "fit": "חובה לצילום ואדריכלות.",
+      "tip": "להסתכל על הפרטים, לא רק לצלם מרחוק."
+    },
+    "en": {
+      "why": "Maison Kammerzell is one of Strasbourg’s most famous houses, right by the cathedral, with a richly decorated half-timbered façade.",
+      "see": [
+        "Detailed historic façade",
+        "Location by cathedral",
+        "Woodwork and ornaments",
+        "Classic city photo"
+      ],
+      "fit": "Must for photos and architecture.",
+      "tip": "Look at the details, not only the wide shot."
+    }
+  },
+  "Ill river walk": {
+    "he": {
+      "why": "הליכה לאורך נהר Ill מחברת בין שטרסבורג היפה לשטרסבורג היומיומית: מים, גשרים, חזיתות ומעברים שקטים. חובה כדי להבין שהעיר בנויה סביב הנהר.",
+      "see": [
+        "הליכה ליד מים",
+        "גשרים קטנים",
+        "חזיתות לאורך הנהר",
+        "חיבור בין אזורים בעיר"
+      ],
+      "fit": "מתאים לכל אחד כמעט, במיוחד ביום יפה.",
+      "tip": "לעשות חלק מהמסלול מוקדם בבוקר או בערב לאור רך."
+    },
+    "en": {
+      "why": "A walk along the Ill links picturesque Strasbourg with everyday Strasbourg: water, bridges, façades and quieter passages.",
+      "see": [
+        "Waterfront walk",
+        "Small bridges",
+        "Riverfront façades",
+        "Links between city areas"
+      ],
+      "fit": "Good for almost everyone in nice weather.",
+      "tip": "Do part of it early morning or evening for softer light."
+    }
+  },
+  "Cathedral platform": {
+    "he": {
+      "why": "תצפית הקתדרלה היא חובה אם רוצים לראות את העיר מלמעלה ולא רק ללכת בתוכה. המדרגות דורשות מאמץ, אבל הגגות, הכיכרות והנהר מתחברים בתמונה אחת.",
+      "see": [
+        "מבט על גגות העיר",
+        "פרטי הקתדרלה מקרוב",
+        "נהר ותעלות מרחוק",
+        "צילום פנורמי"
+      ],
+      "fit": "חובה למי שיכול לעלות מדרגות ואוהב תצפיות.",
+      "tip": "לא לעלות ביום ערפל או גשם חזק; זה מוריד את הערך."
+    },
+    "en": {
+      "why": "The cathedral platform is essential if you want to see Strasbourg from above, not only walk through it.",
+      "see": [
+        "City rooftops",
+        "Cathedral details up close",
+        "River/canals from above",
+        "Panoramic photos"
+      ],
+      "fit": "Must if you can handle stairs and love viewpoints.",
+      "tip": "Avoid fog or heavy rain; it reduces the value."
+    }
+  },
+  "Neustadt district": {
+    "he": {
+      "why": "Neustadt הוא הרובע הגרמני־קיסרי שנבנה אחרי 1871, והוא מסביר את הסיפור הכפול של שטרסבורג בין צרפת לגרמניה. חובה למי שרוצה מעבר לגלויות.",
+      "see": [
+        "שדרות רחבות",
+        "מבנים גרמניים־קיסריים",
+        "כיכרות ומוסדות",
+        "שוני ברור מהעיר העתיקה"
+      ],
+      "fit": "חובה לחובבי היסטוריה ואדריכלות.",
+      "tip": "לקרוא קצת על חילופי השלטון בעיר; אחרת מפספסים את המשמעות."
+    },
+    "en": {
+      "why": "Neustadt is the German imperial district built after 1871, explaining Strasbourg’s French-German double story beyond postcards.",
+      "see": [
+        "Wide boulevards",
+        "German imperial buildings",
+        "Squares and institutions",
+        "Clear contrast with Old Town"
+      ],
+      "fit": "Must for history and architecture lovers.",
+      "tip": "Read briefly about the city’s changing rule; it adds meaning."
+    }
+  },
+  "Saint-Thomas Church": {
+    "he": {
+      "why": "כנסיית סן־תומא היא עצירה שקטה יותר מהקתדרלה, עם חשיבות פרוטסטנטית ואנדרטת מרשל סקס. חובה למי שרוצה שכבה דתית/היסטורית פחות עמוסה.",
+      "see": [
+        "פנים כנסייה רגוע",
+        "אנדרטת Marshal Saxe",
+        "אדריכלות גותית/רומנסקית",
+        "אווירה שקטה יותר"
+      ],
+      "fit": "מתאים להיסטוריה, מוזיקה/עוגב ושקט.",
+      "tip": "לשלב בדרך לפטיט פראנס; לא צריך להקדיש שעה ארוכה."
+    },
+    "en": {
+      "why": "Saint-Thomas Church is a quieter historic stop than the cathedral, with Protestant importance and the Marshal Saxe monument.",
+      "see": [
+        "Calmer church interior",
+        "Marshal Saxe monument",
+        "Gothic/Romanesque architecture",
+        "Quieter atmosphere"
+      ],
+      "fit": "Good for history, organ/music interest and calm.",
+      "tip": "Pair it on the way to Petite France; no need for a long visit."
+    }
+  },
+  "Ponts Couverts sunset": {
+    "he": {
+      "why": "שקיעה בגשרים המקורים היא רגע צילום חזק: מים, מגדלים, גגות ופטיט פראנס באור רך. חובה אם אתה רוצה תמונה אחת שמסכמת את העיר.",
+      "see": [
+        "מגדלי Ponts Couverts",
+        "מים ותעלות",
+        "אור שקיעה על הבתים",
+        "Vauban Dam nearby"
+      ],
+      "fit": "חובה לצילום וזוגות.",
+      "tip": "להגיע 20–30 דקות לפני השקיעה כדי לבחור זווית."
+    },
+    "en": {
+      "why": "Sunset at Ponts Couverts is a strong photo moment: water, towers, rooftops and Petite France in soft light.",
+      "see": [
+        "Ponts Couverts towers",
+        "Water and canals",
+        "Sunset light on houses",
+        "Nearby Vauban Dam"
+      ],
+      "fit": "Must for photos and couples.",
+      "tip": "Arrive 20–30 minutes before sunset to choose your angle."
+    }
+  },
+  "Alsace wine village day": {
+    "he": {
+      "why": "יום כפרי יין באלזס הוא חובה אם יש רכב או טיול מאורגן: הוא מוציא אותך מהעיר אל כרמים, בתים צבעוניים וטעימות שמסבירות את הזהות האזורית.",
+      "see": [
+        "כפרי יין כמו Riquewihr/Eguisheim",
+        "כרמים ונוף פתוח",
+        "טעימות יין",
+        "אוכל אלזסי מקומי"
+      ],
+      "fit": "חובה למי שנשאר יותר מיום־יומיים ויש לו דרך נוחה לצאת מהעיר.",
+      "tip": "לא לעשות עם נהיגה וטעימות בלי תכנון נהג/תחבורה בטוחה."
+    },
+    "en": {
+      "why": "An Alsace wine-village day is essential if you have a car or organized tour: vineyards, colorful villages and tastings explain the region’s identity.",
+      "see": [
+        "Wine villages like Riquewihr/Eguisheim",
+        "Vineyards and open views",
+        "Wine tastings",
+        "Local Alsatian food"
+      ],
+      "fit": "Must if staying longer and you can leave the city comfortably.",
+      "tip": "Do not combine driving and tasting without a safe-driver plan."
+    }
+  }
+};
+
+function v49ExperienceMustDoGuide(item){
+  if(!item || !['experiences','mustdo'].includes(item.cat)) return null;
+  const pack = V49_EXPERIENCE_MUSTDO_GUIDES[item.name];
+  if(!pack) return null;
+  return pack[getLang()] || pack.en || pack.he || null;
+}
+
 function guideContentFor(item){
   const routeGuide = carGuideFor(item);
   if(routeGuide) return {why: routeGuide.why, see: (routeGuide.stops||[]).map(s=>`${s.name}: ${s.text}`), fit: routeGuide.bestFor, tip: routeGuide.tip};
   const lang=getLang();
   const title=titleFor(item);
+  const v49Guide = v49ExperienceMustDoGuide(item);
+  if(v49Guide) return v49Guide;
   const v48Guide = v48RealGuide(item);
   if(v48Guide) return v48Guide;
   const v47Guide = v47SpecificGuide(item);
