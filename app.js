@@ -8519,11 +8519,2230 @@ function enrichedGuideForEurope(item){
   return null;
 }
 
+const V47_REAL_GUIDE_OVERRIDES = {
+  "Lokál Dlouhááá": {
+    "he": {
+      "why": "Lokál Dlouhááá הוא לא עוד שם ברשימת אוכל בפראג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של פאב־מסעדה צ׳כי: בירה פילזנר טרייה, גולאש, שניצל ומנות ביתיות באווירת אולם בירה. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: פאב־מסעדה צ׳כי",
+        "מה מיוחד: בירה פילזנר טרייה, גולאש, שניצל ומנות ביתיות באווירת אולם בירה",
+        "אווירה: רועש, מקומי, מתאים לארוחה צ׳כית ראשונה",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. רועש, מקומי, מתאים לארוחה צ׳כית ראשונה.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Lokál Dlouhááá is not just another food pin in Prague. It is recommended because it gives a clear Czech pub food experience: fresh Pilsner, goulash, schnitzel and comfort dishes in a beer-hall mood. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: Czech pub food",
+        "What stands out: fresh Pilsner, goulash, schnitzel and comfort dishes in a beer-hall mood",
+        "Vibe: lively, local-feeling, good for a first Czech meal",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. lively, local-feeling, good for a first Czech meal.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Naše Maso": {
+    "he": {
+      "why": "Naše Maso הוא לא עוד שם ברשימת אוכל בפראג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של ביסטרו קצבים: בשר איכותי, נקניקיות, כריכים והמבורגר בדלפק קטן ומהיר. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: ביסטרו קצבים",
+        "מה מיוחד: בשר איכותי, נקניקיות, כריכים והמבורגר בדלפק קטן ומהיר",
+        "אווירה: מהיר, צפוף, ממוקד בבשר",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. מהיר, צפוף, ממוקד בבשר.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Naše Maso is not just another food pin in Prague. It is recommended because it gives a clear butcher bistro experience: quality meat, sausages, sandwiches and burgers from a small butcher counter. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: butcher bistro",
+        "What stands out: quality meat, sausages, sandwiches and burgers from a small butcher counter",
+        "Vibe: fast, tight and meat-focused",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. fast, tight and meat-focused.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Kantýna": {
+    "he": {
+      "why": "Kantýna הוא לא עוד שם ברשימת אוכל בפראג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של מסעדת בשר צ׳כית מודרנית: בחירת נתחים בדלפק, טרטר, בירה וחלל גדול עם אנרגיה. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: מסעדת בשר צ׳כית מודרנית",
+        "מה מיוחד: בחירת נתחים בדלפק, טרטר, בירה וחלל גדול עם אנרגיה",
+        "אווירה: תוסס, בשרי, טוב לקבוצה",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. תוסס, בשרי, טוב לקבוצה.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Kantýna is not just another food pin in Prague. It is recommended because it gives a clear modern Czech meat hall experience: counter-selected cuts, steak tartare, beer and a large energetic room. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: modern Czech meat hall",
+        "What stands out: counter-selected cuts, steak tartare, beer and a large energetic room",
+        "Vibe: lively, meat-heavy, good for groups",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. lively, meat-heavy, good for groups.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Havelská Koruna": {
+    "he": {
+      "why": "Havelská Koruna הוא לא עוד שם ברשימת אוכל בפראג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של קפיטריה צ׳כית זולה: מנות צ׳כיות יומיומיות במחיר נמוך יחסית ובשירות מהיר. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: קפיטריה צ׳כית זולה",
+        "מה מיוחד: מנות צ׳כיות יומיומיות במחיר נמוך יחסית ובשירות מהיר",
+        "אווירה: פשוט, יעיל, לא רומנטי",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. פשוט, יעיל, לא רומנטי.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Havelská Koruna is not just another food pin in Prague. It is recommended because it gives a clear budget Czech cafeteria experience: everyday Czech dishes at low prices with fast service. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: budget Czech cafeteria",
+        "What stands out: everyday Czech dishes at low prices with fast service",
+        "Vibe: simple, efficient, not romantic",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. simple, efficient, not romantic.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Sisters Bistro": {
+    "he": {
+      "why": "Sisters Bistro הוא לא עוד שם ברשימת אוכל בפראג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של כריכים פתוחים צ׳כיים: chlebíčky צבעוניים שמתאימים לארוחה קלה ולא כבדה. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: כריכים פתוחים צ׳כיים",
+        "מה מיוחד: chlebíčky צבעוניים שמתאימים לארוחה קלה ולא כבדה",
+        "אווירה: קליל, מרכזי, טוב לצהריים קצר",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. קליל, מרכזי, טוב לצהריים קצר.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Sisters Bistro is not just another food pin in Prague. It is recommended because it gives a clear Czech open-faced sandwiches experience: colorful chlebíčky for a light local bite. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: Czech open-faced sandwiches",
+        "What stands out: colorful chlebíčky for a light local bite",
+        "Vibe: light, central, good for a short lunch",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. light, central, good for a short lunch.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Mincovna": {
+    "he": {
+      "why": "Mincovna הוא לא עוד שם ברשימת אוכל בפראג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של צ׳כי מודרני: מנות צ׳כיות קלאסיות בלב העיר העתיקה עם ביצוע מסודר יותר ממסעדת תיירים אקראית. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: צ׳כי מודרני",
+        "מה מיוחד: מנות צ׳כיות קלאסיות בלב העיר העתיקה עם ביצוע מסודר יותר ממסעדת תיירים אקראית",
+        "אווירה: מרכזי, נוח, מתאים כשאין כוח לחפש",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. מרכזי, נוח, מתאים כשאין כוח לחפש.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Mincovna is not just another food pin in Prague. It is recommended because it gives a clear modern Czech experience: classic Czech dishes in Old Town with a more reliable execution than a random tourist restaurant. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: modern Czech",
+        "What stands out: classic Czech dishes in Old Town with a more reliable execution than a random tourist restaurant",
+        "Vibe: central, convenient, reliable",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. central, convenient, reliable.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "U Parlamentu": {
+    "he": {
+      "why": "U Parlamentu הוא לא עוד שם ברשימת אוכל בפראג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של צ׳כי מסורתי: מנות בירה וצ׳כיות קרובות לעיר העתיקה, בלי תחושה יוקרתית מדי. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: צ׳כי מסורתי",
+        "מה מיוחד: מנות בירה וצ׳כיות קרובות לעיר העתיקה, בלי תחושה יוקרתית מדי",
+        "אווירה: קז׳ואלי, עממי, טוב לבירה ואוכל",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. קז׳ואלי, עממי, טוב לבירה ואוכל.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "U Parlamentu is not just another food pin in Prague. It is recommended because it gives a clear traditional Czech experience: Czech beer-food dishes close to Old Town without a luxury feeling. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: traditional Czech",
+        "What stands out: Czech beer-food dishes close to Old Town without a luxury feeling",
+        "Vibe: casual, pub-like, good for beer and food",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. casual, pub-like, good for beer and food.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Luka Lu": {
+    "he": {
+      "why": "Luka Lu הוא לא עוד שם ברשימת אוכל בפראג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של בלקני: עיצוב צבעוני ומנות בלקניות שמציעות הפסקה מהאוכל הצ׳כי הכבד. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: בלקני",
+        "מה מיוחד: עיצוב צבעוני ומנות בלקניות שמציעות הפסקה מהאוכל הצ׳כי הכבד",
+        "אווירה: חם, צבעוני, זוגי/חברתי",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. חם, צבעוני, זוגי/חברתי.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Luka Lu is not just another food pin in Prague. It is recommended because it gives a clear Balkan experience: colorful décor and Balkan dishes as a break from heavy Czech food. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: Balkan",
+        "What stands out: colorful décor and Balkan dishes as a break from heavy Czech food",
+        "Vibe: warm, colorful, social",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. warm, colorful, social.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Banh Mi Makers": {
+    "he": {
+      "why": "Banh Mi Makers הוא לא עוד שם ברשימת אוכל בפראג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של וייטנאמי מהיר: באן־מי, קערות וטעמים חדים ומהירים — שימושי כשצריך אוכל קל ולא כבד. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: וייטנאמי מהיר",
+        "מה מיוחד: באן־מי, קערות וטעמים חדים ומהירים — שימושי כשצריך אוכל קל ולא כבד",
+        "אווירה: מהיר, זול יחסית, לא רשמי",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. מהיר, זול יחסית, לא רשמי.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Banh Mi Makers is not just another food pin in Prague. It is recommended because it gives a clear Vietnamese fast casual experience: banh mi, bowls and bright quick flavors — useful for a light break. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: Vietnamese fast casual",
+        "What stands out: banh mi, bowls and bright quick flavors — useful for a light break",
+        "Vibe: fast, relatively cheap, informal",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. fast, relatively cheap, informal.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Café Louvre": {
+    "he": {
+      "why": "Café Louvre הוא לא עוד שם ברשימת אוכל בפראג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של בית קפה היסטורי אירופי: חלל קפה ותיק עם עוגות, קפה וארוחות קלות שמחזיר לאווירת פראג הישנה. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: בית קפה היסטורי אירופי",
+        "מה מיוחד: חלל קפה ותיק עם עוגות, קפה וארוחות קלות שמחזיר לאווירת פראג הישנה",
+        "אווירה: קלאסי, נוח להפסקה, מתאים גם למשפחה",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. קלאסי, נוח להפסקה, מתאים גם למשפחה.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Café Louvre is not just another food pin in Prague. It is recommended because it gives a clear historic European café experience: old-style café room with cakes, coffee and light meals in an old-Prague mood. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: historic European café",
+        "What stands out: old-style café room with cakes, coffee and light meals in an old-Prague mood",
+        "Vibe: classic, good for a break, family-friendly",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. classic, good for a break, family-friendly.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Eska Karlín": {
+    "he": {
+      "why": "Eska Karlín הוא לא עוד שם ברשימת אוכל בפראג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של מאפייה־מסעדה צ׳כית מודרנית: לחם, מאפים ומטבח צ׳כי עדכני בשכונת Karlín הצעירה. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: מאפייה־מסעדה צ׳כית מודרנית",
+        "מה מיוחד: לחם, מאפים ומטבח צ׳כי עדכני בשכונת Karlín הצעירה",
+        "אווירה: עכשווי, איכותי, מחוץ לעיר העתיקה",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. עכשווי, איכותי, מחוץ לעיר העתיקה.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Eska Karlín is not just another food pin in Prague. It is recommended because it gives a clear modern Czech bakery-restaurant experience: bread, baking and updated Czech cooking in the younger Karlín district. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: modern Czech bakery-restaurant",
+        "What stands out: bread, baking and updated Czech cooking in the younger Karlín district",
+        "Vibe: modern, polished, outside Old Town",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. modern, polished, outside Old Town.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Mr. HotDoG": {
+    "he": {
+      "why": "Mr. HotDoG הוא לא עוד שם ברשימת אוכל בפראג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של נקניקיות ואמריקאי קז׳ואל: אוכל מהיר מנחם, טוב כשצריך משהו פשוט בלי ארוחה צ׳כית כבדה. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: נקניקיות ואמריקאי קז׳ואל",
+        "מה מיוחד: אוכל מהיר מנחם, טוב כשצריך משהו פשוט בלי ארוחה צ׳כית כבדה",
+        "אווירה: קז׳ואלי, מהיר, לא טקסי",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. קז׳ואלי, מהיר, לא טקסי.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Mr. HotDoG is not just another food pin in Prague. It is recommended because it gives a clear hot dogs and casual American experience: comfort fast food when you want something simple and not a heavy Czech meal. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: hot dogs and casual American",
+        "What stands out: comfort fast food when you want something simple and not a heavy Czech meal",
+        "Vibe: casual, quick, no ceremony",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. casual, quick, no ceremony.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Pho Vietnam Tuan & Lan": {
+    "he": {
+      "why": "Pho Vietnam Tuan & Lan הוא לא עוד שם ברשימת אוכל בפראג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של פו וייטנאמי: מרק פו מחמם וזול יחסית, חלק מהנוכחות הווייטנאמית החזקה באוכל של פראג. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: פו וייטנאמי",
+        "מה מיוחד: מרק פו מחמם וזול יחסית, חלק מהנוכחות הווייטנאמית החזקה באוכל של פראג",
+        "אווירה: פשוט, יעיל, טוב ליום קר",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. פשוט, יעיל, טוב ליום קר.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Pho Vietnam Tuan & Lan is not just another food pin in Prague. It is recommended because it gives a clear Vietnamese pho experience: warming, relatively cheap pho reflecting Prague’s strong Vietnamese food scene. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: Vietnamese pho",
+        "What stands out: warming, relatively cheap pho reflecting Prague’s strong Vietnamese food scene",
+        "Vibe: simple, efficient, good on a cold day",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. simple, efficient, good on a cold day.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Manifesto Market": {
+    "he": {
+      "why": "Manifesto Market הוא לא עוד שם ברשימת אוכל בפראג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של שוק אוכל מודרני: כמה דוכנים במקום אחד — פתרון טוב כשכל אחד רוצה משהו אחר. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: שוק אוכל מודרני",
+        "מה מיוחד: כמה דוכנים במקום אחד — פתרון טוב כשכל אחד רוצה משהו אחר",
+        "אווירה: צעיר, פתוח, קבוצתי",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. צעיר, פתוח, קבוצתי.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Manifesto Market is not just another food pin in Prague. It is recommended because it gives a clear modern food market experience: several food stalls in one place — useful when people want different things. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: modern food market",
+        "What stands out: several food stalls in one place — useful when people want different things",
+        "Vibe: young, open, group-friendly",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. young, open, group-friendly.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "U Kroka": {
+    "he": {
+      "why": "U Kroka הוא לא עוד שם ברשימת אוכל בפראג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של אוכל צ׳כי ביתי: מנות צ׳כיות נדיבות ליד Vyšehrad, טוב לשלב אחרי מסלול רגוע יותר מחוץ לעומס העיר העתיקה. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: אוכל צ׳כי ביתי",
+        "מה מיוחד: מנות צ׳כיות נדיבות ליד Vyšehrad, טוב לשלב אחרי מסלול רגוע יותר מחוץ לעומס העיר העתיקה",
+        "אווירה: שכונתי, נעים, פחות תיירותי",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. שכונתי, נעים, פחות תיירותי.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "U Kroka is not just another food pin in Prague. It is recommended because it gives a clear Czech comfort food experience: generous Czech dishes near Vyšehrad, good after a calmer route outside Old Town. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: Czech comfort food",
+        "What stands out: generous Czech dishes near Vyšehrad, good after a calmer route outside Old Town",
+        "Vibe: neighborhood feel, comfortable, less touristy",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. neighborhood feel, comfortable, less touristy.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Bistro Monk": {
+    "he": {
+      "why": "Bistro Monk הוא לא עוד שם ברשימת אוכל בפראג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של בראנץ׳ וקפה: ארוחות בוקר/בראנץ׳ מסודרות במרכז, טוב לפתיחת יום לפני הליכה ארוכה. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: בראנץ׳ וקפה",
+        "מה מיוחד: ארוחות בוקר/בראנץ׳ מסודרות במרכז, טוב לפתיחת יום לפני הליכה ארוכה",
+        "אווירה: נעים, בוקר, מתאים לזוגות",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. נעים, בוקר, מתאים לזוגות.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Bistro Monk is not just another food pin in Prague. It is recommended because it gives a clear brunch and café experience: structured breakfast/brunch in the center, useful before a walking day. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: brunch and café",
+        "What stands out: structured breakfast/brunch in the center, useful before a walking day",
+        "Vibe: pleasant, breakfast-focused, good for couples",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. pleasant, breakfast-focused, good for couples.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Kuchyň": {
+    "he": {
+      "why": "Kuchyň הוא לא עוד שם ברשימת אוכל בפראג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של צ׳כי עם נוף: אוכל צ׳כי ליד אזור הטירה עם נוף שמוסיף ערך מעבר לצלחת. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: צ׳כי עם נוף",
+        "מה מיוחד: אוכל צ׳כי ליד אזור הטירה עם נוף שמוסיף ערך מעבר לצלחת",
+        "אווירה: נופי, מתאים אחרי טירה",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. נופי, מתאים אחרי טירה.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Kuchyň is not just another food pin in Prague. It is recommended because it gives a clear Czech food with a view experience: Czech food near the castle area where the view adds value beyond the plate. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: Czech food with a view",
+        "What stands out: Czech food near the castle area where the view adds value beyond the plate",
+        "Vibe: view-focused, good after the castle",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. view-focused, good after the castle.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Maitrea": {
+    "he": {
+      "why": "Maitrea הוא לא עוד שם ברשימת אוכל בפראג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של צמחוני אסייתי־אירופי: מנות צמחוניות יצירתיות בחלל רגוע ליד העיר העתיקה. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: צמחוני אסייתי־אירופי",
+        "מה מיוחד: מנות צמחוניות יצירתיות בחלל רגוע ליד העיר העתיקה",
+        "אווירה: רגוע, זן, מתאים להפסקה מאוכל כבד",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. רגוע, זן, מתאים להפסקה מאוכל כבד.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Maitrea is not just another food pin in Prague. It is recommended because it gives a clear vegetarian Asian-European experience: creative vegetarian dishes in a calm space near Old Town. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: vegetarian Asian-European",
+        "What stands out: creative vegetarian dishes in a calm space near Old Town",
+        "Vibe: calm, Zen-like, good break from heavy food",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. calm, Zen-like, good break from heavy food.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Kavárna co hledá jméno": {
+    "he": {
+      "why": "Kavárna co hledá jméno הוא לא עוד שם ברשימת אוכל בפראג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של בית קפה / בראנץ׳ צעיר: קפה ובראנץ׳ באווירה יותר מקומית ועכשווית, לא בית קפה היסטורי כבד. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: בית קפה / בראנץ׳ צעיר",
+        "מה מיוחד: קפה ובראנץ׳ באווירה יותר מקומית ועכשווית, לא בית קפה היסטורי כבד",
+        "אווירה: צעיר, נינוח, מתאים לבוקר",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. צעיר, נינוח, מתאים לבוקר.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Kavárna co hledá jméno is not just another food pin in Prague. It is recommended because it gives a clear young café / brunch experience: coffee and brunch with a more local contemporary mood. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: young café / brunch",
+        "What stands out: coffee and brunch with a more local contemporary mood",
+        "Vibe: young, relaxed, good for morning",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. young, relaxed, good for morning.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Bakeshop Praha": {
+    "he": {
+      "why": "Bakeshop Praha הוא לא עוד שם ברשימת אוכל בפראג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של מאפייה וקפה: מאפים, כריכים וקפה קרוב לעיר העתיקה — עצירה שימושית כשהיום עמוס. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: מאפייה וקפה",
+        "מה מיוחד: מאפים, כריכים וקפה קרוב לעיר העתיקה — עצירה שימושית כשהיום עמוס",
+        "אווירה: מהיר, מתוק, נוח",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. מהיר, מתוק, נוח.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Bakeshop Praha is not just another food pin in Prague. It is recommended because it gives a clear bakery and café experience: pastries, sandwiches and coffee close to Old Town — useful on a busy day. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: bakery and café",
+        "What stands out: pastries, sandwiches and coffee close to Old Town — useful on a busy day",
+        "Vibe: quick, sweet, convenient",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. quick, sweet, convenient.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Wiener Wiaz Haus": {
+    "he": {
+      "why": "Wiener Wiaz Haus הוא לא עוד שם ברשימת אוכל בוינה. זה מקום שמומלץ כי הוא נותן חוויה ברורה של גסטהאוס וינאי: שניצל, תבשילים ומנות אוסטריות באווירה מקומית ולא יוקרתית. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: גסטהאוס וינאי",
+        "מה מיוחד: שניצל, תבשילים ומנות אוסטריות באווירה מקומית ולא יוקרתית",
+        "אווירה: מקומי, כבד, מתאים לארוחת ערב",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. מקומי, כבד, מתאים לארוחת ערב.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Wiener Wiaz Haus is not just another food pin in Vienna. It is recommended because it gives a clear Viennese gasthaus experience: schnitzel, stews and Austrian dishes in a local non-luxury mood. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: Viennese gasthaus",
+        "What stands out: schnitzel, stews and Austrian dishes in a local non-luxury mood",
+        "Vibe: local, hearty, good for dinner",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. local, hearty, good for dinner.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Gasthaus Pöschl": {
+    "he": {
+      "why": "Gasthaus Pöschl הוא לא עוד שם ברשימת אוכל בוינה. זה מקום שמומלץ כי הוא נותן חוויה ברורה של גסטהאוס אוסטרי: מסעדה קטנה ומקומית יותר עם אוכל וינאי ברור ולא תפריט תיירותי ענק. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: גסטהאוס אוסטרי",
+        "מה מיוחד: מסעדה קטנה ומקומית יותר עם אוכל וינאי ברור ולא תפריט תיירותי ענק",
+        "אווירה: קומפקטי, מקומי, פופולרי",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. קומפקטי, מקומי, פופולרי.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Gasthaus Pöschl is not just another food pin in Vienna. It is recommended because it gives a clear Austrian gasthaus experience: small local-feeling place with clear Viennese food rather than a huge tourist menu. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: Austrian gasthaus",
+        "What stands out: small local-feeling place with clear Viennese food rather than a huge tourist menu",
+        "Vibe: compact, local, popular",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. compact, local, popular.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Figlmüller": {
+    "he": {
+      "why": "Figlmüller הוא לא עוד שם ברשימת אוכל בוינה. זה מקום שמומלץ כי הוא נותן חוויה ברורה של שניצל וינאי: שניצל ענק ומפורסם שהפך כמעט לאתר תיירות בפני עצמו. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: שניצל וינאי",
+        "מה מיוחד: שניצל ענק ומפורסם שהפך כמעט לאתר תיירות בפני עצמו",
+        "אווירה: קלאסי, תיירותי, חובה לחובבי שניצל",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. קלאסי, תיירותי, חובה לחובבי שניצל.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Figlmüller is not just another food pin in Vienna. It is recommended because it gives a clear Viennese schnitzel experience: a huge famous schnitzel that has become almost an attraction by itself. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: Viennese schnitzel",
+        "What stands out: a huge famous schnitzel that has become almost an attraction by itself",
+        "Vibe: classic, touristy, must for schnitzel fans",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. classic, touristy, must for schnitzel fans.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Schnitzelwirt": {
+    "he": {
+      "why": "Schnitzelwirt הוא לא עוד שם ברשימת אוכל בוינה. זה מקום שמומלץ כי הוא נותן חוויה ברורה של שניצל עממי: מנות גדולות במחירים נוחים יותר, פחות יוקרתי ויותר אוכל של ממש. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: שניצל עממי",
+        "מה מיוחד: מנות גדולות במחירים נוחים יותר, פחות יוקרתי ויותר אוכל של ממש",
+        "אווירה: עממי, זול יחסית, כבד",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. עממי, זול יחסית, כבד.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Schnitzelwirt is not just another food pin in Vienna. It is recommended because it gives a clear budget schnitzel experience: large portions at fairer prices, less elegant and more about eating well. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: budget schnitzel",
+        "What stands out: large portions at fairer prices, less elegant and more about eating well",
+        "Vibe: simple, good value, hearty",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. simple, good value, hearty.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Naschmarkt stands": {
+    "he": {
+      "why": "Naschmarkt stands הוא לא עוד שם ברשימת אוכל בוינה. זה מקום שמומלץ כי הוא נותן חוויה ברורה של שוק אוכל בינלאומי: דוכנים, אוכל מזרח־תיכוני/ים־תיכוני, קפה ומוצרים — מתאים כשלא רוצים מסעדה אחת. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: שוק אוכל בינלאומי",
+        "מה מיוחד: דוכנים, אוכל מזרח־תיכוני/ים־תיכוני, קפה ומוצרים — מתאים כשלא רוצים מסעדה אחת",
+        "אווירה: מגוון, פתוח, מתאים לצהריים",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. מגוון, פתוח, מתאים לצהריים.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Naschmarkt stands is not just another food pin in Vienna. It is recommended because it gives a clear international food market experience: stalls, Mediterranean/Middle Eastern food, coffee and market products when you do not want one fixed restaurant. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: international food market",
+        "What stands out: stalls, Mediterranean/Middle Eastern food, coffee and market products when you do not want one fixed restaurant",
+        "Vibe: varied, open-air, good for lunch",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. varied, open-air, good for lunch.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Trześniewski": {
+    "he": {
+      "why": "Trześniewski הוא לא עוד שם ברשימת אוכל בוינה. זה מקום שמומלץ כי הוא נותן חוויה ברורה של כריכונים וינאיים: כריכים קטנים עם ממרחים — עצירה מהירה וקלאסית בלב העיר. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: כריכונים וינאיים",
+        "מה מיוחד: כריכים קטנים עם ממרחים — עצירה מהירה וקלאסית בלב העיר",
+        "אווירה: מהיר, מקומי, מתאים לנשנוש",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. מהיר, מקומי, מתאים לנשנוש.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Trześniewski is not just another food pin in Vienna. It is recommended because it gives a clear Viennese open sandwiches experience: tiny open sandwiches with spreads — a fast classic central stop. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: Viennese open sandwiches",
+        "What stands out: tiny open sandwiches with spreads — a fast classic central stop",
+        "Vibe: fast, local, snack-friendly",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. fast, local, snack-friendly.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Leberkas-Pepi": {
+    "he": {
+      "why": "Leberkas-Pepi הוא לא עוד שם ברשימת אוכל בוינה. זה מקום שמומלץ כי הוא נותן חוויה ברורה של אוכל רחוב אוסטרי: Leberkäse בלחמנייה — פתרון מהיר, מלוח ומשביע כמו “סנדוויץ׳ מקומי”. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: אוכל רחוב אוסטרי",
+        "מה מיוחד: Leberkäse בלחמנייה — פתרון מהיר, מלוח ומשביע כמו “סנדוויץ׳ מקומי”",
+        "אווירה: מהיר, זול, לא בריאותי",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. מהיר, זול, לא בריאותי.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Leberkas-Pepi is not just another food pin in Vienna. It is recommended because it gives a clear Austrian street food experience: Leberkäse in a roll — salty, fast and filling local street food. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: Austrian street food",
+        "What stands out: Leberkäse in a roll — salty, fast and filling local street food",
+        "Vibe: fast, cheap, not health food",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. fast, cheap, not health food.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Café Hawelka": {
+    "he": {
+      "why": "Café Hawelka הוא לא עוד שם ברשימת אוכל בוינה. זה מקום שמומלץ כי הוא נותן חוויה ברורה של בית קפה וינאי היסטורי: אווירת קפה ישנה, שולחנות צפופים וקינוחים — פחות מושלם ויותר אותנטי. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: בית קפה וינאי היסטורי",
+        "מה מיוחד: אווירת קפה ישנה, שולחנות צפופים וקינוחים — פחות מושלם ויותר אותנטי",
+        "אווירה: היסטורי, צפוף, אופי חזק",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. היסטורי, צפוף, אופי חזק.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Café Hawelka is not just another food pin in Vienna. It is recommended because it gives a clear historic Viennese café experience: old café atmosphere, tight tables and desserts — less polished, more authentic. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: historic Viennese café",
+        "What stands out: old café atmosphere, tight tables and desserts — less polished, more authentic",
+        "Vibe: historic, crowded, strong character",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. historic, crowded, strong character.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Café Central": {
+    "he": {
+      "why": "Café Central הוא לא עוד שם ברשימת אוכל בוינה. זה מקום שמומלץ כי הוא נותן חוויה ברורה של בית קפה קיסרי: בית קפה מפואר מ־1876 המזוהה עם תרבות הקפה הווינאית והיסטוריה אינטלקטואלית. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: בית קפה קיסרי",
+        "מה מיוחד: בית קפה מפואר מ־1876 המזוהה עם תרבות הקפה הווינאית והיסטוריה אינטלקטואלית",
+        "אווירה: מפואר, תיירותי, יפה מאוד",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. מפואר, תיירותי, יפה מאוד.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Café Central is not just another food pin in Vienna. It is recommended because it gives a clear imperial coffeehouse experience: grand 1876 café tied to Viennese coffeehouse culture and intellectual history. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: imperial coffeehouse",
+        "What stands out: grand 1876 café tied to Viennese coffeehouse culture and intellectual history",
+        "Vibe: grand, touristy, beautiful",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. grand, touristy, beautiful.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Gmoakeller": {
+    "he": {
+      "why": "Gmoakeller הוא לא עוד שם ברשימת אוכל בוינה. זה מקום שמומלץ כי הוא נותן חוויה ברורה של אוכל אוסטרי קלאסי: גסטהאוס ותיק עם מנות אוסטריות מסורתיות בלי להפוך את הארוחה להצגה. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: אוכל אוסטרי קלאסי",
+        "מה מיוחד: גסטהאוס ותיק עם מנות אוסטריות מסורתיות בלי להפוך את הארוחה להצגה",
+        "אווירה: קלאסי, בוגר, מתאים לערב",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. קלאסי, בוגר, מתאים לערב.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Gmoakeller is not just another food pin in Vienna. It is recommended because it gives a clear classic Austrian experience: longstanding gasthaus with traditional Austrian dishes without turning dinner into a show. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: classic Austrian",
+        "What stands out: longstanding gasthaus with traditional Austrian dishes without turning dinner into a show",
+        "Vibe: classic, mature, good for dinner",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. classic, mature, good for dinner.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Glacis Beisl": {
+    "he": {
+      "why": "Glacis Beisl הוא לא עוד שם ברשימת אוכל בוינה. זה מקום שמומלץ כי הוא נותן חוויה ברורה של בייזל מודרני: אוכל אוסטרי באווירה נעימה ליד MuseumsQuartier, טוב אחרי מוזיאונים. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: בייזל מודרני",
+        "מה מיוחד: אוכל אוסטרי באווירה נעימה ליד MuseumsQuartier, טוב אחרי מוזיאונים",
+        "אווירה: נעים, תרבותי, מרכזי",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. נעים, תרבותי, מרכזי.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Glacis Beisl is not just another food pin in Vienna. It is recommended because it gives a clear modern Beisl experience: Austrian food in a pleasant setting near MuseumsQuartier, good after museums. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: modern Beisl",
+        "What stands out: Austrian food in a pleasant setting near MuseumsQuartier, good after museums",
+        "Vibe: pleasant, cultural, central",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. pleasant, cultural, central.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Neni am Naschmarkt": {
+    "he": {
+      "why": "Neni am Naschmarkt הוא לא עוד שם ברשימת אוכל בוינה. זה מקום שמומלץ כי הוא נותן חוויה ברורה של מזרח־תיכוני בשוק: חומוס, סלטים ומנות לחלוקה בתוך אזור Naschmarkt. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: מזרח־תיכוני בשוק",
+        "מה מיוחד: חומוס, סלטים ומנות לחלוקה בתוך אזור Naschmarkt",
+        "אווירה: צבעוני, קבוצתי, לא אוסטרי קלאסי",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. צבעוני, קבוצתי, לא אוסטרי קלאסי.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Neni am Naschmarkt is not just another food pin in Vienna. It is recommended because it gives a clear Middle Eastern at the market experience: hummus, salads and sharing dishes inside the Naschmarkt area. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: Middle Eastern at the market",
+        "What stands out: hummus, salads and sharing dishes inside the Naschmarkt area",
+        "Vibe: colorful, social, not classic Austrian",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. colorful, social, not classic Austrian.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "UBox Würstelstand": {
+    "he": {
+      "why": "UBox Würstelstand הוא לא עוד שם ברשימת אוכל בוינה. זה מקום שמומלץ כי הוא נותן חוויה ברורה של דוכן נקניקיות: נקניקייה וינאית מהירה ליד תחבורה — יותר שימושי מאשר חוויה מסעדתית. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: דוכן נקניקיות",
+        "מה מיוחד: נקניקייה וינאית מהירה ליד תחבורה — יותר שימושי מאשר חוויה מסעדתית",
+        "אווירה: מהיר, זול, לדרך",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. מהיר, זול, לדרך.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "UBox Würstelstand is not just another food pin in Vienna. It is recommended because it gives a clear sausage stand experience: quick Viennese sausage by transit — useful more than atmospheric. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: sausage stand",
+        "What stands out: quick Viennese sausage by transit — useful more than atmospheric",
+        "Vibe: fast, cheap, on the go",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. fast, cheap, on the go.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Swing Kitchen": {
+    "he": {
+      "why": "Swing Kitchen הוא לא עוד שם ברשימת אוכל בוינה. זה מקום שמומלץ כי הוא נותן חוויה ברורה של טבעוני מהיר: בורגרים ומנות טבעוניות מהירות — טוב כשצריך פתרון לאוכלים טבעוני/צמחוני. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: טבעוני מהיר",
+        "מה מיוחד: בורגרים ומנות טבעוניות מהירות — טוב כשצריך פתרון לאוכלים טבעוני/צמחוני",
+        "אווירה: מהיר, מודרני, נגיש",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. מהיר, מודרני, נגיש.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Swing Kitchen is not just another food pin in Vienna. It is recommended because it gives a clear vegan fast food experience: vegan burgers and fast dishes — useful for vegan/vegetarian travelers. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: vegan fast food",
+        "What stands out: vegan burgers and fast dishes — useful for vegan/vegetarian travelers",
+        "Vibe: fast, modern, easy",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. fast, modern, easy.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Miznon Vienna": {
+    "he": {
+      "why": "Miznon Vienna הוא לא עוד שם ברשימת אוכל בוינה. זה מקום שמומלץ כי הוא נותן חוויה ברורה של ישראלי־ים־תיכוני: פיתות, ירקות ואוכל צבעוני — פתרון קליל יותר משניצל וגולאש. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: ישראלי־ים־תיכוני",
+        "מה מיוחד: פיתות, ירקות ואוכל צבעוני — פתרון קליל יותר משניצל וגולאש",
+        "אווירה: צעיר, רועש, קז׳ואלי",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. צעיר, רועש, קז׳ואלי.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Miznon Vienna is not just another food pin in Vienna. It is recommended because it gives a clear Israeli-Mediterranean experience: pitas, vegetables and colorful food — a lighter alternative to schnitzel and goulash. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: Israeli-Mediterranean",
+        "What stands out: pitas, vegetables and colorful food — a lighter alternative to schnitzel and goulash",
+        "Vibe: young, loud, casual",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. young, loud, casual.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Bitzinger Würstelstand": {
+    "he": {
+      "why": "Bitzinger Würstelstand הוא לא עוד שם ברשימת אוכל בוינה. זה מקום שמומלץ כי הוא נותן חוויה ברורה של דוכן נקניקיות אייקוני: נקניקיות ליד האופרה — עצירה וינאית קלאסית אחרי מופע או הליכה במרכז. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: דוכן נקניקיות אייקוני",
+        "מה מיוחד: נקניקיות ליד האופרה — עצירה וינאית קלאסית אחרי מופע או הליכה במרכז",
+        "אווירה: מהיר, מרכזי, לילה מאוחר",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. מהיר, מרכזי, לילה מאוחר.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Bitzinger Würstelstand is not just another food pin in Vienna. It is recommended because it gives a clear iconic sausage stand experience: sausages near the opera — classic Vienna stop after a show or central walk. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: iconic sausage stand",
+        "What stands out: sausages near the opera — classic Vienna stop after a show or central walk",
+        "Vibe: fast, central, late-night useful",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. fast, central, late-night useful.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Gasthaus Rebhuhn": {
+    "he": {
+      "why": "Gasthaus Rebhuhn הוא לא עוד שם ברשימת אוכל בוינה. זה מקום שמומלץ כי הוא נותן חוויה ברורה של גסטהאוס שכונתי: מטבח אוסטרי נעים יותר מחוץ למרכז הכי תיירותי. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: גסטהאוס שכונתי",
+        "מה מיוחד: מטבח אוסטרי נעים יותר מחוץ למרכז הכי תיירותי",
+        "אווירה: שכונתי, רגוע, ארוחת ערב",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. שכונתי, רגוע, ארוחת ערב.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Gasthaus Rebhuhn is not just another food pin in Vienna. It is recommended because it gives a clear neighborhood gasthaus experience: Austrian cooking with a more neighborhood feel outside the most touristy core. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: neighborhood gasthaus",
+        "What stands out: Austrian cooking with a more neighborhood feel outside the most touristy core",
+        "Vibe: neighborhood, relaxed, dinner",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. neighborhood, relaxed, dinner.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Vollpension": {
+    "he": {
+      "why": "Vollpension הוא לא עוד שם ברשימת אוכל בוינה. זה מקום שמומלץ כי הוא נותן חוויה ברורה של קפה ועוגות ביתיות: בית קפה חברתי עם עוגות ביתיות באווירת “סבתא וינאית”. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: קפה ועוגות ביתיות",
+        "מה מיוחד: בית קפה חברתי עם עוגות ביתיות באווירת “סבתא וינאית”",
+        "אווירה: חמים, מתוק, חברתי",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. חמים, מתוק, חברתי.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Vollpension is not just another food pin in Vienna. It is recommended because it gives a clear homestyle cakes café experience: social café with homemade cakes in a “Viennese grandma” mood. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: homestyle cakes café",
+        "What stands out: social café with homemade cakes in a “Viennese grandma” mood",
+        "Vibe: warm, sweet, social",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. warm, sweet, social.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Bruder": {
+    "he": {
+      "why": "Bruder הוא לא עוד שם ברשימת אוכל בוינה. זה מקום שמומלץ כי הוא נותן חוויה ברורה של מודרני וקוקטיילים: אוכל עכשווי, תסיסה/שימור וקוקטיילים — יותר חוויה קולינרית צעירה. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: מודרני וקוקטיילים",
+        "מה מיוחד: אוכל עכשווי, תסיסה/שימור וקוקטיילים — יותר חוויה קולינרית צעירה",
+        "אווירה: יצירתי, לא קלאסי, ערב מיוחד",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. יצירתי, לא קלאסי, ערב מיוחד.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Bruder is not just another food pin in Vienna. It is recommended because it gives a clear modern food and cocktails experience: contemporary food, fermentation/preservation and cocktails — a younger culinary experience. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: modern food and cocktails",
+        "What stands out: contemporary food, fermentation/preservation and cocktails — a younger culinary experience",
+        "Vibe: creative, not classic, special evening",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. creative, not classic, special evening.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Bitzi": {
+    "he": {
+      "why": "Bitzi הוא לא עוד שם ברשימת אוכל בוינה. זה מקום שמומלץ כי הוא נותן חוויה ברורה של מקומי קליל: עצירת אוכל קלה יחסית כשלא רוצים מסעדה כבדה או שוק עמוס. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: מקומי קליל",
+        "מה מיוחד: עצירת אוכל קלה יחסית כשלא רוצים מסעדה כבדה או שוק עמוס",
+        "אווירה: קליל, נגיש, ביניים",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. קליל, נגיש, ביניים.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Bitzi is not just another food pin in Vienna. It is recommended because it gives a clear casual local food experience: a lighter food stop when you do not want a heavy restaurant or busy market. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: casual local food",
+        "What stands out: a lighter food stop when you do not want a heavy restaurant or busy market",
+        "Vibe: light, accessible, in-between",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. light, accessible, in-between.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "La Corde à Linge": {
+    "he": {
+      "why": "La Corde à Linge הוא לא עוד שם ברשימת אוכל בשטרסבורג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של אלזסי קז׳ואלי: מיקום חזק בפטיט פראנס ומנות אלזסיות/צרפתיות באווירה נגישה. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: אלזסי קז׳ואלי",
+        "מה מיוחד: מיקום חזק בפטיט פראנס ומנות אלזסיות/צרפתיות באווירה נגישה",
+        "אווירה: מרכזי, תיירותי אבל שימושי",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. מרכזי, תיירותי אבל שימושי.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "La Corde à Linge is not just another food pin in Strasbourg. It is recommended because it gives a clear casual Alsatian experience: strong Petite France location with Alsatian/French dishes in an accessible mood. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: casual Alsatian",
+        "What stands out: strong Petite France location with Alsatian/French dishes in an accessible mood",
+        "Vibe: central, touristy but useful",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. central, touristy but useful.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Maison Kammerzell": {
+    "he": {
+      "why": "Maison Kammerzell הוא לא עוד שם ברשימת אוכל בשטרסבורג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של אלזסי היסטורי: אכילה בתוך אחד המבנים המפורסמים בעיר ליד הקתדרלה — החוויה היא גם אדריכלות. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: אלזסי היסטורי",
+        "מה מיוחד: אכילה בתוך אחד המבנים המפורסמים בעיר ליד הקתדרלה — החוויה היא גם אדריכלות",
+        "אווירה: היסטורי, יקר יותר, מיוחד",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. היסטורי, יקר יותר, מיוחד.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Maison Kammerzell is not just another food pin in Strasbourg. It is recommended because it gives a clear historic Alsatian experience: dining inside one of the city’s famous historic buildings near the cathedral — architecture is part of the meal. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: historic Alsatian",
+        "What stands out: dining inside one of the city’s famous historic buildings near the cathedral — architecture is part of the meal",
+        "Vibe: historic, pricier, special",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. historic, pricier, special.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Au Pont Corbeau": {
+    "he": {
+      "why": "Au Pont Corbeau הוא לא עוד שם ברשימת אוכל בשטרסבורג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של ווינסטוב אלזסי: מטבח אלזסי מסורתי באווירת טברנה מקומית — choucroute, tarte flambée ויין אזורי. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: ווינסטוב אלזסי",
+        "מה מיוחד: מטבח אלזסי מסורתי באווירת טברנה מקומית — choucroute, tarte flambée ויין אזורי",
+        "אווירה: מסורתי, חמים, אוכל מקומי",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. מסורתי, חמים, אוכל מקומי.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Au Pont Corbeau is not just another food pin in Strasbourg. It is recommended because it gives a clear Alsatian winstub experience: traditional Alsatian winstub mood — choucroute, tarte flambée and regional wine. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: Alsatian winstub",
+        "What stands out: traditional Alsatian winstub mood — choucroute, tarte flambée and regional wine",
+        "Vibe: traditional, warm, local food",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. traditional, warm, local food.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Binchstub Broglie": {
+    "he": {
+      "why": "Binchstub Broglie הוא לא עוד שם ברשימת אוכל בשטרסבורג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של Flammekueche: טארט פלמבה/Flammekueche במרכז — הדרך הישירה לטעום את המאפה האלזסי הדק. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: Flammekueche",
+        "מה מיוחד: טארט פלמבה/Flammekueche במרכז — הדרך הישירה לטעום את המאפה האלזסי הדק",
+        "אווירה: קז׳ואלי, מקומי, טוב לקבוצה",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. קז׳ואלי, מקומי, טוב לקבוצה.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Binchstub Broglie is not just another food pin in Strasbourg. It is recommended because it gives a clear flammekueche experience: tarte flambée / flammekueche in the center — the direct way to taste Alsace’s thin baked specialty. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: flammekueche",
+        "What stands out: tarte flambée / flammekueche in the center — the direct way to taste Alsace’s thin baked specialty",
+        "Vibe: casual, local, group-friendly",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. casual, local, group-friendly.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Le Tire-Bouchon": {
+    "he": {
+      "why": "Le Tire-Bouchon הוא לא עוד שם ברשימת אוכל בשטרסבורג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של ווינסטוב קלאסי: אוכל אלזסי ליד הקתדרלה, טוב כשרוצים חוויה מסורתית בלי להתרחק מהמרכז. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: ווינסטוב קלאסי",
+        "מה מיוחד: אוכל אלזסי ליד הקתדרלה, טוב כשרוצים חוויה מסורתית בלי להתרחק מהמרכז",
+        "אווירה: מסורתי, מרכזי, עשיר",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. מסורתי, מרכזי, עשיר.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Le Tire-Bouchon is not just another food pin in Strasbourg. It is recommended because it gives a clear classic winstub experience: Alsatian food near the cathedral, useful when you want tradition without leaving the center. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: classic winstub",
+        "What stands out: Alsatian food near the cathedral, useful when you want tradition without leaving the center",
+        "Vibe: traditional, central, hearty",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. traditional, central, hearty.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Chez Yvonne": {
+    "he": {
+      "why": "Chez Yvonne הוא לא עוד שם ברשימת אוכל בשטרסבורג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של אלזסי מסורתי: ווינסטוב ותיק עם מנות אזוריות ואווירה קלאסית יותר. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: אלזסי מסורתי",
+        "מה מיוחד: ווינסטוב ותיק עם מנות אזוריות ואווירה קלאסית יותר",
+        "אווירה: ותיק, מסורתי, לא מהיר",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. ותיק, מסורתי, לא מהיר.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Chez Yvonne is not just another food pin in Strasbourg. It is recommended because it gives a clear traditional Alsatian experience: longstanding winstub with regional dishes and classic atmosphere. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: traditional Alsatian",
+        "What stands out: longstanding winstub with regional dishes and classic atmosphere",
+        "Vibe: established, traditional, not fast",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. established, traditional, not fast.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Au Brasseur": {
+    "he": {
+      "why": "Au Brasseur הוא לא עוד שם ברשימת אוכל בשטרסבורג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של מבשלת בירה ואוכל אלזסי: בירה מקומית, אוכל פשוט ומיקום נוח — מתאים לארוחה לא מחייבת. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: מבשלת בירה ואוכל אלזסי",
+        "מה מיוחד: בירה מקומית, אוכל פשוט ומיקום נוח — מתאים לארוחה לא מחייבת",
+        "אווירה: קז׳ואלי, בירה, קבוצתי",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. קז׳ואלי, בירה, קבוצתי.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Au Brasseur is not just another food pin in Strasbourg. It is recommended because it gives a clear brewery and Alsatian food experience: local beer, simple food and convenient location — good for a low-commitment meal. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: brewery and Alsatian food",
+        "What stands out: local beer, simple food and convenient location — good for a low-commitment meal",
+        "Vibe: casual, beer-focused, group-friendly",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. casual, beer-focused, group-friendly.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Flam’s": {
+    "he": {
+      "why": "Flam’s הוא לא עוד שם ברשימת אוכל בשטרסבורג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של Flammekueche אלזסי: התמחות בטארט פלמבה: בצק דק, שמנת, בצל ובייקון/גבינות — אוכל אלזסי ברור ונגיש. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: Flammekueche אלזסי",
+        "מה מיוחד: התמחות בטארט פלמבה: בצק דק, שמנת, בצל ובייקון/גבינות — אוכל אלזסי ברור ונגיש",
+        "אווירה: קליל, מקומי, מתאים לפעם ראשונה",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. קליל, מקומי, מתאים לפעם ראשונה.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Flam’s is not just another food pin in Strasbourg. It is recommended because it gives a clear Alsatian flammekueche experience: specialized in tarte flambée: thin dough, cream, onions and bacon/cheese — clear accessible Alsatian food. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: Alsatian flammekueche",
+        "What stands out: specialized in tarte flambée: thin dough, cream, onions and bacon/cheese — clear accessible Alsatian food",
+        "Vibe: light, local, good first taste",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. light, local, good first taste.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "L’Épicerie": {
+    "he": {
+      "why": "L’Épicerie הוא לא עוד שם ברשימת אוכל בשטרסבורג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של כריכים/טארטינים: טארטינים, גבינות ויין באווירה קטנה — מתאים להפסקה לא כבדה. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: כריכים/טארטינים",
+        "מה מיוחד: טארטינים, גבינות ויין באווירה קטנה — מתאים להפסקה לא כבדה",
+        "אווירה: קטן, ביתי, לא פורמלי",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. קטן, ביתי, לא פורמלי.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "L’Épicerie is not just another food pin in Strasbourg. It is recommended because it gives a clear tartines and casual plates experience: tartines, cheese and wine in a small setting — good for a lighter stop. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: tartines and casual plates",
+        "What stands out: tartines, cheese and wine in a small setting — good for a lighter stop",
+        "Vibe: small, homely, informal",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. small, homely, informal.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Bistrot Coco": {
+    "he": {
+      "why": "Bistrot Coco הוא לא עוד שם ברשימת אוכל בשטרסבורג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של ביסטרו צרפתי: ביסטרו נעים למי שרוצה ארוחה צרפתית מסודרת יותר ולא רק tarte flambée. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: ביסטרו צרפתי",
+        "מה מיוחד: ביסטרו נעים למי שרוצה ארוחה צרפתית מסודרת יותר ולא רק tarte flambée",
+        "אווירה: נעים, זוגי, מעט יותר מוקפד",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. נעים, זוגי, מעט יותר מוקפד.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Bistrot Coco is not just another food pin in Strasbourg. It is recommended because it gives a clear French bistro experience: pleasant bistro for a more composed French meal beyond tarte flambée. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: French bistro",
+        "What stands out: pleasant bistro for a more composed French meal beyond tarte flambée",
+        "Vibe: pleasant, couple-friendly, more polished",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. pleasant, couple-friendly, more polished.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Meiselocker": {
+    "he": {
+      "why": "Meiselocker הוא לא עוד שם ברשימת אוכל בשטרסבורג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של צרפתי־אלזסי: מנות אזוריות בסביבה מרכזית, מתאים כחלופה פחות צפויה למסעדות ליד הקתדרלה. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: צרפתי־אלזסי",
+        "מה מיוחד: מנות אזוריות בסביבה מרכזית, מתאים כחלופה פחות צפויה למסעדות ליד הקתדרלה",
+        "אווירה: מסורתי, מרכזי, רגוע",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. מסורתי, מרכזי, רגוע.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Meiselocker is not just another food pin in Strasbourg. It is recommended because it gives a clear French-Alsatian experience: regional dishes in a central setting, useful as a less obvious alternative near the core. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: French-Alsatian",
+        "What stands out: regional dishes in a central setting, useful as a less obvious alternative near the core",
+        "Vibe: traditional, central, calm",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. traditional, central, calm.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Le Clou": {
+    "he": {
+      "why": "Le Clou הוא לא עוד שם ברשימת אוכל בשטרסבורג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של ווינסטוב אלזסי: מקום קלאסי למנות כמו choucroute, בשר, תפוחי אדמה ויין אלזסי. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: ווינסטוב אלזסי",
+        "מה מיוחד: מקום קלאסי למנות כמו choucroute, בשר, תפוחי אדמה ויין אלזסי",
+        "אווירה: כבד, מקומי, חורפי",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. כבד, מקומי, חורפי.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Le Clou is not just another food pin in Strasbourg. It is recommended because it gives a clear Alsatian winstub experience: classic place for choucroute, meat, potatoes and Alsatian wine. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: Alsatian winstub",
+        "What stands out: classic place for choucroute, meat, potatoes and Alsatian wine",
+        "Vibe: hearty, local, winter-friendly",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. hearty, local, winter-friendly.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "La Hache": {
+    "he": {
+      "why": "La Hache הוא לא עוד שם ברשימת אוכל בשטרסבורג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של בראסרי צרפתי: בראסרי מודרני יותר, מתאים כשמחפשים אוכל צרפתי נגיש במרכז. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: בראסרי צרפתי",
+        "מה מיוחד: בראסרי מודרני יותר, מתאים כשמחפשים אוכל צרפתי נגיש במרכז",
+        "אווירה: עכשווי, מרכזי, נוח",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. עכשווי, מרכזי, נוח.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "La Hache is not just another food pin in Strasbourg. It is recommended because it gives a clear French brasserie experience: more modern brasserie, useful for accessible French food in the center. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: French brasserie",
+        "What stands out: more modern brasserie, useful for accessible French food in the center",
+        "Vibe: modern, central, convenient",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. modern, central, convenient.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Pizz’arOme": {
+    "he": {
+      "why": "Pizz’arOme הוא לא עוד שם ברשימת אוכל בשטרסבורג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של פיצה: אופציה פשוטה כשצריך אוכל מוכר וזול יותר בין אתרים. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: פיצה",
+        "מה מיוחד: אופציה פשוטה כשצריך אוכל מוכר וזול יותר בין אתרים",
+        "אווירה: קל, משפחתי, לא אלזסי",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. קל, משפחתי, לא אלזסי.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Pizz’arOme is not just another food pin in Strasbourg. It is recommended because it gives a clear pizza experience: simple option when you need familiar and cheaper food between sights. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: pizza",
+        "What stands out: simple option when you need familiar and cheaper food between sights",
+        "Vibe: easy, family-friendly, not Alsatian",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. easy, family-friendly, not Alsatian.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Le Thomasien": {
+    "he": {
+      "why": "Le Thomasien הוא לא עוד שם ברשימת אוכל בשטרסבורג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של צרפתי קז׳ואל: עצירה צרפתית פשוטה באזור המרכז, טובה כשלא רוצים תפריט כבד מדי. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: צרפתי קז׳ואל",
+        "מה מיוחד: עצירה צרפתית פשוטה באזור המרכז, טובה כשלא רוצים תפריט כבד מדי",
+        "אווירה: קז׳ואלי, מרכזי",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. קז׳ואלי, מרכזי.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Le Thomasien is not just another food pin in Strasbourg. It is recommended because it gives a clear casual French experience: simple French stop in the center when you do not want a heavy menu. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: casual French",
+        "What stands out: simple French stop in the center when you do not want a heavy menu",
+        "Vibe: casual, central",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. casual, central.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "PUR etc.": {
+    "he": {
+      "why": "PUR etc. הוא לא עוד שם ברשימת אוכל בשטרסבורג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של בריא ומהיר: מנות קלילות יותר, קערות/סלטים — הפסקה טובה מאוכל אלזסי כבד. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: בריא ומהיר",
+        "מה מיוחד: מנות קלילות יותר, קערות/סלטים — הפסקה טובה מאוכל אלזסי כבד",
+        "אווירה: בריא, מהיר, יום עמוס",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. בריא, מהיר, יום עמוס.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "PUR etc. is not just another food pin in Strasbourg. It is recommended because it gives a clear healthy fast casual experience: lighter bowls/salads — a break from heavy Alsatian food. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: healthy fast casual",
+        "What stands out: lighter bowls/salads — a break from heavy Alsatian food",
+        "Vibe: healthy, quick, busy-day useful",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. healthy, quick, busy-day useful.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Café Bretelles": {
+    "he": {
+      "why": "Café Bretelles הוא לא עוד שם ברשימת אוכל בשטרסבורג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של קפה ובראנץ׳: קפה איכותי, מאפים ובראנץ׳ באווירה צעירה ופחות מסורתית. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: קפה ובראנץ׳",
+        "מה מיוחד: קפה איכותי, מאפים ובראנץ׳ באווירה צעירה ופחות מסורתית",
+        "אווירה: קפה, בוקר, צעיר",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. קפה, בוקר, צעיר.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Café Bretelles is not just another food pin in Strasbourg. It is recommended because it gives a clear coffee and brunch experience: quality coffee, pastries and brunch in a younger less traditional mood. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: coffee and brunch",
+        "What stands out: quality coffee, pastries and brunch in a younger less traditional mood",
+        "Vibe: coffee, breakfast, young",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. coffee, breakfast, young.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "What the Cake": {
+    "he": {
+      "why": "What the Cake הוא לא עוד שם ברשימת אוכל בשטרסבורג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של קינוחים וקפה: מקום לקפה ועוגה, טוב להפסקה מתוקה ולא לארוחה כבדה. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: קינוחים וקפה",
+        "מה מיוחד: מקום לקפה ועוגה, טוב להפסקה מתוקה ולא לארוחה כבדה",
+        "אווירה: מתוק, קליל, הפסקה",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. מתוק, קליל, הפסקה.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "What the Cake is not just another food pin in Strasbourg. It is recommended because it gives a clear cakes and café experience: coffee and cake stop, good for a sweet break rather than a full meal. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: cakes and café",
+        "What stands out: coffee and cake stop, good for a sweet break rather than a full meal",
+        "Vibe: sweet, light, break stop",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. sweet, light, break stop.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Stück Burger": {
+    "he": {
+      "why": "Stück Burger הוא לא עוד שם ברשימת אוכל בשטרסבורג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של המבורגר: פתרון מוכר ופשוט כשלא רוצים מטבח אזורי או ילדים צריכים משהו קל. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: המבורגר",
+        "מה מיוחד: פתרון מוכר ופשוט כשלא רוצים מטבח אזורי או ילדים צריכים משהו קל",
+        "אווירה: קל, משפחתי, לא מקומי",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. קל, משפחתי, לא מקומי.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "Stück Burger is not just another food pin in Strasbourg. It is recommended because it gives a clear burgers experience: familiar easy choice when you do not want regional food or children need something simple. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: burgers",
+        "What stands out: familiar easy choice when you do not want regional food or children need something simple",
+        "Vibe: easy, family-friendly, not local",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. easy, family-friendly, not local.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "La Fignette": {
+    "he": {
+      "why": "La Fignette הוא לא עוד שם ברשימת אוכל בשטרסבורג. זה מקום שמומלץ כי הוא נותן חוויה ברורה של אלזסי מסורתי: מנות אלזסיות באווירה מקומית, טובה לטעימת מטבח אזורי בלי פורמליות גבוהה. לפני שהולכים אליו יודעים אם זו עצירה מהירה, ארוחה מקומית, בית קפה היסטורי או מקום לאווירה.",
+      "see": [
+        "מטבח: אלזסי מסורתי",
+        "מה מיוחד: מנות אלזסיות באווירה מקומית, טובה לטעימת מטבח אזורי בלי פורמליות גבוהה",
+        "אווירה: מסורתי, נעים, אזורי",
+        "לבדוק שעות, תפריט ועומס כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שרוצה לבחור אוכל לפי אופי וסוג מטבח, לא רק לפי המרחק במפה. מסורתי, נעים, אזורי.",
+      "tip": "אם המקום מלא, לפתוח מפה ולחפש חלופה קרובה באותו סגנון במקום להתפשר על מלכודת תיירים."
+    },
+    "en": {
+      "why": "La Fignette is not just another food pin in Strasbourg. It is recommended because it gives a clear traditional Alsatian experience: Alsatian dishes in a local mood, good for regional food without high formality. Before going, you know whether it is a quick stop, a local meal, a historic café or an atmosphere place.",
+      "see": [
+        "Cuisine: traditional Alsatian",
+        "What stands out: Alsatian dishes in a local mood, good for regional food without high formality",
+        "Vibe: traditional, pleasant, regional",
+        "Check live hours, menu and crowding while online"
+      ],
+      "fit": "Best when you want to choose by food style and mood, not only by map distance. traditional, pleasant, regional.",
+      "tip": "If it is full, search nearby for the same food style instead of settling for the nearest tourist trap."
+    }
+  },
+  "Letná Beer Garden": {
+    "he": {
+      "why": "Letná Beer Garden מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג בירה עם תצפית. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — בירה פשוטה באוויר פתוח מעל הגשרים של פראג.",
+      "see": [
+        "סוג מקום: בירה עם תצפית",
+        "מוזיקה/אופי: רגוע, שקיעה, לא מועדון",
+        "מה מיוחד: בירה פשוטה באוויר פתוח מעל הגשרים של פראג",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש בירה עם תצפית. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "Letná Beer Garden is recommended for the evening because it is not just a bar; it represents beer garden with a view. The value is knowing in advance what kind of night you are choosing — open-air beer above Prague’s bridges.",
+      "see": [
+        "Type: beer garden with a view",
+        "Music/mood: relaxed, sunset, not a club",
+        "What stands out: open-air beer above Prague’s bridges",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want beer garden with a view. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "Náplavka Riverside": {
+    "he": {
+      "why": "Náplavka Riverside מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג טיילת נהר בערב. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — הליכה, דוכנים ושתייה קלה ליד הוולטאבה.",
+      "see": [
+        "סוג מקום: טיילת נהר בערב",
+        "מוזיקה/אופי: קז׳ואלי, חוץ, תלוי עונה",
+        "מה מיוחד: הליכה, דוכנים ושתייה קלה ליד הוולטאבה",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש טיילת נהר בערב. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "Náplavka Riverside is recommended for the evening because it is not just a bar; it represents riverside evening strip. The value is knowing in advance what kind of night you are choosing — walking, stalls and casual drinks by the Vltava.",
+      "see": [
+        "Type: riverside evening strip",
+        "Music/mood: casual, outdoor, seasonal",
+        "What stands out: walking, stalls and casual drinks by the Vltava",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want riverside evening strip. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "Hemingway Bar": {
+    "he": {
+      "why": "Hemingway Bar מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג בר קוקטיילים איכותי. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — קוקטיילים מוקפדים ואווירה אינטימית לדייט או ערב שקט.",
+      "see": [
+        "סוג מקום: בר קוקטיילים איכותי",
+        "מוזיקה/אופי: לואונג׳, שקט, בוגר",
+        "מה מיוחד: קוקטיילים מוקפדים ואווירה אינטימית לדייט או ערב שקט",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש בר קוקטיילים איכותי. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "Hemingway Bar is recommended for the evening because it is not just a bar; it represents serious cocktail bar. The value is knowing in advance what kind of night you are choosing — crafted cocktails and intimate atmosphere for a date or quiet evening.",
+      "see": [
+        "Type: serious cocktail bar",
+        "Music/mood: lounge, quiet, mature",
+        "What stands out: crafted cocktails and intimate atmosphere for a date or quiet evening",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want serious cocktail bar. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "Anonymous Bar": {
+    "he": {
+      "why": "Anonymous Bar מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג קוקטיילים תיאטרליים. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — חוויה משחקית עם הגשה דרמטית וסיפור סביב המשקה.",
+      "see": [
+        "סוג מקום: קוקטיילים תיאטרליים",
+        "מוזיקה/אופי: קוקטיילים, חוויה, לא רגיל",
+        "מה מיוחד: חוויה משחקית עם הגשה דרמטית וסיפור סביב המשקה",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש קוקטיילים תיאטרליים. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "Anonymous Bar is recommended for the evening because it is not just a bar; it represents theatrical cocktails. The value is knowing in advance what kind of night you are choosing — playful experience with dramatic presentation around the drink.",
+      "see": [
+        "Type: theatrical cocktails",
+        "Music/mood: cocktails, experience, unusual",
+        "What stands out: playful experience with dramatic presentation around the drink",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want theatrical cocktails. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "Dva Kohouti": {
+    "he": {
+      "why": "Dva Kohouti מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג מבשלת קראפט. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — בירה מקומית צעירה בשכונת Karlín עם אווירת עמידה וחצר.",
+      "see": [
+        "סוג מקום: מבשלת קראפט",
+        "מוזיקה/אופי: קראפט, צעיר, חברים",
+        "מה מיוחד: בירה מקומית צעירה בשכונת Karlín עם אווירת עמידה וחצר",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש מבשלת קראפט. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "Dva Kohouti is recommended for the evening because it is not just a bar; it represents craft brewery. The value is knowing in advance what kind of night you are choosing — young local beer scene in Karlín with a standing-yard mood.",
+      "see": [
+        "Type: craft brewery",
+        "Music/mood: craft beer, young, friends",
+        "What stands out: young local beer scene in Karlín with a standing-yard mood",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want craft brewery. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "U Sudu": {
+    "he": {
+      "why": "U Sudu מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג מרתף ברים. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — חללים תת־קרקעיים עם תחושה יותר מחוספסת ופחות מלוטשת.",
+      "see": [
+        "סוג מקום: מרתף ברים",
+        "מוזיקה/אופי: בר, צעיר, קצת כאוטי",
+        "מה מיוחד: חללים תת־קרקעיים עם תחושה יותר מחוספסת ופחות מלוטשת",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש מרתף ברים. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "U Sudu is recommended for the evening because it is not just a bar; it represents cellar bar. The value is knowing in advance what kind of night you are choosing — underground rooms with a rougher, less polished feel.",
+      "see": [
+        "Type: cellar bar",
+        "Music/mood: bar, young, a little chaotic",
+        "What stands out: underground rooms with a rougher, less polished feel",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want cellar bar. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "Jazz Dock": {
+    "he": {
+      "why": "Jazz Dock מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג מוזיקה חיה על הנהר. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — הופעות ג׳אז/בלוז ליד המים במקום ישיבה מסודר.",
+      "see": [
+        "סוג מקום: מוזיקה חיה על הנהר",
+        "מוזיקה/אופי: ג׳אז, הופעות, רגוע",
+        "מה מיוחד: הופעות ג׳אז/בלוז ליד המים במקום ישיבה מסודר",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש מוזיקה חיה על הנהר. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "Jazz Dock is recommended for the evening because it is not just a bar; it represents live music by the river. The value is knowing in advance what kind of night you are choosing — jazz/blues performances by the water in a seated venue.",
+      "see": [
+        "Type: live music by the river",
+        "Music/mood: jazz, concerts, calm",
+        "What stands out: jazz/blues performances by the water in a seated venue",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want live music by the river. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "Lucerna Music Bar": {
+    "he": {
+      "why": "Lucerna Music Bar מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג מועדון מוזיקה מרכזי. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — מסיבות רטרו/הופעות שמייצרות ערב ריקודים ברור.",
+      "see": [
+        "סוג מקום: מועדון מוזיקה מרכזי",
+        "מוזיקה/אופי: רטרו, פופ, ריקודים",
+        "מה מיוחד: מסיבות רטרו/הופעות שמייצרות ערב ריקודים ברור",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש מועדון מוזיקה מרכזי. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "Lucerna Music Bar is recommended for the evening because it is not just a bar; it represents central music club. The value is knowing in advance what kind of night you are choosing — retro parties/concerts that make a clear dancing night.",
+      "see": [
+        "Type: central music club",
+        "Music/mood: retro, pop, dancing",
+        "What stands out: retro parties/concerts that make a clear dancing night",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want central music club. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "Cross Club": {
+    "he": {
+      "why": "Cross Club מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג מועדון אלטרנטיבי. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — עיצוב מתכתי־תעשייתי ומוזיקה אלקטרונית/אלטרנטיבית.",
+      "see": [
+        "סוג מקום: מועדון אלטרנטיבי",
+        "מוזיקה/אופי: אלקטרוני, אלטרנטיבי, צעיר",
+        "מה מיוחד: עיצוב מתכתי־תעשייתי ומוזיקה אלקטרונית/אלטרנטיבית",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש מועדון אלטרנטיבי. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "Cross Club is recommended for the evening because it is not just a bar; it represents alternative club. The value is knowing in advance what kind of night you are choosing — industrial-metal design and electronic/alternative music.",
+      "see": [
+        "Type: alternative club",
+        "Music/mood: electronic, alternative, young",
+        "What stands out: industrial-metal design and electronic/alternative music",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want alternative club. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "BeerGeek Bar": {
+    "he": {
+      "why": "BeerGeek Bar מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג בר בירת קראפט. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — עשרות ברזים/בקבוקים וטעם של סצנת בירה, לא מסיבה.",
+      "see": [
+        "סוג מקום: בר בירת קראפט",
+        "מוזיקה/אופי: קראפט, טעימות, שיחה",
+        "מה מיוחד: עשרות ברזים/בקבוקים וטעם של סצנת בירה, לא מסיבה",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש בר בירת קראפט. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "BeerGeek Bar is recommended for the evening because it is not just a bar; it represents craft beer bar. The value is knowing in advance what kind of night you are choosing — many taps/bottles and beer-geek culture, not a club.",
+      "see": [
+        "Type: craft beer bar",
+        "Music/mood: craft, tasting, conversation",
+        "What stands out: many taps/bottles and beer-geek culture, not a club",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want craft beer bar. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "Roxy Prague": {
+    "he": {
+      "why": "Roxy Prague מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג מועדון אלקטרוני. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — ליין־אפים מתחלפים וקהל שמגיע בשביל מוזיקה וריקוד.",
+      "see": [
+        "סוג מקום: מועדון אלקטרוני",
+        "מוזיקה/אופי: אלקטרוני, ריקודים, לילה ארוך",
+        "מה מיוחד: ליין־אפים מתחלפים וקהל שמגיע בשביל מוזיקה וריקוד",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש מועדון אלקטרוני. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "Roxy Prague is recommended for the evening because it is not just a bar; it represents electronic club. The value is knowing in advance what kind of night you are choosing — changing lineups and a crowd that comes for music and dancing.",
+      "see": [
+        "Type: electronic club",
+        "Music/mood: electronic, dancing, late night",
+        "What stands out: changing lineups and a crowd that comes for music and dancing",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want electronic club. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "Karlovy Lázně": {
+    "he": {
+      "why": "Karlovy Lázně מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג מועדון תיירותי רב־קומות. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — כמה קומות וסגנונות מוזיקה — קל להבנה אבל פחות מקומי.",
+      "see": [
+        "סוג מקום: מועדון תיירותי רב־קומות",
+        "מוזיקה/אופי: פופ/דאנס, תיירותי",
+        "מה מיוחד: כמה קומות וסגנונות מוזיקה — קל להבנה אבל פחות מקומי",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש מועדון תיירותי רב־קומות. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "Karlovy Lázně is recommended for the evening because it is not just a bar; it represents tourist multi-floor club. The value is knowing in advance what kind of night you are choosing — several floors and music styles — easy to understand but less local.",
+      "see": [
+        "Type: tourist multi-floor club",
+        "Music/mood: pop/dance, touristy",
+        "What stands out: several floors and music styles — easy to understand but less local",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want tourist multi-floor club. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "Donaukanal Bars": {
+    "he": {
+      "why": "Donaukanal Bars מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג ברים על התעלה. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — שתייה לאורך Donaukanal באווירה עירונית צעירה ופתוחה.",
+      "see": [
+        "סוג מקום: ברים על התעלה",
+        "מוזיקה/אופי: קיץ, חוץ, רגוע",
+        "מה מיוחד: שתייה לאורך Donaukanal באווירה עירונית צעירה ופתוחה",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש ברים על התעלה. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "Donaukanal Bars is recommended for the evening because it is not just a bar; it represents canal bars. The value is knowing in advance what kind of night you are choosing — drinks along the Donaukanal in a young urban open-air mood.",
+      "see": [
+        "Type: canal bars",
+        "Music/mood: summer, outdoor, relaxed",
+        "What stands out: drinks along the Donaukanal in a young urban open-air mood",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want canal bars. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "Loos American Bar": {
+    "he": {
+      "why": "Loos American Bar מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג בר קוקטיילים אדריכלי. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — חלל קטן שתוכנן על ידי Adolf Loos, יותר קלאסיקה מאשר מסיבה.",
+      "see": [
+        "סוג מקום: בר קוקטיילים אדריכלי",
+        "מוזיקה/אופי: קוקטיילים, שקט, היסטורי",
+        "מה מיוחד: חלל קטן שתוכנן על ידי Adolf Loos, יותר קלאסיקה מאשר מסיבה",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש בר קוקטיילים אדריכלי. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "Loos American Bar is recommended for the evening because it is not just a bar; it represents architectural cocktail bar. The value is knowing in advance what kind of night you are choosing — small space designed by Adolf Loos, more classic than party.",
+      "see": [
+        "Type: architectural cocktail bar",
+        "Music/mood: cocktails, quiet, historic",
+        "What stands out: small space designed by Adolf Loos, more classic than party",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want architectural cocktail bar. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "Das Loft Bar": {
+    "he": {
+      "why": "Das Loft Bar מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג בר גג עם נוף. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — נוף גבוה על וינה, מתאים לערב אלגנטי או דרינק שקיעה.",
+      "see": [
+        "סוג מקום: בר גג עם נוף",
+        "מוזיקה/אופי: לואונג׳, נוף, יקר יותר",
+        "מה מיוחד: נוף גבוה על וינה, מתאים לערב אלגנטי או דרינק שקיעה",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש בר גג עם נוף. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "Das Loft Bar is recommended for the evening because it is not just a bar; it represents rooftop bar with a view. The value is knowing in advance what kind of night you are choosing — high view over Vienna, good for an elegant drink or sunset.",
+      "see": [
+        "Type: rooftop bar with a view",
+        "Music/mood: lounge, view, pricier",
+        "What stands out: high view over Vienna, good for an elegant drink or sunset",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want rooftop bar with a view. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "Grelle Forelle": {
+    "he": {
+      "why": "Grelle Forelle מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג מועדון טכנו. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — מקום לאוהבי מוזיקה אלקטרונית רצינית, לא בר מזדמן.",
+      "see": [
+        "סוג מקום: מועדון טכנו",
+        "מוזיקה/אופי: טכנו/האוס, לילה מאוחר",
+        "מה מיוחד: מקום לאוהבי מוזיקה אלקטרונית רצינית, לא בר מזדמן",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש מועדון טכנו. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "Grelle Forelle is recommended for the evening because it is not just a bar; it represents techno club. The value is knowing in advance what kind of night you are choosing — venue for serious electronic music lovers, not a casual bar.",
+      "see": [
+        "Type: techno club",
+        "Music/mood: techno/house, late night",
+        "What stands out: venue for serious electronic music lovers, not a casual bar",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want techno club. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "Flex": {
+    "he": {
+      "why": "Flex מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג מועדון ליד התעלה. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — מוסד ותיק לסצנת מועדונים/הופעות ליד Donaukanal.",
+      "see": [
+        "סוג מקום: מועדון ליד התעלה",
+        "מוזיקה/אופי: אלטרנטיבי, הופעות, מועדון",
+        "מה מיוחד: מוסד ותיק לסצנת מועדונים/הופעות ליד Donaukanal",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש מועדון ליד התעלה. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "Flex is recommended for the evening because it is not just a bar; it represents canal-side club. The value is knowing in advance what kind of night you are choosing — long-running club/concert venue by Donaukanal.",
+      "see": [
+        "Type: canal-side club",
+        "Music/mood: alternative, concerts, club",
+        "What stands out: long-running club/concert venue by Donaukanal",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want canal-side club. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "Kleinod Bar": {
+    "he": {
+      "why": "Kleinod Bar מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג קוקטיילים אלגנטיים. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — בר מעוצב למי שרוצה קוקטייל איכותי ולא ערב רועש.",
+      "see": [
+        "סוג מקום: קוקטיילים אלגנטיים",
+        "מוזיקה/אופי: קוקטיילים, דייט, אלגנטי",
+        "מה מיוחד: בר מעוצב למי שרוצה קוקטייל איכותי ולא ערב רועש",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש קוקטיילים אלגנטיים. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "Kleinod Bar is recommended for the evening because it is not just a bar; it represents elegant cocktails. The value is knowing in advance what kind of night you are choosing — designed bar for quality cocktails, not a loud night.",
+      "see": [
+        "Type: elegant cocktails",
+        "Music/mood: cocktails, date, elegant",
+        "What stands out: designed bar for quality cocktails, not a loud night",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want elegant cocktails. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "Krutenau bars": {
+    "he": {
+      "why": "Krutenau bars מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג אזור ברים סטודנטיאלי. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — שכונה צעירה עם ברים קטנים, אוכל ותחושת ערב מקומית.",
+      "see": [
+        "סוג מקום: אזור ברים סטודנטיאלי",
+        "מוזיקה/אופי: קז׳ואלי, צעיר, הליכה",
+        "מה מיוחד: שכונה צעירה עם ברים קטנים, אוכל ותחושת ערב מקומית",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש אזור ברים סטודנטיאלי. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "Krutenau bars is recommended for the evening because it is not just a bar; it represents student bar district. The value is knowing in advance what kind of night you are choosing — young district with small bars, food and local evening energy.",
+      "see": [
+        "Type: student bar district",
+        "Music/mood: casual, young, walkable",
+        "What stands out: young district with small bars, food and local evening energy",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want student bar district. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "Code Bar": {
+    "he": {
+      "why": "Code Bar מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג קוקטיילים. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — בר קוקטיילים לאווירה יותר מוקפדת במרכז שטרסבורג.",
+      "see": [
+        "סוג מקום: קוקטיילים",
+        "מוזיקה/אופי: קוקטיילים, דייט",
+        "מה מיוחד: בר קוקטיילים לאווירה יותר מוקפדת במרכז שטרסבורג",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש קוקטיילים. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "Code Bar is recommended for the evening because it is not just a bar; it represents cocktail bar. The value is knowing in advance what kind of night you are choosing — cocktail bar for a more polished evening in central Strasbourg.",
+      "see": [
+        "Type: cocktail bar",
+        "Music/mood: cocktails, date",
+        "What stands out: cocktail bar for a more polished evening in central Strasbourg",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want cocktail bar. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "Académie de la Bière": {
+    "he": {
+      "why": "Académie de la Bière מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג בירה ואוכל. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — בירה, אוכל פשוט ואווירה שמתאימה לפתיחת ערב בלי פורמליות.",
+      "see": [
+        "סוג מקום: בירה ואוכל",
+        "מוזיקה/אופי: בירה, קז׳ואל, קבוצות",
+        "מה מיוחד: בירה, אוכל פשוט ואווירה שמתאימה לפתיחת ערב בלי פורמליות",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש בירה ואוכל. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "Académie de la Bière is recommended for the evening because it is not just a bar; it represents beer and casual food. The value is knowing in advance what kind of night you are choosing — beer, simple food and an easy start to the evening.",
+      "see": [
+        "Type: beer and casual food",
+        "Music/mood: beer, casual, groups",
+        "What stands out: beer, simple food and an easy start to the evening",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want beer and casual food. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "Le Grincheux": {
+    "he": {
+      "why": "Le Grincheux מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג בר יין/בירה קטן. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — אווירה קטנה ויותר מקומית, טובה לשיחה ולא לריקודים.",
+      "see": [
+        "סוג מקום: בר יין/בירה קטן",
+        "מוזיקה/אופי: שיחה, שתייה, רגוע",
+        "מה מיוחד: אווירה קטנה ויותר מקומית, טובה לשיחה ולא לריקודים",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש בר יין/בירה קטן. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "Le Grincheux is recommended for the evening because it is not just a bar; it represents small wine/beer bar. The value is knowing in advance what kind of night you are choosing — small local mood, better for talking than dancing.",
+      "see": [
+        "Type: small wine/beer bar",
+        "Music/mood: conversation, drinks, calm",
+        "What stands out: small local mood, better for talking than dancing",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want small wine/beer bar. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "La Laiterie": {
+    "he": {
+      "why": "La Laiterie מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג מוזיקה חיה. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — אולם הופעות חשוב בעיר — הערך תלוי בליינאפ של אותו ערב.",
+      "see": [
+        "סוג מקום: מוזיקה חיה",
+        "מוזיקה/אופי: הופעות, רוק/אלקטרוני",
+        "מה מיוחד: אולם הופעות חשוב בעיר — הערך תלוי בליינאפ של אותו ערב",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש מוזיקה חיה. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "La Laiterie is recommended for the evening because it is not just a bar; it represents live music venue. The value is knowing in advance what kind of night you are choosing — major concert venue where the value depends on the lineup.",
+      "see": [
+        "Type: live music venue",
+        "Music/mood: concerts, rock/electronic",
+        "What stands out: major concert venue where the value depends on the lineup",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want live music venue. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "Aedaen Place": {
+    "he": {
+      "why": "Aedaen Place מומלץ לערב כי הוא לא רק ‘בר’: הוא מייצג מתחם אוכל/בר/תרבות. הערך למטייל הוא להבין מראש איזה לילה הוא מקבל — חלל רב־שימושי עם ברים, אוכל ואווירה עכשווית.",
+      "see": [
+        "סוג מקום: מתחם אוכל/בר/תרבות",
+        "מוזיקה/אופי: קוקטיילים, אוכל, צעיר",
+        "מה מיוחד: חלל רב־שימושי עם ברים, אוכל ואווירה עכשווית",
+        "לבדוק שעות, ליינאפ או הזמנה כשיש אינטרנט"
+      ],
+      "fit": "מתאים למי שמחפש מתחם אוכל/בר/תרבות. לא כל מקום לילה מתאים לכל מצב רוח.",
+      "tip": "בסוף שבוע לבדוק מראש אם יש תור, כרטיס או אירוע מיוחד."
+    },
+    "en": {
+      "why": "Aedaen Place is recommended for the evening because it is not just a bar; it represents food-bar-culture complex. The value is knowing in advance what kind of night you are choosing — multi-use space with bars, food and contemporary mood.",
+      "see": [
+        "Type: food-bar-culture complex",
+        "Music/mood: cocktails, food, young",
+        "What stands out: multi-use space with bars, food and contemporary mood",
+        "Check hours, lineup or reservation while online"
+      ],
+      "fit": "Best if you want food-bar-culture complex. Not every nightlife spot fits every mood.",
+      "tip": "On weekends, check if there is a line, ticket or special event."
+    }
+  },
+  "Strasbourg Cathedral": {
+    "he": {
+      "why": "קתדרלת שטרסבורג היא הלב הוויזואלי וההיסטורי של העיר: חזית גותית עצומה, אבן ורודה ושעון אסטרונומי שמסביר למה המקום הוא חובה גם למי שלא נכנס בדרך כלל לכנסיות.",
+      "see": [
+        "חזית גותית מפורטת",
+        "השעון האסטרונומי",
+        "כיכר הקתדרלה",
+        "אפשרות לעלות לתצפית אם פתוח"
+      ],
+      "fit": "מתאים לכל ביקור ראשון בשטרסבורג, היסטוריה וצילום.",
+      "tip": "לחזור גם בלילה — התאורה משנה את התחושה של הכיכר."
+    },
+    "en": {
+      "why": "Strasbourg Cathedral is the visual and historical core of the city: a vast Gothic façade, pink sandstone and an astronomical clock that make it essential even for travelers who rarely visit churches.",
+      "see": [
+        "Detailed Gothic façade",
+        "Astronomical clock",
+        "Cathedral square",
+        "Possible platform climb if open"
+      ],
+      "fit": "Essential for first-time Strasbourg, history and photography.",
+      "tip": "Return at night too; the lighting changes the square."
+    }
+  },
+  "Petite France": {
+    "he": {
+      "why": "פטיט פראנס הוא האזור הכי ציורי בשטרסבורג: תעלות, גשרים ובתי חצי־עץ שהופכים את אלזס למוחשית. זה מקום חובה כי הוא נותן את התמונה שהרבה אנשים מדמיינים לפני שהם מגיעים.",
+      "see": [
+        "תעלות וגשרים",
+        "בתי חצי־עץ",
+        "נקודות צילום ליד המים",
+        "הליכת ערב רומנטית"
+      ],
+      "fit": "זוגות, צילום, טיול רגוע בתוך העיר.",
+      "tip": "מוקדם בבוקר או אחרי שקיעה יש פחות עומס ואור יפה יותר."
+    },
+    "en": {
+      "why": "Petite France is Strasbourg’s most picturesque quarter: canals, bridges and half-timbered houses that make Alsace feel tangible. It is a must because it gives the postcard image many travelers came for.",
+      "see": [
+        "Canals and bridges",
+        "Half-timbered houses",
+        "Waterfront photo spots",
+        "Romantic evening walk"
+      ],
+      "fit": "Couples, photography, slow city walking.",
+      "tip": "Early morning or after sunset gives fewer crowds and better light."
+    }
+  },
+  "Batorama boat tour": {
+    "he": {
+      "why": "שייט Batorama עוזר להבין את שטרסבורג מהמים: העיר העתיקה, הגשרים, הסכרים והרובע האירופי מתחברים למסלול אחד במקום להיראות כמו נקודות מנותקות.",
+      "see": [
+        "תעלות Ill",
+        "פטיט פראנס מהמים",
+        "הרובע האירופי",
+        "גשרים וסכרים"
+      ],
+      "fit": "מתאים ליום ראשון בעיר, משפחות ומי שרוצה סקירה בלי הרבה הליכה.",
+      "tip": "להעדיף שעה עם אור יפה; בגשם זו עדיין יכולה להיות פעילות טובה אם הסירה מקורה."
+    },
+    "en": {
+      "why": "A Batorama cruise helps you understand Strasbourg from the water: the old town, bridges, dams and European Quarter become one coherent route rather than scattered points.",
+      "see": [
+        "Ill canals",
+        "Petite France from the water",
+        "European Quarter",
+        "Bridges and dams"
+      ],
+      "fit": "Good for a first city day, families and low-walking overview.",
+      "tip": "Choose good light; in rain it can still work if the boat is covered."
+    }
+  },
+  "St. Stephen’s Cathedral": {
+    "he": {
+      "why": "סטפנסדום הוא העוגן של וינה: גג צבעוני, מגדל גבוה וכיכר שממנה העיר הקיסרית מתחילה להתפענח. זה לא עוד כנסייה אלא נקודת התמצאות מרכזית.",
+      "see": [
+        "החזית והמגדל",
+        "הגג הצבעוני",
+        "Stephansplatz",
+        "אפשרות לעלות לתצפית"
+      ],
+      "fit": "חובה לביקור ראשון, היסטוריה והתמצאות בעיר.",
+      "tip": "להגיע גם בבוקר וגם בערב אם אפשר — הכיכר משנה אופי."
+    },
+    "en": {
+      "why": "Stephansdom is Vienna’s anchor: colored roof tiles, a tall tower and a square from which the imperial city starts to make sense. It is not just another church; it is the main orientation point.",
+      "see": [
+        "Façade and tower",
+        "Colorful tiled roof",
+        "Stephansplatz",
+        "Possible tower view"
+      ],
+      "fit": "A must for first-time visitors, history and orientation.",
+      "tip": "See it by day and evening if possible; the square changes mood."
+    }
+  },
+  "Schönbrunn Palace": {
+    "he": {
+      "why": "שנברון הוא המקום שבו מבינים את וינה ההבסבורגית: ארמון קיסרי, גנים עצומים ותצפית Gloriette. הוא דורש זמן כי הערך נמצא גם בגנים, לא רק בחדרים.",
+      "see": [
+        "חזית הארמון",
+        "הגנים",
+        "Gloriette",
+        "סיור חדרים אם מזמינים"
+      ],
+      "fit": "מתאים לחצי יום, משפחות, זוגות ואדריכלות.",
+      "tip": "אם אין זמן לסיור פנים, עדיין שווה להגיע לגנים ולתצפית."
+    },
+    "en": {
+      "why": "Schönbrunn explains Habsburg Vienna: imperial palace, vast gardens and the Gloriette viewpoint. It needs time because the gardens are as important as the rooms.",
+      "see": [
+        "Palace façade",
+        "Gardens",
+        "Gloriette",
+        "Interior tour if booked"
+      ],
+      "fit": "Good for a half-day, families, couples and architecture.",
+      "tip": "If short on time, gardens and Gloriette still justify the visit."
+    }
+  },
+  "Belvedere Palace": {
+    "he": {
+      "why": "בלוודר משלב ארמון בארוק, גנים ואמנות — בעיקר Klimt. זה יעד חזק כי הוא נותן גם יופי חיצוני וגם תוכן מוזיאוני.",
+      "see": [
+        "ארמון וגנים",
+        "The Kiss של Klimt אם נכנסים",
+        "תצפית לאורך הגן",
+        "צילום חזית"
+      ],
+      "fit": "אמנות, אדריכלות, יום גשום חלקית.",
+      "tip": "להחליט מראש אם נכנסים למוזיאון או רק עושים גנים — זה משנה את זמן הביקור."
+    },
+    "en": {
+      "why": "Belvedere combines Baroque palace, gardens and art — especially Klimt. It works because it gives both exterior beauty and museum substance.",
+      "see": [
+        "Palace and gardens",
+        "Klimt’s The Kiss if entering",
+        "Garden axis view",
+        "Façade photos"
+      ],
+      "fit": "Art, architecture and partly rainy days.",
+      "tip": "Decide in advance museum vs gardens; it changes the time needed."
+    }
+  },
+  "Charles Bridge at sunrise": {
+    "he": {
+      "why": "גשר קארל בזריחה הוא חוויה אחרת לגמרי מהגשר בצהריים: פחות קהל, אור רך על הפסלים ומבט לטירה לפני שהעיר מתעוררת.",
+      "see": [
+        "פסלי האבן",
+        "נהר הוולטאבה",
+        "טירת פראג באור ראשון",
+        "צילום כמעט בלי קהל"
+      ],
+      "fit": "צילום, זוגות, ביקור ראשון בפראג.",
+      "tip": "להגיע 20–30 דקות לפני הזריחה, לא בדיוק בזמן."
+    },
+    "en": {
+      "why": "Charles Bridge at sunrise is a different experience from midday: fewer crowds, soft light on the statues and a castle view before the city wakes.",
+      "see": [
+        "Stone statues",
+        "Vltava River",
+        "Prague Castle in first light",
+        "Photos with few crowds"
+      ],
+      "fit": "Photography, couples, first-time Prague.",
+      "tip": "Arrive 20–30 minutes before sunrise, not exactly at sunrise."
+    }
+  },
+  "Prague Castle panorama": {
+    "he": {
+      "why": "פנורמת טירת פראג מסבירה את העיר במבט אחד: גגות אדומים, נהר, גשרים והטירה מעל הכול. זו נקודת חובה כי היא נותנת התמצאות וחוויה יחד.",
+      "see": [
+        "תצפית על העיר",
+        "גגות וגשרים",
+        "מתחם הטירה",
+        "ירידה למאלה סטרנה"
+      ],
+      "fit": "ביקור ראשון, צילום, היסטוריה.",
+      "tip": "לשלב עם ירידה ברגל דרך Nerudova/Malá Strana ולא רק להגיע ולחזור."
+    },
+    "en": {
+      "why": "The Prague Castle panorama explains the city in one view: red roofs, river, bridges and the castle above it all. It is a must because it gives orientation and emotion together.",
+      "see": [
+        "City viewpoint",
+        "Roofs and bridges",
+        "Castle complex",
+        "Walk down to Malá Strana"
+      ],
+      "fit": "First visit, photos, history.",
+      "tip": "Combine with a walk down through Nerudova/Malá Strana, not just a quick stop."
+    }
+  }
+};
+
+function v47SpecificGuide(item){
+  const pack = V47_REAL_GUIDE_OVERRIDES[item?.name];
+  if(!pack) return null;
+  return pack[getLang()] || pack.en || pack.he;
+}
+
 function guideContentFor(item){
   const routeGuide = carGuideFor(item);
   if(routeGuide) return {why: routeGuide.why, see: (routeGuide.stops||[]).map(s=>`${s.name}: ${s.text}`), fit: routeGuide.bestFor, tip: routeGuide.tip};
   const lang=getLang();
   const title=titleFor(item);
+  const v47Guide = v47SpecificGuide(item);
+  if(v47Guide) return v47Guide;
   const europeRich = enrichedGuideForEurope(item);
   if(europeRich) return europeRich;
   const pragueRich = item && item.city === 'prague' ? (PRAGUE_REAL_GUIDE_CONTENT[item.name]?.[lang] || PRAGUE_REAL_GUIDE_CONTENT[item.name]?.en) : null;
@@ -8538,13 +10757,13 @@ function guideContentFor(item){
   const vibe=textFor(item.vibe)|| (lang==='he'?'אווירה קז׳ואלית':'casual atmosphere');
   if(lang==='he'){
     if(item.cat==='food') return {
-      why:`${title} נכנס לרשימת האוכל כי הוא נותן החלטה ברורה לפני שיוצאים: ${cuisine}, רמת מחיר ${item.price||'לא ידועה'} ואופי של ${vibe}. במקום להסתובב רעבים ולבחור מלכודת תיירים, הכרטיס מסביר מראש אם זה מתאים להפסקת צהריים, ערב רגוע או משהו מהיר.`,
+      why:`${title} מציע ${cuisine} באווירה של ${vibe}. הערך למטייל הוא להבין מראש מה אוכלים כאן, האם זה מתאים להפסקה קצרה או לארוחה רגועה, ומה לבדוק לפני שמגיעים.`,
       see:[`מטבח: ${cuisine}`,`אופי המקום: ${vibe}`,'תפריט וביקורות לפתיחה כשיש אינטרנט','אפשרות להוסיף ל־My Trip רק אם זה מתאים למסלול שלך'],
       fit:'מתאים כשחשוב לדעת מראש מה אוכלים, כמה בערך זה עולה, והאם המקום מתאים לקצב הטיול שלך.',
       tip:'לפני יציאה לפתוח ביקורות עדכניות ושעות פתיחה; במסעדות טובות בעיר העתיקה עומס משתנה מהר.'
     };
     if(item.cat==='nightlife') return {
-      why:`${title} נבחר כאפשרות ערב ב${city} כי הוא מייצג סוג יציאה ברור: בר, מוזיקה, הליכת לילה, קוקטיילים או אווירה מקומית. המטרה היא שלא תצא מהמלון “סתם לבר”, אלא תדע איזה ערב אתה בוחר.`,
+      why:`${title} הוא אפשרות ערב ב${city} עם אופי ברור: שתייה, מוזיקה, הליכת לילה, קוקטיילים או אווירה מקומית. הכרטיס צריך לעזור להבין איזה סוג ערב תקבל לפני שיוצאים.`,
       see:['סוג אווירה ברור לפני הגעה','אפשרות לשלב עם אוכל קרוב','נקודת סיום נוחה ליום טיול','בדיקת אירועים/מוזיקה כשיש אינטרנט'],
       fit:'מתאים לפי מצב רוח: ערב שקט, קוקטיילים, בירה, הופעה או מסיבה. לא כל מקום לילה מתאים לכל אחד.',
       tip:'לבדוק מראש אם צריך הזמנה, דמי כניסה או אם הערב הספציפי מתאים לסגנון שלך.'
@@ -8568,8 +10787,8 @@ function guideContentFor(item){
       tip:'לפני יציאה לפתוח ניווט חי ולבדוק זמן חזרה אחרון, במיוחד בתחבורה ציבורית.'
     };
   }
-  if(item.cat==='food') return {why:`${title} is included because it gives you a clear food decision before moving across town: ${cuisine}, ${item.price||'unknown'} price level and a ${vibe}.`,see:[`Cuisine: ${cuisine}`,`Vibe: ${vibe}`,'Open menu and live reviews while online','Add only if it fits your route'],fit:'Good when you want to know what you are eating and how it fits the day.',tip:'Check live hours and reviews before leaving.'};
-  if(item.cat==='nightlife') return {why:`${title} is an evening option in ${city} with a clear role: drinks, music, a night walk, cocktails or local atmosphere.`,see:['Clear evening mood','Nearby food pairing','Possible end point for the day','Events/music check while online'],fit:'Pick by mood: quiet drink, beer, concert, dance or walk.',tip:'Check reservations, entry fee and today’s program.'};
+  if(item.cat==='food') return {why:`${title} offers ${cuisine} in a ${vibe}. The value is knowing what you will eat, whether it fits a quick break or a relaxed meal, and what to verify before going.`,see:[`Cuisine: ${cuisine}`,`Vibe: ${vibe}`,'Open menu and live reviews while online','Add only if it fits your route'],fit:'Good when you want to know what you are eating and how it fits the day.',tip:'Check live hours and reviews before leaving.'};
+  if(item.cat==='nightlife') return {why:`${title} is an evening option in ${city} with a clear mood: drinks, music, a night walk, cocktails or local atmosphere.`,see:['Clear evening mood','Nearby food pairing','Possible end point for the day','Events/music check while online'],fit:'Pick by mood: quiet drink, beer, concert, dance or walk.',tip:'Check reservations, entry fee and today’s program.'};
   if(item.cat==='experiences') return {why:`${title} is included because it can turn a regular travel day into a memory: view, cruise, show, playful activity or a different angle on ${city}.`,see:['Main experience','What you actually see or do','Weather/evening/family fit','Tickets or hours to verify online'],fit:'Good when you want more than just walking between sights.',tip:'Check availability, weather and opening hours before building the day around it.'};
   if(item.cat==='mustdo') return {why:`${title} is a must-do because it gives the “I was really in ${city}” feeling: icon, view, square, street or classic photo moment.`,see:['Main icon or angle','Photo spots',`Connection to ${city}`,'Nearby stops to combine'],fit:'Best for first-time visitors and anyone who does not want to miss the city anchors.',tip:'Combine with nearby places instead of traveling across town for one isolated stop.'};
   return {why:`${title} was selected as a day trip from ${city} because it gives you a real reason to leave the hotel: ${tags || 'views, history, nature or another town'}.`,see:['Main point of interest','Walk or viewpoint depending on the place','Food/coffee stop if time allows','Return route check before leaving'],fit:'Good if travel time makes sense for your stay length and the place fits your mood.',tip:'Open live navigation and check return options before leaving.'};
