@@ -14,9 +14,8 @@ const CITIES = {
   strasbourg: { name:'Strasbourg', airportName:'Strasbourg Airport', airport:{lat:48.5383,lng:7.6282}, centre:{lat:48.5734,lng:7.7521} }
 };
 
-const CITY_BY_ORIGIN = { current:'prague', pragueAirport:'prague', viennaAirport:'vienna', strasbourgAirport:'strasbourg' };
+const CITY_BY_ORIGIN = { pragueAirport:'prague', viennaAirport:'vienna', strasbourgAirport:'strasbourg' };
 const AIRPORT_ORIGINS = [
-  {id:'current', label:'Current Location'},
   {id:'pragueAirport', label:'Prague Airport'},
   {id:'viennaAirport', label:'Vienna Airport'},
   {id:'strasbourgAirport', label:'Strasbourg Airport'}
@@ -8764,44 +8763,35 @@ function hotel(){return load(STORAGE.hotel,{name:'Hotel address', query:''})}
 function activeMode(){return $('modeSelect').value}
 function activePackageMode(){return load(STORAGE.packageMode,'public')}
 function setPackageMode(mode){save(STORAGE.packageMode, mode); if(mode==='car') $('modeSelect').value='car'; if(mode==='public' && $('modeSelect').value==='car') $('modeSelect').value='transit'; syncPackageButtons(); packOffset=0; render();}
-function activeOrigin(){return $('originSelect').value}
+function activeOrigin(){
+  const savedCity = load('dtf_last_city_v17','prague');
+  return $('originSelect')?.value || originIdForCity(savedCity);
+}
 function activeCity(){
   const o = activeOrigin();
-  // Current Location is only a physical origin. The active guide city should come
-  // from the selected offline/trip city, otherwise choosing Current Location
-  // always forces Prague and desynchronizes the Offline Pack selection.
-  if (o === 'current') return load('dtf_last_city_v17','prague');
   return CITY_BY_ORIGIN[o] || load('dtf_last_city_v17','prague');
 }
 function originIdForCity(city){
   return ({prague:'pragueAirport', vienna:'viennaAirport', strasbourg:'strasbourgAirport'})[city] || 'current';
 }
-function setActiveGuideCity(city, opts = {}){
+function setActiveGuideCity(city){
   if(!CITIES[city]) return;
   save('dtf_last_city_v17', city);
   if($('offlineCitySelect')) $('offlineCitySelect').value = city;
-  // Keep Current Location as origin unless the user explicitly asks to sync origin.
-  // This prevents the user from losing the common “start from where I am now” flow.
-  if(opts.syncOrigin && $('originSelect')) $('originSelect').value = originIdForCity(city);
+  if($('originSelect')) $('originSelect').value = originIdForCity(city);
 }
 
-function syncRouteBuilderToCity(city, opts = {}){
+function syncRouteBuilderToCity(city){
   if(!CITIES[city]) return;
   setActiveGuideCity(city);
-  const origin = $('originSelect');
   const dest = $('destinationSelect');
-  if(origin){
-    const current = origin.value || 'current';
-    const shouldMoveAirport = opts.forceAirportOrigin || current !== 'current';
-    if(shouldMoveAirport) origin.value = originIdForCity(city);
-  }
   updateRouteOptions();
   const pts = routePoints();
-  if(dest && !pts.some(p => p.id === dest.value)) dest.value = 'centre';
+  if(dest) dest.value = pts.some(p => p.id === dest.value) ? dest.value : 'centre';
   if($('hotelWrap')) $('hotelWrap').classList.toggle('hidden', dest?.value !== 'hotel');
 }
 
-function originPoint(){const o=activeOrigin(); if(o==='current') return userLocation || {query:'Current Location'}; const c=CITIES[activeCity()]; return {...c.airport, query:`${c.airport.lat},${c.airport.lng}`, name:c.airportName}}
+function originPoint(){const c=CITIES[activeCity()]; return {...c.airport, query:`${c.airport.lat},${c.airport.lng}`, name:c.airportName}}
 function modeNotice(){
   const city=CITIES[activeCity()].name;
   const packageMode=activePackageMode();
@@ -9012,6 +9002,104 @@ function buildData(){const out=[]; for(const [city,obj] of Object.entries(seed))
 
 const DATA = buildData();
 
+// v43: Public Travel should stay city-first, not send users 1-2 hours away by public transport.
+// These are in-city public packs: easy to do by walking, tram, metro, Moovit or a short taxi.
+const PUBLIC_CITY_TRIPS = [
+  ['prague','Prague Old Town to Charles Bridge Walk',50.0865,14.4114,'central public-friendly walkable mustdo photo'],
+  ['prague','Prague Castle & Malá Strana Public Route',50.0911,14.4016,'central public-friendly castle view'],
+  ['prague','Vyšehrad & Riverside Public Route',50.0647,14.4170,'central public-friendly view river'],
+  ['prague','Letná View & Beer Garden Public Route',50.0967,14.4206,'central public-friendly view beer'],
+  ['prague','Jewish Quarter & Old Town Context Walk',50.0900,14.4180,'central public-friendly history walkable'],
+
+  ['vienna','Vienna Historic Ring & Cathedral Walk',48.2085,16.3731,'central public-friendly walkable mustdo'],
+  ['vienna','Schönbrunn Public Half-Day',48.1845,16.3122,'public-friendly palace park half-day'],
+  ['vienna','Belvedere & Naschmarkt Public Route',48.1912,16.3806,'public-friendly palace market food'],
+  ['vienna','Prater & Danube Canal Public Evening',48.2167,16.3959,'public-friendly evening view nightlife'],
+  ['vienna','MuseumsQuartier & Hofburg Public Route',48.2039,16.3618,'central public-friendly museums palace'],
+
+  ['strasbourg','Cathedral & Petite France Walk',48.5819,7.7506,'central public-friendly walkable mustdo'],
+  ['strasbourg','Strasbourg Boat + Old Town Public Route',48.5819,7.7502,'central public-friendly boat old-town'],
+  ['strasbourg','European Quarter Tram Route',48.5969,7.7682,'public-friendly tram europe architecture'],
+  ['strasbourg','Krutenau Food & Night Walk',48.5794,7.7595,'central public-friendly food nightlife'],
+  ['strasbourg','Covered Bridges Sunset Walk',48.5797,7.7396,'central public-friendly sunset photo']
+].map(([city,name,lat,lng,tags]) => makePlace(
+  city,
+  'trips',
+  name,
+  lat,
+  lng,
+  0.1,
+  0.25,
+  tags + ' city-route',
+  `${name} is an in-city public travel route designed to avoid long transit rides.`,
+  false
+));
+
+Object.assign(EUROPE_REAL_GUIDE_CONTENT, {
+  'Prague Old Town to Charles Bridge Walk': {
+    he:{why:'זה מסלול עירוני קלאסי לפראג בתחבורה ציבורית/הליכה: לא נוסעים שעתיים החוצה, אלא מחברים את הלב ההיסטורי של העיר — כיכר העיר העתיקה, סמטאות האבן וגשר קארל. הסיבה לעשות אותו היא לקבל אוריינטציה אמיתית ביום הראשון ולראות איפה פראג הכי חזקה.',see:['כיכר העיר העתיקה והשעון האסטרונומי','סמטאות העיר העתיקה','גשר קארל והפסלים','נוף לטירה מעל הנהר'],fit:'מתאים ליום ראשון, לזוגות, לצילום ולהליכה קלה. טוב גם כשאין רכב.',tip:'לעשות מוקדם בבוקר או בערב. בצהריים האזור עמוס ומאבד הרבה מהקסם.'},
+    en:{why:'A true in-city Prague public route: no two-hour ride out of town, just the historic core — Old Town Square, stone lanes and Charles Bridge. It gives first-day orientation and the strongest classic Prague feeling.',see:['Old Town Square and Astronomical Clock','Old Town lanes','Charles Bridge statues','Castle view above the river'],fit:'Best for first day, couples, photos and easy walking. Works perfectly without a car.',tip:'Do it early morning or evening; midday crowds flatten the magic.'}
+  },
+  'Prague Castle & Malá Strana Public Route': {
+    he:{why:'מסלול שמסביר את פראג מלמעלה: טירה, גגות, מדרגות, כנסיות ורובע מאלה סטרנה. זה לא “עוד יעד”, אלא הצד המלכותי והפנורמי של העיר — נגיש בחשמלית/מטרו בלי רכב.',see:['אזור טירת פראג','תצפיות מעל העיר','מאלה סטרנה','ירידה לכיוון גשר קארל'],fit:'מתאים למי שרוצה את התמונה הגדולה של פראג, היסטוריה ותצפיות.',tip:'להתחיל למעלה ולרדת ברגל. כך המסלול קל יותר ונראה טוב יותר.'},
+    en:{why:'This route explains Prague from above: castle, rooftops, steps, churches and Malá Strana. It is the royal, panoramic side of the city and works well by tram/metro.',see:['Prague Castle area','Views over the city','Malá Strana streets','Walk down toward Charles Bridge'],fit:'Great for history, viewpoints and understanding the city layout.',tip:'Start high and walk down; it is easier and more scenic.'}
+  },
+  'Vyšehrad & Riverside Public Route': {
+    he:{why:'וישהראד נותן פראג שקטה יותר: מבצר, פארק, תצפיות לנהר והליכה רגועה בלי העומס של העיר העתיקה. זה מסלול ציבורי טוב כשצריך חצי יום פחות תיירותי.',see:['חומות וישהראד','תצפיות על הוולטאבה','בית הקברות ההיסטורי','הליכה לאורך הנהר'],fit:'מתאים ליום רגוע, זוגות, צילום ומי שכבר ראה את המרכז.',tip:'לשלב עם Náplavka או עצירת קפה ליד הנהר.'},
+    en:{why:'Vyšehrad shows a quieter Prague: fortress walls, park paths, river views and less Old Town pressure. A strong public half-day when you want something local-feeling.',see:['Vyšehrad walls','Vltava viewpoints','Historic cemetery','Riverside walk'],fit:'Good for a calm day, couples, photos and travelers who already saw the center.',tip:'Pair it with Náplavka or a river café stop.'}
+  },
+  'Letná View & Beer Garden Public Route': {
+    he:{why:'מסלול קצר שנותן את אחת התצפיות הכי טובות על גשרי פראג, ואז אפשר לשבת לבירה באוויר פתוח. זה בדיוק סוג המסלול שמתאים לתחבורה ציבורית: קרוב, פשוט, עם תמורה גבוהה.',see:['תצפית מטרונום לטנה','נוף לגשרים','פארק לטנה','Beer Garden לפי מזג האוויר'],fit:'מתאים לשקיעה, חברים, ערב קל וצילום.',tip:'לא מתאים לגשם. אם מזג האוויר יפה, זה אחד המסלולים הכי משתלמים בעיר.'},
+    en:{why:'A short high-value public route: one of Prague’s best bridge views and an easy open-air beer stop. Close, simple and rewarding.',see:['Letná Metronome viewpoint','Bridge panorama','Letná Park','Beer garden when weather allows'],fit:'Best for sunset, friends, easy evening and photos.',tip:'Not for rain. In good weather it is one of the best-value city routes.'}
+  },
+  'Jewish Quarter & Old Town Context Walk': {
+    he:{why:'זה מסלול עומק בתוך העיר: הרובע היהודי, בתי כנסת, סמטאות והקשר היסטורי. לא צריך לצאת מחוץ לפראג כדי לקבל תוכן משמעותי — כאן העיר מספרת שכבה אחרת שלה.',see:['אזור Josefov','בתי כנסת ואתרי זיכרון מבחוץ/מבפנים לפי כרטיס','רחובות העיר העתיקה','הקשר יהודי והיסטורי'],fit:'מתאים למי שרוצה היסטוריה, זהות ועומק ולא רק תמונות.',tip:'אם נכנסים לאתרים, לבדוק שעות וכרטיסים; לא הכול פתוח בכל יום.'},
+    en:{why:'An in-city depth route: Jewish Quarter, synagogues, lanes and historical context. You do not need to leave Prague to get a meaningful layer of the city.',see:['Josefov area','Synagogues and memorial sites depending on tickets','Old Town streets','Jewish and historical context'],fit:'Best for history, identity and depth rather than only photos.',tip:'Check opening days and tickets if entering sites.'}
+  },
+  'Vienna Historic Ring & Cathedral Walk': {
+    he:{why:'מסלול תחבורה ציבורית/הליכה שמרכז את וינה הקלאסית בלי לצאת מהעיר: קתדרלה, רחובות מרכזיים, מבני רינגשטראסה ואווירה קיסרית. זה צריך להיות בסיס לפני טיולי יום רחוקים.',see:['Stephansdom','רחובות Graben/Kärntner','מבני Ringstrasse','נקודות קפה קלאסיות בדרך'],fit:'מתאים ליום ראשון בווינה, הליכה קלה והבנת העיר.',tip:'לא לרוץ. וינה נבנית מחוויה איטית: קפה, חזיתות, כיכרות.'},
+    en:{why:'A public/walking route through classic Vienna: cathedral, central streets, Ringstrasse buildings and imperial atmosphere. This should come before far day trips.',see:['Stephansdom','Graben/Kärntner streets','Ringstrasse architecture','Classic café stops'],fit:'Best for first day in Vienna, easy walking and orientation.',tip:'Do not rush; Vienna rewards slow cafés, façades and squares.'}
+  },
+  'Schönbrunn Public Half-Day': {
+    he:{why:'שנברון הוא יעד מושלם לתחבורה ציבורית: מגיעים במטרו, מקבלים ארמון, גנים ותצפית בלי רכב. זה חצי יום חזק בתוך וינה, לא טיול חוץ מיותר.',see:['חזית הארמון','גני שנברון','Gloriette ותצפית','אפשרות כניסה לחדרים אם מזמינים'],fit:'מתאים למשפחות, זוגות, היסטוריה וגנים.',tip:'גם בלי כניסה לארמון, הגנים והתצפית שווים מאוד.'},
+    en:{why:'Schönbrunn is ideal by public transport: metro access, palace, gardens and viewpoint without a car. A strong Vienna half-day inside the city.',see:['Palace façade','Schönbrunn gardens','Gloriette viewpoint','Interior rooms if booked'],fit:'Good for families, couples, history and gardens.',tip:'Even without entering the palace, the gardens and viewpoint are worthwhile.'}
+  },
+  'Belvedere & Naschmarkt Public Route': {
+    he:{why:'מסלול שמחבר ארמון, אמנות ואוכל בלי יציאה מהעיר. בלוודר נותן גנים ותרבות, Naschmarkt נותן אוכל ושוק — שילוב טוב ליום עירוני בתחבורה ציבורית.',see:['Belvedere Palace וגנים','אפשרות מוזיאון/אמנות','Naschmarkt','עצירת אוכל קלה'],fit:'מתאים ליום גשם חלקי, אוכל, תרבות וזוגות.',tip:'להחליט מראש אם נכנסים למוזיאון; אחרת לשמור את זה כמסלול חוץ+שוק.'},
+    en:{why:'A city route combining palace, art and food. Belvedere gives gardens/culture; Naschmarkt gives market energy and easy food.',see:['Belvedere Palace and gardens','Optional museum/art','Naschmarkt','Easy food stop'],fit:'Good for partial rain, food, culture and couples.',tip:'Decide in advance whether you enter the museum or keep it as gardens + market.'}
+  },
+  'Prater & Danube Canal Public Evening': {
+    he:{why:'מסלול ערב קל בתחבורה ציבורית: פראטר נותן גלגל ענק ואווירת פארק, תעלת הדנובה נותנת ברים וסטריט־ארט. זה יותר הגיוני מלנסוע רחוק בלילה.',see:['Prater Giant Ferris Wheel','אזור פארק פראטר','Danube Canal','ברים/אווירה ליד המים'],fit:'מתאים לערב קל, חברים, צילום ומשפחות מוקדם יותר.',tip:'להתחיל בפראטר לפני חושך מלא ואז לעבור לתעלה אם רוצים אווירה צעירה יותר.'},
+    en:{why:'An easy public evening route: Prater for the Ferris wheel and park mood, Danube Canal for bars and street art. More logical than long night transit.',see:['Prater Giant Ferris Wheel','Prater park area','Danube Canal','Waterside bars/atmosphere'],fit:'Good for easy evening, friends, photos and families earlier in the day.',tip:'Start at Prater before full dark, then move to the canal for a younger mood.'}
+  },
+  'MuseumsQuartier & Hofburg Public Route': {
+    he:{why:'מסלול מרכזי שמראה את וינה התרבותית והקיסרית: Hofburg, כיכרות, MuseumsQuartier ואפשרות למוזיאון בלי להתרחק. זה יום ציבורי חזק גם במזג אוויר לא מושלם.',see:['Hofburg מבחוץ','MuseumsQuartier','כיכרות מרכזיות','אפשרות מוזיאון לפי עניין'],fit:'מתאים לחובבי תרבות, אדריכלות ויום עירוני נוח.',tip:'לבחור מוזיאון אחד בלבד אם נכנסים; אחרת היום נהיה כבד מדי.'},
+    en:{why:'A central route showing imperial and cultural Vienna: Hofburg, squares, MuseumsQuartier and museum options without leaving the city.',see:['Hofburg exterior','MuseumsQuartier','Central squares','One museum if interested'],fit:'Good for culture, architecture and easy urban travel.',tip:'Pick one museum only if entering; otherwise the day becomes too heavy.'}
+  },
+  'Cathedral & Petite France Walk': {
+    he:{why:'זה המסלול הכי נכון לשטרסבורג בתחבורה ציבורית/הליכה: קתדרלה ענקית, סמטאות, תעלות ו־Petite France. אין סיבה לנסוע שעתיים החוצה לפני שמבינים את העיר עצמה.',see:['קתדרלת שטרסבורג','כיכר הקתדרלה','תעלות Petite France','בתי חצי־עץ וגשרים'],fit:'מתאים ליום ראשון, צילום, זוגות והליכה קלה.',tip:'לעשות חלק ביום וחלק בערב — התאורה משנה לגמרי את התחושה.'},
+    en:{why:'The right public/walking route for Strasbourg: cathedral, lanes, canals and Petite France. No need for a two-hour ride before understanding the city itself.',see:['Strasbourg Cathedral','Cathedral square','Petite France canals','Half-timbered houses and bridges'],fit:'Best for first day, photos, couples and easy walking.',tip:'Do part by day and part by evening; the light changes the whole mood.'}
+  },
+  'Strasbourg Boat + Old Town Public Route': {
+    he:{why:'שייט בשטרסבורג נותן מבט ברור על העיר, התעלות והרובע האירופי בלי להתאמץ. בשילוב העיר העתיקה זה מסלול ציבורי מצוין שלא דורש רכב.',see:['שייט בתעלות','העיר העתיקה','גשרים ומים','אפשרות לראות את הרובע האירופי מהמסלול'],fit:'מתאים למשפחות, זוגות, יום ראשון בעיר ויום עם פחות הליכה.',tip:'לבדוק שעת שייט ושפה. עדיף לשלב עם הליכה קצרה לפני/אחרי.'},
+    en:{why:'A Strasbourg boat ride gives a clear view of canals, old town and European district without effort. Combined with Old Town, it is a strong public route.',see:['Canal cruise','Old Town','Bridges and water','European Quarter depending on route'],fit:'Good for families, couples, first day and low-walking days.',tip:'Check departure time and language; pair it with a short walk before or after.'}
+  },
+  'European Quarter Tram Route': {
+    he:{why:'הרובע האירופי מראה צד אחר של שטרסבורג: לא רק אלזס ציורית אלא גם מוסדות אירופה, אדריכלות מודרנית ופארקים. נוח להגיע בחשמלית.',see:['European Parliament מבחוץ','מוסדות אירופה','Parc de l’Orangerie ליד האזור','אדריכלות מודרנית'],fit:'מתאים למי שרוצה להבין למה שטרסבורג חשובה פוליטית ולא רק יפה.',tip:'לשלב עם פארק Orangerie כדי שהמסלול לא ירגיש רק “בנייני משרדים”.'},
+    en:{why:'The European Quarter shows another Strasbourg: not just picturesque Alsace, but EU institutions, modern architecture and parks. Easy by tram.',see:['European Parliament exterior','EU institutions','Nearby Parc de l’Orangerie','Modern architecture'],fit:'Good for understanding Strasbourg’s political importance, not just its beauty.',tip:'Pair with Orangerie park so it does not feel like only office buildings.'}
+  },
+  'Krutenau Food & Night Walk': {
+    he:{why:'Krutenau נותנת את הצד הצעיר והפחות מוזיאוני של שטרסבורג: ברים, אוכל, סטודנטים ואווירת ערב. זה מסלול טוב אחרי יום בעיר העתיקה.',see:['רחובות Krutenau','ברים קטנים','מסעדות קז׳ואל','אווירת ערב מקומית'],fit:'מתאים לאוכל, ערב רגוע, זוגות וחברים.',tip:'לבדוק מקום אחד לאכול ועוד מקום לשתות — לא צריך לרוץ בין הרבה כתובות.'},
+    en:{why:'Krutenau gives Strasbourg’s younger, less museum-like side: bars, food, students and evening atmosphere. A good follow-up after Old Town.',see:['Krutenau streets','Small bars','Casual restaurants','Local evening mood'],fit:'Good for food, relaxed evening, couples and friends.',tip:'Choose one food stop and one drinks stop; no need to over-hop.'}
+  },
+  'Covered Bridges Sunset Walk': {
+    he:{why:'הגשרים המקורים וסכר Vauban נותנים את אחד מרגעי השקיעה היפים בעיר. זה מסלול קצר, קל, עירוני — בדיוק מה שמתאים לתחבורה ציבורית/הליכה.',see:['Covered Bridges','Barrage Vauban','תצפית לעיר העתיקה','אור שקיעה על התעלות'],fit:'מתאים לצילום, זוגות וסיום יום רגוע.',tip:'להגיע לפני השקיעה ולא אחריה. אחרי החושך הערך הוויזואלי יורד.'},
+    en:{why:'The Covered Bridges and Barrage Vauban create one of the best sunset moments in Strasbourg. Short, easy and urban — exactly right for public/walking travel.',see:['Covered Bridges','Barrage Vauban','Old town view','Sunset light over canals'],fit:'Best for photos, couples and a calm end to the day.',tip:'Arrive before sunset, not after; the visual value drops in full dark.'}
+  }
+});
+DATA.unshift(...PUBLIC_CITY_TRIPS);
+
+
 function getOfflinePacks(){ return load(STORAGE.offlinePacks, {}); }
 function setOfflinePacks(v){ save(STORAGE.offlinePacks, v); }
 function packItemsForCity(city){
@@ -9139,7 +9227,8 @@ function visibleItems(){
     if(currentTab==='trips') items=items.filter(x=>x.drive<=driveLimit);
   } else {
     items=items.filter(x=>x.transit<=1.8 || x.cat!=='trips');
-    if(currentTab==='trips') items=items.filter(x=>x.transit<=2.0);
+    // v43: in Public Travels, day-trip tab means practical in-city/public routes, not long out-of-city rides.
+    if(currentTab==='trips') items=items.filter(x=>x.transit<=0.8 && !(x.tags||[]).includes('car-best'));
   }
   items=items.map(x=>({...x,score:likes[x.id]||0,distance:distanceKm(base,x)}));
   const sortOrder=$('sortOrder')?.value || 'near';
@@ -9149,7 +9238,8 @@ function visibleItems(){
     return da-db || (b.score||0)-(a.score||0);
   });
   if(items.length === 0 && currentTab === 'trips') {
-    items = DATA.filter(x=>x.city===city && x.cat==='trips')
+    // v43 fallback: still keep public mode city-first. Do not bring back 1-2h public day trips.
+    items = DATA.filter(x=>x.city===city && x.cat==='trips' && (packageMode==='car' || (x.transit<=0.8 && !(x.tags||[]).includes('car-best'))))
       .map(x=>({...x,score:likes[x.id]||0,distance:distanceKm(base,x)}))
       .sort((a,b)=> packageMode==='car' ? (a.drive||99)-(b.drive||99) : (a.transit||99)-(b.transit||99));
   }
@@ -9179,10 +9269,12 @@ function groupedOptions(points){
 }
 function openSelectedRoute(){ const d=findDest(); const mode=activeMode(); if(mode==='car'){ if(Number.isFinite(d.lat)) waze(d); else googleDirections(d); return; } if(mode==='transit'){ moovit(d); return; } if(mode==='uber'){ if(Number.isFinite(d.lat)) uber(d); else googleDirections(d); return; } if(mode==='bolt'){ bolt(); return; } googleDirections(d); }
 function updateRouteOptions(){
-  const currentOrigin=$('originSelect').value || 'current';
+  const savedCity = load('dtf_last_city_v17','prague');
+  const currentOrigin=$('originSelect').value || originIdForCity(savedCity);
   $('originSelect').innerHTML=AIRPORT_ORIGINS.map(o=>`<option value="${o.id}">${o.label}</option>`).join('');
-  $('originSelect').value=AIRPORT_ORIGINS.some(o=>o.id===currentOrigin)?currentOrigin:'current';
-  if($('originSelect').value!=='current') save('dtf_last_city_v17', activeCity());
+  $('originSelect').value=AIRPORT_ORIGINS.some(o=>o.id===currentOrigin)?currentOrigin:originIdForCity(savedCity);
+  save('dtf_last_city_v17', activeCity());
+  if($('offlineCitySelect')) $('offlineCitySelect').value = activeCity();
   const pts=routePoints();
   const currentDest=$('destinationSelect').value;
   $('destinationSelect').innerHTML=groupedOptions(pts);
@@ -9228,8 +9320,8 @@ function actions(item){
   const packageMode=activePackageMode();
   const coords=Number.isFinite(item.lat)&&Number.isFinite(item.lng);
   let navBtns='';
-  if(packageMode==='car') navBtns=`${coords?`<button class="icon-btn" title="Waze from current origin" onclick='waze(${safeJson(item)})'>🚗</button>`:''}<button class="icon-btn" title="Google driving from current origin" onclick='googleDirections(${safeJson(item)})'>🗺️</button>`;
-  else navBtns=`<button class="icon-btn" title="Moovit / public travel" onclick='moovit(${safeJson(item)})'>🚇</button><button class="icon-btn" title="Google public travel from current origin" onclick='googleDirections(${safeJson(item)})'>🗺️</button><button class="icon-btn" title="Uber" onclick='uber(${safeJson(item)})'>🚕</button><button class="icon-btn" title="Bolt" onclick="bolt()">⚡</button>`;
+  if(packageMode==='car') navBtns=`${coords?`<button class="icon-btn" title="Waze from current origin" onclick='waze(${safeJson(item)})'>🚗</button>`:''}<button class="map-action-btn google-map-btn" title="Open in Google Maps" onclick='googleDirections(${safeJson(item)})'>🗺️ Google Maps</button>`;
+  else navBtns=`<button class="icon-btn" title="Moovit / public travel" onclick='moovit(${safeJson(item)})'>🚇</button>${coords?`<button class="icon-btn" title="Waze" onclick='waze(${safeJson(item)})'>🚗</button>`:''}<button class="map-action-btn google-map-btn" title="Open in Google Maps" onclick='googleDirections(${safeJson(item)})'>🗺️ Google Maps</button><button class="icon-btn" title="Uber" onclick='uber(${safeJson(item)})'>🚕</button><button class="icon-btn" title="Bolt" onclick="bolt()">⚡</button>`;
   return `${navBtns}<button class="icon-btn like" title="Like" onclick="vote('${item.id}',1)">👍</button><button class="icon-btn unlike" title="Unlike" onclick="vote('${item.id}',-1)">👎</button><button class="add-trip-btn" title="Add to My Trip" onclick='addTrip(${safeJson(item)})'>➕ ${getLang()==='he'?'הוסף לטיול שלי':'Add to My Trip'}</button><button class="icon-btn save" title="Save offline" onclick='saveOffline(${safeJson(item)})'>💾</button>${currentTab==='mytrip'?`<button class="icon-btn remove" title="Remove from My Trip" onclick="removeTrip('${item.id}')">🗑️</button>`:''}${currentTab==='saved'?`<button class="icon-btn remove" title="Remove offline" onclick="removeSaved('${item.id}')">🗑️</button>`:''}`
 }
 function routePackCard(item){
@@ -9241,7 +9333,7 @@ function routePackCard(item){
   const labels = lang==='he'
     ? {route:'מסלול רכב יומי', total:'זמן כולל משוער', drive:'נהיגה לכל כיוון', stops:'תחנות במסלול', food:'איפה לאכול באזור', parking:'חניה ולוגיקה', best:'למי זה מתאים', tip:'טיפ מסלול', nav:'ניווט ליעד הראשי'}
     : {route:'Car day route', total:'Estimated total day', drive:'Drive each way', stops:'Route stops', food:'Where to eat nearby', parking:'Parking & route logic', best:'Best for', tip:'Route tip', nav:'Navigate to main destination'};
-  const stopsHtml=(g.stops||[]).map((s,i)=>`<li><strong>${i+1}. ${s.name}</strong><span>${s.duration||''}</span><p>${s.text}</p>${Number.isFinite(s.lat)?`<button class="icon-btn" onclick='waze({lat:${s.lat},lng:${s.lng},name:${JSON.stringify(s.name)}})'>🚗</button><button class="icon-btn" onclick='googleDirections({lat:${s.lat},lng:${s.lng},name:${JSON.stringify(s.name)}})'>🗺️</button>`:''}</li>`).join('');
+  const stopsHtml=(g.stops||[]).map((s,i)=>`<li><strong>${i+1}. ${s.name}</strong><span>${s.duration||''}</span><p>${s.text}</p>${Number.isFinite(s.lat)?`<button class="icon-btn" onclick='waze({lat:${s.lat},lng:${s.lng},name:${JSON.stringify(s.name)}})'>🚗</button><button class="map-action-btn google-map-btn" onclick='googleDirections({lat:${s.lat},lng:${s.lng},name:${JSON.stringify(s.name)}})'>🗺️ Google Maps</button>`:''}</li>`).join('');
   const foodHtml=(g.food||[]).map(f=>`<li><strong>${f.name}</strong><span>${f.price||''} · ${f.cuisine||''}</span><p>${f.why}</p></li>`).join('');
   return `<article class="card guide-card route-pack-card">
     <img class="place-image" src="${imageFor(item)}" alt="${titleFor(item)}" loading="lazy" />
@@ -9257,7 +9349,7 @@ function routePackCard(item){
       <section class="guide-section"><strong>${labels.tip}</strong><p>${g.tip}</p></section>
       <div class="compact-actions main-card-actions">
         <button class="icon-btn" title="${labels.nav}" onclick='waze(${safeJson(item)})'>🚗</button>
-        <button class="icon-btn" title="Google driving" onclick='googleDirections(${safeJson(item)})'>🗺️</button>
+        <button class="map-action-btn google-map-btn" title="Open in Google Maps" onclick='googleDirections(${safeJson(item)})'>🗺️ Google Maps</button>
         <button class="icon-btn speak" onclick='speakItem(${safeJson(item)})'>${readGuideLabel()}</button>
         <button class="icon-btn stop-speak" onclick="stopSpeaking()">${stopGuideLabel()}</button>
         <button class="icon-btn like" onclick="vote('${item.id}',1)">👍</button>
@@ -9342,7 +9434,7 @@ function render(){
 }
 function initGps(){ if(!navigator.geolocation){render();return} navigator.geolocation.getCurrentPosition(p=>{userLocation={lat:p.coords.latitude,lng:p.coords.longitude};render()},()=>render(),{enableHighAccuracy:false,maximumAge:600000,timeout:5000}) }
 
-$('originSelect').addEventListener('change',()=>{ if($('originSelect').value!=='current') save('dtf_last_city_v17', activeCity()); if($('offlineCitySelect')) $('offlineCitySelect').value = activeCity(); packOffset=0; render(); }); $('modeSelect').addEventListener('change',()=>{packOffset=0;render()}); $('destinationSelect').addEventListener('change',()=>updateRouteOptions()); $('driveHours').addEventListener('change',()=>{packOffset=0;render()}); $('sortOrder').addEventListener('change',()=>{packOffset=0;render()}); $('stayDays').addEventListener('change',()=>{packOffset=0;render()}); if($('addCustom')) $('addCustom').addEventListener('click',addCustom); $('saveHotel').addEventListener('click',()=>{const q=$('hotelAddress').value.trim(); if(q){save(STORAGE.hotel,{name:'Hotel address',query:q});render()}});
+$('originSelect').addEventListener('change',()=>{ save('dtf_last_city_v17', activeCity()); if($('offlineCitySelect')) $('offlineCitySelect').value = activeCity(); packOffset=0; updateRouteOptions(); render(); }); $('modeSelect').addEventListener('change',()=>{packOffset=0;render()}); $('destinationSelect').addEventListener('change',()=>updateRouteOptions()); $('driveHours').addEventListener('change',()=>{packOffset=0;render()}); $('sortOrder').addEventListener('change',()=>{packOffset=0;render()}); $('stayDays').addEventListener('change',()=>{packOffset=0;render()}); if($('addCustom')) $('addCustom').addEventListener('click',addCustom); $('saveHotel').addEventListener('click',()=>{const q=$('hotelAddress').value.trim(); if(q){save(STORAGE.hotel,{name:'Hotel address',query:q});render()}});
 $('publicTravelBtn').addEventListener('click',()=>setPackageMode('public'));
 $('carTravelBtn').addEventListener('click',()=>setPackageMode('car'));
 document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active')); b.classList.add('active'); currentTab=b.dataset.tab; packOffset=0; render()}));
@@ -9370,4 +9462,4 @@ Object.assign(window, {
   setPackageMode
 });
 if('serviceWorker' in navigator){navigator.serviceWorker.register('service-worker.js').catch(()=>{})}
-$('originSelect').innerHTML=AIRPORT_ORIGINS.map(o=>`<option value="${o.id}">${o.label}</option>`).join(''); if($('offlineCitySelect')) $('offlineCitySelect').value=activeCity(); initGps(); render();
+$('originSelect').innerHTML=AIRPORT_ORIGINS.map(o=>`<option value="${o.id}">${o.label}</option>`).join(''); $('originSelect').value = originIdForCity(load('dtf_last_city_v17','prague')); if($('offlineCitySelect')) $('offlineCitySelect').value=activeCity(); initGps(); render();

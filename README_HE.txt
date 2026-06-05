@@ -1,21 +1,13 @@
-DayTripFlow Europe PWA v41 - Smartphone UX
+DayTripFlow Europe PWA v45
 
 מה חדש:
-- התאמות מובייל אמיתיות למסך טלפון.
-- טאבים דביקים ונוחים בגלילה אופקית.
-- כרטיסיות מותאמות מגע עם כפתורים קטנים וברורים.
-- תמונות וכותרות ברזולוציה נוחה יותר.
-- Route Packs ברכב נשארים נקיים: Route Packs / My Trip / Saved Offline.
-- Public Travel נשאר עם הלשוניות הרגילות.
-- נשמרו: Offline Pack, הקראה, Tell Me More, My Trip, Like/Unlike.
+- נוסף כפתור Waze לכל כרטיס גם במצב Public Travels.
+- כרטיסי תחבורה ציבורית עדיין כוללים Moovit ו-Google Maps.
+- כרטיסי רכב ממשיכים לכלול Waze ו-Google Maps.
+- הכפתור מתאים למי שבחר מסלול עירוני/ציבורי אבל בפועל רוצה להגיע ברכב.
 
-איך לבדוק נכון:
-1. לפתוח דרך שרת מקומי או Netlify/GitHub Pages/Vercel, לא רק file://.
-2. אם פותחים מהמחשב: אפשר להריץ בתיקייה:
-   py -m http.server 8080
-   ואז לפתוח:
-   http://localhost:8080
-3. בטלפון: להעלות ל-Netlify/GitHub Pages ואז Add to Home Screen.
-
-הערה:
-שגיאות manifest/service-worker יכולות להופיע בפתיחה דרך file://. זה לא מדד תקין ל-PWA.
+בדיקה:
+1. העלה את כל הקבצים ל-GitHub Pages.
+2. פתח בטלפון.
+3. בחר Public Travels.
+4. ודא שבכל כרטיס מופיעים Moovit, Waze, Google Maps, Uber/Bolt.

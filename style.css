@@ -161,3 +161,24 @@ select,input{min-height:48px;border-radius:16px;font-size:16px;}
 @supports(padding:max(0px)){
   .app{padding-left:max(10px,env(safe-area-inset-left));padding-right:max(10px,env(safe-area-inset-right));}
 }
+
+/* v42: make Google Maps explicit and available in every card */
+.map-action-btn.google-map-btn{
+  min-height:36px;
+  padding:8px 10px;
+  border-radius:999px;
+  background:#2563eb;
+  color:#fff;
+  font-size:12px;
+  font-weight:800;
+  white-space:nowrap;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:4px;
+}
+.route-stops .google-map-btn{margin-inline-start:6px;margin-top:6px;}
+.compact-actions .google-map-btn{grid-column:auto;}
+@media(max-width:520px){
+  .map-action-btn.google-map-btn{font-size:11px;padding:7px 9px;min-height:34px;}
+}
