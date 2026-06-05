@@ -1,11 +1,11 @@
 const STORAGE = {
-  saved: 'dtf_saved_v30',
-  trip: 'dtf_mytrip_v30',
-  likes: 'dtf_likes_v30',
-  hotel: 'dtf_hotel_v30',
-  recs: 'dtf_my_recs_v30',
-  packageMode: 'dtf_package_mode_v30',
-  offlinePacks: 'dtf_offline_packs_v30'
+  saved: 'dtf_saved_v46',
+  trip: 'dtf_mytrip_v46',
+  likes: 'dtf_likes_v46',
+  hotel: 'dtf_hotel_v46',
+  recs: 'dtf_my_recs_v46',
+  packageMode: 'dtf_package_mode_v46',
+  offlinePacks: 'dtf_offline_packs_v46'
 };
 
 const CITIES = {
@@ -8840,7 +8840,7 @@ function syncTabsForPackageMode(){
     if (packageMode === 'car' && tab === 'trips') {
       btn.textContent = getLang() === 'he' ? 'מסלולי רכב' : 'Route Packs';
     } else if (packageMode !== 'car' && tab === 'trips') {
-      btn.textContent = getLang() === 'he' ? 'טיולי יום' : 'Day trips';
+      btn.textContent = getLang() === 'he' ? 'מסלולים בעיר' : 'City routes';
     }
   });
 
@@ -9002,26 +9002,42 @@ function buildData(){const out=[]; for(const [city,obj] of Object.entries(seed))
 
 const DATA = buildData();
 
-// v43: Public Travel should stay city-first, not send users 1-2 hours away by public transport.
-// These are in-city public packs: easy to do by walking, tram, metro, Moovit or a short taxi.
+
+// v46: Public Travel is city-first. These packs are designed for fast metro/tram/walking,
+// usually under 60 minutes between stops and never built around 2-hour outbound rides.
 const PUBLIC_CITY_TRIPS = [
-  ['prague','Prague Old Town to Charles Bridge Walk',50.0865,14.4114,'central public-friendly walkable mustdo photo'],
-  ['prague','Prague Castle & Malá Strana Public Route',50.0911,14.4016,'central public-friendly castle view'],
-  ['prague','Vyšehrad & Riverside Public Route',50.0647,14.4170,'central public-friendly view river'],
-  ['prague','Letná View & Beer Garden Public Route',50.0967,14.4206,'central public-friendly view beer'],
-  ['prague','Jewish Quarter & Old Town Context Walk',50.0900,14.4180,'central public-friendly history walkable'],
+  ['prague','Old Town • Charles Bridge • Kampa Core Walk',50.0865,14.4114,'central public-friendly walkable mustdo photo history city-route'],
+  ['prague','Prague Castle • Malá Strana Downhill Route',50.0911,14.4016,'central public-friendly castle view history city-route'],
+  ['prague','Vyšehrad Fortress • Riverside Calm Route',50.0647,14.4170,'central public-friendly view river history city-route'],
+  ['prague','Jewish Quarter • Old Town Context Walk',50.0900,14.4180,'central public-friendly history walkable city-route'],
+  ['prague','Petřín • Strahov • Castle View Route',50.0835,14.3956,'central public-friendly viewpoint romantic city-route'],
+  ['prague','Letná View • Beer Garden • Metronome Route',50.0967,14.4206,'central public-friendly view beer sunset city-route'],
+  ['prague','Dancing House • Náplavka • Riverside Route',50.0755,14.4140,'central public-friendly river evening food city-route'],
+  ['prague','National Museum • Wenceslas • Lucerna Route',50.0796,14.4300,'central public-friendly museum city city-route'],
+  ['prague','Kampa • Lennon Wall • Malá Strana Corners',50.0853,14.4068,'central public-friendly photo romantic city-route'],
+  ['prague','Tram 22 Scenic Prague Route',50.0911,14.4016,'public-friendly tram castle view city-route'],
 
-  ['vienna','Vienna Historic Ring & Cathedral Walk',48.2085,16.3731,'central public-friendly walkable mustdo'],
-  ['vienna','Schönbrunn Public Half-Day',48.1845,16.3122,'public-friendly palace park half-day'],
-  ['vienna','Belvedere & Naschmarkt Public Route',48.1912,16.3806,'public-friendly palace market food'],
-  ['vienna','Prater & Danube Canal Public Evening',48.2167,16.3959,'public-friendly evening view nightlife'],
-  ['vienna','MuseumsQuartier & Hofburg Public Route',48.2039,16.3618,'central public-friendly museums palace'],
+  ['vienna','Stephansdom • Graben • Hofburg Classic Walk',48.2085,16.3731,'central public-friendly walkable mustdo history city-route'],
+  ['vienna','Ringstrasse • Opera • Parliament Route',48.2080,16.3630,'central public-friendly architecture history city-route'],
+  ['vienna','Schönbrunn Palace Gardens Public Half-Day',48.1845,16.3122,'public-friendly palace park history city-route'],
+  ['vienna','Belvedere • Karlsplatz • Naschmarkt Route',48.1912,16.3806,'public-friendly palace market food city-route'],
+  ['vienna','MuseumsQuartier • Hofburg Culture Route',48.2039,16.3618,'central public-friendly museums palace city-route'],
+  ['vienna','Prater • Giant Wheel • Danube Canal Evening',48.2167,16.3959,'public-friendly evening view nightlife city-route'],
+  ['vienna','Hundertwasserhaus • Stadtpark • Canal Route',48.2114,16.3935,'public-friendly architecture park photo city-route'],
+  ['vienna','Coffeehouse Vienna • Central • Hawelka Route',48.2085,16.3650,'central public-friendly cafe history city-route'],
+  ['vienna','Karlskirche • Musikverein • Secession Route',48.1982,16.3714,'central public-friendly music architecture city-route'],
+  ['vienna','Grinzing Wine Tavern Light Evening',48.2540,16.3580,'public-friendly tram wine evening city-route'],
 
-  ['strasbourg','Cathedral & Petite France Walk',48.5819,7.7506,'central public-friendly walkable mustdo'],
-  ['strasbourg','Strasbourg Boat + Old Town Public Route',48.5819,7.7502,'central public-friendly boat old-town'],
-  ['strasbourg','European Quarter Tram Route',48.5969,7.7682,'public-friendly tram europe architecture'],
-  ['strasbourg','Krutenau Food & Night Walk',48.5794,7.7595,'central public-friendly food nightlife'],
-  ['strasbourg','Covered Bridges Sunset Walk',48.5797,7.7396,'central public-friendly sunset photo']
+  ['strasbourg','Cathedral • Petite France Essential Walk',48.5819,7.7506,'central public-friendly walkable mustdo history city-route'],
+  ['strasbourg','Batorama Boat • Old Town Orientation',48.5819,7.7502,'central public-friendly boat old-town city-route'],
+  ['strasbourg','European Quarter Tram • Orangerie Route',48.5969,7.7682,'public-friendly tram europe architecture park city-route'],
+  ['strasbourg','Krutenau Food • Bars • Student Quarter Walk',48.5794,7.7595,'central public-friendly food nightlife city-route'],
+  ['strasbourg','Covered Bridges • Vauban Dam Sunset Route',48.5797,7.7396,'central public-friendly sunset photo city-route'],
+  ['strasbourg','Neustadt • Republic Square Architecture Route',48.5865,7.7550,'central public-friendly architecture history city-route'],
+  ['strasbourg','Orangerie Park • European Institutions Easy Route',48.5940,7.7740,'public-friendly park europe family city-route'],
+  ['strasbourg','Saint-Thomas • Ill River Quiet Walk',48.5798,7.7458,'central public-friendly church river walkable city-route'],
+  ['strasbourg','Modern Art Museum • Barrage Vauban Route',48.5790,7.7360,'central public-friendly museum view city-route'],
+  ['strasbourg','Christmas Market Core Route',48.5830,7.7460,'central public-friendly seasonal mustdo city-route']
 ].map(([city,name,lat,lng,tags]) => makePlace(
   city,
   'trips',
@@ -9030,73 +9046,136 @@ const PUBLIC_CITY_TRIPS = [
   lng,
   0.1,
   0.25,
-  tags + ' city-route',
-  `${name} is an in-city public travel route designed to avoid long transit rides.`,
+  tags,
+  `${name} is a fast in-city public travel route designed for metro, tram, walking, Moovit or short taxi hops — not a long regional day trip.`,
   false
 ));
 
 Object.assign(EUROPE_REAL_GUIDE_CONTENT, {
-  'Prague Old Town to Charles Bridge Walk': {
-    he:{why:'זה מסלול עירוני קלאסי לפראג בתחבורה ציבורית/הליכה: לא נוסעים שעתיים החוצה, אלא מחברים את הלב ההיסטורי של העיר — כיכר העיר העתיקה, סמטאות האבן וגשר קארל. הסיבה לעשות אותו היא לקבל אוריינטציה אמיתית ביום הראשון ולראות איפה פראג הכי חזקה.',see:['כיכר העיר העתיקה והשעון האסטרונומי','סמטאות העיר העתיקה','גשר קארל והפסלים','נוף לטירה מעל הנהר'],fit:'מתאים ליום ראשון, לזוגות, לצילום ולהליכה קלה. טוב גם כשאין רכב.',tip:'לעשות מוקדם בבוקר או בערב. בצהריים האזור עמוס ומאבד הרבה מהקסם.'},
-    en:{why:'A true in-city Prague public route: no two-hour ride out of town, just the historic core — Old Town Square, stone lanes and Charles Bridge. It gives first-day orientation and the strongest classic Prague feeling.',see:['Old Town Square and Astronomical Clock','Old Town lanes','Charles Bridge statues','Castle view above the river'],fit:'Best for first day, couples, photos and easy walking. Works perfectly without a car.',tip:'Do it early morning or evening; midday crowds flatten the magic.'}
+  'Old Town • Charles Bridge • Kampa Core Walk': {
+    he:{why:'זה מסלול הליבה של פראג, בלי נסיעה ארוכה: כיכר העיר העתיקה, סמטאות האבן, גשר קארל וקמפה. כאן מבינים למה פראג כל כך מצולמת — מגדלים, פסלים, נהר וטירה באותו קו ראייה. המסלול נוח בתחבורה ציבורית והליכה, ולכן הוא צריך להופיע לפני כל טיול רחוק.',see:['כיכר העיר העתיקה והשעון האסטרונומי מהמאה ה־15','גשר קארל מהמאה ה־14 והפסלים שעליו','Kampa Island ותעלות קטנות ליד הנהר','מבט לטירת פראג מעל הוולטאבה'],fit:'מתאים ליום ראשון בעיר, צילום, זוגות והיכרות בסיסית עם פראג.',tip:'לעשות מוקדם בבוקר או בערב. בשעות צהריים גשר קארל עמוס מאוד.'},
+    en:{why:'This is Prague’s core route without a long ride: Old Town Square, stone lanes, Charles Bridge and Kampa. It explains why Prague is so photogenic — towers, statues, river and castle in one visual line. It is exactly what public travel should prioritize before any far day trip.',see:['Old Town Square and the 15th-century Astronomical Clock','14th-century Charles Bridge and its statues','Kampa Island and small riverside canals','Castle view above the Vltava'],fit:'Best for first day, photography, couples and basic orientation.',tip:'Do it early morning or evening. Charles Bridge is heavily crowded at midday.'}
   },
-  'Prague Castle & Malá Strana Public Route': {
-    he:{why:'מסלול שמסביר את פראג מלמעלה: טירה, גגות, מדרגות, כנסיות ורובע מאלה סטרנה. זה לא “עוד יעד”, אלא הצד המלכותי והפנורמי של העיר — נגיש בחשמלית/מטרו בלי רכב.',see:['אזור טירת פראג','תצפיות מעל העיר','מאלה סטרנה','ירידה לכיוון גשר קארל'],fit:'מתאים למי שרוצה את התמונה הגדולה של פראג, היסטוריה ותצפיות.',tip:'להתחיל למעלה ולרדת ברגל. כך המסלול קל יותר ונראה טוב יותר.'},
-    en:{why:'This route explains Prague from above: castle, rooftops, steps, churches and Malá Strana. It is the royal, panoramic side of the city and works well by tram/metro.',see:['Prague Castle area','Views over the city','Malá Strana streets','Walk down toward Charles Bridge'],fit:'Great for history, viewpoints and understanding the city layout.',tip:'Start high and walk down; it is easier and more scenic.'}
+  'Prague Castle • Malá Strana Downhill Route': {
+    he:{why:'מסלול שמתחיל בצד הגבוה של פראג ויורד דרך ההיסטוריה: טירת פראג, קתדרלת ויטוס, סמטאות מאלה סטרנה וגשר קארל. הטירה הייתה מרכז שלטון בוהמי וצ׳כי במשך מאות שנים, ולכן זה לא רק נוף — זה המקום שמסביר את הכוח הפוליטי והדתי של העיר.',see:['אזור טירת פראג וקתדרלת St. Vitus','תצפיות לגגות ולנהר','Nerudova Street ומאלה סטרנה','ירידה נוחה לכיוון גשר קארל'],fit:'מתאים למי שרוצה היסטוריה, תצפיות ומסלול חצי יום בלי רכב.',tip:'להגיע בחשמלית למעלה ולרדת ברגל. זה הרבה יותר נוח מאשר לטפס מהמרכז.'},
+    en:{why:'Start high and walk down through Prague’s power story: Prague Castle, St. Vitus Cathedral, Malá Strana lanes and Charles Bridge. The castle was the seat of Bohemian and Czech rulers for centuries, so this is not only a view — it explains the city’s political and religious weight.',see:['Prague Castle area and St. Vitus Cathedral','Rooftop and river viewpoints','Nerudova Street and Malá Strana','Downhill walk toward Charles Bridge'],fit:'Good for history, viewpoints and a half-day without a car.',tip:'Take tram up and walk down. It is easier and more scenic.'}
   },
-  'Vyšehrad & Riverside Public Route': {
-    he:{why:'וישהראד נותן פראג שקטה יותר: מבצר, פארק, תצפיות לנהר והליכה רגועה בלי העומס של העיר העתיקה. זה מסלול ציבורי טוב כשצריך חצי יום פחות תיירותי.',see:['חומות וישהראד','תצפיות על הוולטאבה','בית הקברות ההיסטורי','הליכה לאורך הנהר'],fit:'מתאים ליום רגוע, זוגות, צילום ומי שכבר ראה את המרכז.',tip:'לשלב עם Náplavka או עצירת קפה ליד הנהר.'},
-    en:{why:'Vyšehrad shows a quieter Prague: fortress walls, park paths, river views and less Old Town pressure. A strong public half-day when you want something local-feeling.',see:['Vyšehrad walls','Vltava viewpoints','Historic cemetery','Riverside walk'],fit:'Good for a calm day, couples, photos and travelers who already saw the center.',tip:'Pair it with Náplavka or a river café stop.'}
+  'Vyšehrad Fortress • Riverside Calm Route': {
+    he:{why:'וישהראד מציג פראג פחות עמוסה: מבצר על גבעה, פארק, תצפיות לנהר ובית קברות שבו קבורים דמויות תרבות צ׳כיות. לפי המסורת זה אחד המקומות העתיקים בסיפור של פראג. הערך שלו הוא שקט, נוף והיסטוריה בלי לחץ של מרכז העיר.',see:['חומות ותצפיות על הוולטאבה','בזיליקת Peter and Paul','בית הקברות ההיסטורי Slavín','ירידה רגועה לכיוון הנהר ונאפלאבקה'],fit:'מתאים ליום רגוע, צילום, זוגות ומי שכבר ראה את העיר העתיקה.',tip:'לשלב עם הליכה ב־Náplavka או קפה ליד הנהר.'},
+    en:{why:'Vyšehrad shows a quieter Prague: hilltop fortress, park paths, river views and the cemetery of major Czech cultural figures. It is one of the older layers in Prague’s story. The value is calm, view and history without Old Town pressure.',see:['Fortress walls and Vltava views','Peter and Paul Basilica','Slavín historic cemetery','Easy walk down toward Náplavka'],fit:'Good for a calm day, photos, couples and travelers who already saw Old Town.',tip:'Pair it with Náplavka or a riverside café.'}
   },
-  'Letná View & Beer Garden Public Route': {
-    he:{why:'מסלול קצר שנותן את אחת התצפיות הכי טובות על גשרי פראג, ואז אפשר לשבת לבירה באוויר פתוח. זה בדיוק סוג המסלול שמתאים לתחבורה ציבורית: קרוב, פשוט, עם תמורה גבוהה.',see:['תצפית מטרונום לטנה','נוף לגשרים','פארק לטנה','Beer Garden לפי מזג האוויר'],fit:'מתאים לשקיעה, חברים, ערב קל וצילום.',tip:'לא מתאים לגשם. אם מזג האוויר יפה, זה אחד המסלולים הכי משתלמים בעיר.'},
-    en:{why:'A short high-value public route: one of Prague’s best bridge views and an easy open-air beer stop. Close, simple and rewarding.',see:['Letná Metronome viewpoint','Bridge panorama','Letná Park','Beer garden when weather allows'],fit:'Best for sunset, friends, easy evening and photos.',tip:'Not for rain. In good weather it is one of the best-value city routes.'}
+  'Jewish Quarter • Old Town Context Walk': {
+    he:{why:'הרובע היהודי של פראג נותן עומק שאי אפשר לקבל רק מתצפיות. Josefov היה במשך מאות שנים מרכז יהודי חשוב באירופה, עם בתי כנסת, בית קברות עתיק וסיפורים כמו הגולם. זה מסלול קצר יחסית אבל משמעותי מאוד.',see:['אזור Josefov','בית הקברות היהודי העתיק אם נכנסים לאתרים','בתי הכנסת ההיסטוריים','חיבור לעיר העתיקה ולסמטאות סביב'],fit:'מתאים להיסטוריה, זהות, תרבות וביקור משמעותי יותר.',tip:'אם רוצים להיכנס לאתרים, לבדוק שעות וכרטיסים; לא הכול פתוח בכל יום.'},
+    en:{why:'Prague’s Jewish Quarter gives depth you cannot get from viewpoints alone. Josefov was a major Jewish center in Europe for centuries, with synagogues, the Old Jewish Cemetery and stories such as the Golem. Short, central, but meaningful.',see:['Josefov area','Old Jewish Cemetery if entering sites','Historic synagogues','Connection to Old Town lanes'],fit:'Best for history, identity, culture and a more meaningful visit.',tip:'If entering sites, check opening days and tickets first.'}
   },
-  'Jewish Quarter & Old Town Context Walk': {
-    he:{why:'זה מסלול עומק בתוך העיר: הרובע היהודי, בתי כנסת, סמטאות והקשר היסטורי. לא צריך לצאת מחוץ לפראג כדי לקבל תוכן משמעותי — כאן העיר מספרת שכבה אחרת שלה.',see:['אזור Josefov','בתי כנסת ואתרי זיכרון מבחוץ/מבפנים לפי כרטיס','רחובות העיר העתיקה','הקשר יהודי והיסטורי'],fit:'מתאים למי שרוצה היסטוריה, זהות ועומק ולא רק תמונות.',tip:'אם נכנסים לאתרים, לבדוק שעות וכרטיסים; לא הכול פתוח בכל יום.'},
-    en:{why:'An in-city depth route: Jewish Quarter, synagogues, lanes and historical context. You do not need to leave Prague to get a meaningful layer of the city.',see:['Josefov area','Synagogues and memorial sites depending on tickets','Old Town streets','Jewish and historical context'],fit:'Best for history, identity and depth rather than only photos.',tip:'Check opening days and tickets if entering sites.'}
+  'Petřín • Strahov • Castle View Route': {
+    he:{why:'זה מסלול תצפיות ורומנטיקה בתוך פראג: גבעת פטרין, אזור Strahov ומבט רחב על העיר. פטרין היה אזור גנים ונופש עירוני, ו־Strahov מוסיף שכבה מנזרית־תרבותית. מתאים כשלא רוצים מוזיאון אבל כן רוצים להבין את העיר מלמעלה.',see:['גבעת פטרין ותצפיות','אזור Strahov Monastery מבחוץ/ספרייה אם פתוח','שבילי גן ונקודות צילום','מבט לכיוון הטירה והעיר העתיקה'],fit:'מתאים לזוגות, שקיעה, צילום והליכה בינונית.',tip:'לבדוק אם הפוניקולר פעיל; אם לא, העלייה ברגל דורשת מאמץ.'},
+    en:{why:'A viewpoint-and-romance route inside Prague: Petřín Hill, Strahov area and wide city views. Petřín has long been an urban leisure hill, while Strahov adds a monastic-cultural layer. Good when you want the city from above without a museum-heavy day.',see:['Petřín Hill viewpoints','Strahov Monastery area / library if open','Garden paths and photo points','Views toward castle and Old Town'],fit:'Best for couples, sunset, photos and medium walking.',tip:'Check funicular status; walking up takes effort.'}
   },
-  'Vienna Historic Ring & Cathedral Walk': {
-    he:{why:'מסלול תחבורה ציבורית/הליכה שמרכז את וינה הקלאסית בלי לצאת מהעיר: קתדרלה, רחובות מרכזיים, מבני רינגשטראסה ואווירה קיסרית. זה צריך להיות בסיס לפני טיולי יום רחוקים.',see:['Stephansdom','רחובות Graben/Kärntner','מבני Ringstrasse','נקודות קפה קלאסיות בדרך'],fit:'מתאים ליום ראשון בווינה, הליכה קלה והבנת העיר.',tip:'לא לרוץ. וינה נבנית מחוויה איטית: קפה, חזיתות, כיכרות.'},
-    en:{why:'A public/walking route through classic Vienna: cathedral, central streets, Ringstrasse buildings and imperial atmosphere. This should come before far day trips.',see:['Stephansdom','Graben/Kärntner streets','Ringstrasse architecture','Classic café stops'],fit:'Best for first day in Vienna, easy walking and orientation.',tip:'Do not rush; Vienna rewards slow cafés, façades and squares.'}
+  'Letná View • Beer Garden • Metronome Route': {
+    he:{why:'לטנה היא הדרך הקלה לקבל תמונת “גלויות” של פראג: גשרים על הוולטאבה, גגות העיר והאוויר הפתוח של הפארק. אחר כך אפשר לשבת לבירה בלי להפוך את הערב למסעדה כבדה. זה מסלול עירוני קצר עם תמורה גבוהה.',see:['תצפית המטרונום','הגשרים של פראג בקו אחד','Letná Park','Beer Garden לפי מזג האוויר'],fit:'מתאים לשקיעה, חברים, ערב קל וצילום.',tip:'לא מתאים לגשם. ביום יפה זה אחד הערבים הפשוטים והטובים בעיר.'},
+    en:{why:'Letná is the easiest way to get the postcard bridge view of Prague: Vltava bridges, rooftops and open park air. Then you can sit for beer without turning the evening into a heavy restaurant plan.',see:['Metronome viewpoint','Prague bridges in one line','Letná Park','Beer Garden when weather allows'],fit:'Good for sunset, friends, easy evening and photography.',tip:'Not for rain. In good weather it is one of Prague’s simplest great evenings.'}
   },
-  'Schönbrunn Public Half-Day': {
-    he:{why:'שנברון הוא יעד מושלם לתחבורה ציבורית: מגיעים במטרו, מקבלים ארמון, גנים ותצפית בלי רכב. זה חצי יום חזק בתוך וינה, לא טיול חוץ מיותר.',see:['חזית הארמון','גני שנברון','Gloriette ותצפית','אפשרות כניסה לחדרים אם מזמינים'],fit:'מתאים למשפחות, זוגות, היסטוריה וגנים.',tip:'גם בלי כניסה לארמון, הגנים והתצפית שווים מאוד.'},
-    en:{why:'Schönbrunn is ideal by public transport: metro access, palace, gardens and viewpoint without a car. A strong Vienna half-day inside the city.',see:['Palace façade','Schönbrunn gardens','Gloriette viewpoint','Interior rooms if booked'],fit:'Good for families, couples, history and gardens.',tip:'Even without entering the palace, the gardens and viewpoint are worthwhile.'}
+  'Dancing House • Náplavka • Riverside Route': {
+    he:{why:'מסלול נהר קל שמחבר פראג מודרנית עם אווירה מקומית: Dancing House, טיילת Náplavka, סירות, דוכנים או ברים לפי עונה. זה מתאים במיוחד כשלא רוצים עוד כנסייה או טירה אלא ערב עירוני נינוח.',see:['Dancing House מבחוץ','טיילת Náplavka','גשרי הוולטאבה','אוכל/שתייה קלילה לפי עונה'],fit:'מתאים לערב קל, הליכה אחרי אוכל, זוגות וחברים.',tip:'הכי טוב בסוף יום או בערב. בשבתות לפעמים יש שוק/אווירה חזקה יותר.'},
+    en:{why:'A light river route connecting modern Prague with local atmosphere: Dancing House, Náplavka embankment, boats, stands or bars depending on season. Good when you do not want another church or castle.',see:['Dancing House exterior','Náplavka riverside','Vltava bridges','Casual food/drinks depending on season'],fit:'Good for an easy evening, post-meal walk, couples and friends.',tip:'Best late day or evening. Saturdays can have more market energy.'}
   },
-  'Belvedere & Naschmarkt Public Route': {
-    he:{why:'מסלול שמחבר ארמון, אמנות ואוכל בלי יציאה מהעיר. בלוודר נותן גנים ותרבות, Naschmarkt נותן אוכל ושוק — שילוב טוב ליום עירוני בתחבורה ציבורית.',see:['Belvedere Palace וגנים','אפשרות מוזיאון/אמנות','Naschmarkt','עצירת אוכל קלה'],fit:'מתאים ליום גשם חלקי, אוכל, תרבות וזוגות.',tip:'להחליט מראש אם נכנסים למוזיאון; אחרת לשמור את זה כמסלול חוץ+שוק.'},
-    en:{why:'A city route combining palace, art and food. Belvedere gives gardens/culture; Naschmarkt gives market energy and easy food.',see:['Belvedere Palace and gardens','Optional museum/art','Naschmarkt','Easy food stop'],fit:'Good for partial rain, food, culture and couples.',tip:'Decide in advance whether you enter the museum or keep it as gardens + market.'}
+  'National Museum • Wenceslas • Lucerna Route': {
+    he:{why:'כיכר ואצלב היא לא רק רחוב קניות — היא מקום של אירועים פוליטיים וציבוריים מרכזיים בצ׳כיה המודרנית. עם המוזיאון הלאומי ופסאז׳ Lucerna מקבלים מסלול שמסביר את פראג של המאה ה־20, לא רק ימי הביניים.',see:['National Museum מבחוץ/בפנים','Wenceslas Square','Lucerna Passage והפסל ההפוך','חנויות וקפה באזור'],fit:'מתאים ליום גשם חלקי, היסטוריה מודרנית וקניות קלות.',tip:'אם נכנסים למוזיאון, לא להעמיס עוד מוזיאון באותו יום.'},
+    en:{why:'Wenceslas Square is not only shopping; it is a stage of modern Czech public and political history. With the National Museum and Lucerna Passage, this route shows 20th-century Prague, not just medieval Prague.',see:['National Museum exterior/interior','Wenceslas Square','Lucerna Passage and inverted horse statue','Shops and cafés nearby'],fit:'Good for partial rain, modern history and light shopping.',tip:'If entering the museum, do not overload the same day with another museum.'}
   },
-  'Prater & Danube Canal Public Evening': {
-    he:{why:'מסלול ערב קל בתחבורה ציבורית: פראטר נותן גלגל ענק ואווירת פארק, תעלת הדנובה נותנת ברים וסטריט־ארט. זה יותר הגיוני מלנסוע רחוק בלילה.',see:['Prater Giant Ferris Wheel','אזור פארק פראטר','Danube Canal','ברים/אווירה ליד המים'],fit:'מתאים לערב קל, חברים, צילום ומשפחות מוקדם יותר.',tip:'להתחיל בפראטר לפני חושך מלא ואז לעבור לתעלה אם רוצים אווירה צעירה יותר.'},
-    en:{why:'An easy public evening route: Prater for the Ferris wheel and park mood, Danube Canal for bars and street art. More logical than long night transit.',see:['Prater Giant Ferris Wheel','Prater park area','Danube Canal','Waterside bars/atmosphere'],fit:'Good for easy evening, friends, photos and families earlier in the day.',tip:'Start at Prater before full dark, then move to the canal for a younger mood.'}
+  'Kampa • Lennon Wall • Malá Strana Corners': {
+    he:{why:'קמפה ומאלה סטרנה נותנים את פראג הרכה: תעלות, גשרים קטנים, קיר לנון, חצרות וסמטאות ליד הנהר. זה מסלול קצר שנועד לגלות פינות חמד ולא רק את האתרים הגדולים.',see:['Kampa Island','Lennon Wall','תעלות קטנות ליד Certovka','סמטאות מאלה סטרנה'],fit:'מתאים לצילום, זוגות, הליכה קלה ומי שאוהב פינות קטנות.',tip:'לא להתייחס לקיר לנון כיעד יחיד; הוא עובד רק כחלק מהמסלול.'},
+    en:{why:'Kampa and Malá Strana show Prague’s softer side: canals, small bridges, Lennon Wall, courtyards and lanes near the river. A short route for hidden corners rather than major monuments.',see:['Kampa Island','Lennon Wall','Small Čertovka canal corners','Malá Strana lanes'],fit:'Good for photos, couples, easy walking and small discoveries.',tip:'Do not treat Lennon Wall as the destination; it works as part of the route.'}
   },
-  'MuseumsQuartier & Hofburg Public Route': {
-    he:{why:'מסלול מרכזי שמראה את וינה התרבותית והקיסרית: Hofburg, כיכרות, MuseumsQuartier ואפשרות למוזיאון בלי להתרחק. זה יום ציבורי חזק גם במזג אוויר לא מושלם.',see:['Hofburg מבחוץ','MuseumsQuartier','כיכרות מרכזיות','אפשרות מוזיאון לפי עניין'],fit:'מתאים לחובבי תרבות, אדריכלות ויום עירוני נוח.',tip:'לבחור מוזיאון אחד בלבד אם נכנסים; אחרת היום נהיה כבד מדי.'},
-    en:{why:'A central route showing imperial and cultural Vienna: Hofburg, squares, MuseumsQuartier and museum options without leaving the city.',see:['Hofburg exterior','MuseumsQuartier','Central squares','One museum if interested'],fit:'Good for culture, architecture and easy urban travel.',tip:'Pick one museum only if entering; otherwise the day becomes too heavy.'}
+  'Tram 22 Scenic Prague Route': {
+    he:{why:'קו 22 הוא “סיור זול” בפראג: הוא עובר דרך אזורים יפים ומוביל לכיוון הטירה. זה פתרון טוב כשעייפים מהליכה אבל עדיין רוצים לראות את העיר דרך חלון מקומי.',see:['נסיעה בחשמלית דרך אזורים היסטוריים','גישה נוחה לאזור הטירה','נוף עירוני משתנה','אפשרות לרדת בתחנות לפי כוח וזמן'],fit:'מתאים ליום עייף, גשם קל או מי שרוצה תחבורה ציבורית כחלק מהחוויה.',tip:'לא לנסוע עד הסוף בלי מטרה. לבחור תחנה אחת או שתיים ולרדת.'},
+    en:{why:'Tram 22 is a low-cost scenic Prague ride: it passes attractive areas and takes you toward the castle. Good when you are tired of walking but still want to see the city through a local window.',see:['Tram ride through historic areas','Easy access to castle district','Changing city scenery','Hop-off options depending on energy'],fit:'Good for tired days, light rain or making public transport part of the experience.',tip:'Do not just ride end-to-end; pick one or two stops to get off.'}
   },
-  'Cathedral & Petite France Walk': {
-    he:{why:'זה המסלול הכי נכון לשטרסבורג בתחבורה ציבורית/הליכה: קתדרלה ענקית, סמטאות, תעלות ו־Petite France. אין סיבה לנסוע שעתיים החוצה לפני שמבינים את העיר עצמה.',see:['קתדרלת שטרסבורג','כיכר הקתדרלה','תעלות Petite France','בתי חצי־עץ וגשרים'],fit:'מתאים ליום ראשון, צילום, זוגות והליכה קלה.',tip:'לעשות חלק ביום וחלק בערב — התאורה משנה לגמרי את התחושה.'},
-    en:{why:'The right public/walking route for Strasbourg: cathedral, lanes, canals and Petite France. No need for a two-hour ride before understanding the city itself.',see:['Strasbourg Cathedral','Cathedral square','Petite France canals','Half-timbered houses and bridges'],fit:'Best for first day, photos, couples and easy walking.',tip:'Do part by day and part by evening; the light changes the whole mood.'}
+
+  'Stephansdom • Graben • Hofburg Classic Walk': {
+    he:{why:'זה מסלול הליבה של וינה: קתדרלת סטפנוס, רחובות Graben ו־Kohlmarkt והופבורג. הוא מחבר בין וינה הדתית, המסחרית והקיסרית בלי נסיעה ארוכה. ה־Hofburg היה מרכז שלטון הבסבורג במשך מאות שנים ולכן זה מסלול שמסביר את העיר, לא רק מצלם אותה.',see:['St. Stephen’s Cathedral והגג הצבעוני','Graben ו־Kohlmarkt','Hofburg Palace מבחוץ','כיכרות וחזיתות קיסריות'],fit:'מתאים ליום ראשון בוינה, היכרות בסיסית, היסטוריה וצילום.',tip:'לעצור לקפה באמצע. וינה עובדת טוב בקצב איטי, לא בריצה בין נקודות.'},
+    en:{why:'Vienna’s core route: St. Stephen’s Cathedral, Graben/Kohlmarkt and the Hofburg. It connects religious, commercial and imperial Vienna without a long ride. Hofburg was the Habsburg power center for centuries, so this route explains the city, not just photographs it.',see:['St. Stephen’s Cathedral and colored roof','Graben and Kohlmarkt','Hofburg exterior','Imperial squares and façades'],fit:'Best for first day in Vienna, orientation, history and photos.',tip:'Stop for coffee midway. Vienna works best slowly.'}
   },
-  'Strasbourg Boat + Old Town Public Route': {
-    he:{why:'שייט בשטרסבורג נותן מבט ברור על העיר, התעלות והרובע האירופי בלי להתאמץ. בשילוב העיר העתיקה זה מסלול ציבורי מצוין שלא דורש רכב.',see:['שייט בתעלות','העיר העתיקה','גשרים ומים','אפשרות לראות את הרובע האירופי מהמסלול'],fit:'מתאים למשפחות, זוגות, יום ראשון בעיר ויום עם פחות הליכה.',tip:'לבדוק שעת שייט ושפה. עדיף לשלב עם הליכה קצרה לפני/אחרי.'},
-    en:{why:'A Strasbourg boat ride gives a clear view of canals, old town and European district without effort. Combined with Old Town, it is a strong public route.',see:['Canal cruise','Old Town','Bridges and water','European Quarter depending on route'],fit:'Good for families, couples, first day and low-walking days.',tip:'Check departure time and language; pair it with a short walk before or after.'}
+  'Ringstrasse • Opera • Parliament Route': {
+    he:{why:'רינגשטראסה היא חלון הראווה של וינה מהמאה ה־19: שדרה שנבנתה במקום החומות הישנות ובה ריכזו אופרה, פרלמנט, מוזיאונים ובנייני יוקרה. המסלול מראה את וינה כעיר אימפריאלית מודרנית.',see:['Vienna State Opera','Parliament ו־Rathaus מבחוץ','בנייני Ringstrasse','פארקים וכיכרות לאורך השדרה'],fit:'מתאים לאדריכלות, היסטוריה עירונית וצילום.',tip:'אפשר לעשות חלק ברגל וחלק בחשמלית כדי לא להתעייף.'},
+    en:{why:'Ringstrasse is Vienna’s 19th-century showcase boulevard, built where old city walls once stood. Opera, Parliament, museums and grand buildings show Vienna as a modern imperial capital.',see:['Vienna State Opera','Parliament and Rathaus exteriors','Ringstrasse architecture','Parks and squares along the boulevard'],fit:'Good for architecture, urban history and photography.',tip:'Mix walking and tram so it does not become exhausting.'}
   },
-  'European Quarter Tram Route': {
-    he:{why:'הרובע האירופי מראה צד אחר של שטרסבורג: לא רק אלזס ציורית אלא גם מוסדות אירופה, אדריכלות מודרנית ופארקים. נוח להגיע בחשמלית.',see:['European Parliament מבחוץ','מוסדות אירופה','Parc de l’Orangerie ליד האזור','אדריכלות מודרנית'],fit:'מתאים למי שרוצה להבין למה שטרסבורג חשובה פוליטית ולא רק יפה.',tip:'לשלב עם פארק Orangerie כדי שהמסלול לא ירגיש רק “בנייני משרדים”.'},
-    en:{why:'The European Quarter shows another Strasbourg: not just picturesque Alsace, but EU institutions, modern architecture and parks. Easy by tram.',see:['European Parliament exterior','EU institutions','Nearby Parc de l’Orangerie','Modern architecture'],fit:'Good for understanding Strasbourg’s political importance, not just its beauty.',tip:'Pair with Orangerie park so it does not feel like only office buildings.'}
+  'Schönbrunn Palace Gardens Public Half-Day': {
+    he:{why:'שנברון היה ארמון הקיץ של הבסבורגים ואחד הסמלים הגדולים של וינה. הוא מושלם לתחבורה ציבורית כי מגיעים במטרו ומקבלים ארמון, גנים ותצפית Gloriette בלי רכב. זה חצי יום בעיר, לא טיול חוץ.',see:['חזית ארמון שנברון','הגנים הסימטריים','Gloriette ותצפית על העיר','אפשרות כניסה לחדרי הארמון'],fit:'מתאים למשפחות, זוגות, היסטוריה וגנים.',tip:'גם בלי כניסה פנימה, הגנים והתצפית שווים. להזמין כרטיסים מראש אם רוצים סיור חדרים.'},
+    en:{why:'Schönbrunn was the Habsburg summer palace and one of Vienna’s great symbols. It is perfect by public transport: metro access, palace, gardens and Gloriette viewpoint without a car.',see:['Schönbrunn façade','Formal gardens','Gloriette viewpoint','Optional palace rooms'],fit:'Good for families, couples, history and gardens.',tip:'Even without entering, the gardens and view are worthwhile. Book ahead for palace rooms.'}
   },
-  'Krutenau Food & Night Walk': {
-    he:{why:'Krutenau נותנת את הצד הצעיר והפחות מוזיאוני של שטרסבורג: ברים, אוכל, סטודנטים ואווירת ערב. זה מסלול טוב אחרי יום בעיר העתיקה.',see:['רחובות Krutenau','ברים קטנים','מסעדות קז׳ואל','אווירת ערב מקומית'],fit:'מתאים לאוכל, ערב רגוע, זוגות וחברים.',tip:'לבדוק מקום אחד לאכול ועוד מקום לשתות — לא צריך לרוץ בין הרבה כתובות.'},
-    en:{why:'Krutenau gives Strasbourg’s younger, less museum-like side: bars, food, students and evening atmosphere. A good follow-up after Old Town.',see:['Krutenau streets','Small bars','Casual restaurants','Local evening mood'],fit:'Good for food, relaxed evening, couples and friends.',tip:'Choose one food stop and one drinks stop; no need to over-hop.'}
+  'Belvedere • Karlsplatz • Naschmarkt Route': {
+    he:{why:'זה מסלול שמחבר ארמון, אמנות ואוכל: Belvedere נבנה כארמון בארוקי של הנסיך אויגן מסבויה, היום הוא מזוהה גם עם קלימט. Karlsplatz מוסיף אדריכלות ו־Naschmarkt נותן עצירת אוכל נוחה.',see:['Upper/Lower Belvedere וגנים','אפשרות לראות את “הנשיקה” של קלימט אם נכנסים','Karlsplatz ו־Karlskirche','Naschmarkt לאוכל'],fit:'מתאים לתרבות, אוכל, יום גשם חלקי וזוגות.',tip:'להחליט מראש אם נכנסים למוזיאון. בלי כניסה — זה מסלול גנים ושוק, לא יום מוזיאון.'},
+    en:{why:'A route connecting palace, art and food: Belvedere was built as Prince Eugene of Savoy’s Baroque palace and is now strongly linked with Klimt. Karlsplatz adds architecture, Naschmarkt adds food.',see:['Upper/Lower Belvedere and gardens','Klimt’s The Kiss if entering','Karlsplatz and Karlskirche','Naschmarkt food stop'],fit:'Good for culture, food, partial rain and couples.',tip:'Decide ahead if you enter the museum; otherwise keep it as gardens + market.'}
   },
-  'Covered Bridges Sunset Walk': {
-    he:{why:'הגשרים המקורים וסכר Vauban נותנים את אחד מרגעי השקיעה היפים בעיר. זה מסלול קצר, קל, עירוני — בדיוק מה שמתאים לתחבורה ציבורית/הליכה.',see:['Covered Bridges','Barrage Vauban','תצפית לעיר העתיקה','אור שקיעה על התעלות'],fit:'מתאים לצילום, זוגות וסיום יום רגוע.',tip:'להגיע לפני השקיעה ולא אחריה. אחרי החושך הערך הוויזואלי יורד.'},
-    en:{why:'The Covered Bridges and Barrage Vauban create one of the best sunset moments in Strasbourg. Short, easy and urban — exactly right for public/walking travel.',see:['Covered Bridges','Barrage Vauban','Old town view','Sunset light over canals'],fit:'Best for photos, couples and a calm end to the day.',tip:'Arrive before sunset, not after; the visual value drops in full dark.'}
+  'MuseumsQuartier • Hofburg Culture Route': {
+    he:{why:'מסלול תרבות מרכזי שמחבר את Hofburg עם MuseumsQuartier. זה אזור שבו רואים איך וינה עברה מאימפריה למרכז תרבות מודרני: ארמונות, מוזיאונים, חצרות וקפה.',see:['Hofburg ו־Heldenplatz','MuseumsQuartier והחצרות','אפשרות Albertina או Kunsthistorisches','בתי קפה קרובים'],fit:'מתאים ליום עם מזג אוויר לא יציב, תרבות ואדריכלות.',tip:'לבחור מוזיאון אחד. שני מוזיאונים גדולים ביום אחד הופכים את המסלול לכבד מדי.'},
+    en:{why:'A central culture route connecting Hofburg with MuseumsQuartier. It shows Vienna’s shift from empire to modern cultural capital: palaces, museums, courtyards and cafés.',see:['Hofburg and Heldenplatz','MuseumsQuartier courtyards','Albertina or Kunsthistorisches option','Nearby cafés'],fit:'Good for unstable weather, culture and architecture.',tip:'Pick one museum; two major museums in one day is too heavy.'}
+  },
+  'Prater • Giant Wheel • Danube Canal Evening': {
+    he:{why:'פראטר נותן את הצד המשחקי של וינה: גלגל ענק היסטורי, פארק שעשועים ואווירה לא רשמית. שילוב עם תעלת הדנובה מוסיף ברים וסטריט־ארט, כך שזה מסלול ערב עירוני שלא דורש נסיעה ארוכה.',see:['Prater Giant Ferris Wheel מ־1897','אזור פארק פראטר','Danube Canal וברים','סטריט־ארט ואווירת ערב'],fit:'מתאים לערב קל, חברים, משפחות מוקדם יותר וצילום.',tip:'להתחיל בפראטר לפני חושך מלא ואז להמשיך לתעלה אם רוצים אווירה צעירה יותר.'},
+    en:{why:'Prater shows Vienna’s playful side: the historic Giant Ferris Wheel, amusement park mood and informal energy. Pairing it with Danube Canal adds bars and street art for an easy urban evening.',see:['1897 Giant Ferris Wheel','Prater park area','Danube Canal bars','Street art and evening mood'],fit:'Good for easy evening, friends, families earlier and photos.',tip:'Start at Prater before full dark, then move to the canal for a younger mood.'}
+  },
+  'Hundertwasserhaus • Stadtpark • Canal Route': {
+    he:{why:'מסלול שמראה וינה פחות קלאסית: Hundertwasserhaus עם קירות צבעוניים וקווים לא ישרים, Stadtpark עם פסל שטראוס ותעלת הדנובה עם אווירה מודרנית. טוב כשנמאס מארמונות בלבד.',see:['Hundertwasserhaus מבחוץ','Stadtpark ופסל יוהאן שטראוס','הליכה לכיוון התעלה','אדריכלות וצילום'],fit:'מתאים לצילום, אדריכלות ויום קליל.',tip:'Hundertwasserhaus הוא בעיקר צילום מבחוץ; אל לבנות עליו לבד מסלול ארוך.'},
+    en:{why:'A route showing less-classical Vienna: Hundertwasserhaus with color and irregular lines, Stadtpark with Strauss, and the Danube Canal’s modern mood. Good when palaces are enough for one day.',see:['Hundertwasserhaus exterior','Stadtpark and Johann Strauss statue','Walk toward the canal','Architecture and photos'],fit:'Good for photography, architecture and a lighter day.',tip:'Hundertwasserhaus is mainly an exterior photo stop; do not build the whole day around it alone.'}
+  },
+  'Coffeehouse Vienna • Central • Hawelka Route': {
+    he:{why:'בתי הקפה הם חלק מהזהות של וינה, לא רק מקום לשתות. Café Central קשור לדמויות ספרות, פוליטיקה ותרבות; Hawelka נותן תחושה ותיקה ובוהמית יותר. זה מסלול שמסביר את וינה דרך שולחן קפה.',see:['Café Central והאולם ההיסטורי','Café Hawelka או בית קפה קלאסי אחר','עוגות כמו Apfelstrudel / Sachertorte','הליכה קצרה במרכז בין בתי קפה'],fit:'מתאים ליום גשם, זוגות, תרבות וקצב איטי.',tip:'לא חייבים לאכול ארוחה מלאה. קפה ועוגה מספיקים כדי לקבל את החוויה.'},
+    en:{why:'Coffeehouses are part of Vienna’s identity, not just places to drink. Café Central is tied to literary, political and cultural history; Hawelka gives an older bohemian feeling. This route explains Vienna through a café table.',see:['Café Central historic hall','Café Hawelka or another classic café','Apfelstrudel / Sachertorte style desserts','Short central walk between cafés'],fit:'Good for rain, couples, culture and slow travel.',tip:'No need for a full meal. Coffee and cake are enough for the experience.'}
+  },
+  'Karlskirche • Musikverein • Secession Route': {
+    he:{why:'מסלול שמחבר את וינה של מוזיקה, אמנות ואדריכלות: Karlskirche הבארוקית, Musikverein שמזוהה עם קונצרט השנה החדשה, ו־Secession שמייצג את המודרניזם הווינאי. הכל קרוב ונוח בתחבורה ציבורית.',see:['Karlskirche מבחוץ/בפנים','Musikverein מבחוץ או קונצרט אם יש','Secession Building','Karlsplatz'],fit:'מתאים למוזיקה, אדריכלות ותרבות בלי יום ארוך.',tip:'אם יש קונצרט בערב, להפוך את זה למסלול אחר הצהריים שמסתיים במוזיקה.'},
+    en:{why:'A compact route connecting Vienna’s music, art and architecture: Baroque Karlskirche, Musikverein of New Year’s Concert fame, and Secession as Viennese modernism. Close and public-friendly.',see:['Karlskirche exterior/interior','Musikverein exterior or concert','Secession Building','Karlsplatz'],fit:'Good for music, architecture and culture without a long day.',tip:'If there is an evening concert, make this an afternoon route ending in music.'}
+  },
+  'Grinzing Wine Tavern Light Evening': {
+    he:{why:'גרינציג נותן תחושת כפר יין בתוך וינה: Heuriger, יין מקומי, חצרות ואווירה רגועה. זה לא “חיי לילה” רועשים אלא ערב אוסטרי קליל שנגיש בחשמלית/תחבורה ציבורית.',see:['רחובות Grinzing','Heuriger – טברנת יין מקומית','אוכל אוסטרי פשוט','אווירה כפרית בערב'],fit:'מתאים לזוגות, חברים, יין וערב רגוע.',tip:'לבדוק שעות של Heuriger ספציפי. לא כל מקום פתוח כל ערב.'},
+    en:{why:'Grinzing gives a wine-village feeling inside Vienna: heuriger taverns, local wine, courtyards and relaxed atmosphere. It is not loud nightlife; it is an easy Austrian evening by tram/public transport.',see:['Grinzing streets','Heuriger wine tavern','Simple Austrian food','Village-like evening mood'],fit:'Good for couples, friends, wine and a calm night.',tip:'Check the specific heuriger opening days; not every place opens every night.'}
+  },
+
+  'Cathedral • Petite France Essential Walk': {
+    he:{why:'זה מסלול הבסיס של שטרסבורג: קתדרלה גותית ענקית, סמטאות, תעלות ו־Petite France. הוא מוכיח שלא צריך לנסוע רחוק כדי לקבל חוויה חזקה — העיר עצמה מלאה היסטוריה אלזסית וגרמנית־צרפתית.',see:['קתדרלת שטרסבורג והחזית המפורטת','השעון האסטרונומי אם נכנסים','Petite France והתעלות','בתי חצי־עץ וגשרים'],fit:'מתאים ליום ראשון, צילום, זוגות והיכרות עם העיר.',tip:'לחזור לאזור גם בערב. האור על הקתדרלה והתעלות משנה את החוויה.'},
+    en:{why:'Strasbourg’s essential route: huge Gothic cathedral, lanes, canals and Petite France. It proves you do not need a long ride to get a strong experience — the city itself is packed with Alsatian and Franco-German history.',see:['Strasbourg Cathedral façade','Astronomical clock if entering','Petite France canals','Half-timbered houses and bridges'],fit:'Best for first day, photos, couples and city orientation.',tip:'Return in the evening; light changes the cathedral and canals.'}
+  },
+  'Batorama Boat • Old Town Orientation': {
+    he:{why:'שייט Batorama/תעלות הוא דרך קלה להבין את מבנה שטרסבורג: העיר העתיקה, נהר Ill, הגשרים והרובע האירופי. זה מתאים במיוחד כשיש מעט זמן או כשלא רוצים ללכת הרבה.',see:['תעלות ונהר Ill','חזיתות העיר העתיקה','מעברים דרך אזורי מים וגשרים','אפשרות לראות את הרובע האירופי לפי מסלול'],fit:'מתאים למשפחות, זוגות, יום ראשון בעיר ויום עייף.',tip:'לבדוק שעה ושפה של ההסברים. לשלב עם הליכה קצרה לפני או אחרי.'},
+    en:{why:'A Batorama/canal boat ride is an easy way to understand Strasbourg’s structure: Old Town, Ill River, bridges and European Quarter. Good when time is short or walking energy is low.',see:['Canals and Ill River','Old Town façades','Water passages and bridges','European Quarter depending on route'],fit:'Good for families, couples, first day and tired days.',tip:'Check departure time and commentary language. Pair with a short walk before or after.'}
+  },
+  'European Quarter Tram • Orangerie Route': {
+    he:{why:'הרובע האירופי מראה למה שטרסבורג היא לא רק עיר ציורית: כאן יושבים מוסדות אירופה, והפארק Orangerie מוסיף ירוק ורוגע. המסלול נוח בחשמלית ולא דורש רכב.',see:['European Parliament מבחוץ','Council of Europe / מוסדות סביב','Parc de l’Orangerie','אדריכלות מודרנית מול עיר עתיקה'],fit:'מתאים למי שרוצה להבין את התפקיד הפוליטי של העיר וגם לנוח בפארק.',tip:'לשלב את המוסדות עם Orangerie; אחרת זה עלול להרגיש כמו רק בנייני משרדים.'},
+    en:{why:'The European Quarter shows why Strasbourg is not only picturesque: EU institutions are based here, and Orangerie Park adds green calm. Easy by tram, no car needed.',see:['European Parliament exterior','Council of Europe / nearby institutions','Parc de l’Orangerie','Modern architecture contrasted with Old Town'],fit:'Good for understanding the city’s political role and resting in a park.',tip:'Pair institutions with Orangerie; otherwise it can feel like only office buildings.'}
+  },
+  'Krutenau Food • Bars • Student Quarter Walk': {
+    he:{why:'Krutenau הוא הצד הצעיר והיומיומי יותר של שטרסבורג: ברים, מסעדות קז׳ואל, סטודנטים ורחובות פחות “גלויה”. זה מסלול טוב לאוכל וערב בלי להיתקע בתחבורה מאוחרת.',see:['רחובות Krutenau','ברים קטנים ומסעדות קז׳ואל','אווירה סטודנטיאלית','הליכה קצרה חזרה למרכז'],fit:'מתאים לאוכל, ערב רגוע, חברים וזוגות.',tip:'לבחור מקום אוכל אחד ומקום שתייה אחד. לא צריך לרוץ בין יותר מדי תחנות.'},
+    en:{why:'Krutenau is Strasbourg’s younger, everyday side: bars, casual restaurants, students and less postcard-perfect streets. Good for food and evening without late-night transport risk.',see:['Krutenau streets','Small bars and casual restaurants','Student atmosphere','Short walk back toward center'],fit:'Good for food, relaxed evening, friends and couples.',tip:'Pick one food stop and one drink stop; no need to over-hop.'}
+  },
+  'Covered Bridges • Vauban Dam Sunset Route': {
+    he:{why:'Ponts Couverts ו־Barrage Vauban נותנים את אחד הנופים העירוניים היפים בשטרסבורג: תעלות, מגדלים וגגות העיר העתיקה. זה מסלול קצר, נוח, מושלם לשקיעה ולא דורש תחבורה ארוכה.',see:['הגשרים המקורים','Barrage Vauban ותצפית אם פתוח','תעלות העיר','אור שקיעה על Petite France'],fit:'מתאים לצילום, זוגות וסיום יום רגוע.',tip:'להגיע לפני השקיעה. אחרי שהאור נעלם חלק גדול מהקסם יורד.'},
+    en:{why:'Ponts Couverts and Barrage Vauban give one of Strasbourg’s best urban views: canals, towers and Old Town rooftops. Short, easy, perfect for sunset, no long transit needed.',see:['Covered Bridges','Barrage Vauban viewpoint if open','City canals','Sunset light over Petite France'],fit:'Best for photos, couples and a calm end of day.',tip:'Arrive before sunset; after the light fades much of the magic drops.'}
+  },
+  'Neustadt • Republic Square Architecture Route': {
+    he:{why:'Neustadt מספר את התקופה הגרמנית של שטרסבורג אחרי 1871, כשהעיר הפכה לחלק מהאימפריה הגרמנית. השדרות, הכיכרות והמבנים המונומנטליים מסבירים למה העיר היא שילוב צרפתי־גרמני ולא רק אלזס ציורית.',see:['Place de la République','מבני Neustadt הגדולים','שדרות רחבות ואדריכלות גרמנית־אימפריאלית','חיבור חזרה למרכז העתיק'],fit:'מתאים לחובבי היסטוריה עירונית, אדריכלות והקשר צרפתי־גרמני.',tip:'לקרוא מראש 2 דקות על 1871 ואלזס־לורן; המסלול נהיה הרבה יותר מעניין.'},
+    en:{why:'Neustadt tells Strasbourg’s German imperial period after 1871. Its boulevards, squares and monumental buildings explain why the city feels Franco-German, not only picturesque Alsace.',see:['Place de la République','Large Neustadt buildings','Broad boulevards and imperial architecture','Connection back to Old Town'],fit:'Good for urban history, architecture and Franco-German context.',tip:'Read briefly about 1871 and Alsace-Lorraine; the route becomes much richer.'}
+  },
+  'Orangerie Park • European Institutions Easy Route': {
+    he:{why:'פארק Orangerie הוא מקום טוב לנשום בתוך שטרסבורג: אגם, שבילים, חסידות ואווירה משפחתית. יחד עם מוסדות אירופה לידו זה מסלול קל שמאזן בין פוליטיקה, טבע קטן ומנוחה.',see:['Parc de l’Orangerie','אגם ושבילים','אזור מוסדות אירופה','אפשרות קפה/פיקניק'],fit:'מתאים למשפחות, ילדים, יום רגוע או הפסקה אחרי העיר העתיקה.',tip:'לא לצפות לאטרקציית ענק. הערך הוא רוגע, ירוק ונוחות.'},
+    en:{why:'Orangerie Park is where Strasbourg breathes: lake, paths, storks and family atmosphere. Combined with nearby European institutions it balances politics, greenery and rest.',see:['Parc de l’Orangerie','Lake and paths','European institutions area','Café/picnic option'],fit:'Good for families, children, calm days and a break from Old Town.',tip:'Do not expect a huge attraction; the value is calm, green space and ease.'}
+  },
+  'Saint-Thomas • Ill River Quiet Walk': {
+    he:{why:'כנסיית Saint-Thomas וסביבת נהר Ill נותנים מסלול שקט יותר מהקתדרלה ו־Petite France. הכנסייה קשורה למסורת הפרוטסטנטית של העיר, וההליכה סביב הנהר מראה שטרסבורג פחות עמוסה.',see:['Saint-Thomas Church','הליכה ליד נהר Ill','גשרים קטנים וסמטאות','אווירה שקטה יותר מהמרכז העמוס'],fit:'מתאים למי שכבר ראה את האתרים המרכזיים ורוצה שכבה שקטה יותר.',tip:'טוב כמעבר בין המרכז ל־Petite France בלי ללכת באותו רחוב תיירותי.'},
+    en:{why:'Saint-Thomas Church and the Ill River area give a quieter route than the cathedral and Petite France. The church connects to Strasbourg’s Protestant tradition, while the river walk shows a softer city layer.',see:['Saint-Thomas Church','Ill River walk','Small bridges and lanes','Quieter mood than the central crowds'],fit:'Good after the main sights, when you want a calmer layer.',tip:'Use it as a quiet connector between the center and Petite France.'}
+  },
+  'Modern Art Museum • Barrage Vauban Route': {
+    he:{why:'מסלול שמחבר אמנות מודרנית עם תצפית עירונית: Musée d’Art Moderne נמצא ליד Barrage Vauban, כך שאפשר לשלב מוזיאון, גשרים ונוף בלי תחבורה מסובכת.',see:['Museum of Modern and Contemporary Art','Barrage Vauban','Ponts Couverts','נוף ל־Petite France'],fit:'מתאים ליום גשם חלקי, אמנות, צילום ותצפית.',tip:'אם לא נכנסים למוזיאון, עדיין שווה להגיע בשביל Vauban והתצפית.'},
+    en:{why:'A route combining modern art with an urban viewpoint: the Modern and Contemporary Art Museum sits near Barrage Vauban, so you can pair museum, bridges and view without complex transport.',see:['Museum of Modern and Contemporary Art','Barrage Vauban','Ponts Couverts','View toward Petite France'],fit:'Good for partial rain, art, photos and a viewpoint.',tip:'Even without entering the museum, Vauban and the view are worthwhile.'}
+  },
+  'Christmas Market Core Route': {
+    he:{why:'שטרסבורג מכונה בירת חג המולד, ובחורף השווקים במרכז הם חוויה בפני עצמה: אורות, דוכנים, יין חם וכיכרות מלאות. זה מסלול עונתי בלבד, אבל כשהוא פעיל הוא אחד הדברים החזקים בעיר.',see:['Place Kléber והעץ הגדול','Place Broglie ושווקים','רחובות מוארים סביב הקתדרלה','מאכלים ושתייה חמה'],fit:'מתאים לחורף, זוגות, משפחות וצילום ערב.',tip:'בעונה צפוף מאוד. להגיע מוקדם יחסית ולשמור על ארנק/טלפון.'},
+    en:{why:'Strasbourg is nicknamed the Capital of Christmas, and in winter the central markets become a major experience: lights, stalls, mulled wine and crowded squares. Seasonal, but one of the city’s strongest draws when active.',see:['Place Kléber and the large tree','Place Broglie markets','Lit streets around the cathedral','Food and hot drinks'],fit:'Best for winter, couples, families and evening photos.',tip:'It gets very crowded. Go relatively early and watch your belongings.'}
   }
 });
+
 DATA.unshift(...PUBLIC_CITY_TRIPS);
 
 
