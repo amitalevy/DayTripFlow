@@ -546,3 +546,96 @@ body{
   .route-nav-btn{font-size:12px;min-height:40px;padding:8px 9px;}
   .route-nav-btn.copy{grid-column:1/-1;}
 }
+
+/* v77: restore comfortable card navigation buttons on smartphone
+   Keep Route Builder buttons unchanged; only card/route-pack navigation rows. */
+@media(max-width:680px){
+  .card .destination-nav-row,
+  .route-pack-card .destination-nav-row,
+  .guide-card .destination-nav-row{
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:8px !important;
+    padding:9px !important;
+    margin-top:11px !important;
+    border-radius:16px !important;
+  }
+
+  .card .destination-nav-row .map-action-btn,
+  .card .destination-nav-row .icon-btn,
+  .route-pack-card .destination-nav-row .map-action-btn,
+  .route-pack-card .destination-nav-row .icon-btn,
+  .guide-card .destination-nav-row .map-action-btn,
+  .guide-card .destination-nav-row .icon-btn{
+    width:100% !important;
+    min-width:0 !important;
+    min-height:46px !important;
+    padding:10px 9px !important;
+    border-radius:14px !important;
+    font-size:12.5px !important;
+    line-height:1.15 !important;
+    white-space:normal !important;
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    gap:5px !important;
+    text-align:center !important;
+  }
+
+  /* Undo older v74 mobile rule that hid text and left only tiny icons. */
+  .card .destination-nav-row .map-action-btn::before,
+  .card .destination-nav-row .icon-btn::before,
+  .route-pack-card .destination-nav-row .map-action-btn::before,
+  .route-pack-card .destination-nav-row .icon-btn::before,
+  .guide-card .destination-nav-row .map-action-btn::before,
+  .guide-card .destination-nav-row .icon-btn::before{
+    content:none !important;
+  }
+
+  .card .destination-nav-row .map-action-btn::first-letter,
+  .card .destination-nav-row .icon-btn::first-letter,
+  .route-pack-card .destination-nav-row .map-action-btn::first-letter,
+  .route-pack-card .destination-nav-row .icon-btn::first-letter,
+  .guide-card .destination-nav-row .map-action-btn::first-letter,
+  .guide-card .destination-nav-row .icon-btn::first-letter{
+    font-size:inherit !important;
+  }
+
+  .card .destination-nav-row .copy-location,
+  .route-pack-card .destination-nav-row .copy-location,
+  .guide-card .destination-nav-row .copy-location{
+    grid-column:1/-1 !important;
+    font-size:12.5px !important;
+  }
+
+  .card .mini-nav-row,
+  .route-pack-card .mini-nav-row,
+  .guide-card .mini-nav-row{
+    display:grid !important;
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    gap:7px !important;
+    margin-top:9px !important;
+  }
+
+  .card .mini-nav-row .map-action-btn,
+  .card .mini-nav-row .icon-btn,
+  .route-pack-card .mini-nav-row .map-action-btn,
+  .route-pack-card .mini-nav-row .icon-btn,
+  .guide-card .mini-nav-row .map-action-btn,
+  .guide-card .mini-nav-row .icon-btn{
+    width:100% !important;
+    min-height:42px !important;
+    border-radius:13px !important;
+    padding:9px 8px !important;
+    font-size:12px !important;
+    white-space:normal !important;
+  }
+}
+
+@media(max-width:380px){
+  .card .destination-nav-row,
+  .route-pack-card .destination-nav-row,
+  .guide-card .destination-nav-row{
+    grid-template-columns:1fr !important;
+  }
+}
