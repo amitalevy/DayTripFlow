@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DayTripFlow Europe v44 City-Synced Route Builder</title>
+  <title>DayTripFlow Europe v70 Curated Photos + Attractions</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -50,6 +50,10 @@
         <button id="clearOfflinePack" class="icon-btn remove" type="button" title="Remove selected offline pack">🗑️</button>
       </div>
       <div id="offlinePackStatus" class="offline-status">Offline status will appear here.</div>
+      <div class="compact-actions low-data-actions">
+        <button id="syncLowData" class="mini-main" type="button">🔄 Sync on WiFi / low data</button>
+      </div>
+      <div id="lowDataStatus" class="offline-status">Low-data sync status will appear here.</div>
       <p class="source-note">Important: this saves the guide data, coordinates and local card visuals. Live transit times, Uber/Bolt prices and Google/Waze map tiles still require the external apps or a separately downloaded offline map.</p>
     </section>
 
@@ -132,6 +136,9 @@
       <button class="tab" data-tab="nightlife">Nightlife</button>
       <button class="tab" data-tab="experiences">Experiences</button>
       <button class="tab" data-tab="mustdo">MustDo</button>
+      <button class="tab" data-tab="attractions">Attractions</button>
+      <button class="tab" data-tab="markets">Markets & shopping</button>
+      <button class="tab" data-tab="winter">Winter / Christmas</button>
       <button class="tab" data-tab="recommendations">My recommendations</button>
       <button class="tab" data-tab="mytrip">My Trip</button>
       <button class="tab" data-tab="saved">Saved offline</button>

@@ -5,7 +5,8 @@ const STORAGE = {
   hotel: 'dtf_hotel_v46',
   recs: 'dtf_my_recs_v46',
   packageMode: 'dtf_package_mode_v46',
-  offlinePacks: 'dtf_offline_packs_v46'
+  offlinePacks: 'dtf_offline_packs_v46',
+  routeCache: 'dtf_route_cache_v69'
 };
 
 const CITIES = {
@@ -25,7 +26,7 @@ const AIRPORT_ORIGINS = [
 // v22 bilingual content helpers: UI language also controls card titles/descriptions/tags.
 function getLang(){ return localStorage.getItem('dtf_language_v19') === 'he' ? 'he' : 'en'; }
 const CITY_HE = { prague:'פראג', vienna:'וינה', strasbourg:'שטרסבורג' };
-const CAT_HE = { trips:'טיולי יום', food:'אוכל', nightlife:'חיי לילה', experiences:'חוויות', mustdo:'חובה לעשות', recommendations:'ההמלצות שלי' };
+const CAT_HE = { trips:'טיולי יום', food:'אוכל', nightlife:'חיי לילה', experiences:'חוויות', mustdo:'חובה לעשות', attractions:'אטרקציות', markets:'שווקים וקניות', winter:'חורף וחג מולד', recommendations:'ההמלצות שלי' };
 const TAG_HE = {
   castle:'טירה', easy:'קל', 'half-day':'חצי יום', UNESCO:'אתר UNESCO', history:'היסטוריה', train:'רכבת', spa:'ספא', 'full-day':'יום מלא', romantic:'רומנטי', 'long-day':'יום ארוך', 'cross-border':'חוצה גבול', museums:'מוזיאונים', memorial:'אתר זיכרון', forest:'יער', beer:'בירה', city:'עיר', nature:'טבע', 'car-best':'מומלץ ברכב', wine:'יין', river:'נהר', park:'פארק', 'old-town':'עיר עתיקה', mountain:'הר', hiking:'הליכה', view:'תצפית', lake:'אגם', iconic:'אייקוני', abbey:'מנזר', danube:'דנובה', palace:'ארמון', railway:'רכבת נופית', roman:'רומי', village:'כפר', germany:'גרמניה', switzerland:'שוויץ', 'black-forest':'היער השחור', waterfalls:'מפלים', alsace:'אלזס', casino:'קזינו', 'theme-park':'פארק שעשועים', border:'גבול', viewpoint:'תצפית', boat:'שייט', central:'מרכזי', popular:'פופולרי', budget:'זול יחסית', 'good-value':'תמורה טובה', parking:'חניה', 'car-friendly':'נוח לרכב', custom:'מותאם אישית', 'google-maps':'גוגל מפות', casual:'קז׳ואל', photo:'צילום', indoor:'מקורה', show:'הופעה', evening:'ערב', free:'חינם', mustdo:'חובה', czech:'צ׳כי', austrian:'אוסטרי', alsatian:'אלזסי', french:'צרפתי', german:'גרמני', asian:'אסייתי', vietnamese:'וייטנאמי', vegetarian:'צמחוני', meat:'בשרי', bistro:'ביסטרו', cafe:'בית קפה', market:'שוק', schnitzel:'שניצל', pastry:'מאפים', fish:'דגים', local:'מקומי', 'public-friendly':'נוח בתחבורה ציבורית', 'walkable':'נגיש בהליכה'
 };
@@ -13157,11 +13158,112 @@ function v49ExperienceMustDoGuide(item){
   return pack[getLang()] || pack.en || pack.he || null;
 }
 
+
+
+// v72: Strasbourg Markets & Shopping - targeted content cleanup only.
+// This override is intentionally limited to Strasbourg market/shopping cards.
+// It does not change buttons, photos, routes, tabs, or any other city content.
+const V72_STRASBOURG_MARKETS_CONTENT = {
+  'Strasbourg Covered Market': {
+    he: {
+      why: 'זה כרטיס שמיועד לאוכל וקניות מקומיות בשטרסבורג, לא לקניון רגיל. הרעיון הוא לעצור במקום שבו אפשר לטעום או לקנות מוצרים שמייצגים את אלזס: גבינות, נקניקים, מאפים, לחמים, ירקות עונתיים ומעדנים אזוריים. זה מתאים במיוחד אם אתה רוצה להבין את המטבח המקומי דרך חומרי הגלם ולא רק דרך מסעדה.',
+      see: ['דוכני גבינות, נקניקים ומעדנים מקומיים', 'מאפים ולחמים בסגנון צרפתי/אלזסי', 'תוצרת יומית של מקומיים ולא רק מזכרות לתיירים', 'אפשרות לקנות נשנוש לפיקניק או להפסקת צהריים קלה'],
+      fit: 'מתאים למי שאוהב שווקים, אוכל מקומי, גבינות ומאפים, או רוצה לקנות משהו קטן ואותנטי יותר ממזכרת רגילה.',
+      tip: 'שוק אוכל מקומי עובד הכי טוב בבוקר או סביב צהריים. לפני הגעה לבדוק שעות פתיחה, כי מחוץ לשעות הפעילות הערך של המקום יורד משמעותית.'
+    },
+    en: {
+      why: 'This is a practical local-food stop in Strasbourg, not a regular mall. The point is to taste or buy products that explain Alsace through ingredients: cheese, charcuterie, pastries, bread, seasonal produce and regional deli items.',
+      see: ['Cheese, charcuterie and deli stalls', 'French and Alsatian pastries and bread', 'Everyday local shopping rather than only tourist souvenirs', 'Good picnic or light-lunch supplies'],
+      fit: 'Best for travelers who like food markets, regional ingredients, cheese, pastries and local shopping.',
+      tip: 'Food markets are best in the morning or around lunch. Check opening hours before going; outside market hours the value drops.'
+    }
+  },
+  'Place des Halles': {
+    he: {
+      why: 'Place des Halles הוא מרכז קניות גדול ושימושי במרכז שטרסבורג, קרוב יחסית לתחנת הרכבת. זה לא “אתר חובה” רומנטי, אלא מקום פרקטי מאוד כשצריך בגדים, קוסמטיקה, אלקטרוניקה, אוכל מהיר, שירותים או פתרון נוח ליום גשום.',
+      see: ['רשתות אופנה ומותגים מוכרים', 'חנויות קוסמטיקה, טכנולוגיה ושירותים שימושיים', 'בתי קפה ואוכל מהיר להפסקה קצרה', 'גישה נוחה בתחבורה ציבורית ובמרחק הליכה מאזורים מרכזיים'],
+      fit: 'מתאים לקניות פרקטיות, יום גשם, משפחות, מי ששכח ציוד או רוצה לעשות קניות בלי להסתובב בין רחובות.',
+      tip: 'לא לבנות עליו כחוויית תיירות עיקרית. להשתמש בו כשצריך פתרון נוח, מהיר ומקורה באמצע היום.'
+    },
+    en: {
+      why: 'Place des Halles is a large practical shopping center in central Strasbourg, relatively close to the main train station. It is not a romantic must-see; it is useful when you need clothes, cosmetics, electronics, quick food, restrooms or a rainy-day backup.',
+      see: ['Fashion chains and familiar brands', 'Cosmetics, tech and practical services', 'Cafés and quick food stops', 'Easy public transport and central access'],
+      fit: 'Best for practical shopping, rainy days, families, forgotten travel items or one-stop shopping.',
+      tip: 'Do not treat it as a main travel highlight. Use it as a convenient indoor reset during the day.'
+    }
+  },
+  'Rivetoile': {
+    he: {
+      why: 'Rivetoile הוא מרכז קניות מודרני יותר באזור הדרומי־מזרחי של מרכז שטרסבורג, ליד המים ובקרבת קווי טראם. הוא מתאים כשמחפשים קניות רגועות יותר, אוכל, בתי קפה או עצירה נוחה אחרי הליכה לאורך הנהר או באזורי העיר החדשים.',
+      see: ['חנויות אופנה ורשתות מודרניות', 'מסעדות ובתי קפה בתוך המתחם', 'אזור נעים יותר ליד המים ביחס לקניון עירוני צפוף', 'גישה טובה בטראם וגם חניה למגיעים ברכב'],
+      fit: 'מתאים ליום גשם, קניות נוחות, עצירה עם ילדים, או שילוב עם הליכה באזור הנהר והחלקים החדשים של העיר.',
+      tip: 'אם אתה כבר נמצא ליד התעלות/הנהר או מגיע ברכב, Rivetoile יכול להיות נוח יותר מלהיכנס לעומס של המרכז ההיסטורי.'
+    },
+    en: {
+      why: 'Rivetoile is a more modern shopping center southeast of the historic core, close to the water and tram lines. It works when you want easier shopping, food, cafés or a practical stop after walking near the river or newer city areas.',
+      see: ['Fashion chains and modern stores', 'Restaurants and cafés inside the center', 'A more open riverside setting than dense city-center shopping', 'Good tram access and parking for drivers'],
+      fit: 'Good for rainy days, easy shopping, families or pairing with a river-area walk.',
+      tip: 'If you are already near the river/newer districts or arriving by car, Rivetoile can be easier than pushing into the historic center.'
+    }
+  },
+  'Kehl Shopping Street': {
+    he: {
+      why: 'Kehl היא עיירה גרמנית ממש מעבר לגבול, ונגישה משטרסבורג בטראם. זה לא יעד תיירות קלאסי אלא חוויית קניות פרקטית וחוצה גבול: סופרמרקטים, חנויות יומיומיות, מחירים שונים ותחושה גרמנית בתוך נסיעה קצרה.',
+      see: ['רחוב קניות קטן בצד הגרמני', 'סופרמרקטים וחנויות שימושיות', 'מעבר גבול פשוט באמצעות טראם', 'שינוי אווירה מצרפת לגרמניה בלי נסיעה ארוכה'],
+      fit: 'מתאים למי שיש זמן נוסף, רוצה קניות פרקטיות, אוהב מעבר גבול קצר או מחפש סופרמרקט/מוצרים גרמניים.',
+      tip: 'לא להחליף בזה את שטרסבורג עצמה אם הביקור קצר. זה בונוס פרקטי, לא הלב של הטיול.'
+    },
+    en: {
+      why: 'Kehl is a German town just across the border, reachable from Strasbourg by tram. It is not classic sightseeing; it is practical cross-border shopping with supermarkets, everyday stores, different prices and a German feel in a short ride.',
+      see: ['Small German shopping street', 'Supermarkets and practical stores', 'Easy tram border crossing', 'Quick change of atmosphere from France to Germany'],
+      fit: 'Good for spare time, practical shopping, a small cross-border experience or German supermarket products.',
+      tip: 'Do not choose it instead of Strasbourg highlights on a short stay. Treat it as a practical add-on.'
+    }
+  },
+  'Broglie Market': {
+    he: {
+      why: 'Place Broglie הוא אזור מרכזי בשטרסבורג שקשור במיוחד לשווקים עונתיים ולאירועי חג, ובראשם שוק חג המולד ההיסטורי. מחוץ לעונה זו כיכר עירונית מרכזית, אבל בתקופות שוק היא הופכת לאחת התחנות החשובות של חוויית הקניות והאווירה בעיר.',
+      see: ['דוכנים עונתיים כאשר השוק פעיל', 'אווירת חג/אירוע במרכז העיר', 'קרבה לקתדרלה ולרחובות המרכזיים', 'נקודה טובה לשלב במסלול הליכה עירוני'],
+      fit: 'מתאים במיוחד בעונת חג המולד, בתקופות שוק ואירועים, או למי שנמצא כבר במרכז ורוצה להבין את פעימות העיר.',
+      tip: 'חובה לבדוק תאריכים ושעות. לא כל שוק או אירוע פועל כל השנה, ולכן לא כדאי להסתמך עליו בלי בדיקה.'
+    },
+    en: {
+      why: 'Place Broglie is a central Strasbourg square strongly linked to seasonal markets and events, especially the historic Christmas market. Outside season it is mainly a central urban square; during market periods it becomes a key shopping and atmosphere stop.',
+      see: ['Seasonal stalls when active', 'Holiday or event atmosphere in the city center', 'Close to the cathedral and central streets', 'Easy to combine with a city walk'],
+      fit: 'Best during Christmas season, market periods or city-center walks.',
+      tip: 'Check dates and hours. Seasonal markets are not active year-round, so do not rely on it without verifying.'
+    }
+  },
+  'Neudorf Local Market': {
+    he: {
+      why: 'Neudorf Local Market מייצג צד יותר שכונתי ופחות תיירותי של שטרסבורג. זה מקום שמעניין בעיקר אם אתה רוצה לראות איך מקומיים קונים אוכל יומיומי: ירקות, פירות, גבינות, פרחים, מאפים ומוצרים פשוטים של השכונה.',
+      see: ['דוכני פירות וירקות עונתיים', 'גבינות, מאפים ומוצרים יומיומיים', 'אווירה שכונתית ולא מרכז תיירותי', 'אפשרות לעצור לקפה או נשנוש באזור'],
+      fit: 'מתאים למי שמחפש אותנטיות, שוק מקומי, אוכל יומיומי ומבט על שטרסבורג מחוץ למסלול הקלאסי.',
+      tip: 'לבוא בבוקר ולבדוק ימי פעילות. אם אתה בעיר לזמן קצר מאוד, עדיף קודם לראות את המרכז ההיסטורי ורק אז להגיע לשוק שכונתי.'
+    },
+    en: {
+      why: 'Neudorf Local Market shows a more neighborhood-based, less touristy side of Strasbourg. It is mainly interesting if you want to see everyday local food shopping: produce, cheese, flowers, pastries and simple neighborhood goods.',
+      see: ['Seasonal fruit and vegetable stalls', 'Cheese, pastries and everyday products', 'Neighborhood atmosphere rather than tourist-center shopping', 'Possible nearby coffee or snack stop'],
+      fit: 'Best for travelers who want local authenticity, everyday food shopping and Strasbourg beyond the classic center.',
+      tip: 'Go in the morning and check market days. On a very short stay, see the historic center first, then add a local market.'
+    }
+  }
+};
+
+function v72StrasbourgMarketGuide(item){
+  if(!item || item.city !== 'strasbourg' || item.cat !== 'markets') return null;
+  const pack = V72_STRASBOURG_MARKETS_CONTENT[item.name];
+  if(!pack) return null;
+  return pack[getLang()] || pack.en || pack.he || null;
+}
+
 function guideContentFor(item){
   const routeGuide = carGuideFor(item);
   if(routeGuide) return {why: routeGuide.why, see: (routeGuide.stops||[]).map(s=>`${s.name}: ${s.text}`), fit: routeGuide.bestFor, tip: routeGuide.tip};
   const lang=getLang();
   const title=titleFor(item);
+  const v72MarketGuide = v72StrasbourgMarketGuide(item);
+  if(v72MarketGuide) return v72MarketGuide;
   const v49Guide = v49ExperienceMustDoGuide(item);
   if(v49Guide) return v49Guide;
   const v48Guide = v48RealGuide(item);
@@ -13475,7 +13577,7 @@ function syncTabsForPackageMode(){
   const packageMode = activePackageMode();
   const allowedTabs = packageMode === 'car'
     ? ['trips', 'mytrip', 'saved']
-    : ['trips', 'food', 'nightlife', 'experiences', 'mustdo', 'recommendations', 'mytrip', 'saved'];
+    : ['trips', 'food', 'nightlife', 'experiences', 'mustdo', 'attractions', 'markets', 'winter', 'recommendations', 'mytrip', 'saved'];
 
   document.querySelectorAll('.tab').forEach(btn => {
     const tab = btn.dataset.tab;
@@ -13595,33 +13697,725 @@ function buildImage(city,cat,name,tags=[]){
     recommendations:['#0891b2','#0f766e','#8b5cf6']
   };
   const p=palettes[cat] || ['#0f172a','#38bdf8','#8b5cf6'];
-  const icon={trips:'🏞️',food:'🍜',nightlife:'🎶',experiences:'✨',mustdo:'⭐',recommendations:'📍'}[cat] || '📍';
+  const icon={trips:'🏞️',food:'🍽️',nightlife:'🎶',experiences:'✨',mustdo:'⭐',recommendations:'📍'}[cat] || '📍';
   const label=(name||'Place').replace(/[&<>]/g,'').slice(0,34);
   const sub=(tags||[]).slice(0,2).join(' • ').replace(/[&<>]/g,'').slice(0,34);
-  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="900" height="440" viewBox="0 0 900 440">
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="900" height="540" viewBox="0 0 900 540">
     <defs>
       <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${p[0]}"/><stop offset="0.58" stop-color="${p[1]}"/><stop offset="1" stop-color="${p[2]}"/></linearGradient>
-      <radialGradient id="r" cx="70%" cy="20%" r="65%"><stop offset="0" stop-color="#ffffff" stop-opacity=".42"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
+      <radialGradient id="r" cx="70%" cy="20%" r="65%"><stop offset="0" stop-color="#ffffff" stop-opacity=".38"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></radialGradient>
       <filter id="shadow"><feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#000" flood-opacity=".38"/></filter>
     </defs>
-    <rect width="900" height="440" rx="34" fill="url(#g)"/>
-    <rect width="900" height="440" rx="34" fill="url(#r)"/>
-    <circle cx="740" cy="88" r="135" fill="#fff" opacity=".16"/>
-    <circle cx="115" cy="365" r="185" fill="#020617" opacity=".18"/>
-    <path d="M0 325 C120 250 240 385 390 305 C560 215 675 350 900 255 L900 440 L0 440 Z" fill="#020617" opacity=".30"/>
-    <path d="M620 320 C690 260 760 260 835 325" stroke="#fff" stroke-width="10" opacity=".35" fill="none" stroke-linecap="round"/>
-    <text x="64" y="130" font-family="Arial, sans-serif" font-size="76" filter="url(#shadow)">${icon}</text>
-    <text x="64" y="218" font-family="Arial, sans-serif" font-size="48" font-weight="900" fill="#fff" filter="url(#shadow)">${label}</text>
-    <text x="66" y="272" font-family="Arial, sans-serif" font-size="25" font-weight="800" fill="#f8fafc" opacity=".95">${sub || CITIES[city]?.name || 'DayTripFlow'}</text>
-    <rect x="64" y="328" width="255" height="42" rx="21" fill="#fff" opacity=".18"/>
-    <text x="84" y="356" font-family="Arial, sans-serif" font-size="19" font-weight="800" fill="#fff" opacity=".95">Curated travel card</text>
+    <rect width="900" height="540" rx="34" fill="url(#g)"/>
+    <rect width="900" height="540" rx="34" fill="url(#r)"/>
+    <circle cx="740" cy="118" r="145" fill="#fff" opacity=".14"/>
+    <circle cx="115" cy="425" r="205" fill="#020617" opacity=".20"/>
+    <path d="M0 395 C120 310 240 455 390 365 C560 265 675 430 900 320 L900 540 L0 540 Z" fill="#020617" opacity=".32"/>
+    <text x="64" y="160" font-family="Arial, sans-serif" font-size="82" filter="url(#shadow)">${icon}</text>
+    <text x="64" y="268" font-family="Arial, sans-serif" font-size="48" font-weight="900" fill="#fff" filter="url(#shadow)">${label}</text>
+    <text x="66" y="326" font-family="Arial, sans-serif" font-size="25" font-weight="800" fill="#f8fafc" opacity=".95">${sub || CITIES[city]?.name || 'DayTripFlow'}</text>
+    <rect x="64" y="395" width="285" height="44" rx="22" fill="#fff" opacity=".18"/>
+    <text x="86" y="425" font-family="Arial, sans-serif" font-size="19" font-weight="800" fill="#fff" opacity=".95">Offline guide card</text>
   </svg>`;
   return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 }
+
+
+function escapeHtml(value){
+  return String(value ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+}
+function asciiSlugForPhoto(value){
+  return String(value || '')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .toLowerCase()
+    .replace(/č/g,'c').replace(/š/g,'s').replace(/ž/g,'z').replace(/ř/g,'r').replace(/ě/g,'e').replace(/ň/g,'n').replace(/ů/g,'u')
+    .replace(/[^a-z0-9]+/g,' ')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+function photoHash(value){
+  let h=2166136261;
+  const src=String(value || 'daytripflow');
+  for(let i=0;i<src.length;i++){h^=src.charCodeAt(i);h=Math.imul(h,16777619)}
+  return Math.abs(h>>>0);
+}
+const CITY_IMAGE_TAGS = {
+  prague:'Prague Charles Bridge Old Town',
+  vienna:'Vienna Schönbrunn Palace Hofburg',
+  strasbourg:'Strasbourg Petite France Cathedral'
+};
+const CITY_HERO_WIKI = {
+  prague:'Prague',
+  vienna:'Vienna',
+  strasbourg:'Strasbourg'
+};
+const PHOTO_WIKI_TITLES = {
+  // Prague public routes / must-do / experiences
+  'Old Town • Charles Bridge • Kampa Core Walk':'Charles Bridge',
+  'Prague Castle • Malá Strana Downhill Route':'Prague Castle',
+  'Jewish Quarter • Old Town Context Walk':'Josefov',
+  'Petřín • Strahov • Castle View Route':'Petřín',
+  'Letná View • Beer Garden • Metronome Route':'Letná Park',
+  'Dancing House • Náplavka • Riverside Route':'Dancing House',
+  'Charles Bridge at sunrise':'Charles Bridge',
+  'Old Town Square at night':'Old Town Square, Prague',
+  'Prague Castle panorama':'Prague Castle',
+  'Astronomical Clock area':'Prague astronomical clock',
+  'Vyšehrad Fortress':'Vyšehrad',
+  'Jewish Quarter':'Josefov',
+  'Kampa Island':'Kampa Island',
+  'Lennon Wall':'Lennon Wall',
+  'Clementinum viewpoint':'Clementinum',
+  'Vltava River Cruise':'Vltava',
+  'Petřín Hill Viewpoint':'Petřín',
+  'Black Light Theatre':'Black light theatre',
+  'Beer Spa':'Beer spa',
+  'Prague Vintage Car Tour':'Prague vintage car',
+  'E-bike Old Town Tour':'Prague Old Town',
+  'Prague Castle Viewpoints':'Prague Castle',
+  'Vyšehrad Sunset Walk':'Vyšehrad',
+  'Letná Metronome View':'Letná Park',
+  'Paddle Boats on Vltava':'Vltava',
+  // Prague car / trips
+  'Karlštejn Castle':'Karlštejn',
+  'Kutná Hora':'Kutná Hora',
+  'Karlovy Vary':'Karlovy Vary',
+  'Český Krumlov':'Český Krumlov',
+  'Dresden':'Dresden',
+  'Terezín':'Terezín',
+  'Konopiště Castle':'Konopiště',
+  'Pilsen':'Plzeň',
+  'Bohemian Paradise':'Bohemian Paradise',
+  'Křivoklát Castle':'Křivoklát Castle',
+  'Mělník':'Mělník',
+  'Poděbrady':'Poděbrady',
+  'Tábor':'Tábor',
+  'České Budějovice':'České Budějovice',
+  'Liberec':'Liberec',
+  'Český ráj rocks':'Bohemian Paradise',
+  'Lidice Memorial':'Lidice',
+  'Velká Amerika Quarry':'Velká Amerika',
+  'Průhonice Park':'Průhonice Park',
+  'Sázava Monastery':'Sázava Monastery',
+  // Vienna public / must-do / experiences
+  'Stephansdom • Graben • Hofburg Classic Walk':'St. Stephen\'s Cathedral, Vienna',
+  'Schönbrunn Palace Gardens Public Half-Day':'Schönbrunn Palace',
+  'Belvedere • Karlsplatz • Naschmarkt Route':'Belvedere, Vienna',
+  'Prater • Giant Wheel • Danube Canal Evening':'Wiener Riesenrad',
+  'Ringstrasse Tram • Parliament • Rathaus Route':'Vienna Ring Road',
+  'MuseumsQuartier • Spittelberg • Mariahilfer Route':'MuseumsQuartier',
+  'Schönbrunn Palace':'Schönbrunn Palace',
+  'Schönbrunn Palace gardens':'Schönbrunn Palace',
+  'Belvedere Palace':'Belvedere, Vienna',
+  'Vienna State Opera standing tickets':'Vienna State Opera',
+  'Spanish Riding School':'Spanish Riding School',
+  'St. Stephen’s Cathedral':'St. Stephen\'s Cathedral, Vienna',
+  'Prater Giant Ferris Wheel':'Wiener Riesenrad',
+  'Café Central breakfast':'Café Central',
+  'Ringstrasse walk':'Vienna Ring Road',
+  'Sunset at Kahlenberg':'Kahlenberg',
+  'Hofburg Palace complex':'Hofburg',
+  // Vienna car / trips
+  'Bratislava':'Bratislava',
+  'Wachau Valley':'Wachau',
+  'Melk Abbey':'Melk Abbey',
+  'Baden bei Wien':'Baden bei Wien',
+  'Hallstatt':'Hallstatt',
+  'Graz':'Graz',
+  'Laxenburg Castle Park':'Laxenburg castles',
+  'Klosterneuburg Abbey':'Klosterneuburg Monastery',
+  'Semmering Railway':'Semmering railway',
+  'Eisenstadt':'Eisenstadt',
+  'Carnuntum':'Carnuntum',
+  'Neusiedler See':'Lake Neusiedl',
+  'Krems an der Donau':'Krems an der Donau',
+  'Dürnstein':'Dürnstein',
+  'Mayerling':'Mayerling incident',
+  'Forchtenstein Castle':'Forchtenstein Castle',
+  'Mariazell':'Mariazell',
+  'Sopron':'Sopron',
+  'Göttweig Abbey':'Göttweig Abbey',
+  'Schloss Hof':'Schloss Hof',
+  // Strasbourg public / must-do / experiences
+  'Cathedral • Petite France Essential Walk':'Strasbourg Cathedral',
+  'Batorama Boat • Old Town Orientation':'Batorama Strasbourg',
+  'European Quarter Tram • Orangerie Route':'European Parliament, Strasbourg',
+  'Covered Bridges • Vauban Dam Sunset Route':'Barrage Vauban',
+  'Neustadt • Republic Square Architecture Route':'Neustadt (Strasbourg)',
+  'Modern Art Museum • Barrage Vauban Route':'Musée d\'Art moderne et contemporain de Strasbourg',
+  'Strasbourg Cathedral':'Strasbourg Cathedral',
+  'Petite France':'Petite France, Strasbourg',
+  'Strasbourg Boat Tour':'Batorama Strasbourg',
+  'Batorama cruise':'Batorama Strasbourg',
+  'Cathedral Platform View':'Strasbourg Cathedral',
+  'Petite France canals':'Petite France, Strasbourg',
+  'European Quarter walk':'European Parliament, Strasbourg',
+  'Covered Bridges sunset':'Barrage Vauban',
+  'Bike tour along Ill river':'Ill (France)',
+  // Strasbourg car / trips
+  'Colmar':'Colmar',
+  'Riquewihr':'Riquewihr',
+  'Château du Haut-Kœnigsbourg':'Château du Haut-Kœnigsbourg',
+  'Baden-Baden':'Baden-Baden',
+  'Europa-Park':'Europa-Park',
+  'Obernai':'Obernai',
+  'Eguisheim':'Eguisheim',
+  'Kaysersberg':'Kaysersberg',
+  'Freiburg im Breisgau':'Freiburg im Breisgau',
+  'Black Forest Triberg':'Triberg im Schwarzwald',
+  'Saverne':'Saverne',
+  'Molsheim':'Molsheim',
+  'Mont Sainte-Odile':'Mont Sainte-Odile',
+  'Sélestat':'Sélestat',
+  'Basel':'Basel',
+  'Nancy':'Nancy, France',
+  'Heidelberg':'Heidelberg',
+  'Mummelsee':'Mummelsee',
+  'Gengenbach':'Gengenbach',
+  'Wissembourg':'Wissembourg',
+  // Restaurants / nightlife likely pages or Commons search terms
+  'Café Louvre':'Café Louvre, Prague',
+  'Lokál Dlouhááá':'Lokál Dlouhá Prague',
+  'Naše Maso':'Naše maso Prague',
+  'Kantýna':'Kantýna Prague restaurant',
+  'Maitrea':'Maitrea Prague restaurant',
+  'Café Central':'Café Central',
+  'Figlmüller':'Figlmüller',
+  'Demel':'Demel',
+  'Plachutta':'Plachutta',
+  'Naschmarkt':'Naschmarkt',
+  'Das Loft':'SO/Vienna Das Loft',
+  'Grelle Forelle':'Grelle Forelle Vienna',
+  'Volksgarten':'Volksgarten, Vienna',
+  'Pratersauna':'Pratersauna Vienna',
+  'Flam’s':'Flammekueche Strasbourg restaurant',
+  'Maison Kammerzell':'Maison Kammerzell',
+  'La Corde à Linge':'La Corde à Linge Strasbourg',
+  'Les BerThoM':'Les BerThoM Strasbourg',
+  'Kitsch’n Bar':'Kitsch’n Bar Strasbourg'
+};
+const PHOTO_QUERY_OVERRIDES = {
+  // Prague routes and city places
+  'Old Town • Charles Bridge • Kampa Core Walk':'Prague Old Town Charles Bridge Kampa island skyline',
+  'Prague Castle • Malá Strana Downhill Route':'Prague Castle Mala Strana rooftops St Vitus Cathedral',
+  'Vyšehrad Fortress • Riverside Calm Route':'Vysehrad fortress Prague Vltava view',
+  'Jewish Quarter • Old Town Context Walk':'Josefov Jewish Quarter Prague Old New Synagogue',
+  'Petřín • Strahov • Castle View Route':'Petrin hill Strahov Prague panorama',
+  'Letná View • Beer Garden • Metronome Route':'Letna Park Prague metronome view bridges',
+  'Dancing House • Náplavka • Riverside Route':'Dancing House Prague Vltava riverfront',
+  'National Museum • Wenceslas • Lucerna Route':'National Museum Prague Wenceslas Square',
+  'Kampa • Lennon Wall • Malá Strana Corners':'Kampa Island Lennon Wall Mala Strana Prague',
+  'Tram 22 Scenic Prague Route':'Prague tram 22 castle Mala Strana',
+  'Charles Bridge at sunrise':'Charles Bridge Prague sunrise',
+  'Old Town Square at night':'Old Town Square Prague night',
+  'Astronomical Clock area':'Prague astronomical clock Old Town Square',
+  'Jewish Quarter':'Josefov Prague Jewish Quarter Old New Synagogue',
+  'Kampa Island':'Kampa Island Prague canal',
+  'Lennon Wall':'Lennon Wall Prague',
+  'Clementinum viewpoint':'Clementinum Prague library tower view',
+  'Vltava River Cruise':'Vltava river Prague cruise Charles Bridge',
+  'Petřín Hill Viewpoint':'Petrin Hill Prague viewpoint tower',
+  'Prague Castle panorama':'Prague Castle panorama Vltava Charles Bridge',
+  'Vyšehrad Fortress':'Vysehrad fortress Prague',
+  'Black Light Theatre':'Prague black light theatre stage',
+  'Beer Spa':'Prague beer spa wooden tub',
+
+  // Prague car destinations
+  'Karlštejn Castle':'Karlstejn Castle Czech Republic exterior',
+  'Kutná Hora':'Kutna Hora St Barbara Cathedral Sedlec',
+  'Karlovy Vary':'Karlovy Vary colonnade hot springs',
+  'Český Krumlov':'Cesky Krumlov castle old town river',
+  'Dresden':'Dresden Frauenkirche Zwinger Elbe',
+  'Terezín':'Terezin Memorial Czech Republic fortress',
+  'Konopiště Castle':'Konopiste Castle Czech Republic lake',
+  'Pilsen':'Pilsen Plzen main square brewery',
+  'Bohemian Paradise':'Bohemian Paradise sandstone rocks Czech Republic',
+  'Křivoklát Castle':'Krivoklat Castle Czech Republic forest',
+  'Mělník':'Melnik Czech Republic castle vineyard river confluence',
+  'Poděbrady':'Podebrady spa colonnade Czech Republic',
+  'Tábor':'Tabor Czech Republic old town square',
+  'České Budějovice':'Ceske Budejovice town square Czech Republic',
+  'Liberec':'Liberec Jested tower Czech Republic',
+  'Český ráj rocks':'Prachov Rocks Bohemian Paradise Czech Republic',
+  'Lidice Memorial':'Lidice Memorial Czech Republic',
+  'Velká Amerika Quarry':'Velka Amerika quarry turquoise water Czech Republic',
+  'Průhonice Park':'Pruhonice Park castle Czech Republic',
+  'Sázava Monastery':'Sazava Monastery Czech Republic river',
+
+  // Vienna public routes and places
+  'Stephansdom • Graben • Hofburg Classic Walk':'St Stephen Cathedral Vienna Graben Hofburg',
+  'Ringstrasse • Opera • Parliament Route':'Vienna Ringstrasse State Opera Parliament Rathaus',
+  'Schönbrunn Palace Gardens Public Half-Day':'Schonbrunn Palace gardens Vienna',
+  'Belvedere • Karlsplatz • Naschmarkt Route':'Belvedere Palace Vienna Karlsplatz Naschmarkt',
+  'MuseumsQuartier • Hofburg Culture Route':'MuseumsQuartier Vienna Hofburg',
+  'Prater • Giant Wheel • Danube Canal Evening':'Prater Giant Ferris Wheel Vienna',
+  'Hundertwasserhaus • Stadtpark • Canal Route':'Hundertwasserhaus Vienna Stadtpark',
+  'Coffeehouse Vienna • Central • Hawelka Route':'Cafe Central Vienna coffeehouse interior',
+  'Karlskirche • Musikverein • Secession Route':'Karlskirche Vienna Musikverein Secession',
+  'Grinzing Wine Tavern Light Evening':'Grinzing Vienna wine tavern vineyards',
+  'Schönbrunn Palace':'Schonbrunn Palace Vienna',
+  'Schönbrunn Palace gardens':'Schonbrunn Palace gardens Vienna',
+  'Belvedere Palace':'Belvedere Palace Vienna',
+  'Vienna State Opera standing tickets':'Vienna State Opera exterior interior',
+  'Spanish Riding School':'Spanish Riding School Vienna horses',
+  'St. Stephen’s Cathedral':'St Stephen Cathedral Vienna',
+  'Prater Giant Ferris Wheel':'Wiener Riesenrad Vienna Prater',
+  'Café Central breakfast':'Cafe Central Vienna interior',
+  'Ringstrasse walk':'Vienna Ringstrasse Parliament Rathaus',
+  'Sunset at Kahlenberg':'Kahlenberg Vienna sunset view',
+  'Hofburg Palace complex':'Hofburg Palace Vienna',
+
+  // Vienna car destinations
+  'Bratislava':'Bratislava castle old town Danube',
+  'Wachau Valley':'Wachau Valley Danube vineyards Durnstein',
+  'Melk Abbey':'Melk Abbey Austria Danube',
+  'Baden bei Wien':'Baden bei Wien Austria spa town',
+  'Hallstatt':'Hallstatt Austria lake village',
+  'Graz':'Graz Austria old town Schlossberg',
+  'Laxenburg Castle Park':'Laxenburg Castle Park Austria Franzensburg',
+  'Klosterneuburg Abbey':'Klosterneuburg Abbey Austria',
+  'Semmering Railway':'Semmering Railway Austria viaduct',
+  'Eisenstadt':'Eisenstadt Esterhazy Palace Austria',
+  'Carnuntum':'Carnuntum Roman city Austria',
+  'Neusiedler See':'Lake Neusiedl Austria reeds',
+  'Krems an der Donau':'Krems an der Donau Austria old town',
+  'Dürnstein':'Durnstein Wachau Austria blue tower',
+  'Mayerling':'Mayerling Austria chapel',
+  'Forchtenstein Castle':'Forchtenstein Castle Austria',
+  'Mariazell':'Mariazell Basilica Austria',
+  'Sopron':'Sopron Hungary firewatch tower old town',
+  'Göttweig Abbey':'Gottweig Abbey Austria Wachau',
+  'Schloss Hof':'Schloss Hof Austria palace garden',
+
+  // Strasbourg public routes and places
+  'Cathedral • Petite France Essential Walk':'Strasbourg Cathedral Petite France canals',
+  'Batorama Boat • Old Town Orientation':'Strasbourg Batorama boat canal',
+  'European Quarter Tram • Orangerie Route':'European Parliament Strasbourg Parc Orangerie tram',
+  'Krutenau Food • Bars • Student Quarter Walk':'Krutenau Strasbourg street restaurants bars',
+  'Covered Bridges • Vauban Dam Sunset Route':'Barrage Vauban Strasbourg covered bridges',
+  'Neustadt • Republic Square Architecture Route':'Neustadt Strasbourg Place de la Republique architecture',
+  'Orangerie Park • European Institutions Easy Route':'Parc de l Orangerie Strasbourg European Parliament',
+  'Saint-Thomas • Ill River Quiet Walk':'Saint Thomas church Strasbourg Ill river',
+  'Modern Art Museum • Barrage Vauban Route':'Strasbourg Museum Modern Art Barrage Vauban',
+  'Christmas Market Core Route':'Strasbourg Christmas market Cathedral',
+  'Strasbourg Cathedral':'Strasbourg Cathedral exterior',
+  'Petite France':'Petite France Strasbourg canals half timbered houses',
+  'Strasbourg Boat Tour':'Strasbourg canal boat Batorama',
+  'Batorama cruise':'Strasbourg canal boat Batorama',
+  'Cathedral Platform View':'Strasbourg Cathedral platform view',
+  'Petite France canals':'Petite France Strasbourg canals',
+  'European Quarter walk':'European Parliament Strasbourg',
+  'Covered Bridges sunset':'Barrage Vauban Strasbourg sunset',
+  'Bike tour along Ill river':'Strasbourg Ill river bike path',
+
+  // Strasbourg car destinations
+  'Colmar':'Colmar Petite Venise Alsace half timbered',
+  'Riquewihr':'Riquewihr Alsace village vineyard',
+  'Château du Haut-Kœnigsbourg':'Chateau du Haut Koenigsbourg Alsace castle',
+  'Baden-Baden':'Baden Baden Germany spa Kurhaus',
+  'Europa-Park':'Europa Park Rust Germany roller coaster',
+  'Obernai':'Obernai Alsace old town',
+  'Eguisheim':'Eguisheim Alsace village half timbered',
+  'Kaysersberg':'Kaysersberg Alsace village river',
+  'Freiburg im Breisgau':'Freiburg im Breisgau Munster old town',
+  'Black Forest Triberg':'Triberg waterfalls Black Forest Germany',
+  'Saverne':'Saverne Alsace Chateau Rohan canal',
+  'Molsheim':'Molsheim Alsace old town Metzig',
+  'Mont Sainte-Odile':'Mont Sainte Odile Alsace monastery view',
+  'Sélestat':'Selestat Alsace old town church',
+  'Basel':'Basel Switzerland Rhine old town',
+  'Nancy':'Nancy Place Stanislas France',
+  'Heidelberg':'Heidelberg castle old bridge Germany',
+  'Mummelsee':'Mummelsee Black Forest lake Germany',
+  'Gengenbach':'Gengenbach Black Forest half timbered old town',
+  'Wissembourg':'Wissembourg Alsace old town river',
+
+  // Restaurants and nightlife - use food/interior when exact venue image is unavailable
+  'Flam’s':'Flammekueche tarte flambee Alsace Strasbourg restaurant',
+  'Maison Kammerzell':'Maison Kammerzell Strasbourg restaurant facade',
+  'La Corde à Linge':'La Corde a Linge Strasbourg Petite France restaurant',
+  'Les BerThoM':'Les BerThoM beer bar Strasbourg',
+  'Kitsch’n Bar':'Kitsch n Bar Strasbourg',
+  'Académie de la Bière':'Academie de la Biere Strasbourg bar',
+  'L’Alchimiste':'L Alchimiste cocktail bar Strasbourg',
+  'La Laiterie':'La Laiterie Strasbourg concert venue',
+  'Café Louvre':'Cafe Louvre Prague interior',
+  'Lokál Dlouhááá':'Lokal Dlouha Prague beer restaurant',
+  'Naše Maso':'Nase Maso Prague butcher bistro',
+  'Kantýna':'Kantyna Prague restaurant interior',
+  'Maitrea':'Maitrea Prague vegetarian restaurant',
+  'Café Central':'Cafe Central Vienna interior',
+  'Figlmüller':'Figlmueller Vienna schnitzel restaurant',
+  'Demel':'Demel Vienna cafe interior pastry',
+  'Plachutta':'Plachutta Vienna restaurant tafelspitz',
+  'Naschmarkt':'Naschmarkt Vienna food market',
+  'Das Loft':'Das Loft Vienna rooftop bar view',
+  'Grelle Forelle':'Grelle Forelle Vienna club',
+  'Volksgarten':'Volksgarten Vienna club',
+  'Pratersauna':'Pratersauna Vienna club',
+  'Loos American Bar':'Loos American Bar Vienna interior',
+  'Flex':'Flex Vienna club Danube canal',
+  'Hemingway Bar':'Hemingway Bar Prague cocktail',
+  'Anonymous Bar':'Anonymous Bar Prague cocktail',
+  'Dva Kohouti':'Dva Kohouti Prague brewery',
+  'BeerGeek Bar':'BeerGeek Bar Prague craft beer',
+  'Jazz Dock':'Jazz Dock Prague club',
+  'Cross Club':'Cross Club Prague interior',
+  'Lucerna Music Bar':'Lucerna Music Bar Prague',
+  'Roxy Prague':'Roxy Prague club',
+  'Karlovy Lázně':'Karlovy Lazne Prague club'
+};
+
+const LOCKED_PHOTO_QUERIES = {
+  // Prague food / nightlife examples and common venues
+  'Manifesto Market':'Manifesto Market Prague food market courtyard stalls',
+  'Lokál Dlouhááá':'Lokal Dlouha Prague Czech pub interior Pilsner',
+  'Naše Maso':'Nase Maso Prague butcher bistro',
+  'Kantýna':'Kantyna Prague restaurant interior beef',
+  'Café Louvre':'Cafe Louvre Prague historic cafe interior',
+  'Eska Karlín':'Eska Karlin Prague bakery restaurant interior',
+  'Maitrea':'Maitrea Prague vegetarian restaurant interior',
+  'Lucerna Music Bar':'Lucerna Music Bar Prague concert club interior',
+  'Aloha Wave Lounge':'Aloha Wave Lounge Prague bar interior',
+  'Hemingway Bar':'Hemingway Bar Prague cocktail interior',
+  'Cross Club':'Cross Club Prague steampunk club interior',
+  'Roxy Prague':'Roxy Prague nightclub interior',
+  'Jazz Dock':'Jazz Dock Prague riverside jazz club',
+  'BeerGeek Bar':'BeerGeek Bar Prague craft beer taps',
+  // Vienna food / nightlife
+  'Figlmüller':'Figlmueller Vienna schnitzel restaurant interior',
+  'Plachutta':'Plachutta Vienna Tafelspitz restaurant interior',
+  'Café Central':'Cafe Central Vienna historic cafe interior',
+  'Café Landtmann':'Cafe Landtmann Vienna interior',
+  'Demel':'Demel Vienna pastry shop interior',
+  'Naschmarkt':'Naschmarkt Vienna food market stalls',
+  'Zum Schwarzen Kameel':'Zum Schwarzen Kameel Vienna restaurant',
+  'Das Loft':'Das Loft Vienna rooftop bar view',
+  'Grelle Forelle':'Grelle Forelle Vienna club interior',
+  'Volksgarten':'Volksgarten Vienna club interior',
+  'Pratersauna':'Pratersauna Vienna club',
+  'Loos American Bar':'Loos American Bar Vienna interior',
+  'Flex':'Flex Vienna club Danube canal',
+  // Strasbourg food / nightlife
+  'Flam’s':'Flams Strasbourg flammekueche restaurant interior',
+  'Maison Kammerzell':'Maison Kammerzell Strasbourg restaurant historic facade',
+  'La Corde à Linge':'La Corde a Linge Strasbourg Petite France terrace',
+  'Au Pont Corbeau':'Au Pont Corbeau Strasbourg winstub restaurant',
+  'Le Tire-Bouchon':'Le Tire Bouchon Strasbourg restaurant winstub',
+  'Pâtisserie Christian':'Patisserie Christian Strasbourg pastries shop',
+  'Les BerThoM':'Les BerThoM Strasbourg beer bar interior',
+  'Kitsch’n Bar':'Kitschn Bar Strasbourg interior',
+  'Académie de la Bière':'Academie de la Biere Strasbourg beer bar',
+  'L’Alchimiste':'L Alchimiste Strasbourg cocktail bar',
+  'La Laiterie':'La Laiterie Strasbourg concert venue',
+  // car route packs - lock to main destination scenery
+  'Karlovy Vary Spa Route':'Karlovy Vary colonnade hot springs Czech Republic',
+  'Karlštejn Castle Route':'Karlstejn Castle Czech Republic exterior',
+  'Kutná Hora Gothic Route':'Kutna Hora St Barbara Cathedral Sedlec Ossuary',
+  'Český Krumlov Long Route':'Cesky Krumlov castle old town river',
+  'Wachau Danube & Wine Route':'Wachau Valley Danube Durnstein vineyards',
+  'Hallstatt Lakes Route':'Hallstatt Austria lake village viewpoint',
+  'Carnuntum Roman Route':'Carnuntum Roman city Austria ruins reconstructed houses',
+  'Bratislava Castle Route':'Bratislava Castle old town Danube',
+  'Colmar & Alsace Villages Route':'Colmar Petite Venise Alsace half timbered houses',
+  'Alsace Wine Villages Route':'Riquewihr Eguisheim Alsace wine village street',
+  'Baden-Baden Spa Route':'Baden Baden Kurhaus Germany spa town',
+  'Black Forest Triberg Route':'Triberg waterfalls Black Forest Germany',
+  // new attractions / markets
+  'Prague Zoo':'Prague Zoo entrance animals',
+  'Žižkov Television Tower':'Zizkov Television Tower Prague',
+  'Vltava Pedal Boats':'Vltava pedal boats Prague',
+  'Stromovka Park':'Stromovka Park Prague',
+  'Havelské tržiště':'Havelske trziste Prague market',
+  'Palladium Mall':'Palladium Prague shopping mall',
+  'Fashion Arena Prague Outlet':'Fashion Arena Prague Outlet',
+  'Naplavka Farmers Market':'Naplavka Farmers Market Prague',
+  'Naschmarkt Vienna':'Naschmarkt Vienna market stalls',
+  'Mariahilfer Straße':'Mariahilfer Strasse Vienna shopping street',
+  'Donau Zentrum':'Donau Zentrum Vienna shopping mall',
+  'Parndorf Designer Outlet':'Parndorf Designer Outlet Austria',
+  'Vienna Prater':'Prater Vienna Giant Ferris Wheel amusement park',
+  'Danube Tower':'Danube Tower Vienna view',
+  'Kahlenberg Viewpoint':'Kahlenberg Vienna viewpoint',
+  'Strasbourg Covered Market':'Strasbourg market hall food stalls',
+  'Place des Halles':'Place des Halles Strasbourg shopping mall',
+  'Rivetoile':'Rivetoile Strasbourg shopping center',
+  'Kehl Shopping Street':'Kehl Germany shopping street',
+  'Batorama Boat Ride':'Batorama Strasbourg boat tour',
+  'Parc de l’Orangerie':'Parc de l Orangerie Strasbourg lake storks',
+  'Cathedral Platform':'Strasbourg Cathedral platform view'
+};
+
+function categoryEmoji(cat){
+  return {trips:'🏰',food:'🍽️',nightlife:'🌙',experiences:'✨',mustdo:'⭐',attractions:'🎡',markets:'🛍️',winter:'🎄',recommendations:'📍'}[cat] || '📍';
+}
+
+function bingThumbUrl(query, width=1400, height=850){
+  const q = encodeURIComponent(String(query || 'travel landmark').replace(/\s+/g,' ').trim());
+  // Prototype image provider: gives each card a specific web thumbnail by the exact place/venue query.
+  // For production/offline packs, replace this with a licensed local /images manifest.
+  return `https://tse1.mm.bing.net/th?q=${q}&w=${width}&h=${height}&c=7&rs=1&p=0&o=5&dpr=1.5&pid=1.7`;
+}
+function exactPhotoQueryFor(item){
+  const raw = String(item?.name || titleFor(item) || '').trim();
+  const city = CITIES[item?.city || activeCity()]?.name || '';
+  const cat = item?.cat || '';
+  const locked = LOCKED_PHOTO_QUERIES?.[raw] || item?.lockedPhotoQuery;
+  if(locked) return locked;
+  const curated = PHOTO_QUERY_OVERRIDES?.[raw] || PHOTO_WIKI_TITLES?.[raw] || raw;
+  if(cat === 'food') return `${curated} ${city} restaurant interior food exterior`;
+  if(cat === 'nightlife') return `${curated} ${city} bar club interior nightlife exterior`;
+  if(cat === 'experiences') return `${curated} ${city} travel experience attraction`;
+  if(cat === 'mustdo') return `${curated} ${city} landmark attraction`;
+  if(cat === 'attractions') return `${curated} ${city} attraction activity`;
+  if(cat === 'markets') return `${curated} ${city} market shopping mall outlet`;
+  if(cat === 'winter') return `${curated} ${city} christmas market winter lights holiday food`;
+  if(cat === 'trips') return `${curated} ${city} walking route landmark view`;
+  if(typeof isRoutePack === 'function' && isRoutePack(item)) return `${curated} scenic route destination restaurant viewpoint`;
+  return `${curated} ${city} travel landmark`;
+}
+function localFallbackImage(item){
+  const title = escapeHtml(titleFor(item) || item?.name || 'DayTripFlow');
+  const city = escapeHtml(cityNameFor(item?.city || activeCity()));
+  const emoji = categoryEmoji(item?.cat);
+  const palette = {
+    prague:['#0f172a','#2563eb','#7c3aed'],
+    vienna:['#111827','#7c2d12','#a16207'],
+    strasbourg:['#052e2b','#0f766e','#7c3aed']
+  }[item?.city || activeCity()] || ['#0f172a','#334155','#7c3aed'];
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 540"><defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="${palette[0]}"/><stop offset="0.55" stop-color="${palette[1]}"/><stop offset="1" stop-color="${palette[2]}"/></linearGradient><radialGradient id="r" cx="80%" cy="20%" r="70%"><stop offset="0" stop-color="rgba(255,255,255,.28)"/><stop offset="1" stop-color="rgba(255,255,255,0)"/></radialGradient></defs><rect width="900" height="540" fill="url(#g)"/><rect width="900" height="540" fill="url(#r)"/><circle cx="735" cy="120" r="82" fill="rgba(255,255,255,.14)"/><text x="64" y="108" font-family="Arial, sans-serif" font-size="64">${emoji}</text><text x="64" y="365" font-family="Arial, sans-serif" font-size="50" font-weight="800" fill="#fff">${title}</text><text x="64" y="420" font-family="Arial, sans-serif" font-size="30" fill="#dbeafe">${city}</text></svg>`;
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
+function wikiTitleFor(item){
+  if(item?.wikiTitleOverride) return item.wikiTitleOverride;
+  const raw = String(item?.name || titleFor(item) || '').trim();
+  if(PHOTO_WIKI_TITLES[raw]) return PHOTO_WIKI_TITLES[raw];
+  if(raw.includes('•')){
+    const first = raw.split('•').map(x=>x.trim()).find(Boolean);
+    if(first && PHOTO_WIKI_TITLES[first]) return PHOTO_WIKI_TITLES[first];
+    return `${first || raw} ${CITIES[item?.city || activeCity()]?.name || ''}`.trim();
+  }
+  return raw ? `${raw} ${CITIES[item?.city || activeCity()]?.name || ''}`.trim() : (CITIES[item?.city || activeCity()]?.name || 'travel');
+}
+function photoQueryFor(item){
+  if(item?.photoQueryOverride) return item.photoQueryOverride;
+  const rawName = String(item?.name || titleFor(item) || 'travel').trim();
+  if(PHOTO_QUERY_OVERRIDES[rawName]) return PHOTO_QUERY_OVERRIDES[rawName];
+  const raw = rawName.replace(/•/g,' ');
+  const city = CITIES[item?.city || activeCity()]?.name || '';
+  const cat = item?.cat === 'food' ? 'restaurant food' : item?.cat === 'nightlife' ? 'bar nightlife' : item?.cat || 'landmark';
+  return `${raw} ${city} ${cat}`.trim();
+}
 function imageFor(item){
-  // v22: generated AI-style local visual. Replace with item.imagePath WebP later without changing card code.
-  if(item.imagePath) return item.imagePath;
-  return buildImage(item.city || activeCity(), item.cat || 'recommendations', titleFor(item) || item.query || 'Place', (item.tags || []).map(tagFor));
+  if(item?.imagePath) return item.imagePath;
+  const fallback = localFallbackImage(item || {});
+  if(typeof navigator !== 'undefined' && navigator.onLine === false) return fallback;
+  return bingThumbUrl(exactPhotoQueryFor(item || {}));
+}
+function imageMarkup(item, className='place-image'){
+  const src=imageFor(item);
+  const fallback=localFallbackImage(item || {});
+  const alt=escapeHtml(titleFor(item) || item?.name || 'Travel place');
+  const wiki=escapeHtml(wikiTitleFor(item || {}));
+  const query=escapeHtml(photoQueryFor(item || {}));
+  const exactQuery=escapeHtml(exactPhotoQueryFor(item || {}));
+  return `<img class="${className} dtf-photo" src="${src}" alt="${alt}" loading="lazy" data-place-name="${alt}" data-city="${escapeHtml(item?.city || activeCity())}" data-cat="${escapeHtml(item?.cat || '')}" data-wiki-title="${wiki}" data-photo-query="${query}" data-exact-photo-query="${exactQuery}" data-fallback="${fallback}" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src=this.dataset.fallback" />`;
+}
+async function wikipediaThumb(title, size=1100){
+  const clean = String(title || '').trim();
+  if(!clean) throw new Error('empty wiki title');
+  const key = `dtf_photo_wiki_api_${size}_${clean}`;
+  const cached = localStorage.getItem(key);
+  if(cached) return cached;
+  // Use the classic MediaWiki API with origin=* instead of REST summary.
+  // It is more reliable from GitHub Pages / mobile browsers and returns a direct thumbnail URL.
+  const url = `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(clean)}&prop=pageimages&format=json&pithumbsize=${size}&redirects=1&origin=*`;
+  const res = await fetch(url, {cache:'force-cache'});
+  if(!res.ok) throw new Error('wiki pageimages failed');
+  const data = await res.json();
+  const pages = data?.query?.pages ? Object.values(data.query.pages) : [];
+  const src = pages.find(pg => pg?.thumbnail?.source)?.thumbnail?.source;
+  if(src){ localStorage.setItem(key, src); return src; }
+  throw new Error('no wiki page image');
+}
+async function commonsThumb(query, size=1100){
+  const clean = String(query || '').trim();
+  if(!clean) throw new Error('empty commons query');
+  const key = `dtf_photo_commons_api_v60_${size}_${clean}`;
+  const cached = localStorage.getItem(key);
+  if(cached) return cached;
+  const url = `https://commons.wikimedia.org/w/api.php?action=query&generator=search&gsrnamespace=6&gsrsearch=${encodeURIComponent(clean)}&gsrlimit=12&prop=imageinfo&iiprop=url|size|mime&iiurlwidth=${size}&format=json&origin=*`;
+  const res = await fetch(url, {cache:'force-cache'});
+  if(!res.ok) throw new Error('commons search failed');
+  const data = await res.json();
+  const pages = data?.query?.pages ? Object.values(data.query.pages) : [];
+  const badWords = /(coat[_\s-]?of[_\s-]?arms|logo|map|karte|plan|sign|marker|mile|milestone|boundary|plaque|seal|flag|icon|svg|diagram|grave|cemetery|poster|ticket|menu|qr|advert)/i;
+  const scored = pages.map(pg => {
+    const info = pg?.imageinfo?.[0] || {};
+    const src = info.thumburl || info.url || '';
+    const title = `${pg?.title || ''} ${src}`;
+    const w = Number(info.thumbwidth || info.width || 0);
+    const h = Number(info.thumbheight || info.height || 0);
+    const ratio = h ? w/h : 0;
+    let score = 0;
+    if(src) score += 20;
+    if(w >= 700) score += 8;
+    if(h >= 420) score += 8;
+    if(ratio >= 1.15 && ratio <= 2.6) score += 8;
+    if(/(panorama|view|town|old|castle|cathedral|palace|square|bridge|street|interior|restaurant|bar|night|canal|river|garden|park|market|abbey|church|village|sunset|facade)/i.test(title)) score += 10;
+    if(badWords.test(title)) score -= 50;
+    return {src, score};
+  }).filter(x => x.src && x.score > -10).sort((a,b)=>b.score-a.score);
+  const found = scored[0]?.src;
+  if(found){ localStorage.setItem(key, found); return found; }
+  throw new Error('no commons image');
+}
+
+function imageTopicFor(item){
+  const name = String(item?.name || titleFor(item) || '').trim();
+  const city = CITIES[item?.city || activeCity()]?.name || '';
+  const raw = name.replace(/•/g,' ').trim();
+  const foodTopics = {
+    'Lokál Dlouhááá':'Czech goulash Pilsner pub Prague',
+    'Naše Maso':'Prague butcher bistro meat sandwich',
+    'Kantýna':'Czech beef restaurant Prague',
+    'Havelská Koruna':'Czech cuisine svickova goulash Prague',
+    'Sisters Bistro':'chlebicky Czech open sandwich Prague',
+    'Mincovna':'Czech restaurant Prague Old Town',
+    'U Parlamentu':'Czech pub food Prague',
+    'Luka Lu':'Balkan restaurant Prague',
+    'Banh Mi Makers':'banh mi sandwich',
+    'Café Louvre':'Café Louvre Prague',
+    'Eska Karlín':'Eska Karlin Prague bakery restaurant',
+    'Mr. HotDoG':'hot dog restaurant Prague',
+    'Pho Vietnam Tuan & Lan':'Vietnamese pho',
+    'Manifesto Market':'Manifesto Market Prague food market',
+    'U Kroka':'Czech restaurant Prague',
+    'Bistro Monk':'brunch cafe Prague',
+    'Kuchyň':'Kuchyň Prague Castle restaurant',
+    'Maitrea':'vegetarian restaurant Prague',
+    'Kavárna co hledá jméno':'Prague cafe brunch',
+    'Bakeshop Praha':'Prague bakery pastry',
+    'Figlmüller':'Wiener schnitzel Figlmüller Vienna',
+    'Plachutta':'Tafelspitz Vienna Plachutta',
+    'Café Central':'Café Central Vienna',
+    'Café Landtmann':'Café Landtmann Vienna',
+    'Demel':'Demel Vienna pastry',
+    'Naschmarkt':'Naschmarkt Vienna market',
+    'Gasthaus Pöschl':'Viennese Gasthaus food',
+    'Zum Schwarzen Kameel':'Zum Schwarzen Kameel Vienna',
+    'Bitzinger Würstelstand':'Vienna sausage stand',
+    'Flam’s':'flammekueche Alsace Strasbourg',
+    'Maison Kammerzell':'Maison Kammerzell Strasbourg',
+    'La Corde à Linge':'La Corde à Linge Strasbourg',
+    'Au Pont Corbeau':'Au Pont Corbeau Strasbourg',
+    'Le Tire-Bouchon':'Le Tire-Bouchon Strasbourg',
+    'Pâtisserie Christian':'Pâtisserie Christian Strasbourg',
+    'L’Épicerie':'Strasbourg tartines restaurant',
+    'Bistrot et Chocolat':'Bistrot et Chocolat Strasbourg'
+  };
+  const nightlifeTopics = {
+    'Hemingway Bar':'Hemingway Bar Prague cocktails',
+    'Anonymous Bar':'Anonymous Bar Prague cocktails',
+    'Letná Beer Garden':'Letná Beer Garden Prague view',
+    'Náplavka Riverside':'Náplavka Prague riverside nightlife',
+    'Dva Kohouti':'Dva Kohouti Prague brewery',
+    'Jazz Dock':'Jazz Dock Prague',
+    'Cross Club':'Cross Club Prague',
+    'Lucerna Music Bar':'Lucerna Music Bar Prague',
+    'Roxy Prague':'Roxy Prague club',
+    'Karlovy Lázně':'Karlovy Lázně Prague club',
+    'BeerGeek Bar':'BeerGeek Bar Prague craft beer',
+    'Das Loft':'Das Loft Vienna rooftop bar',
+    'Grelle Forelle':'Grelle Forelle Vienna club',
+    'Volksgarten':'Volksgarten Vienna club',
+    'Pratersauna':'Pratersauna Vienna club',
+    'Loos American Bar':'Loos American Bar Vienna',
+    'Flex':'Flex Vienna club',
+    'Les BerThoM':'Les BerThoM Strasbourg beer bar',
+    'Kitsch’n Bar':'Kitsch’n Bar Strasbourg',
+    'Académie de la Bière':'Académie de la Bière Strasbourg',
+    'L’Alchimiste':'cocktail bar Strasbourg',
+    'La Laiterie':'La Laiterie Strasbourg concert venue'
+  };
+  if(item?.cat === 'food') return foodTopics[name] || `${raw} ${city} restaurant dish`;
+  if(item?.cat === 'nightlife') return nightlifeTopics[name] || `${raw} ${city} nightlife bar`;
+  if(item?.cat === 'experiences') return `${raw} ${city} travel experience landmark`;
+  if(item?.cat === 'mustdo') return `${raw} ${city} landmark`;
+  if(item?.cat === 'attractions') return `${raw} ${city} attraction activity`;
+  if(item?.cat === 'markets') return `${raw} ${city} market shopping mall outlet`;
+  if(item?.cat === 'winter') return `${raw} ${city} christmas market winter lights holiday`;
+  if(isRoutePack && typeof isRoutePack === 'function' && isRoutePack(item)) return `${raw} scenic route ${city} castle landscape`;
+  return `${raw} ${city} travel landmark`;
+}
+async function bestPhotoFor(item){
+  const title = wikiTitleFor(item || {});
+  const topic = photoQueryFor(item || {}) || imageTopicFor(item || {});
+  const rawName = String(item?.name || '').trim();
+  const hasCuratedQuery = !!PHOTO_QUERY_OVERRIDES[rawName] || !!item?.photoQueryOverride;
+  // For many towns/routes/restaurants, Wikipedia's page image can be a bad thumbnail
+  // (signs, coats of arms, boundary stones). Prefer a richer Commons image search first.
+  if(hasCuratedQuery){
+    try { return await commonsThumb(topic, 1400); } catch(e) {}
+    try { return await wikipediaThumb(title, 1400); } catch(e) {}
+  } else {
+    try { return await wikipediaThumb(title, 1400); } catch(e) {}
+    try { return await commonsThumb(topic, 1400); } catch(e) {}
+  }
+  const city = CITIES[item?.city || activeCity()]?.name || '';
+  const cat = item?.cat === 'food' ? 'restaurant food' : item?.cat === 'nightlife' ? 'nightlife bar' : 'landmark';
+  try { return await commonsThumb(`${city} ${cat} ${(item?.cat||'')}`, 1400); } catch(e) {}
+  throw new Error('no usable photo');
+}
+
+function loadRealPhotos(){
+  if(!navigator.onLine) return;
+  const imgs = Array.from(document.querySelectorAll('img.dtf-photo[data-wiki-title]'));
+  imgs.forEach(async img => {
+    if(img.dataset.loadedPhoto === '1') return;
+    img.dataset.loadedPhoto = '1';
+    const item = {
+      name: img.dataset.wikiTitle || img.dataset.placeName || img.alt || '',
+      wikiTitleOverride: img.dataset.wikiTitle || '',
+      photoQueryOverride: img.dataset.photoQuery || '',
+      city: img.dataset.city || activeCity(),
+      cat: img.dataset.cat || ''
+    };
+    try{
+      const src = await bestPhotoFor(item);
+      if(src) img.src = src.replace(/^http:/,'https:');
+    }catch(e){
+      // Keep the current exact web thumbnail if Wikimedia lookup fails.
+      if(!img.src || img.src.startsWith('data:image')) img.src = img.dataset.fallback || img.src;
+    }
+  });
+}
+
+function cityHeroUrl(city){
+  if(typeof navigator !== 'undefined' && navigator.onLine === false) return localFallbackImage({city, cat:'mustdo', name:CITIES[city]?.name || city});
+  const q = {
+    prague:'Prague skyline Charles Bridge Old Town Castle premium travel photography',
+    vienna:'Vienna skyline Stephansdom Hofburg Schönbrunn premium travel photography',
+    strasbourg:'Strasbourg Petite France Cathedral canals premium travel photography'
+  }[city] || `${CITIES[city]?.name || city} city skyline travel`;
+  return bingThumbUrl(q, 1800, 980);
+}
+async function updateCityHeroReal(city){
+  if(!navigator.onLine) return;
+  const title = CITY_HERO_WIKI[city] || CITIES[city]?.name || city;
+  try{
+    const src = await wikipediaThumb(title, 1800);
+    document.documentElement.style.setProperty('--city-hero-image', `url("${src.replace(/^http:/,'https:')}")`);
+  }catch(e){/* keep local hero fallback */}
+}
+function updateVisualTheme(){
+  const city=activeCity();
+  const url=cityHeroUrl(city);
+  document.documentElement.style.setProperty('--city-hero-image', `url("${url}")`);
+  document.documentElement.dataset.city = city;
+  const hero=document.querySelector('.hero');
+  if(hero) hero.setAttribute('data-city', cityNameFor(city));
+  updateCityHeroReal(city);
 }
 function descriptionFor(item){
   return guideContentFor(item).why || textFor(item.description) || textFor(item.note) || (getLang()==='he' ? 'מקום מומלץ. בדוק שעות פתיחה, כרטיסים וביקורות עדכניות לפני ההגעה.' : 'Curated place. Check live opening hours, tickets and reviews before going.');
@@ -13823,6 +14617,65 @@ Object.assign(EUROPE_REAL_GUIDE_CONTENT, {
 DATA.unshift(...PUBLIC_CITY_TRIPS);
 
 
+// v70: dedicated Attractions + Markets/Shopping tabs. These are practical city items,
+// not car route packs, so they appear only in Public Travels and remain lightweight.
+const EXTRA_CITY_TABS_V70 = [
+  // Prague attractions
+  ['prague','attractions','Prague Zoo',50.1169,14.4114,'family animals outdoor tram public-friendly'],
+  ['prague','attractions','Žižkov Television Tower',50.0810,14.4517,'viewpoint unusual architecture public-friendly'],
+  ['prague','attractions','Vltava Pedal Boats',50.0792,14.4128,'river boats romantic public-friendly'],
+  ['prague','attractions','Stromovka Park',50.1052,14.4215,'park local family public-friendly'],
+  ['prague','attractions','Prague Venice / Čertovka Boat',50.0866,14.4089,'boat canal old-town public-friendly'],
+  ['prague','attractions','Miniature Railway Kingdom',50.0710,14.4046,'indoor family rain public-friendly'],
+  ['prague','markets','Havelské tržiště',50.0844,14.4236,'market souvenirs old-town walkable'],
+  ['prague','markets','Naplavka Farmers Market',50.0719,14.4149,'market food river local weekend'],
+  ['prague','markets','Palladium Mall',50.0882,14.4282,'mall shopping central public-friendly'],
+  ['prague','markets','Fashion Arena Prague Outlet',50.0758,14.5497,'outlet shopping car transit'],
+  ['prague','markets','Westfield Chodov',50.0316,14.4903,'mall shopping metro'],
+  ['prague','markets','Vinohrady Local Shops',50.0755,14.4378,'local shops cafe neighborhood'],
+  // Vienna attractions
+  ['vienna','attractions','Vienna Prater',48.2167,16.3959,'amusement ferris-wheel public-friendly family'],
+  ['vienna','attractions','Danube Tower',48.2403,16.4095,'viewpoint tower public-friendly'],
+  ['vienna','attractions','Kahlenberg Viewpoint',48.2766,16.3339,'viewpoint sunset wine public-friendly'],
+  ['vienna','attractions','Spanish Riding School',48.2067,16.3667,'horses performance imperial central'],
+  ['vienna','attractions','Danube Canal Walk',48.2132,16.3747,'street-art river evening public-friendly'],
+  ['vienna','attractions','House of Music',48.2032,16.3726,'museum music indoor family'],
+  ['vienna','markets','Naschmarkt Vienna',48.2006,16.3627,'market food local public-friendly'],
+  ['vienna','markets','Mariahilfer Straße',48.1989,16.3470,'shopping street central metro'],
+  ['vienna','markets','Donau Zentrum',48.2436,16.4350,'mall shopping metro'],
+  ['vienna','markets','Parndorf Designer Outlet',47.9872,16.8395,'outlet shopping car train'],
+  ['vienna','markets','Karmelitermarkt',48.2190,16.3762,'local market food neighborhood'],
+  ['vienna','markets','Brunnenmarkt',48.2112,16.3359,'local market multicultural'],
+  // Strasbourg attractions
+  ['strasbourg','attractions','Batorama Boat Ride',48.5819,7.7502,'boat canals public-friendly mustdo'],
+  ['strasbourg','attractions','Cathedral Platform',48.5819,7.7506,'viewpoint stairs cathedral central'],
+  ['strasbourg','attractions','Parc de l’Orangerie',48.5940,7.7740,'park family lake public-friendly'],
+  ['strasbourg','attractions','Bike tour along Ill river',48.5794,7.7500,'bike river local public-friendly'],
+  ['strasbourg','attractions','European Parliament Visit',48.5975,7.7683,'europe politics architecture tram'],
+  ['strasbourg','attractions','Alsatian Museum',48.5799,7.7500,'museum local culture indoor'],
+  ['strasbourg','markets','Strasbourg Covered Market',48.5840,7.7442,'market food local central'],
+  ['strasbourg','markets','Place des Halles',48.5866,7.7426,'mall shopping central tram'],
+  ['strasbourg','markets','Rivetoile',48.5746,7.7625,'mall shopping river tram'],
+  ['strasbourg','markets','Kehl Shopping Street',48.5737,7.8131,'cross-border shopping tram'],
+  ['strasbourg','markets','Broglie Market',48.5850,7.7486,'market seasonal local'],
+  ['strasbourg','markets','Neudorf Local Market',48.5658,7.7540,'market local neighborhood']
+].map(([city,cat,name,lat,lng,tags]) => makePlace(city, cat, name, lat, lng, 0.15, 0.25, tags, `${name} is a curated ${cat} stop in ${CITIES[city].name}.`, false));
+
+Object.assign(EUROPE_REAL_GUIDE_CONTENT, {
+  'Prague Zoo':{he:{why:'גן החיות של פראג נחשב לאחד מגני החיות הבולטים באירופה, והוא יושב באזור טרויה הירוק מעל הנהר. זו אטרקציה חזקה למשפחות או למי שרוצה יום פתוח מחוץ למרכז ההיסטורי בלי לצאת מהעיר.',see:['אזורי בעלי חיים גדולים','נוף ירוק מעל הוולטאבה','שילוב אפשרי עם Troja Palace או הגנים הבוטניים'],fit:'משפחות, ילדים, יום שמש, חצי יום עד יום מלא.',tip:'לתכנן כמה שעות ולא להגיע בסוף היום.'},en:{why:'Prague Zoo is one of Europe’s stronger zoos, set in the green Troja area above the river. It is a real family attraction without leaving the city.',see:['Large animal areas','Green Vltava-side setting','Possible pairing with Troja Palace or botanical gardens'],fit:'Families, sunny days, half-day to full day.',tip:'Allow several hours; do not arrive too late.'}},
+  'Žižkov Television Tower':{he:{why:'מגדל הטלוויזיה בז׳יז׳קוב הוא אחד המבנים המוזרים והבולטים בפראג. מגיעים בשביל תצפית גבוהה וסיפור אדריכלי חריג, כולל הפסלים של התינוקות המטפסים שמזוהים עם המקום.',see:['תצפית פנורמית','המגדל יוצא הדופן','שכונת ז׳יז׳קוב הפחות תיירותית'],fit:'תצפית, צילום, מי שכבר ראה את הקלאסיקות.',tip:'עדיף ביום בהיר; אחרת התצפית פחות מצדיקה את העלייה.'},en:{why:'Žižkov Television Tower is one of Prague’s strangest landmarks. Go for a high viewpoint and an unusual architectural story, including the famous crawling babies sculptures.',see:['Panoramic view','Unusual tower design','Less touristy Žižkov neighborhood'],fit:'Viewpoints, photos, second-time Prague visitors.',tip:'Best on a clear day.'}},
+  'Vltava Pedal Boats':{he:{why:'סירות הפדלים על הוולטאבה הן פעילות קלילה שנותנת את פראג מהמים בלי להזמין שייט רשמי. זו אטרקציה יותר חווייתית מציונית דרך, מתאימה בעיקר למזג אוויר טוב.',see:['גשר קארל והנהר מזווית נמוכה','אי Slovanský / אזור השכרת סירות','צילום זוגי או משפחתי'],fit:'זוגות, משפחות, אחר צהריים קליל.',tip:'לא לעשות ברוח חזקה או גשם.'},en:{why:'Pedal boats on the Vltava offer a playful river view without booking a formal cruise. It is about experience more than sightseeing efficiency.',see:['Charles Bridge/river from water level','Boat rental island area','Photos with couples or family'],fit:'Couples, families, relaxed afternoon.',tip:'Avoid strong wind or rain.'}},
+  'Havelské tržiště':{he:{why:'שוק האוולסקה הוא שוק קטן במרכז פראג שמוכר פירות, מזכרות ופריטים תיירותיים. הוא לא שוק מקומי עמוק, אבל נוח לעצירה קצרה בעיר העתיקה.',see:['דוכני מזכרות','פירות ונשנושים','רחוב שוק היסטורי במרכז'],fit:'עצירה קצרה, מזכרות, לא יום קניות מלא.',tip:'להשוות מחירים; חלק מהדוכנים תיירותיים מאוד.'},en:{why:'Havelské tržiště is a small central market selling fruit, souvenirs and tourist items. It is not a deep local market, but useful for a quick Old Town stop.',see:['Souvenir stalls','Fruit/snacks','Historic central market street'],fit:'Short stop, souvenirs, not a full shopping day.',tip:'Compare prices; many stalls are tourist-focused.'}},
+  'Naschmarkt Vienna':{he:{why:'נאשמרקט הוא שוק האוכל המוכר ביותר בווינה: דוכנים, מסעדות, תבלינים, גבינות ואווירה בינלאומית. זה מקום טוב לקבוצה שלא מסכימה על מטבח אחד.',see:['דוכני אוכל ותבלינים','מסעדות קז׳ואליות','שוק פשפשים בשבת באזור סמוך'],fit:'צהריים, קבוצות, אוהבי שווקים.',tip:'לעשות סיבוב לפני שבוחרים איפה לשבת.'},en:{why:'Naschmarkt is Vienna’s best-known food market: stalls, restaurants, spices, cheeses and international energy. Useful when a group wants options.',see:['Food and spice stalls','Casual restaurants','Saturday flea-market area nearby'],fit:'Lunch, groups, market lovers.',tip:'Walk once before choosing a table.'}},
+  'Vienna Prater':{he:{why:'הפראטר הוא אזור השעשועים הקלאסי של וינה, עם הגלגל הענק ההיסטורי כאייקון מרכזי. מתאים כערב קליל או פעילות משפחתית בלי מוזיאון נוסף.',see:['הגלגל הענק Wiener Riesenrad','מתקני לונה פארק','אוכל רחוב ואווירה צבעונית'],fit:'משפחות, ערב קליל, צילום.',tip:'אפשר להיכנס לאזור בלי לשלם; משלמים לפי מתקנים.'},en:{why:'Prater is Vienna’s classic amusement area, anchored by the historic Giant Ferris Wheel. Good for a playful evening or family break.',see:['Wiener Riesenrad','Amusement rides','Street food and colorful atmosphere'],fit:'Families, easy evening, photos.',tip:'Entry to the area is free; rides are paid individually.'}},
+  'Batorama Boat Ride':{he:{why:'Batorama הוא השייט הקלאסי של שטרסבורג, ועוזר להבין את מבנה העיר: תעלות, פטיט פראנס והרובע האירופי. זו דרך נוחה לקבל אוריינטציה בלי ללכת הרבה.',see:['תעלות העיר','פטיט פראנס מהמים','אזור המוסדות האירופיים לפי המסלול'],fit:'ביקור ראשון, משפחות, יום עייף.',tip:'עדיף בתחילת הביקור כדי להבין את העיר.'},en:{why:'Batorama is Strasbourg’s classic boat ride and a useful orientation: canals, Petite France and often the European Quarter.',see:['City canals','Petite France from the water','European institutions depending on route'],fit:'First visit, families, tired days.',tip:'Do it early in the trip for orientation.'}},
+  'Cathedral Platform':{he:{why:'פלטפורמת הקתדרלה נותנת תצפית מעל גגות שטרסבורג והאלזס. העלייה במדרגות לא קלה לכולם, אבל היא הופכת את הקתדרלה מחזית מרשימה לנקודת מבט על כל העיר.',see:['גגות העיר העתיקה','פטיט פראנס מרחוק','פרטי אבן של הקתדרלה מקרוב'],fit:'צילום, תצפיות, מי שמסתדר עם מדרגות.',tip:'לבדוק שעות ומזג אוויר לפני העלייה.'},en:{why:'The cathedral platform gives a rooftop view over Strasbourg and Alsace. The stairs are not for everyone, but they turn the cathedral into a city viewpoint.',see:['Old-town rooftops','Petite France from above','Close stone details of the cathedral'],fit:'Photos, viewpoints, travelers comfortable with stairs.',tip:'Check opening hours and weather first.'}},
+  'Place des Halles':{he:{why:'Place des Halles הוא מרכז קניות שימושי במרכז שטרסבורג, טוב כשצריך קניות פרקטיות, בגדים או גיבוי ליום גשם. זה לא אתר רומנטי אלא פתרון נוח.',see:['חנויות אופנה ורשתות','מזון מהיר וקפה','גישה נוחה בתחבורה ציבורית'],fit:'יום גשם, קניות בסיסיות, משפחות.',tip:'לא לבנות עליו כחוויית תיירות; להשתמש בו כשצריך משהו פרקטי.'},en:{why:'Place des Halles is a practical central shopping mall in Strasbourg, useful for clothes, basics or rainy-day backup. Not romantic, but convenient.',see:['Fashion chains','Fast food/cafés','Easy public transport access'],fit:'Rainy day, basic shopping, families.',tip:'Use it practically, not as a main attraction.'}}
+});
+
+DATA.push(...EXTRA_CITY_TABS_V70);
+
+
 function getOfflinePacks(){ return load(STORAGE.offlinePacks, {}); }
 function setOfflinePacks(v){ save(STORAGE.offlinePacks, v); }
 function packItemsForCity(city){
@@ -13859,7 +14712,7 @@ function saveCityOfflinePack(){
   const packs = getOfflinePacks();
   const cityItems = packItemsForCity(city);
   packs[city] = {
-    version:'v48',
+    version:'v70',
     city,
     cityName:CITIES[city]?.name || city,
     language:getLang(),
@@ -13881,45 +14734,287 @@ function clearCityOfflinePack(){
   setOfflinePacks(packs);
   refreshOfflineStatus();
 }
+
+
+// v64: Offline-first + Low-data sync helpers.
+// Important: a PWA cannot force Google Maps / Moovit / Waze to save map tiles offline.
+// This layer keeps DayTripFlow's own guide data, coordinates, selected routes and last opened destinations local,
+// then uses live data only when the external apps are opened.
+function getRouteCache(){
+  const raw = load(STORAGE.routeCache, []);
+  if(Array.isArray(raw)) return raw;
+  // Defensive migration: older/broken builds could store an object/string under this key.
+  // Route cache must always be an array so navigation buttons do not crash.
+  try{
+    if(raw && typeof raw === 'object') return Object.values(raw).filter(Boolean);
+  }catch{}
+  return [];
+}
+function setRouteCache(v){
+  const list = Array.isArray(v) ? v : [];
+  save(STORAGE.routeCache, list.slice(0,250));
+}
+function cacheKeyForPoint(p){
+  if(!p) return '';
+  if(p.id) return String(p.id);
+  if(Number.isFinite(p.lat) && Number.isFinite(p.lng)) return `${Number(p.lat).toFixed(5)},${Number(p.lng).toFixed(5)}`;
+  return String(p.query || p.name || '').toLowerCase().trim();
+}
+function compactPointForCache(p, source='manual'){
+  if(!p) return null;
+  const key = cacheKeyForPoint(p);
+  if(!key) return null;
+  return {
+    key,
+    id:p.id || key,
+    name:p.name || titleFor(p) || p.query || 'Destination',
+    title:titleFor(p) || p.name || p.query || 'Destination',
+    city:p.city || activeCity(),
+    cat:p.cat || currentTab || 'route',
+    lat:Number.isFinite(p.lat) ? p.lat : null,
+    lng:Number.isFinite(p.lng) ? p.lng : null,
+    query:p.query || (Number.isFinite(p.lat)&&Number.isFinite(p.lng) ? `${p.lat},${p.lng}` : (p.name || '')),
+    source,
+    savedAt:new Date().toISOString()
+  };
+}
+function cacheTravelPoint(p, source='open'){
+  const cp = compactPointForCache(p, source);
+  if(!cp) return;
+  const list = getRouteCache().filter(x => x.key !== cp.key);
+  list.unshift(cp);
+  setRouteCache(list);
+  updateLowDataStatus();
+}
+function cacheVisibleCards(reason='visible'){
+  let items=[];
+  try{ items = visibleItems() || []; }catch{ items=[]; }
+  items.slice(0,60).forEach(item => cacheTravelPoint(item, reason));
+}
+function preloadImagesFor(items){
+  if(!navigator.onLine) return;
+  (items||[]).slice(0,80).forEach(item=>{
+    try{
+      const src=imageFor(item);
+      if(src){ const img=new Image(); img.decoding='async'; img.loading='eager'; img.src=src; }
+    }catch{}
+  });
+}
+function rememberCurrentLocation(pos){
+  if(!pos || !pos.coords) return;
+  const loc={lat:pos.coords.latitude,lng:pos.coords.longitude,accuracy:pos.coords.accuracy||null,savedAt:new Date().toISOString()};
+  userLocation={lat:loc.lat,lng:loc.lng};
+  save(STORAGE.cachedLocation, loc);
+}
+function networkLabel(){
+  const c = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  if(!navigator.onLine) return getLang()==='he'?'אופליין':'Offline';
+  if(!c) return getLang()==='he'?'מחובר':'Online';
+  const type = c.type || c.effectiveType || 'online';
+  return String(type).toUpperCase();
+}
+function lowDataStatusHtml(){
+  const lang=getLang();
+  const cache=getRouteCache();
+  const last=load(STORAGE.lastSync,null);
+  const loc=load(STORAGE.cachedLocation,null);
+  const city=activeCity();
+  const pack=offlinePackSummary(city);
+  const lastText=last ? new Date(last).toLocaleString(lang==='he'?'he-IL':'en-US') : (lang==='he'?'לא בוצע עדיין':'Not yet synced');
+  const locText=loc ? `${Number(loc.lat).toFixed(5)}, ${Number(loc.lng).toFixed(5)}` : (lang==='he'?'אין מיקום שמור':'No cached location');
+  if(lang==='he'){
+    return `<strong>Low-data travel sync</strong><br>מצב רשת: ${networkLabel()} · חבילת עיר: ${pack?'שמורה':'לא שמורה'} · יעדים/מסלולים ב־cache: ${cache.length}<br>מיקום אחרון שמור: ${locText}<br>עדכון אחרון: ${lastText}<br><span class="source-note">המערכת שומרת תוכן, נ״צ, כרטיסים ותמונות שטענת. מפות Google / Moovit / Waze עצמן נשמרות רק בתוך האפליקציות שלהן.</span>`;
+  }
+  return `<strong>Low-data travel sync</strong><br>Network: ${networkLabel()} · City pack: ${pack?'saved':'not saved'} · cached places/routes: ${cache.length}<br>Last cached location: ${locText}<br>Last sync: ${lastText}<br><span class="source-note">DayTripFlow caches guide data, coordinates, cards and loaded images. Google / Moovit / Waze map data is controlled by those apps.</span>`;
+}
+function updateLowDataStatus(){ const el=$('lowDataStatus'); if(el) el.innerHTML=lowDataStatusHtml(); }
+function syncLowDataNow(){
+  const finish = () => {
+    try{ saveCityOfflinePack(); }catch{}
+    try{ cacheVisibleCards('low-data-sync'); }catch{}
+    try{ preloadImagesFor(packItemsForCity(activeCity()).slice(0,80)); }catch{}
+    save(STORAGE.lastSync, new Date().toISOString());
+    updateLowDataStatus();
+    refreshOfflineStatus();
+    flash(getLang()==='he'?'סונכרן ושמור לנסיעה עם דאטה מינימלי':'Synced for low-data travel');
+  };
+  if(navigator.geolocation){
+    navigator.geolocation.getCurrentPosition(pos=>{rememberCurrentLocation(pos); finish();},()=>finish(),{enableHighAccuracy:false,maximumAge:300000,timeout:5000});
+  } else finish();
+}
+
 function cityLabel(city){ return getLang()==='he' ? (CITY_HE[city] || CITIES[city]?.name || city) : (CITIES[city]?.name || city); }
 function ttsAvailable(){ return 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window; }
 function stripHtml(text){ return String(text || '').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim(); }
 function speechTextFor(item){
-  const g = guideContentFor(item);
+  const g = isRoutePack(item) ? carGuideFor(item) : guideContentFor(item);
   const lang = getLang();
   const title = titleFor(item);
   const cuisine = item.cat === 'food' ? `${lang==='he'?'סוג מטבח':'Cuisine'}: ${textFor(item.cuisine) || ''}. ${item.price ? (lang==='he'?'מחיר':'Price') + ': ' + item.price + '. ' : ''}` : '';
+  if(isRoutePack(item)){
+    const stops = (g.stops || []).map(s => `${s.name}: ${s.text || ''}`).join(lang==='he' ? '. ' : '. ');
+    const food = (g.food || []).map(f => `${f.name}: ${f.why || ''}`).join(lang==='he' ? '. ' : '. ');
+    if(lang === 'he') return stripHtml(`${title}. ${g.subtitle || ''}. למה המסלול הזה הגיוני: ${g.why || ''}. תחנות במסלול: ${stops}. איפה לאכול באזור: ${food}. טיפ מסלול: ${g.tip || ''}.`);
+    return stripHtml(`${title}. ${g.subtitle || ''}. Why this route makes sense: ${g.why || ''}. Route stops: ${stops}. Where to eat nearby: ${food}. Route tip: ${g.tip || ''}.`);
+  }
   const see = (g.see || []).join(lang==='he' ? '. ' : '. ');
   if(lang === 'he'){
     return stripHtml(`${title}. ${cuisine} למה כדאי להגיע: ${g.why}. מה רואים או עושים שם: ${see}. למי זה מתאים: ${g.fit}. טיפ חשוב: ${g.tip}.`);
   }
   return stripHtml(`${title}. ${cuisine} Why go: ${g.why}. What you will see or do: ${see}. Who it fits: ${g.fit}. Useful tip: ${g.tip}.`);
 }
+function chunkSpeechText(text, maxLen=850){
+  const clean = stripHtml(text);
+  if(clean.length <= maxLen) return [clean];
+  const parts = clean.split(/(?<=[.!?؟])\s+/);
+  const chunks = [];
+  let buf = '';
+  for(const part of parts){
+    if((buf + ' ' + part).trim().length > maxLen && buf){ chunks.push(buf.trim()); buf = part; }
+    else buf = (buf + ' ' + part).trim();
+  }
+  if(buf) chunks.push(buf.trim());
+  return chunks.length ? chunks : [clean.slice(0,maxLen)];
+}
+function getTtsVoice(langCode){
+  const voices = window.speechSynthesis?.getVoices?.() || [];
+  const prefix = langCode.split('-')[0];
+  return voices.find(v => v.lang === langCode) || voices.find(v => (v.lang || '').toLowerCase().startsWith(prefix)) || voices.find(v => /Google|Microsoft|Apple/i.test(v.name || '')) || null;
+}
+function speakChunks(chunks, langCode, rate){
+  if(!chunks.length) return;
+  const text = chunks.shift();
+  const u = new SpeechSynthesisUtterance(text);
+  const voice = getTtsVoice(langCode);
+  if(voice) u.voice = voice;
+  u.lang = voice?.lang || langCode;
+  u.rate = rate;
+  u.pitch = 1;
+  u.volume = 1;
+  u.onend = () => speakChunks(chunks, langCode, rate);
+  u.onerror = (e) => {
+    console.warn('DayTripFlow TTS error:', e.error || e);
+    flash(getLang()==='he' ? 'ההקראה נעצרה בדפדפן. נסה שוב או בדוק הרשאות קול.' : 'Voice guide stopped by the browser. Try again or check speech permissions.');
+  };
+  window.speechSynthesis.speak(u);
+  window.speechSynthesis.resume?.();
+}
 function speakItem(item){
   if(!ttsAvailable()){
     alert(getLang()==='he' ? 'הקראה קולית לא נתמכת בדפדפן הזה.' : 'Text-to-speech is not supported in this browser.');
     return;
   }
-  window.speechSynthesis.cancel();
-  const u = new SpeechSynthesisUtterance(speechTextFor(item));
-  u.lang = getLang()==='he' ? 'he-IL' : 'en-US';
-  u.rate = getLang()==='he' ? 0.92 : 0.96;
-  u.pitch = 1;
-  window.speechSynthesis.speak(u);
+  const langCode = getLang()==='he' ? 'he-IL' : 'en-US';
+  const rate = getLang()==='he' ? 0.88 : 0.94;
+  const text = speechTextFor(item);
+  const start = () => {
+    window.speechSynthesis.cancel();
+    setTimeout(() => speakChunks(chunkSpeechText(text), langCode, rate), 80);
+    flash(getLang()==='he' ? 'מקריא הסבר קולי...' : 'Reading guide aloud...');
+  };
+  const voices = window.speechSynthesis.getVoices?.() || [];
+  if(!voices.length){
+    window.speechSynthesis.onvoiceschanged = () => { window.speechSynthesis.onvoiceschanged = null; start(); };
+    setTimeout(start, 350);
+  } else start();
 }
-function stopSpeaking(){ if(ttsAvailable()) window.speechSynthesis.cancel(); }
+function stopSpeaking(){ if(ttsAvailable()){ window.speechSynthesis.cancel(); flash(getLang()==='he'?'ההקראה נעצרה':'Voice guide stopped'); } }
 function distanceKm(a,b){ if(!a||!b||a.lat==null||b.lat==null) return null; const R=6371,dLat=(b.lat-a.lat)*Math.PI/180,dLng=(b.lng-a.lng)*Math.PI/180,s1=Math.sin(dLat/2),s2=Math.sin(dLng/2),c=s1*s1+Math.cos(a.lat*Math.PI/180)*Math.cos(b.lat*Math.PI/180)*s2*s2; return 2*R*Math.atan2(Math.sqrt(c),Math.sqrt(1-c)); }
 function fmtDistance(km){ if(km==null) return 'distance: GPS/offline unknown'; return km<1?`${Math.round(km*1000)} m`:`${km.toFixed(1)} km`; }
 function originQuery(){const p=originPoint(); return p.query || `${p.lat},${p.lng}`}
 function placeQuery(p){return p.query || `${p.lat},${p.lng}`}
 function openUrl(url){window.open(url,'_blank','noopener')}
 function googleMode(){return activePackageMode()==='car'?'driving':'transit'}
-function googleDirections(p){openUrl(`https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(originQuery())}&destination=${encodeURIComponent(placeQuery(p))}&travelmode=${googleMode()}`)}
-function googleSearch(p){openUrl(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(placeQuery(p))}`)}
-function moovit(p){openUrl(`https://moovitapp.com/index/en/public_transit-search?to=${encodeURIComponent(p.name||p.query)}`)}
-function waze(p){openUrl(`https://waze.com/ul?ll=${p.lat},${p.lng}&navigate=yes`)}
-function uber(p){openUrl(`https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[latitude]=${p.lat}&dropoff[longitude]=${p.lng}&dropoff[nickname]=${encodeURIComponent(p.name||'Destination')}`)}
-function bolt(){openUrl('https://bolt.eu/en/')}
+
+// v68: permission-safe external navigation launcher.
+// Important truth: browser/PWA code cannot force-install or reliably detect native apps.
+// To avoid Android/iOS permission errors, use official HTTPS universal/app links first.
+// On phones these links usually open the installed app; if the app is missing, the OS/site handles fallback.
+function deviceOS(){
+  const ua = navigator.userAgent || navigator.vendor || '';
+  if(/android/i.test(ua)) return 'android';
+  if(/iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) return 'ios';
+  return 'desktop';
+}
+function storeWebUrl(app){
+  const stores = {
+    waze: { ios:'https://apps.apple.com/app/id323229106', android:'https://play.google.com/store/apps/details?id=com.waze', desktop:'https://www.waze.com/apps/' },
+    moovit: { ios:'https://apps.apple.com/app/id498477945', android:'https://play.google.com/store/apps/details?id=com.tranzmate', desktop:'https://moovitapp.com/' },
+    uber: { ios:'https://apps.apple.com/app/id368677368', android:'https://play.google.com/store/apps/details?id=com.ubercab', desktop:'https://www.uber.com/' },
+    bolt: { ios:'https://apps.apple.com/app/id675033630', android:'https://play.google.com/store/apps/details?id=ee.mtakso.client', desktop:'https://bolt.eu/' },
+    googlemaps: { ios:'https://apps.apple.com/app/id585027354', android:'https://play.google.com/store/apps/details?id=com.google.android.apps.maps', desktop:'https://maps.google.com/' }
+  };
+  const os = deviceOS();
+  return (stores[app] && (stores[app][os] || stores[app].desktop)) || '#';
+}
+function openExternal(url){
+  // Create a real anchor click. This is more reliable from PWAs than assigning custom schemes to location.href.
+  const a=document.createElement('a');
+  a.href=url;
+  a.target='_blank';
+  a.rel='noopener noreferrer';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(()=>a.remove(),0);
+}
+function openStore(app){ openExternal(storeWebUrl(app)); }
+function coordDest(p){ return Number.isFinite(p?.lat) && Number.isFinite(p?.lng); }
+function pointName(p){ return encodeURIComponent(p?.name || p?.query || 'Destination'); }
+function safeDestinationText(p){ return coordDest(p) ? `${p.lat},${p.lng}` : encodeURIComponent(placeQuery(p)); }
+function showInstallHint(app){
+  const lang=getLang();
+  const names={waze:'Waze',moovit:'Moovit',uber:'Uber',bolt:'Bolt',googlemaps:'Google Maps'};
+  const msg = lang==='he'
+    ? `אם ${names[app]||app} לא נפתחה, התקן אותה מהחנות או פתח את Google Maps כגיבוי.`
+    : `If ${names[app]||app} did not open, install it from the store or use Google Maps as backup.`;
+  flash(msg);
+}
+function moovit(p){
+  cacheTravelPoint(p,'moovit');
+  const name=pointName(p);
+  // Moovit deep links are inconsistent across devices. Use Moovit web/app link safely.
+  const url = coordDest(p)
+    ? `https://moovitapp.com/index/en/public_transit-directions-site_${p.lat}_${p.lng}-efsite?customerId=4908&ref=1`
+    : `https://moovitapp.com/index/en/public_transit-search-query_${name}`;
+  openExternal(url);
+  showInstallHint('moovit');
+}
+function waze(p){
+  cacheTravelPoint(p,'waze');
+  if(!coordDest(p)){ googleDirections(p); return; }
+  // Official Waze universal link: opens Waze app when installed, otherwise Waze/store fallback.
+  openExternal(`https://waze.com/ul?ll=${p.lat},${p.lng}&navigate=yes`);
+  showInstallHint('waze');
+}
+function uber(p){
+  cacheTravelPoint(p,'uber');
+  if(!coordDest(p)){ flash(getLang()==='he'?'אין נ״צ להזמנת Uber':'No coordinates for Uber'); return; }
+  const name=pointName(p);
+  // Uber official universal link.
+  openExternal(`https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[latitude]=${p.lat}&dropoff[longitude]=${p.lng}&dropoff[nickname]=${name}`);
+  showInstallHint('uber');
+}
+function bolt(p){
+  if(p) cacheTravelPoint(p,'bolt');
+  // Bolt does not provide a consistently reliable public route deep link for all regions from browser PWAs.
+  // Avoid permission errors: open store/app landing instead of a blocked custom scheme.
+  openExternal(storeWebUrl('bolt'));
+  showInstallHint('bolt');
+}
+function googleDirectionsNative(p){
+  cacheTravelPoint(p,'google-maps');
+  const dest = safeDestinationText(p);
+  const origin = encodeURIComponent(originQuery());
+  const mode = googleMode();
+  // Google Maps universal link. On mobile it usually opens the native app if installed; otherwise browser fallback.
+  openExternal(`https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${encodeURIComponent(dest)}&travelmode=${mode}`);
+}
+function googleDirections(p){ googleDirectionsNative(p); }
+function googleSearch(p){
+  cacheTravelPoint(p,'google-search');
+  const q = encodeURIComponent(placeQuery(p));
+  openExternal(`https://www.google.com/maps/search/?api=1&query=${q}`);
+}
 function visibleItems(){
   const city=activeCity(), packageMode=activePackageMode(), days=Number($('stayDays').value)||3, driveLimit=Number($('driveHours')?.value)||5;
   if(currentTab==='saved') return getSaved();
@@ -13990,7 +15085,7 @@ function groupedOptions(points){
     return `<optgroup label="${g}">${arr.map(p=>`<option value="${p.id}">${titleFor(p)}</option>`).join('')}</optgroup>`;
   }).join('');
 }
-function openSelectedRoute(){ const d=findDest(); const mode=activeMode(); if(mode==='car'){ if(Number.isFinite(d.lat)) waze(d); else googleDirections(d); return; } if(mode==='transit'){ moovit(d); return; } if(mode==='uber'){ if(Number.isFinite(d.lat)) uber(d); else googleDirections(d); return; } if(mode==='bolt'){ bolt(); return; } googleDirections(d); }
+function openSelectedRoute(){ const d=findDest(); const mode=activeMode(); if(mode==='car'){ if(Number.isFinite(d.lat)) waze(d); else googleDirections(d); return; } if(mode==='transit'){ moovit(d); return; } if(mode==='uber'){ if(Number.isFinite(d.lat)) uber(d); else googleDirections(d); return; } if(mode==='bolt'){ bolt(d); return; } googleDirections(d); }
 function updateRouteOptions(){
   const savedCity = load('dtf_last_city_v17','prague');
   const currentOrigin=$('originSelect').value || originIdForCity(savedCity);
@@ -14044,7 +15139,7 @@ function actions(item){
   const coords=Number.isFinite(item.lat)&&Number.isFinite(item.lng);
   let navBtns='';
   if(packageMode==='car') navBtns=`${coords?`<button class="icon-btn" title="Waze from current origin" onclick='waze(${safeJson(item)})'>🚗</button>`:''}<button class="map-action-btn google-map-btn" title="Open in Google Maps" onclick='googleDirections(${safeJson(item)})'>🗺️ Google Maps</button>`;
-  else navBtns=`<button class="icon-btn" title="Moovit / public travel" onclick='moovit(${safeJson(item)})'>🚇</button>${coords?`<button class="icon-btn" title="Waze" onclick='waze(${safeJson(item)})'>🚗</button>`:''}<button class="map-action-btn google-map-btn" title="Open in Google Maps" onclick='googleDirections(${safeJson(item)})'>🗺️ Google Maps</button><button class="icon-btn" title="Uber" onclick='uber(${safeJson(item)})'>🚕</button><button class="icon-btn" title="Bolt" onclick="bolt()">⚡</button>`;
+  else navBtns=`<button class="icon-btn" title="Moovit / public travel" onclick='moovit(${safeJson(item)})'>🚇</button>${coords?`<button class="icon-btn" title="Waze" onclick='waze(${safeJson(item)})'>🚗</button>`:''}<button class="map-action-btn google-map-btn" title="Open in Google Maps" onclick='googleDirections(${safeJson(item)})'>🗺️ Google Maps</button><button class="icon-btn" title="Uber" onclick='uber(${safeJson(item)})'>🚕</button><button class="icon-btn" title="Bolt" onclick='bolt(${safeJson(item)})'>⚡</button>`;
   return `${navBtns}<button class="icon-btn like" title="Like" onclick="vote('${item.id}',1)">👍</button><button class="icon-btn unlike" title="Unlike" onclick="vote('${item.id}',-1)">👎</button><button class="add-trip-btn" title="Add to My Trip" onclick='addTrip(${safeJson(item)})'>➕ ${getLang()==='he'?'הוסף לטיול שלי':'Add to My Trip'}</button><button class="icon-btn save" title="Save offline" onclick='saveOffline(${safeJson(item)})'>💾</button>${currentTab==='mytrip'?`<button class="icon-btn remove" title="Remove from My Trip" onclick="removeTrip('${item.id}')">🗑️</button>`:''}${currentTab==='saved'?`<button class="icon-btn remove" title="Remove offline" onclick="removeSaved('${item.id}')">🗑️</button>`:''}`
 }
 function routePackCard(item){
@@ -14059,7 +15154,7 @@ function routePackCard(item){
   const stopsHtml=(g.stops||[]).map((s,i)=>`<li><strong>${i+1}. ${s.name}</strong><span>${s.duration||''}</span><p>${s.text}</p>${Number.isFinite(s.lat)?`<button class="icon-btn" onclick='waze({lat:${s.lat},lng:${s.lng},name:${JSON.stringify(s.name)}})'>🚗</button><button class="map-action-btn google-map-btn" onclick='googleDirections({lat:${s.lat},lng:${s.lng},name:${JSON.stringify(s.name)}})'>🗺️ Google Maps</button>`:''}</li>`).join('');
   const foodHtml=(g.food||[]).map(f=>`<li><strong>${f.name}</strong><span>${f.price||''} · ${f.cuisine||''}</span><p>${f.why}</p></li>`).join('');
   return `<article class="card guide-card route-pack-card">
-    <img class="place-image" src="${imageFor(item)}" alt="${titleFor(item)}" loading="lazy" />
+    ${imageMarkup(item)}
     <div class="card-body">
       <div class="card-topline"><span class="category-pill">${labels.route}</span><span class="distance-pill">${fmtDistance(km)}</span></div>
       <h3>${titleFor(item)}</h3>
@@ -14105,7 +15200,7 @@ function card(item){
   const shortIntro = g.why || textFor(item.description) || textFor(item.note) || '';
   const moreId = `more-${item.id}`;
   return `<article class="card guide-card">
-    <img class="place-image" src="${imageFor(item)}" alt="${titleFor(item) || 'Place'}" loading="lazy" />
+    ${imageMarkup(item)}
     <div class="card-body">
       <div class="card-topline"><span class="category-pill">${catNameFor(item.cat)}</span><span class="distance-pill">${fmtDistance(km)}</span></div>
       <h3>${titleFor(item)}</h3>
@@ -14127,7 +15222,63 @@ function card(item){
   </article>`
 }
 
-function moreLabel(){ const car=activePackageMode()==='car'; const labels= car ? {trips:(getLang()==='he'?'עוד מסלולי רכב':'More route packs')} : {trips:(getLang()==='he'?'עוד טיולי יום':'More trips'),food:(getLang()==='he'?'עוד אוכל':'More food'),nightlife:(getLang()==='he'?'עוד חיי לילה':'More nightlife'),experiences:(getLang()==='he'?'עוד חוויות':'More experiences'),mustdo:(getLang()==='he'?'עוד חובה לעשות':'More MustDo'),recommendations:(getLang()==='he'?'עוד המלצות':'More recommendations')}; return labels[currentTab]||'More'; }
+function scrollToListTop(){
+  const list = $('list');
+  const tabs = document.querySelector('.tabs');
+  const headerOffset = (tabs ? tabs.getBoundingClientRect().height : 54) + 14;
+  const anchor = list || tabs || document.body;
+  const absoluteTop = anchor.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+  window.scrollTo({ top: Math.max(0, absoluteTop), behavior: 'smooth' });
+  setTimeout(()=>{ window.scrollTo({ top: Math.max(0, absoluteTop), behavior: 'smooth' }); }, 60);
+}
+function bottomListActions(canMore){
+  const lang=getLang();
+  const moreBtn = canMore ? `<button class="mini-main" onclick="showMoreForCurrentTab()">${moreLabel()}</button>` : '';
+  return `<div class="bottom-list-actions">${moreBtn}<button class="mini-main back-top-btn" onclick="scrollToListTop()">${lang==='he'?'⬆ חזור לתחילת הרשימה':'⬆ Back to top'}</button></div>`;
+}
+function moreLabel(){ const car=activePackageMode()==='car'; const labels= car ? {trips:(getLang()==='he'?'עוד מסלולי רכב':'More route packs')} : {trips:(getLang()==='he'?'עוד טיולי יום':'More trips'),food:(getLang()==='he'?'עוד אוכל':'More food'),nightlife:(getLang()==='he'?'עוד חיי לילה':'More nightlife'),experiences:(getLang()==='he'?'עוד חוויות':'More experiences'),mustdo:(getLang()==='he'?'עוד חובה לעשות':'More MustDo'),attractions:(getLang()==='he'?'עוד אטרקציות':'More attractions'),markets:(getLang()==='he'?'עוד שווקים וקניות':'More markets'),winter:(getLang()==='he'?'עוד חורף וחג מולד':'More winter'),recommendations:(getLang()==='he'?'עוד המלצות':'More recommendations')}; return labels[currentTab]||'More'; }
+
+
+// v66: robust delegated button handling.
+// Some mobile/PWA contexts can ignore or lose inline onclick handlers after dynamic rendering.
+// We convert rendered inline handlers to data attributes and execute them through one trusted listener.
+function bindActionButtons(){
+  document.querySelectorAll('#list button[onclick], .pack-row button[onclick], .danger-row button[onclick], .bottom-list-actions button[onclick]').forEach(btn=>{
+    const code = btn.getAttribute('onclick');
+    if(!code) return;
+    btn.dataset.dtfClick = code;
+    btn.removeAttribute('onclick');
+    btn.type = btn.type || 'button';
+  });
+}
+function runDtfButtonCode(code){
+  try{
+    const fn = new Function(
+      'waze','googleDirections','googleSearch','moovit','uber','bolt',
+      'speakItem','stopSpeaking','vote','addTrip','saveOffline','removeTrip','removeSaved',
+      'clearTrip','clearSaved','showMoreForCurrentTab','scrollToListTop','toggleMore','openSelectedRoute',
+      'setPackageMode','syncLowDataNow','updateLowDataStatus','flash',
+      code
+    );
+    return fn(
+      waze, googleDirections, googleSearch, moovit, uber, bolt,
+      speakItem, stopSpeaking, vote, addTrip, saveOffline, removeTrip, removeSaved,
+      clearTrip, clearSaved, showMoreForCurrentTab, scrollToListTop, toggleMore, openSelectedRoute,
+      setPackageMode, syncLowDataNow, updateLowDataStatus, flash
+    );
+  }catch(err){
+    console.error('DayTripFlow button action failed:', err, code);
+    try{ flash(getLang()==='he'?'הכפתור לא הצליח להיפתח. בדוק הרשאות/אפליקציה מותקנת.':'Button action failed. Check app permissions/installation.'); }catch(_){ }
+  }
+}
+document.addEventListener('click', (ev)=>{
+  const btn = ev.target && ev.target.closest ? ev.target.closest('button[data-dtf-click]') : null;
+  if(!btn) return;
+  ev.preventDefault();
+  ev.stopPropagation();
+  runDtfButtonCode(btn.dataset.dtfClick || '');
+}, true);
+
 function showMoreForCurrentTab(){
   const days = Number($('stayDays').value) || 3;
   const step = Math.max(days, 1);
@@ -14135,6 +15286,7 @@ function showMoreForCurrentTab(){
   render();
 }
 function render(){
+  updateVisualTheme();
   updateRouteOptions();
   refreshOfflineStatus();
   syncTabsForPackageMode();
@@ -14153,9 +15305,13 @@ function render(){
     const noun = packageMode === 'car' && currentTab === 'trips' ? (lang==='he'?'מסלולי רכב':'route pack(s)') : (lang==='he'?'מקומות':'place(s)');
     head+=`<div class="pack-row"><strong>${lang==='he'?'מוצגים':'Showing'} ${items.length} ${noun} ${lang==='he'?'לפי':'for'} ${$('stayDays').value} ${lang==='he'?'ימי שהייה':'day(s)'}</strong><button class="mini-main" onclick="showMoreForCurrentTab()">${moreLabel()}</button></div>`;
   }
-  $('list').innerHTML=items.length? head+items.map(card).join('') : head+`<p class="empty">${lang==='he'?'אין עדיין פריטים מתאימים.':'No matching places yet.'}</p>`;
+  const bottom = bottomListActions(canMore || items.length > 0);
+  $('list').innerHTML=items.length? head+items.map(card).join('')+bottom : head+`<p class="empty">${lang==='he'?'אין עדיין פריטים מתאימים.':'No matching places yet.'}</p>`+bottom;
+  bindActionButtons();
+  requestAnimationFrame(loadRealPhotos);
 }
-function initGps(){ if(!navigator.geolocation){render();return} navigator.geolocation.getCurrentPosition(p=>{userLocation={lat:p.coords.latitude,lng:p.coords.longitude};render()},()=>render(),{enableHighAccuracy:false,maximumAge:600000,timeout:5000}) }
+
+function initGps(){ const cached=load(STORAGE.cachedLocation,null); if(cached && Number.isFinite(cached.lat) && Number.isFinite(cached.lng)) userLocation={lat:cached.lat,lng:cached.lng}; if(!navigator.geolocation){render();return} navigator.geolocation.getCurrentPosition(p=>{rememberCurrentLocation(p);render()},()=>render(),{enableHighAccuracy:false,maximumAge:600000,timeout:5000}) }
 
 $('originSelect').addEventListener('change',()=>{ save('dtf_last_city_v17', activeCity()); if($('offlineCitySelect')) $('offlineCitySelect').value = activeCity(); packOffset=0; updateRouteOptions(); render(); }); $('modeSelect').addEventListener('change',()=>{packOffset=0;render()}); $('destinationSelect').addEventListener('change',()=>updateRouteOptions()); $('driveHours').addEventListener('change',()=>{packOffset=0;render()}); $('sortOrder').addEventListener('change',()=>{packOffset=0;render()}); $('stayDays').addEventListener('change',()=>{packOffset=0;render()}); if($('addCustom')) $('addCustom').addEventListener('click',addCustom); $('saveHotel').addEventListener('click',()=>{const q=$('hotelAddress').value.trim(); if(q){save(STORAGE.hotel,{name:'Hotel address',query:q});render()}});
 $('publicTravelBtn').addEventListener('click',()=>setPackageMode('public'));
@@ -14173,16 +15329,126 @@ if($('offlineCitySelect')) $('offlineCitySelect').addEventListener('change',()=>
   refreshOfflineStatus();
   render();
 });
-window.addEventListener('online', refreshOfflineStatus);
-window.addEventListener('offline', refreshOfflineStatus);
+window.addEventListener('online', ()=>{ refreshOfflineStatus(); syncLowDataNow(); });
+window.addEventListener('offline', ()=>{ refreshOfflineStatus(); updateLowDataStatus(); });
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden && navigator.onLine) syncLowDataNow(); });
+if($('syncLowData')) $('syncLowData').addEventListener('click', syncLowDataNow);
 
 
 // Expose handlers for inline onclick buttons. This keeps Route Pack card buttons working even if app.js is loaded as a module or browser scoping changes.
 Object.assign(window, {
   waze, googleDirections, googleSearch, moovit, uber, bolt,
   speakItem, stopSpeaking, vote, addTrip, saveOffline, removeTrip, removeSaved,
-  clearTrip, clearSaved, showMoreForCurrentTab, toggleMore, openSelectedRoute,
-  setPackageMode
+  clearTrip, clearSaved, showMoreForCurrentTab, scrollToListTop, toggleMore, openSelectedRoute,
+  setPackageMode, syncLowDataNow, updateLowDataStatus
 });
 if('serviceWorker' in navigator){navigator.serviceWorker.register('service-worker.js').catch(()=>{})}
 $('originSelect').innerHTML=AIRPORT_ORIGINS.map(o=>`<option value="${o.id}">${o.label}</option>`).join(''); $('originSelect').value = originIdForCity(load('dtf_last_city_v17','prague')); if($('offlineCitySelect')) $('offlineCitySelect').value=activeCity(); initGps(); render();
+
+// v71: Winter / Christmas tab + non-generic Attractions and Markets content pass.
+// This layer is appended after v70 and does not change existing card actions, buttons, route logic or stored data.
+const EXTRA_WINTER_TABS_V71 = [
+  ['prague','winter','Old Town Square Christmas Market',50.0870,14.4211,'christmas market lights food central walkable'],
+  ['prague','winter','Wenceslas Square Christmas Market',50.0810,14.4256,'christmas market shopping central metro'],
+  ['prague','winter','Prague Castle Christmas Market',50.0909,14.4006,'christmas market castle view romantic'],
+  ['prague','winter','Náměstí Míru Christmas Market',50.0753,14.4378,'christmas local market church metro'],
+  ['prague','winter','Manifesto Winter Market',50.0950,14.4385,'winter food market casual'],
+  ['prague','winter','Ice skating at Letná / city seasonal rinks',50.0972,14.4217,'winter skating family seasonal'],
+
+  ['vienna','winter','Rathausplatz Christmas Market',48.2108,16.3580,'christmas market lights city-hall mustdo'],
+  ['vienna','winter','Schönbrunn Christmas Market',48.1858,16.3122,'christmas market palace romantic'],
+  ['vienna','winter','Belvedere Christmas Village',48.1915,16.3809,'christmas market palace lights'],
+  ['vienna','winter','Karlsplatz Art Advent',48.2003,16.3716,'christmas market crafts local family'],
+  ['vienna','winter','Spittelberg Christmas Market',48.2036,16.3547,'christmas market lanes crafts evening'],
+  ['vienna','winter','Vienna Ice Dream / Rathausplatz skating',48.2108,16.3580,'winter skating city-hall family'],
+
+  ['strasbourg','winter','Christkindelsmärik Place Broglie',48.5852,7.7490,'christmas market historic central'],
+  ['strasbourg','winter','Place Kléber Christmas Tree',48.5836,7.7466,'christmas tree lights mustdo'],
+  ['strasbourg','winter','Cathedral Christmas Market',48.5819,7.7506,'christmas market cathedral lights'],
+  ['strasbourg','winter','Petite France Christmas Lights',48.5810,7.7428,'christmas lights canals romantic'],
+  ['strasbourg','winter','OFF Market Strasbourg',48.5795,7.7520,'christmas market alternative local'],
+  ['strasbourg','winter','Alsatian Christmas Food Walk',48.5820,7.7480,'christmas food alsace walkable']
+].map(([city,cat,name,lat,lng,tags]) => makePlace(city, cat, name, lat, lng, 0.08, 0.18, tags, `${name} winter guide stop in ${CITIES[city].name}.`, false));
+
+DATA.push(...EXTRA_WINTER_TABS_V71);
+
+Object.assign(EUROPE_REAL_GUIDE_CONTENT, {
+  // Prague attractions
+  'Prague Venice / Čertovka Boat': {he:{why:'שייט קצר באזור Čertovka מציג את פראג מהתעלות הקטנות שמתחת לגשר קארל ומאחורי קמפה. זה לא שייט ארוך על הנהר אלא חוויה אינטימית יותר, טובה למי שרוצה לראות את העיר מזווית נמוכה ושקטה.',see:['תעלת Čertovka','גשר קארל מזווית קרובה','בתי Malá Strana ליד המים','אזור Kampa'],fit:'זוגות, ביקור ראשון, יום רגוע, מי שרוצה שייט קצר ולא מסלול ארוך.',tip:'עדיף בשעות אור או לקראת ערב; לבדוק האם המסלול פתוח בעונה ובמזג האוויר.'},en:{why:'A short boat ride around Čertovka shows Prague through the small canals below Charles Bridge and behind Kampa. It is more intimate than a long river cruise.',see:['Čertovka canal','Charles Bridge from below','Malá Strana waterfront houses','Kampa area'],fit:'Couples, first visit, relaxed day, short boat experience.',tip:'Best in daylight or early evening; check seasonal operation and weather.'}},
+  'Miniature Railway Kingdom': {he:{why:'Kingdom of Railways הוא מוזיאון מודלים מקורה עם רכבות, ערים מיניאטוריות ותצוגות שילדים וחובבי דגמים יכולים להיתקע בהן הרבה זמן. זו לא אטרקציית חובה לכל אחד, אבל היא מצוינת כגיבוי לגשם או לפעילות משפחתית.',see:['מסילות רכבת מיניאטוריות','דגמים של אזורים בצ׳כיה','תצוגות אינטראקטיביות לילדים','פעילות מקורה'],fit:'משפחות, ילדים, יום גשום, חובבי רכבות ודגמים.',tip:'לא לבחור בה אם יש לכם רק יום ראשון בפראג; היא טובה יותר כפעילות גיבוי או לילדים.'},en:{why:'Kingdom of Railways is an indoor model-railway museum with miniature cities and moving trains. It is not for everyone, but excellent as a rainy-day or family backup.',see:['Miniature railway layouts','Czech regional models','Interactive family displays','Indoor activity'],fit:'Families, children, rainy days, railway/model fans.',tip:'Do not make it your first Prague must-do; use it as a family or bad-weather option.'}},
+  'Stromovka Park': {he:{why:'Stromovka הוא אחד הפארקים הגדולים והאהובים בפראג, בעבר אזור ציד מלכותי והיום מרחב ירוק מקומי להליכה, קפה, אופניים ומשפחות. מגיעים כדי לראות פראג יומיומית ולא רק עיר עתיקה.',see:['שבילים רחבים וירוקים','אגמים קטנים ומדשאות','קפה ועצירות רגועות','קרבה לאזור Holešovice ולטירת Troja'],fit:'משפחות, ריצה/אופניים, יום רגוע, מי שרוצה לברוח מהמוני העיר העתיקה.',tip:'לשלב עם Letná או Holešovice אם רוצים יום מקומי יותר ופחות תיירותי.'},en:{why:'Stromovka is one of Prague’s largest and most loved parks, once a royal hunting ground and now a local green escape for walks, cycling and families.',see:['Wide green paths','Small ponds and lawns','Cafés and relaxed stops','Access to Holešovice/Troja side'],fit:'Families, cycling, running, calm local day.',tip:'Combine with Letná or Holešovice for a more local Prague day.'}},
+
+  // Vienna attractions
+  'Danube Canal Walk': {he:{why:'תעלת הדנובה היא המקום שבו וינה פחות רשמית: קירות גרפיטי, ברים על המים, טיילת, רוכבי אופניים ואווירת ערב צעירה יותר. זה הצד העירוני והעכשווי שמאזן את הארמונות והמוזיאונים.',see:['קירות Street Art מתחלפים','ברים ובתי קפה לאורך המים','גשרים והליכה נוחה ליד המרכז','אווירת ערב בקיץ'],fit:'מי שרוצה וינה צעירה, הליכת ערב, צילום סטריט־ארט, עצירת שתייה קז׳ואלית.',tip:'הכי חזק באביב/קיץ ובערב. בחורף חלק מהמקומות סגורים והאווירה שקטה יותר.'},en:{why:'The Danube Canal is Vienna’s less formal side: street-art walls, waterside bars, cycling paths and a younger evening mood. It balances the imperial museums and palaces.',see:['Changing street-art walls','Riverside bars and cafés','Bridges and easy central walking','Summer evening atmosphere'],fit:'Modern Vienna, evening walks, street-art photos, casual drinks.',tip:'Best in spring/summer evenings; in winter it is much quieter.'}},
+  'Danube Tower': {he:{why:'Donauturm הוא מגדל התצפית הגבוה של וינה באזור Donaupark. הוא מתאים כשמחפשים תצפית רחבה על הדנובה, העיר והאזורים המודרניים יותר של וינה, לא רק המרכז ההיסטורי.',see:['תצפית גבוהה על וינה','נהר הדנובה והאי Donauinsel','Donaupark','מסעדה/קפה מסתובבים אם פתוחים'],fit:'תצפיות, צילום, משפחות, יום בהיר.',tip:'לא לעלות ביום ערפילי. כדאי לשלב עם Donaupark או Donauinsel ולא לנסוע רק לתמונה אחת.'},en:{why:'Donauturm is Vienna’s high observation tower in Donaupark. It gives a broad view of the Danube, the city and modern Vienna beyond the old center.',see:['High Vienna panorama','Danube and Donauinsel','Donaupark','Rotating café/restaurant if open'],fit:'Viewpoints, photos, families, clear days.',tip:'Avoid foggy days; combine with Donaupark or Donauinsel.'}},
+  'Kahlenberg Viewpoint': {he:{why:'Kahlenberg הוא אחד המקומות הטובים להבין שווינה יושבת ליד גבעות, כרמים והדנובה. מהתצפית רואים את העיר מלמעלה ואת הנוף שמסביב, ולכן זה מתאים במיוחד לשקיעה או יום בהיר.',see:['תצפית על וינה והדנובה','כרמים וגבעות Wienerwald','אפשרות לשלב עם Grinzing','אווירה פתוחה מחוץ למרכז'],fit:'זוגות, שקיעה, צילום, מי שרוצה לברוח מהעיר בלי יום טיול ארוך.',tip:'לבדוק תחבורה חזרה בערב. ברכב זה פשוט יותר, אבל גם תחבורה ציבורית אפשרית בתכנון נכון.'},en:{why:'Kahlenberg shows Vienna from above: city, Danube, vineyards and the Vienna Woods. It is one of the best sunset/viewpoint escapes without a full day trip.',see:['Vienna and Danube panorama','Vineyards and Vienna Woods','Possible pairing with Grinzing','Open-air escape from the center'],fit:'Couples, sunset, photos, easy escape.',tip:'Check evening return transport; easier by car but possible with planning.'}},
+  'House of Music': {he:{why:'Haus der Musik הוא מוזיאון אינטראקטיבי שמחבר את וינה למסורת המוזיקה שלה בצורה נגישה יותר ממוזיאון קלאסי. הוא טוב במיוחד ביום גשם או למי שרוצה להבין את העיר דרך צלילים, מלחינים וניסויים.',see:['תצוגות אינטראקטיביות על צליל','מלחינים וינאים','פעילות מקורה למשפחות','חוויה מוזיקלית לא כבדה'],fit:'משפחות, יום גשום, חובבי מוזיקה, מי שלא רוצה עוד ארמון.',tip:'מתאים במיוחד אחרי או לפני ערב אופרה/קונצרט כדי לתת הקשר מוזיקלי.'},en:{why:'Haus der Musik connects Vienna to its musical heritage in a more interactive way than a standard museum. Good for rainy days and travelers who want sound, composers and experiments.',see:['Interactive sound exhibits','Viennese composers','Indoor family activity','Accessible music context'],fit:'Families, rainy days, music lovers, museum alternative.',tip:'Pair it with an opera/concert evening for context.'}},
+
+  // Strasbourg attractions
+  'Bike tour along Ill river': {he:{why:'רכיבה לאורך נהר Ill מאפשרת לראות את שטרסבורג כעיר שטוחה, ירוקה ונוחה מאוד לאופניים. זה לא רק מעבר בין נקודות: לאורך הנהר רואים גשרים, תעלות, פטיט פראנס, אזורי מגורים והדרך לרובע האירופי.',see:['שבילי אופניים לאורך הנהר','פטיט פראנס והתעלות','גשרים ונקודות צילום','אפשרות להמשיך לרובע האירופי או Orangerie'],fit:'מי שרוצה טיול קליל, זוגות, משפחות עם ילדים גדולים, מזג אוויר טוב.',tip:'להישאר על שבילי אופניים מסומנים ולבדוק מראש נקודת השכרה/החזרה. פחות מתאים בגשם חזק.'},en:{why:'Cycling along the Ill shows Strasbourg as a flat, green, bike-friendly city. It is not just transport: you pass canals, bridges, Petite France, residential areas and routes toward the European Quarter.',see:['Bike paths along the river','Petite France and canals','Bridges and photo stops','Possible extension to European Quarter/Orangerie'],fit:'Easy active outing, couples, families with older kids, good weather.',tip:'Use marked bike lanes and check rental/return points first. Not ideal in heavy rain.'}},
+  'European Parliament Visit': {he:{why:'הרובע האירופי מזכיר ששטרסבורג היא לא רק עיר אלזסית יפה אלא גם מרכז פוליטי אירופי. מבנה הפרלמנט, מועצת אירופה והאזור סביבם נותנים שכבה מודרנית וחשובה לסיפור העיר.',see:['בניין הפרלמנט האירופי מבחוץ/ביקור אם זמין','Council of Europe','שדרות ורחובות מודרניים יותר','שילוב עם Parc de l’Orangerie'],fit:'מתעניינים באירופה, אדריכלות מודרנית, יום רגוע עם טראם.',tip:'לבדוק מראש אם יש ביקורים פתוחים. גם אם לא נכנסים, האזור מעניין לשילוב עם Orangerie.'},en:{why:'The European Quarter shows that Strasbourg is not only a pretty Alsatian city, but also a European political center. It adds a modern layer to the city story.',see:['European Parliament building','Council of Europe','Modern avenues and institutions','Pairing with Parc de l’Orangerie'],fit:'European politics, modern architecture, relaxed tram-based outing.',tip:'Check visit availability. Even from outside, combine it with Orangerie.'}},
+  'Alsatian Museum': {he:{why:'המוזיאון האלזסי מציג את חיי היום־יום של אלזס דרך בתים, רהיטים, תלבושות, חפצים ומסורות. זה מקום טוב להבין מה עומד מאחורי הבתים הצבעוניים והאוכל המקומי.',see:['חדרים משוחזרים בסגנון אלזסי','חפצים ותלבושות מסורתיות','סיפור החיים המקומיים באזור הגבול צרפת־גרמניה','מבנה היסטורי על גדת הנהר'],fit:'יום גשום, תרבות מקומית, מי שרוצה להבין את אלזס ולא רק לצלם אותה.',tip:'מומלץ לפני יציאה לכפרים כמו Colmar/Riquewihr כדי לקבל הקשר.'},en:{why:'The Alsatian Museum explains local everyday life through interiors, furniture, clothing, objects and traditions. It gives context to the colorful houses and regional food.',see:['Reconstructed Alsatian rooms','Traditional objects and costumes','French-German border culture','Historic riverside building'],fit:'Rainy day, local culture, travelers who want context.',tip:'Visit before the Alsace villages to understand what you are seeing.'}},
+
+  // Markets and shopping
+  'Naplavka Farmers Market': {he:{why:'שוק נפלבקה מתקיים על גדת הוולטאבה ונחשב לאחת העצירות המקומיות היותר נעימות בסופי שבוע: מאפים, קפה, גבינות, ירקות, אוכל רחוב ואנשים שיושבים ליד הנהר.',see:['דוכני אוכל מקומי','קפה ומאפים','אווירת נהר בסוף שבוע','הליכה לאורך הטיילת'],fit:'בוקר שבת, אוכל קל, אווירה מקומית, זוגות ומשפחות.',tip:'לבדוק יום ושעות. אם אין שוק פעיל, עדיין נחמד להליכה אבל הערך יורד.'},en:{why:'Náplavka Farmers Market runs along the Vltava and is one of Prague’s nicer local weekend stops: pastries, coffee, cheese, produce, street food and riverside sitting.',see:['Local food stalls','Coffee and pastries','Weekend river atmosphere','Riverside walk'],fit:'Saturday morning, light food, local mood, couples/families.',tip:'Check day and hours; without the market the riverside is still nice but less special.'}},
+  'Palladium Mall': {he:{why:'Palladium הוא קניון מרכזי מאוד ליד כיכר הרפובליקה, שימושי כשצריך קניות, גשם, שירותים, אוכל מהיר או מקום נוח להתארגן באמצע יום בעיר העתיקה.',see:['רשתות אופנה בינלאומיות','קומת אוכל','מיקום מרכזי ליד תחבורה','פתרון טוב ליום גשם'],fit:'קניות פרקטיות, גשם, משפחות, עצירה נוחה באמצע יום.',tip:'לא יעד תיירות בפני עצמו; להשתמש בו כשצריך נוחות.'},en:{why:'Palladium is a very central mall near Republic Square, useful for shopping, rain, restrooms, quick food or a convenient reset during an Old Town day.',see:['International fashion chains','Food court','Central transport access','Rainy-day backup'],fit:'Practical shopping, rain, families, convenient break.',tip:'Not a travel highlight; use it for convenience.'}},
+  'Fashion Arena Prague Outlet': {he:{why:'Fashion Arena הוא אאוטלט מחוץ למרכז פראג עם מותגים בהנחות. הוא מתאים רק אם קניות הן חלק מתוכנית הטיול או אם יש רכב/זמן, לא כעצירה עירונית רגילה.',see:['חנויות אאוטלט','מותגים בינלאומיים','חניה ונוחות לרכב','זמן קניות ייעודי'],fit:'קניות מותגים, יום גשם חלקי, מי שמוכן לצאת מהמרכז.',tip:'לא לשלב ביום עמוס בעיר העתיקה; זה דורש זמן נסיעה והחלטה מודעת.'},en:{why:'Fashion Arena is an outlet outside central Prague with discounted brands. It only makes sense if shopping is part of the plan or you have a car/time.',see:['Outlet shops','International brands','Car-friendly access','Dedicated shopping time'],fit:'Brand shopping, partial rainy day, travelers willing to leave center.',tip:'Do not squeeze into a busy Old Town day; it needs time.'}},
+  'Mariahilfer Straße': {he:{why:'Mariahilfer Straße הוא רחוב הקניות הראשי של וינה, עם רשתות, חנויות מקומיות, קפה וחיבור טוב בתחבורה ציבורית. הוא פרקטי יותר מנוצץ — מקום לקניות אמיתיות במהלך טיול.',see:['חנויות אופנה ורשתות','בתי קפה בין הקניות','גישה נוחה במטרו','קרבה ל-MuseumsQuartier'],fit:'קניות עירוניות, בגדים, יום גשם חלקי, משפחות.',tip:'לשלב עם MuseumsQuartier או Spittelberg במקום לנסוע במיוחד רק לקניות.'},en:{why:'Mariahilfer Straße is Vienna’s main shopping street: chains, local shops, cafés and easy metro access. Practical rather than glamorous, but useful for real shopping.',see:['Fashion chains and shops','Cafés between stores','Metro access','Close to MuseumsQuartier'],fit:'Urban shopping, clothes, partial rainy day, families.',tip:'Pair with MuseumsQuartier or Spittelberg.'}},
+  'Parndorf Designer Outlet': {he:{why:'Parndorf Designer Outlet הוא מתחם אאוטלט גדול מחוץ לוינה, מתאים למי שמחפש מותגים והנחות ומוכן להקדיש לזה חצי יום או יותר. זה לא טיול עירוני אלא יעד קניות.',see:['חנויות מותגים','אזור פתוח בסגנון כפר קניות','חניה וגישה ברכב','אפשרויות אוכל פשוטות'],fit:'קניות מותגים, רכב, יום ייעודי, מי שלא רוצה להסתפק ברחוב קניות בעיר.',tip:'לבדוק שעות והגעה מראש. לא כדאי אם יש מעט ימים בוינה.'},en:{why:'Parndorf Designer Outlet is a large outlet outside Vienna for brand shopping and discounts. It is not a city stroll; it is a dedicated shopping destination.',see:['Designer-brand shops','Open-air outlet village','Car-friendly access','Simple food options'],fit:'Brand shopping, car users, dedicated half-day.',tip:'Check hours/transport first. Not ideal with very few Vienna days.'}},
+  'Karmelitermarkt': {he:{why:'Karmelitermarkt הוא שוק שכונתי ברובע השני של וינה, פחות תיירותי מנאשמרקט ומעניין למי שרוצה אוכל, קפה ואווירה מקומית סביב Leopoldstadt.',see:['דוכני אוכל וירקות','בתי קפה ומסעדות קטנות','שוק שכונתי רגוע','קרבה לתעלת הדנובה'],fit:'בוקר רגוע, אוכל מקומי, מי שכבר ראה את הקלאסיקות.',tip:'הכי טוב בשעות פעילות השוק. בערב האופי משתנה יותר למסעדות סביב.'},en:{why:'Karmelitermarkt is a neighborhood market in Vienna’s 2nd district, less touristy than Naschmarkt and good for local food/café mood around Leopoldstadt.',see:['Food and produce stalls','Small cafés/restaurants','Calm neighborhood market','Near Danube Canal'],fit:'Relaxed morning, local food, repeat visitors.',tip:'Best during market hours; evenings shift toward surrounding restaurants.'}},
+  'Strasbourg Covered Market': {he:{why:'השוק המקורה/אזורי שוק האוכל בשטרסבורג טובים לעצירה פרקטית: גבינות, מאפים, מוצרים מקומיים ואפשרות להבין את המטבח האלזסי דרך חומרי גלם, לא רק מסעדות.',see:['גבינות ומעדנים','מאפים ולחמים','מוצרים מקומיים','אווירת קניות יומיומית'],fit:'אוכל מקומי, יום גשם, מי שאוהב שווקים ולא רק מסעדות.',tip:'לבדוק שעות. שווקים מקומיים פחות פעילים מחוץ לשעות הבוקר/צהריים.'},en:{why:'Strasbourg’s covered/food-market stops are practical for cheese, pastries and local products — a way to understand Alsatian food through ingredients, not only restaurants.',see:['Cheese and deli products','Pastries and bread','Local goods','Everyday shopping mood'],fit:'Local food, rainy day, market lovers.',tip:'Check hours; local markets are often best in the morning.'}},
+  'Kehl Shopping Street': {he:{why:'Kehl נמצאת מעבר לגבול בגרמניה ונגישה משטרסבורג בטראם. זה לא אתר תיירות קלאסי, אלא פתרון קניות חוצה גבול, סופרמרקטים, מחירים ולעיתים תחושה אחרת לגמרי בתוך נסיעה קצרה.',see:['רחוב קניות גרמני קטן','חנויות וסופרמרקטים','חציית גבול קלה בטראם','שינוי אווירה מהיר'],fit:'קניות פרקטיות, סקרנות חוצה גבול, מי שיש לו זמן עודף.',tip:'לא להחליף בזה את Strasbourg עצמה אם זה ביקור קצר; זה תוספת פרקטית.'},en:{why:'Kehl is just across the German border and reachable by tram from Strasbourg. It is not classic sightseeing, but useful for cross-border shopping and a quick change of atmosphere.',see:['Small German shopping street','Stores and supermarkets','Easy tram border crossing','Different everyday feel'],fit:'Practical shopping, cross-border curiosity, spare time.',tip:'Do not choose it over Strasbourg highlights on a short trip.'}},
+  'Broglie Market': {he:{why:'Place Broglie קשור במיוחד לשווקים עונתיים, ובראש ובראשונה לשוק חג המולד ההיסטורי. מחוץ לעונה זה אזור מרכזי נוח, אבל בשיא החורף הוא הופך לחלק מהחוויה הגדולה של Strasbourg.',see:['כיכר מרכזית ליד העיר העתיקה','דוכנים עונתיים כאשר פעיל','קרבה לקתדרלה ולמרכז','אווירת חג בחורף'],fit:'עונת חורף/חג מולד, הליכה מרכזית, צילום ערב.',tip:'לוודא שהשוק פעיל בתאריך שלך. לא כל כיכר שוק פעילה כל השנה.'},en:{why:'Place Broglie is especially tied to seasonal markets, most famously Strasbourg’s historic Christmas market. Outside season it is central; in winter it becomes a key part of the experience.',see:['Central square near Old Town','Seasonal stalls when active','Near cathedral/center','Winter holiday atmosphere'],fit:'Winter/Christmas season, central walk, evening photos.',tip:'Confirm market dates; not every market square is active year-round.'}},
+
+  // Winter / Christmas tab
+  'Old Town Square Christmas Market': {he:{why:'שוק חג המולד בכיכר העיר העתיקה הוא הלב החורפי של פראג: עץ גדול, דוכני אוכל, אורות וכנסיית טין ברקע. זו חוויה תיירותית מאוד, אבל גם אחת התמונות החזקות של העיר בדצמבר.',see:['עץ חג מולד מרכזי','דוכני Trdelník, נקניקיות ויין חם','תאורת ערב סביב הכיכר','כנסיית טין והשעון האסטרונומי'],fit:'חורף, צילום, זוגות, משפחות, ביקור ראשון בדצמבר.',tip:'עמוס מאוד בערב. להגיע מוקדם או מאוחר יותר, לשמור על חפצים ולהתרחק קצת לאוכל טוב יותר.'},en:{why:'Old Town Square Christmas Market is Prague’s winter postcard: big tree, food stalls, lights and Týn Church in the background. Very touristy, but one of the city’s strongest December scenes.',see:['Central Christmas tree','Trdelník, sausages and mulled wine stalls','Evening lights','Týn Church and Astronomical Clock setting'],fit:'Winter, photos, couples, families, first December visit.',tip:'Very crowded in the evening. Go early/late and watch belongings.'}},
+  'Wenceslas Square Christmas Market': {he:{why:'שוק ואצלב הוא גרסה רחבה וקלה יותר לתנועה, עם דוכנים לאורך השדרה וקשר טבעי לקניות במרכז. הוא פחות רומנטי מהעיר העתיקה אבל שימושי מאוד במסלול עירוני.',see:['דוכני חג לאורך השדרה','חנויות וקניונים קרובים','אווירת מרכז עיר מודרני','חיבור למטרו ולחשמליות'],fit:'קניות וחג, משפחות, מעבר נוח בין אזורי העיר.',tip:'לשלב עם Old Town Square בהליכה אחת ולא לנסוע אליו בנפרד.'},en:{why:'Wenceslas Square market is wider and easier to move through, with stalls along the boulevard and natural access to central shopping. Less romantic than Old Town, but very practical.',see:['Holiday stalls along boulevard','Nearby shops/malls','Modern city-center atmosphere','Metro/tram access'],fit:'Shopping plus Christmas mood, families, easy central route.',tip:'Combine with Old Town Square on one walk.'}},
+  'Prague Castle Christmas Market': {he:{why:'שוק חג המולד באזור הטירה קטן יותר אבל נותן שילוב חזק של אורות, חצרות היסטוריות ונוף העיר. הערך הוא האווירה של הטירה בחורף, לא כמות הדוכנים.',see:['דוכנים באזור Prague Castle','קתדרלת St. Vitus ברקע','אורות חורף בחצרות','תצפית לעיר בירידה'],fit:'זוגות, צילום, מי שמבקר בטירה בחורף.',tip:'לבוא כחלק מביקור בטירה, לא רק בשביל השוק. להתלבש חם — פתוח וגבוה יותר.'},en:{why:'The Prague Castle Christmas Market is smaller, but combines winter lights, historic courtyards and city views. The value is castle atmosphere, not stall quantity.',see:['Castle-area stalls','St. Vitus Cathedral backdrop','Winter-lit courtyards','City views on the walk down'],fit:'Couples, photos, winter castle visit.',tip:'Do it with the castle visit, not as a standalone market.'}},
+  'Náměstí Míru Christmas Market': {he:{why:'שוק Náměstí Míru ליד כנסיית St. Ludmila מרגיש מקומי ושכונתי יותר מהשווקים המרכזיים. הוא טוב למי שרוצה חג מולד עם פחות עומס ויותר תחושת שכונה.',see:['כנסיית St. Ludmila מוארת','דוכני אוכל ומתנות','אווירה שכונתית בוינוהראדי','גישה נוחה במטרו'],fit:'מי שרוצה שוק רגוע יותר, ערב קצר, זוגות ומקומיים.',tip:'מצוין לשלב עם ארוחת ערב בוינוהראדי.'},en:{why:'Náměstí Míru market by St. Ludmila Church feels more local and neighborhood-based than the central markets. Good for Christmas atmosphere with less crush.',see:['Lit St. Ludmila Church','Food and gift stalls','Vinohrady neighborhood mood','Metro access'],fit:'Quieter market, short evening, couples/local feel.',tip:'Pair with dinner in Vinohrady.'}},
+  'Manifesto Winter Market': {he:{why:'Manifesto בחורף נותן גרסת אוכל-רחוב מסודרת ומחוממת יותר, עם דוכני אוכל, שתייה ואווירה צעירה. הוא פחות מסורתי משוק חג מולד קלאסי, אבל נוח לקבוצות שרוצות אוכל מגוון.',see:['דוכני אוכל בינלאומי','שתייה חמה/קוקטיילים לפי עונה','ישיבה מסודרת יותר','אווירה צעירה וקז׳ואלית'],fit:'קבוצות, אוכל מגוון, ערב קליל, מי שלא רוצה שוק צפוף מדי.',tip:'לבדוק אם המתחם פעיל בעונה ובאיזה מיקום/שעות.'},en:{why:'Manifesto in winter offers a more organized street-food market mood with food stalls, drinks and a younger atmosphere. Less traditional, but practical for groups.',see:['International food stalls','Seasonal hot drinks/cocktails','More organized seating','Young casual mood'],fit:'Groups, varied food, easy evening, less traditional market.',tip:'Check seasonal opening, location and hours.'}},
+  'Ice skating at Letná / city seasonal rinks': {he:{why:'משטחי החלקה עונתיים בפראג מוסיפים פעילות חורף אמיתית ולא רק הליכה בין דוכנים. Letná ואזורים עירוניים אחרים מציעים דרך קלילה להרגיש את העיר בחורף.',see:['משטח החלקה עונתי','אווירת חורף מקומית','אפשרות לשלב עם תצפית/פארק','פעילות משפחתית או זוגית'],fit:'משפחות, זוגות, חורף, מי שרוצה פעילות ולא רק צילום.',tip:'לבדוק מראש אם המשטח פתוח, השכרת נעליים ושעות.'},en:{why:'Seasonal ice rinks in Prague add a real winter activity beyond market walking. Letná and other city rinks make the city feel active in winter.',see:['Seasonal skating rink','Local winter atmosphere','Possible pairing with park/viewpoint','Family or couple activity'],fit:'Families, couples, winter activity, not only photos.',tip:'Check opening, skate rental and hours.'}},
+
+  'Rathausplatz Christmas Market': {he:{why:'שוק חג המולד מול בית העירייה הוא החוויה החורפית הגדולה ביותר של וינה: אורות, שער כניסה מואר, עץ ענק, דוכנים ולעיתים אזורי החלקה. זה המקום שמגדיר את וינה בדצמבר.',see:['חזית Rathaus מוארת','דוכני אוכל ומתנות','אזורי החלקה/אורות עונתיים','עצים מוארים בפארק'],fit:'ביקור ראשון בחורף, משפחות, צילום, ערב חגיגי.',tip:'עמוס מאוד בערב ובסופי שבוע. להגיע מוקדם או באמצע שבוע.'},en:{why:'The Christmas market in front of Vienna City Hall is the city’s biggest winter scene: lights, illuminated entrance, huge tree, stalls and often skating areas.',see:['Illuminated Rathaus façade','Food and gift stalls','Seasonal skating/lights','Lit trees in the park'],fit:'First winter visit, families, photos, festive evening.',tip:'Very crowded evenings/weekends. Go early or midweek.'}},
+  'Schönbrunn Christmas Market': {he:{why:'שוק חג המולד בשנברון משלב ארמון קיסרי עם דוכני חג, מוזיקה ואווירה אלגנטית יותר. הוא פחות “מרכז עיר” ויותר חוויה של חצר ארמון בחורף.',see:['חזית ארמון שנברון','דוכני אמנות ומתנות','אוכל ושתייה חמה','אפשרות לשלב עם גני הארמון'],fit:'זוגות, צילום, מי שמבקר בשנברון בחורף.',tip:'לבוא לפני החשיכה ולראות גם את הארמון באור יום וגם את האורות בערב.'},en:{why:'Schönbrunn Christmas Market combines imperial palace scenery with holiday stalls, music and a more elegant atmosphere.',see:['Schönbrunn Palace façade','Craft and gift stalls','Food and hot drinks','Possible garden walk'],fit:'Couples, photos, winter Schönbrunn visit.',tip:'Arrive before dark to see both daylight palace and evening lights.'}},
+  'Belvedere Christmas Village': {he:{why:'שוק החורף בבלוודר מציע שילוב של ארמון, אגם קטן, אורות ודוכנים באווירה רגועה יותר מרטהאוס. הוא מתאים במיוחד לצילום ערב עם השתקפות הארמון.',see:['ארמון בלוודר מואר','דוכני חג סביב החזית','אווירה רומנטית יותר','אפשרות לשלב עם מוזיאון Belvedere'],fit:'זוגות, צילום, ערב רגוע, אוהבי אמנות.',tip:'לשלב עם ביקור ב-Belvedere ביום ואז לחזור לאורות בערב.'},en:{why:'Belvedere Christmas Village pairs palace architecture, lights and stalls in a calmer mood than Rathausplatz. Excellent for evening photos and reflections.',see:['Lit Belvedere Palace','Holiday stalls','Romantic atmosphere','Possible museum pairing'],fit:'Couples, photos, calmer evening, art lovers.',tip:'Pair a daytime Belvedere visit with evening lights.'}},
+  'Karlsplatz Art Advent': {he:{why:'Art Advent בכיכר Karlsplatz מתמקד יותר בעבודות יד, אוכל אורגני ואווירה יצירתית מאשר שוק תיירותי סטנדרטי. הכנסייה Karlskirche מאחור נותנת תפאורה חזקה מאוד.',see:['דוכני אמנות ועבודות יד','Karlskirche מוארת','אוכל חורפי ושתייה חמה','אווירה משפחתית/יצירתית'],fit:'מי שמעדיף שוק פחות מסחרי, משפחות, מתנות איכותיות.',tip:'טוב לשלב עם Karlskirche ועם הליכה קצרה ל-Naschmarkt.'},en:{why:'Art Advent at Karlsplatz focuses more on crafts, organic food and creative atmosphere than a standard tourist market, with Karlskirche as a dramatic backdrop.',see:['Craft and art stalls','Illuminated Karlskirche','Winter food and hot drinks','Creative/family atmosphere'],fit:'Less commercial market, families, better gifts.',tip:'Pair with Karlskirche and a short walk to Naschmarkt.'}},
+  'Spittelberg Christmas Market': {he:{why:'שוק Spittelberg נפרס בסמטאות צרות ליד MuseumsQuartier, ולכן הוא מרגיש אינטימי ושכונתי יותר. מגיעים בשביל עבודות יד, יין חם ורחובות קטנים ולא כיכר ענקית.',see:['סמטאות Spittelberg','דוכני עבודות יד','ברים וקפה בסביבה','אווירת ערב צפופה ונעימה'],fit:'זוגות, חברים, מתנות, מי שכבר ראה את Rathausplatz.',tip:'צפוף בסופי שבוע; ללכת לאט ולשלב עם MuseumsQuartier.'},en:{why:'Spittelberg Christmas Market spreads through narrow lanes near MuseumsQuartier, feeling more intimate and neighborhood-like than a large square market.',see:['Spittelberg lanes','Craft stalls','Nearby bars/cafés','Cozy evening atmosphere'],fit:'Couples, friends, gifts, repeat Vienna visitors.',tip:'Crowded weekends; walk slowly and pair with MuseumsQuartier.'}},
+  'Vienna Ice Dream / Rathausplatz skating': {he:{why:'Vienna Ice Dream הופך את אזור Rathausplatz למתחם החלקה גדול ומואר. זו פעילות חורף אמיתית ולא רק צפייה בדוכנים, טובה במיוחד למשפחות או זוגות שרוצים לעשות משהו.',see:['מסלולי החלקה מוארים','רקע בית העירייה','אווירה חורפית חזקה','אפשרות לשלב עם השוק'],fit:'משפחות, זוגות, פעילות חורף, ערב פעיל.',tip:'לבדוק תאריכים, עומס והשכרת נעליים מראש.'},en:{why:'Vienna Ice Dream turns Rathausplatz into a large illuminated skating area. It is a real winter activity, not just market browsing.',see:['Lit skating paths','City Hall backdrop','Strong winter atmosphere','Possible market pairing'],fit:'Families, couples, active winter evening.',tip:'Check dates, crowding and skate rental first.'}},
+
+  'Christkindelsmärik Place Broglie': {he:{why:'Christkindelsmärik בשטרסבורג הוא אחד משווקי חג המולד ההיסטוריים והמפורסמים באירופה, עם שורשים מהמאה ה־16. Place Broglie הוא מוקד מרכזי להבנת למה העיר נקראת “בירת חג המולד”.',see:['דוכני חג מסורתיים','אורות חג במרכז העיר','אווירה היסטורית סביב Place Broglie','אוכל אלזסי חורפי ויין חם'],fit:'חורף, היסטוריה של חג המולד, צילום, זוגות ומשפחות.',tip:'להגיע מוקדם ביום אם רוצים פחות עומס; בערב יפה יותר אבל צפוף.'},en:{why:'Strasbourg’s Christkindelsmärik is one of Europe’s historic Christmas markets, with roots in the 16th century. Place Broglie is central to the city’s “Capital of Christmas” identity.',see:['Traditional holiday stalls','Central city lights','Historic Place Broglie atmosphere','Alsatian winter food and mulled wine'],fit:'Winter, Christmas history, photos, couples/families.',tip:'Go early for lower crowds; evenings are prettier but packed.'}},
+  'Place Kléber Christmas Tree': {he:{why:'עץ חג המולד הענק בכיכר Kléber הוא הסמל המרכזי של שטרסבורג בחורף. לא מגיעים בשביל דוכן אחד אלא בשביל הרגע הוויזואלי: כיכר גדולה, אורות ועץ שמגדיר את העיר בעונה.',see:['העץ הגדול של שטרסבורג','אורות בכיכר Kléber','דוכנים ומרכז העיר סביב','צילום ערב חזק'],fit:'צילום, ביקור ראשון בדצמבר, משפחות וזוגות.',tip:'להגיע גם ביום וגם בלילה אם אפשר. בלילה התמונה הרבה יותר חזקה.'},en:{why:'The giant Christmas tree at Place Kléber is Strasbourg’s central winter symbol. You go for the visual moment: large square, lights and the tree that defines the season.',see:['Strasbourg’s big tree','Place Kléber lights','Nearby stalls and center','Strong evening photos'],fit:'Photos, first December visit, families/couples.',tip:'See it by day and night if possible; night is much stronger.'}},
+  'Cathedral Christmas Market': {he:{why:'שוק החג ליד הקתדרלה מחבר בין האייקון הגותי של שטרסבורג לבין אווירת חג המולד. התאורה והחזית העצומה של הקתדרלה נותנים לדוכנים תפאורה שאין בשוק רגיל.',see:['קתדרלת שטרסבורג מוארת','דוכני חג סביב הכיכר','רחובות קטנים ליד המרכז','אוכל חורפי ויין חם'],fit:'ביקור ראשון, צילום, ערב חגיגי, מי שרוצה את שטרסבורג הקלאסית בחורף.',tip:'צפוף מאוד ליד הקתדרלה; לשמור על חפצים ולהגיע עם סבלנות.'},en:{why:'The market near Strasbourg Cathedral pairs the city’s Gothic icon with Christmas atmosphere. The illuminated façade gives the stalls a backdrop no ordinary market can match.',see:['Lit cathedral façade','Holiday stalls around the square','Small central streets','Winter food and mulled wine'],fit:'First visit, photos, festive evening, classic Strasbourg winter.',tip:'Very crowded near the cathedral; watch belongings and be patient.'}},
+  'Petite France Christmas Lights': {he:{why:'פטיט פראנס בחורף הוא לא רק שוק — זו הליכה בין תעלות, גשרים ובתי חצי־עץ עם אורות חג. האזור רומנטי במיוחד בלילה ומרגיש כמו גלויה אלזסית.',see:['תעלות וגשרים מוארים','בתי חצי־עץ מקושטים','נקודות צילום סביב Ponts Couverts','הליכת ערב איטית'],fit:'זוגות, צילום, ערב רגוע, מי שרוצה פחות דוכנים ויותר אווירה.',tip:'להגיע אחרי החשיכה, אבל לא מאוחר מדי אם רוצים גם בתי קפה פתוחים.'},en:{why:'Petite France in winter is less about one market and more about canals, bridges and half-timbered houses lit for Christmas. It is one of Strasbourg’s most romantic evening walks.',see:['Lit canals and bridges','Decorated half-timbered houses','Photo spots near Ponts Couverts','Slow evening walk'],fit:'Couples, photos, calm evening, atmosphere over stalls.',tip:'Go after dark but not too late if you want cafés open.'}},
+  'OFF Market Strasbourg': {he:{why:'OFF Market הוא הצד האלטרנטיבי/אחראי יותר של חג המולד בשטרסבורג, עם דגש על יד שנייה, קיימות, יוזמות מקומיות ואווירה פחות מסחרית. מתאים למי שכבר ראה את השווקים הקלאסיים.',see:['דוכני יד שנייה וקיימות','מוצרים מקומיים/אלטרנטיביים','אווירה צעירה יותר','פחות “גלויה” ויותר מקומית'],fit:'מטיילים שמחפשים שוק פחות תיירותי, קיימות, קניות שונות.',tip:'לבדוק מיקום ושעות באותה שנה; אירועים אלטרנטיביים יכולים להשתנות.'},en:{why:'OFF Market is Strasbourg’s more alternative/responsible Christmas side, focusing on second-hand, sustainability and local initiatives. Good after the classic markets.',see:['Second-hand and sustainability stalls','Local/alternative goods','Younger atmosphere','Less postcard, more local'],fit:'Less touristy market, sustainability, different shopping.',tip:'Check current-year location and hours; alternative events can change.'}},
+  'Alsatian Christmas Food Walk': {he:{why:'הליכת אוכל חורפית באלזס נותנת את הטעם האמיתי של העונה: bredle עוגיות חג, יין חם, choucroute, גבינות, מאפים וריחות תבלינים. זו דרך להבין את שטרסבורג דרך המטבח, לא רק דרך תמונות.',see:['Bredle ועוגיות חג','יין חם ותבלינים','מאכלים אלזסיים חורפיים','דוכני אוכל סביב המרכז'],fit:'חובבי אוכל, חורף, זוגות וקבוצות.',tip:'לא לאכול ארוחה כבדה לפני. להשאיר מקום לטעימות קטנות בכמה נקודות.'},en:{why:'An Alsatian Christmas food walk gives the season its real flavor: bredle cookies, mulled wine, choucroute, cheeses, pastries and spice smells. It explains Strasbourg through food.',see:['Bredle Christmas cookies','Mulled wine and spices','Alsatian winter dishes','Food stalls around the center'],fit:'Food lovers, winter, couples/groups.',tip:'Do not eat a heavy meal beforehand; save room for small tastings.'}}
+});
+
+// v71 photo query refinement for winter category and specific attraction/market cards.
+const V71_PHOTO_QUERY = {
+  'Old Town Square Christmas Market':'Prague Old Town Square Christmas Market tree lights',
+  'Wenceslas Square Christmas Market':'Prague Wenceslas Square Christmas Market',
+  'Prague Castle Christmas Market':'Prague Castle Christmas Market St Vitus winter',
+  'Náměstí Míru Christmas Market':'Namesti Miru Christmas Market Prague St Ludmila',
+  'Manifesto Winter Market':'Manifesto Market Prague winter food',
+  'Ice skating at Letná / city seasonal rinks':'Prague winter ice skating Letna',
+  'Rathausplatz Christmas Market':'Vienna Rathausplatz Christmas Market City Hall lights',
+  'Schönbrunn Christmas Market':'Schönbrunn Palace Christmas Market Vienna',
+  'Belvedere Christmas Village':'Belvedere Christmas Village Vienna lights',
+  'Karlsplatz Art Advent':'Karlsplatz Art Advent Vienna Karlskirche Christmas market',
+  'Spittelberg Christmas Market':'Spittelberg Christmas Market Vienna',
+  'Vienna Ice Dream / Rathausplatz skating':'Vienna Ice Dream Rathausplatz skating',
+  'Christkindelsmärik Place Broglie':'Strasbourg Christkindelsmarik Place Broglie Christmas Market',
+  'Place Kléber Christmas Tree':'Strasbourg Place Kleber Christmas tree',
+  'Cathedral Christmas Market':'Strasbourg Cathedral Christmas Market lights',
+  'Petite France Christmas Lights':'Strasbourg Petite France Christmas lights',
+  'OFF Market Strasbourg':'OFF Market Strasbourg Christmas',
+  'Alsatian Christmas Food Walk':'Alsace Christmas market food bredele mulled wine Strasbourg'
+};
+
+const previousV70PhotoSearchQuery = typeof photoSearchQuery === 'function' ? photoSearchQuery : null;
+function photoSearchQuery(item){
+  const name = item?.name || item?.title?.en || '';
+  if(V71_PHOTO_QUERY[name]) return V71_PHOTO_QUERY[name];
+  if(item?.cat === 'winter') return `${name} ${CITIES[item.city]?.name || ''} Christmas market winter lights`;
+  return previousV70PhotoSearchQuery ? previousV70PhotoSearchQuery(item) : name;
+}
