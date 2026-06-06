@@ -63,26 +63,31 @@
         <label>Origin
           <select id="originSelect"></select>
         </label>
-        <label>Travel mode
-          <select id="modeSelect">
-            <option value="transit">Public transport / Moovit</option>
-            <option value="uber">Uber</option>
-            <option value="bolt">Bolt</option>
-            <option value="car">Car / Waze</option>
-          </select>
+        <label>Destination
+          <select id="destinationSelect"></select>
         </label>
       </div>
+      <select id="modeSelect" class="hidden" aria-hidden="true" tabindex="-1">
+        <option value="transit" selected>Public transport / Moovit</option>
+        <option value="uber">Uber</option>
+        <option value="bolt">Bolt</option>
+        <option value="car">Car / Waze</option>
+      </select>
       <div id="hotelWrap" class="hotel-wrap hidden">
         <label>Hotel / base address
           <input id="hotelAddress" placeholder="Paste hotel name or address" />
         </label>
         <button id="saveHotel" class="mini-main">Save hotel</button>
       </div>
-      <div class="grid two">
-        <label>Destination
-          <select id="destinationSelect"></select>
-        </label>
+      <div class="route-builder-actions" aria-label="Selected route navigation actions">
+        <button id="routeMoovitBtn" class="route-nav-btn moovit" type="button">🚇 Moovit</button>
+        <button id="routeGoogleBtn" class="route-nav-btn google" type="button">🗺️ Google Maps</button>
+        <button id="routeWazeBtn" class="route-nav-btn waze" type="button">🚗 Waze / Car</button>
+        <button id="routeUberBtn" class="route-nav-btn uber" type="button">🚕 Uber</button>
+        <button id="routeBoltBtn" class="route-nav-btn bolt" type="button">⚡ Bolt</button>
+        <button id="routeCopyBtn" class="route-nav-btn copy" type="button">📋 Copy location</button>
       </div>
+      <p id="routeBuilderActionHint" class="route-builder-hint">Use these buttons for Airport → hotel / city centre navigation, without opening a recommendation card.</p>
     </section>
 
     <section class="panel">

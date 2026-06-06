@@ -461,3 +461,88 @@ body{
 .low-data-actions{margin-top:10px}
 #lowDataStatus.offline-status{border-color:rgba(56,189,248,.25);background:rgba(8,47,73,.22)}
 #lowDataStatus .source-note{display:block;margin-top:6px;background:transparent;padding:0;color:#a5b4fc}
+
+/* v73: compact copy-location action for manual paste into Moovit/Waze/Google Maps */
+.copy-location{background:rgba(251,191,36,.18)!important;color:#fde68a!important;border:1px solid rgba(251,191,36,.25)!important}
+.mini-nav-row .copy-location{min-width:38px}
+
+/* v74: persistent destination navigation buttons */
+.destination-nav-row,.card-secondary-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:10px;
+  align-items:center;
+}
+.destination-nav-row{
+  padding:8px;
+  border-radius:16px;
+  background:rgba(15,23,42,.48);
+  border:1px solid rgba(148,163,184,.16);
+}
+.destination-nav-row .map-action-btn,
+.destination-nav-row .icon-btn,
+.mini-nav-row .map-action-btn,
+.mini-nav-row .icon-btn{
+  min-height:36px;
+  padding:7px 10px;
+  border-radius:999px;
+  font-size:12px;
+  white-space:nowrap;
+}
+.car-waze-btn{background:rgba(34,197,94,.18);color:#bbf7d0;}
+.uber-btn{background:rgba(255,255,255,.13);color:#f8fafc;}
+.bolt-btn{background:rgba(250,204,21,.18);color:#fef08a;}
+.card-secondary-actions{border-top:1px solid rgba(148,163,184,.12);padding-top:9px;}
+.mini-nav-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;align-items:center}
+@media(max-width:520px){
+  .destination-nav-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;padding:7px;}
+  .destination-nav-row .map-action-btn,.destination-nav-row .icon-btn{width:100%;min-width:0;font-size:0;padding:7px 0;}
+  .destination-nav-row .map-action-btn::first-letter,.destination-nav-row .icon-btn::first-letter{font-size:15px;}
+  .destination-nav-row .map-action-btn{font-size:0;}
+  .destination-nav-row .map-action-btn::before{content:'🗺️';font-size:15px;}
+  .destination-nav-row .car-waze-btn::before{content:'🚗';font-size:15px;}
+  .destination-nav-row .uber-btn::before{content:'🚕';font-size:15px;}
+  .destination-nav-row .bolt-btn::before{content:'⚡';font-size:15px;}
+  .destination-nav-row .copy-location::before{content:'📋';font-size:15px;}
+  .destination-nav-row .copy-location{font-size:0;}
+  .card-secondary-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;}
+  .card-secondary-actions .add-trip-btn{grid-column:1/-1;}
+}
+
+
+/* v75: Route Builder primary navigation buttons */
+.route-builder-actions{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:8px;
+  margin-top:12px;
+}
+.route-nav-btn{
+  border:1px solid rgba(148,163,184,.24);
+  border-radius:14px;
+  min-height:42px;
+  padding:9px 10px;
+  background:rgba(30,41,59,.92);
+  color:#f8fafc;
+  font-size:13px;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 10px 26px rgba(0,0,0,.18);
+}
+.route-nav-btn.google{background:linear-gradient(135deg,#2563eb,#1d4ed8);}
+.route-nav-btn.waze{background:linear-gradient(135deg,#0f766e,#0e7490);}
+.route-nav-btn.uber{background:linear-gradient(135deg,#111827,#334155);}
+.route-nav-btn.bolt{background:linear-gradient(135deg,#65a30d,#16a34a);}
+.route-nav-btn.copy{background:rgba(167,139,250,.20);color:#ddd6fe;}
+.route-builder-hint{
+  margin:9px 0 0;
+  color:#94a3b8;
+  font-size:12px;
+  line-height:1.45;
+}
+@media(max-width:680px){
+  .route-builder-actions{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .route-nav-btn{font-size:12px;min-height:40px;padding:8px 9px;}
+  .route-nav-btn.copy{grid-column:1/-1;}
+}

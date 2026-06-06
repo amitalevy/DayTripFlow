@@ -14969,6 +14969,42 @@ function showInstallHint(app){
     : `If ${names[app]||app} did not open, install it from the store or use Google Maps as backup.`;
   flash(msg);
 }
+
+// v73: copy destination data for manual paste into Moovit/Waze/Google Maps.
+function mapsUrlForPoint(p){
+  const q = coordDest(p) ? `${p.lat},${p.lng}` : (p?.query || p?.name || '');
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(q)}`;
+}
+function copyLocationText(p){
+  const name = p?.name || p?.query || 'Destination';
+  const coords = coordDest(p) ? `${p.lat},${p.lng}` : (p?.query || '');
+  const map = mapsUrlForPoint(p);
+  return `${name}\n${coords}\n${map}`;
+}
+async function copyLocation(p){
+  try{
+    cacheTravelPoint(p,'copy-location');
+    const text = copyLocationText(p);
+    if(navigator.clipboard && window.isSecureContext){
+      await navigator.clipboard.writeText(text);
+    } else {
+      const ta=document.createElement('textarea');
+      ta.value=text;
+      ta.setAttribute('readonly','');
+      ta.style.position='fixed';
+      ta.style.left='-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+    }
+    flash(getLang()==='he'?'היעד והנ״צ הועתקו. אפשר להדביק ב־Moovit / Waze / Google Maps.':'Location copied. Paste it into Moovit / Waze / Google Maps.');
+  } catch(e){
+    console.warn('Copy location failed', e);
+    flash(getLang()==='he'?'לא הצלחתי להעתיק. פתח את Google Maps כגיבוי.':'Could not copy. Use Google Maps as backup.');
+  }
+}
+
 function moovit(p){
   cacheTravelPoint(p,'moovit');
   const name=pointName(p);
@@ -15010,6 +15046,85 @@ function googleDirectionsNative(p){
   openExternal(`https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${encodeURIComponent(dest)}&travelmode=${mode}`);
 }
 function googleDirections(p){ googleDirectionsNative(p); }
+
+// v75: Route Builder quick navigation actions.
+// These buttons use the currently selected Origin + Destination, so airport -> hotel/city centre is available
+// without opening any recommendation card.
+function selectedRouteDestination(){
+  const d = findDest();
+  const city = activeCity();
+  if(d && d.id === 'hotel'){
+    const h = hotel();
+    if(h && h.query) return {id:'hotel', name:h.query, query:h.query, city, cat:'route'};
+    flash(getLang()==='he'?'הכנס ושמור כתובת מלון קודם':'Enter and save hotel address first');
+    return null;
+  }
+  if(d && d.id === 'centre') return {...d, city, cat:'route'};
+  return d ? {...d, city:d.city || city, cat:d.cat || 'route'} : null;
+}
+function selectedRouteText(){
+  const d = selectedRouteDestination();
+  if(!d) return null;
+  const origin = originQuery();
+  const destination = coordDest(d) ? `${d.lat},${d.lng}` : (d.query || d.name || '');
+  const name = d.name || d.query || 'Destination';
+  const map = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(origin)}&destination=${encodeURIComponent(destination)}&travelmode=${googleMode()}`;
+  return `${name}\nOrigin: ${origin}\nDestination: ${destination}\n${map}`;
+}
+async function copySelectedRoute(){
+  const d = selectedRouteDestination();
+  if(!d) return;
+  try{
+    cacheTravelPoint(d,'copy-selected-route');
+    const text = selectedRouteText() || copyLocationText(d);
+    if(navigator.clipboard && window.isSecureContext) await navigator.clipboard.writeText(text);
+    else {
+      const ta=document.createElement('textarea');
+      ta.value=text; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.left='-9999px';
+      document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+    }
+    flash(getLang()==='he'?'המסלול/היעד הועתקו':'Selected route copied');
+  }catch(e){
+    console.warn('Copy selected route failed', e);
+    flash(getLang()==='he'?'לא הצלחתי להעתיק':'Could not copy route');
+  }
+}
+function uberSelectedRoute(){
+  const d = selectedRouteDestination();
+  if(!d) return;
+  cacheTravelPoint(d,'uber-selected-route');
+  if(coordDest(d)) return uber(d);
+  const q = encodeURIComponent(d.query || d.name || 'Destination');
+  openExternal(`https://m.uber.com/ul/?action=setPickup&pickup=my_location&dropoff[formatted_address]=${q}`);
+  showInstallHint('uber');
+}
+function boltSelectedRoute(){
+  const d = selectedRouteDestination();
+  if(d) cacheTravelPoint(d,'bolt-selected-route');
+  bolt(d);
+}
+function moovitSelectedRoute(){
+  const d = selectedRouteDestination();
+  if(d) moovit(d);
+}
+function googleSelectedRoute(){ const d=selectedRouteDestination(); if(d) googleDirections(d); }
+function wazeSelectedRoute(){ const d=selectedRouteDestination(); if(d) waze(d); }
+function bindRouteBuilderButtons(){
+  const pairs = [
+    ['routeMoovitBtn', moovitSelectedRoute],
+    ['routeGoogleBtn', googleSelectedRoute],
+    ['routeWazeBtn', wazeSelectedRoute],
+    ['routeUberBtn', uberSelectedRoute],
+    ['routeBoltBtn', boltSelectedRoute],
+    ['routeCopyBtn', copySelectedRoute]
+  ];
+  pairs.forEach(([id,fn])=>{ const el=$(id); if(el && !el.dataset.bound){ el.addEventListener('click', fn); el.dataset.bound='1'; }});
+  const hint=$('routeBuilderActionHint');
+  if(hint) hint.textContent = getLang()==='he'
+    ? 'כאן מנווטים מהשדה/נקודת המוצא אל המלון או מרכז העיר: Moovit, Google Maps, Waze, Uber, Bolt או העתקת יעד.'
+    : 'Navigate from airport/origin to hotel or city centre: Moovit, Google Maps, Waze, Uber, Bolt or copy location.';
+}
+
 function googleSearch(p){
   cacheTravelPoint(p,'google-search');
   const q = encodeURIComponent(placeQuery(p));
@@ -15134,13 +15249,28 @@ function toggleMore(id){
 function tellMoreLabel(){ return getLang()==='he' ? '📖 ספר לי עוד' : '📖 Tell me more'; }
 function readGuideLabel(){ return getLang()==='he' ? '🔊 הקרא הסבר' : '🔊 Read guide'; }
 function stopGuideLabel(){ return getLang()==='he' ? '⏹ עצור' : '⏹ Stop'; }
+
+function navigationButtonsForPoint(p, opts={}){
+  const coords = p && Number.isFinite(p.lat) && Number.isFinite(p.lng);
+  const labelGoogle = opts.compact ? '🗺️' : '🗺️ Google Maps';
+  const labelCar = opts.compact ? '🚗' : (getLang()==='he' ? '🚗 Waze / Car' : '🚗 Waze / Car');
+  const labelUber = opts.compact ? '🚕' : '🚕 Uber';
+  const labelBolt = opts.compact ? '⚡' : '⚡ Bolt';
+  const cls = opts.mini ? 'mini-nav-row' : 'destination-nav-row';
+  if(!p) return '';
+  const json = safeJson(p);
+  return `<div class="${cls}" aria-label="Navigation actions">
+    <button class="map-action-btn google-map-btn" title="Google Maps" onclick='googleDirections(${json})'>${labelGoogle}</button>
+    ${coords ? `<button class="icon-btn car-waze-btn" title="Waze / Car" onclick='waze(${json})'>${labelCar}</button>` : ''}
+    ${coords ? `<button class="icon-btn uber-btn" title="Uber" onclick='uber(${json})'>${labelUber}</button>` : ''}
+    ${coords ? `<button class="icon-btn bolt-btn" title="Bolt" onclick='bolt(${json})'>${labelBolt}</button>` : ''}
+    <button class="icon-btn copy-location" title="Copy location" onclick='copyLocation(${json})'>📋</button>
+  </div>`;
+}
+
 function actions(item){
-  const packageMode=activePackageMode();
-  const coords=Number.isFinite(item.lat)&&Number.isFinite(item.lng);
-  let navBtns='';
-  if(packageMode==='car') navBtns=`${coords?`<button class="icon-btn" title="Waze from current origin" onclick='waze(${safeJson(item)})'>🚗</button>`:''}<button class="map-action-btn google-map-btn" title="Open in Google Maps" onclick='googleDirections(${safeJson(item)})'>🗺️ Google Maps</button>`;
-  else navBtns=`<button class="icon-btn" title="Moovit / public travel" onclick='moovit(${safeJson(item)})'>🚇</button>${coords?`<button class="icon-btn" title="Waze" onclick='waze(${safeJson(item)})'>🚗</button>`:''}<button class="map-action-btn google-map-btn" title="Open in Google Maps" onclick='googleDirections(${safeJson(item)})'>🗺️ Google Maps</button><button class="icon-btn" title="Uber" onclick='uber(${safeJson(item)})'>🚕</button><button class="icon-btn" title="Bolt" onclick='bolt(${safeJson(item)})'>⚡</button>`;
-  return `${navBtns}<button class="icon-btn like" title="Like" onclick="vote('${item.id}',1)">👍</button><button class="icon-btn unlike" title="Unlike" onclick="vote('${item.id}',-1)">👎</button><button class="add-trip-btn" title="Add to My Trip" onclick='addTrip(${safeJson(item)})'>➕ ${getLang()==='he'?'הוסף לטיול שלי':'Add to My Trip'}</button><button class="icon-btn save" title="Save offline" onclick='saveOffline(${safeJson(item)})'>💾</button>${currentTab==='mytrip'?`<button class="icon-btn remove" title="Remove from My Trip" onclick="removeTrip('${item.id}')">🗑️</button>`:''}${currentTab==='saved'?`<button class="icon-btn remove" title="Remove offline" onclick="removeSaved('${item.id}')">🗑️</button>`:''}`
+  const navBtns = navigationButtonsForPoint(item, {mini:false, compact:false});
+  return `${navBtns}<div class="card-secondary-actions"><button class="icon-btn like" title="Like" onclick="vote('${item.id}',1)">👍</button><button class="icon-btn unlike" title="Unlike" onclick="vote('${item.id}',-1)">👎</button><button class="add-trip-btn" title="Add to My Trip" onclick='addTrip(${safeJson(item)})'>➕ ${getLang()==='he'?'הוסף לטיול שלי':'Add to My Trip'}</button><button class="icon-btn save" title="Save offline" onclick='saveOffline(${safeJson(item)})'>💾</button>${currentTab==='mytrip'?`<button class="icon-btn remove" title="Remove from My Trip" onclick="removeTrip('${item.id}')">🗑️</button>`:''}${currentTab==='saved'?`<button class="icon-btn remove" title="Remove offline" onclick="removeSaved('${item.id}')">🗑️</button>`:''}</div>`
 }
 function routePackCard(item){
   const g = carGuideFor(item);
@@ -15151,8 +15281,8 @@ function routePackCard(item){
   const labels = lang==='he'
     ? {route:'מסלול רכב יומי', total:'זמן כולל משוער', drive:'נהיגה לכל כיוון', stops:'תחנות במסלול', food:'איפה לאכול באזור', parking:'חניה ולוגיקה', best:'למי זה מתאים', tip:'טיפ מסלול', nav:'ניווט ליעד הראשי'}
     : {route:'Car day route', total:'Estimated total day', drive:'Drive each way', stops:'Route stops', food:'Where to eat nearby', parking:'Parking & route logic', best:'Best for', tip:'Route tip', nav:'Navigate to main destination'};
-  const stopsHtml=(g.stops||[]).map((s,i)=>`<li><strong>${i+1}. ${s.name}</strong><span>${s.duration||''}</span><p>${s.text}</p>${Number.isFinite(s.lat)?`<button class="icon-btn" onclick='waze({lat:${s.lat},lng:${s.lng},name:${JSON.stringify(s.name)}})'>🚗</button><button class="map-action-btn google-map-btn" onclick='googleDirections({lat:${s.lat},lng:${s.lng},name:${JSON.stringify(s.name)}})'>🗺️ Google Maps</button>`:''}</li>`).join('');
-  const foodHtml=(g.food||[]).map(f=>`<li><strong>${f.name}</strong><span>${f.price||''} · ${f.cuisine||''}</span><p>${f.why}</p></li>`).join('');
+  const stopsHtml=(g.stops||[]).map((s,i)=>{ const pt={lat:s.lat,lng:s.lng,name:s.name}; return `<li><strong>${i+1}. ${s.name}</strong><span>${s.duration||''}</span><p>${s.text}</p>${Number.isFinite(s.lat)?navigationButtonsForPoint(pt,{mini:true,compact:true}):''}</li>`; }).join('');
+  const foodHtml=(g.food||[]).map(f=>{ const pt={lat:f.lat,lng:f.lng,name:f.name||'Food stop'}; const has=Number.isFinite(f.lat)&&Number.isFinite(f.lng); return `<li><strong>${f.name}</strong><span>${f.price||''} · ${f.cuisine||''}</span><p>${f.why}</p>${has?navigationButtonsForPoint(pt,{mini:true,compact:true}):''}</li>`; }).join('');
   return `<article class="card guide-card route-pack-card">
     ${imageMarkup(item)}
     <div class="card-body">
@@ -15166,8 +15296,7 @@ function routePackCard(item){
       <section class="guide-grid"><div><strong>${labels.parking}</strong><p>${g.parking}</p></div><div><strong>${labels.best}</strong><p>${g.bestFor}</p></div></section>
       <section class="guide-section"><strong>${labels.tip}</strong><p>${g.tip}</p></section>
       <div class="compact-actions main-card-actions">
-        <button class="icon-btn" title="${labels.nav}" onclick='waze(${safeJson(item)})'>🚗</button>
-        <button class="map-action-btn google-map-btn" title="Open in Google Maps" onclick='googleDirections(${safeJson(item)})'>🗺️ Google Maps</button>
+        ${navigationButtonsForPoint(item,{mini:false,compact:false})}
         <button class="icon-btn speak" onclick='speakItem(${safeJson(item)})'>${readGuideLabel()}</button>
         <button class="icon-btn stop-speak" onclick="stopSpeaking()">${stopGuideLabel()}</button>
         <button class="icon-btn like" onclick="vote('${item.id}',1)">👍</button>
@@ -15288,6 +15417,7 @@ function showMoreForCurrentTab(){
 function render(){
   updateVisualTheme();
   updateRouteOptions();
+  bindRouteBuilderButtons();
   refreshOfflineStatus();
   syncTabsForPackageMode();
   const items=visibleItems();
@@ -15452,3 +15582,8 @@ function photoSearchQuery(item){
   if(item?.cat === 'winter') return `${name} ${CITIES[item.city]?.name || ''} Christmas market winter lights`;
   return previousV70PhotoSearchQuery ? previousV70PhotoSearchQuery(item) : name;
 }
+
+
+// v73 expose copy helper for inline card actions.
+window.copyLocation = copyLocation;
+window.mapsUrlForPoint = mapsUrlForPoint;
